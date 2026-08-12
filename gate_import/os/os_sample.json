@@ -1,0 +1,3864 @@
+{
+    "subject": {
+        "subject_name": "Operating System",
+        "subject_code": "OS"
+    },
+    "topics": [
+        {
+            "topic_name": "Process Management-I",
+            "summary": "Introduction, Process, Threads & CPU Scheduling",
+            "display_order": 1
+        },
+        {
+            "topic_name": "Process Management-II",
+            "summary": "IPC, Synchronization and Concurrency",
+            "display_order": 2
+        },
+        {
+            "topic_name": "Deadlock",
+            "summary": "Deadlock conditions, prevention, avoidance and detection",
+            "display_order": 3
+        },
+        {
+            "topic_name": "Memory Management and Virtual Memory",
+            "summary": "Paging, Segmentation, Virtual Memory, Page Replacement, TLB",
+            "display_order": 4
+        },
+        {
+            "topic_name": "File System and Device Management",
+            "summary": "File systems, disk scheduling, device management",
+            "display_order": 5
+        },
+        {
+            "topic_name": "Miscellaneous",
+            "summary": "Miscellaneous OS topics",
+            "display_order": 6
+        }
+    ],
+    "questions": [
+        {
+            "question_text": "Which of the following is an example of a spooled device? (a) The terminal used to enter the input data for the C program being executed (b) An output device used to print the output of a number of jobs (c) The secondary memory device in a virtual storage system (d) The swapping area on a disk used by the swapper.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Spooling",
+                "I/O devices"
+            ],
+            "tags": [
+                "spooling",
+                "output device",
+                "print job",
+                "I/O and Spooling"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The terminal used to enter the input data for the C program being executed",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "An output device used to print the output of a number of jobs",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "The secondary memory device in a virtual storage system",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "The swapping area on a disk used by the swapper",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Spooled devices are output devices used to print the output of jobs.",
+            "pyq_sources": [
+                {
+                    "year": 1998,
+                    "set": null,
+                    "question_number": "Q1.1",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider n processes sharing the CPU in a Round-Robin fashion. Assuming that each process switch takes s seconds, what must be the quantum size q such that the overhead resulting from process switching is minimized but at the same time each process is guaranteed to get its turn at the CPU at least every t seconds? (a) q ≤ (t − ns)/(n − 1) (b) q ≥ (t − ns)/(n − 1) (c) q ≤ (t − ns)/(n + 1) (d) q ≥ (t − ns)/(n + 1)",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Round Robin Scheduling",
+                "Time Quantum"
+            ],
+            "tags": [
+                "round robin",
+                "quantum size",
+                "context switch overhead",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "q ≤ (t − ns)/(n − 1)",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "q ≥ (t − ns)/(n − 1)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "q ≤ (t − ns)/(n + 1)",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "q ≥ (t − ns)/(n + 1)",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "With n = 4, using the Gantt chart arrangement of processes with switch time s between them, the constraint derived is t ≥ n×s + q×(n−1), giving q ≤ (t − ns)/(n − 1).",
+            "pyq_sources": [
+                {
+                    "year": 1998,
+                    "set": null,
+                    "question_number": "Q1.2",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Four jobs are waiting to be run. Their expected run times are 6, 3, 5 and x. In what order should they be run to minimize the average response time?",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Shortest Job First",
+                "Average Response Time"
+            ],
+            "tags": [
+                "job ordering",
+                "response time",
+                "case analysis",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "Order jobs by increasing expected run time; where x falls in the sequence 3,5,6 depends on its value.",
+            "explanation": "Average response time is minimized by running jobs in increasing order of run time (Shortest Job First). Depending on the value of x: if x < 3, order is x,3,5,6; if 3 < x < 5, order is 3,x,5,6; if 5 < x < 6, order is 3,5,x,6; if x > 6, order is 3,5,6,x.",
+            "pyq_sources": [
+                {
+                    "year": 1998,
+                    "set": null,
+                    "question_number": "Q1.3",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "System calls are usually invoked by using (a) a software interrupt (b) polling (c) an indirect jump (d) a privileged instruction",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "System Calls",
+                "Software Interrupt"
+            ],
+            "tags": [
+                "system call",
+                "software interrupt",
+                "trap",
+                "Introduction and System Calls"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "a software interrupt",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "polling",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "an indirect jump",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "a privileged instruction",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "System calls are invoked by using a software interrupt.",
+            "pyq_sources": [
+                {
+                    "year": 1999,
+                    "set": null,
+                    "question_number": "Q1.4",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "A multi-user, multi-processing operating system cannot be implemented on hardware that does not support (a) Address translation (b) DMA for disk transfer (c) At least two modes of CPU execution (privileged and non-privileged) (d) Demand paging",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Privileged Mode",
+                "Multi-user OS"
+            ],
+            "tags": [
+                "dual mode",
+                "privileged instructions",
+                "security",
+                "Introduction and System Calls",
+                "Multiprogramming"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Address translation",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "DMA for disk transfer",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "At least two modes of CPU execution (privileged and non-privileged)",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Demand paging",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The system has multiple users and multiple processes; security is the primary concern. Otherwise user programs and the operating system could be corrupted. That is the reason two modes are required to ensure security and protection.",
+            "pyq_sources": [
+                {
+                    "year": 1999,
+                    "set": null,
+                    "question_number": "Q1.5",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following actions is/are typically not performed by the operating system when switching context from process A to process B? (a) Saving current register values and restoring saved register values for process B (b) Changing address translation tables (c) Swapping out the memory image of process A to the disk (d) Invalidating the translation look-aside buffer",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Context Switching"
+            ],
+            "tags": [
+                "context switch",
+                "register save",
+                "TLB",
+                "Process Concept and States"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Saving current register values and restoring saved register values for process B",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Changing address translation tables",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Swapping out the memory image of process A to the disk",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Invalidating the translation look-aside buffer",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Swapping out the memory image of process A to the disk is typically not performed by the OS when switching context from process A to B.",
+            "pyq_sources": [
+                {
+                    "year": 1999,
+                    "set": null,
+                    "question_number": "Q1.6",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "A processor needs software interrupt to (a) Test the interrupt system of the processor (b) Implement co-routines (c) Obtain system services which need execution of privileged instructions (d) Return from subroutine",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Software Interrupt",
+                "Privileged Instructions"
+            ],
+            "tags": [
+                "software interrupt",
+                "system services",
+                "privileged mode",
+                "Introduction and System Calls"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Test the interrupt system of the processor",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Implement co-routines",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Obtain system services which need execution of privileged instructions",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Return from subroutine",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "To execute privileged instructions, system services can be obtained using a software interrupt.",
+            "pyq_sources": [
+                {
+                    "year": 2001,
+                    "set": null,
+                    "question_number": "Q1.7",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "A CPU has two modes-privileged and non-privileged. In order to change the mode from privileged to non-privileged (a) a hardware interrupt is needed (b) a software interrupt is needed (c) a privileged instruction (which does not generate an interrupt) is needed (d) a non-privileged instruction (which does not generate an interrupt) is needed",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Privileged Mode Switching"
+            ],
+            "tags": [
+                "privileged mode",
+                "non-privileged mode",
+                "mode switch",
+                "Introduction and System Calls"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "a hardware interrupt is needed",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "a software interrupt is needed",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "a privileged instruction (which does not generate an interrupt) is needed",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "a non-privileged instruction (which does not generate an interrupt) is needed",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Because we want to change the mode from privileged to non-privileged, the next instruction to be executed should be a non-privileged instruction.",
+            "pyq_sources": [
+                {
+                    "year": 2001,
+                    "set": null,
+                    "question_number": "Q1.8",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider a set of n tasks with known runtimes r1, r2, ..., rn to be run on a uniprocessor machine. Which of the following processor scheduling algorithms will result in the maximum throughput? (a) Round-Robin (b) Shortest-Job-First (c) Highest-Response-Ratio-Next (d) First-Come-First-Served",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Shortest Job First",
+                "Throughput"
+            ],
+            "tags": [
+                "throughput",
+                "SJF",
+                "scheduling comparison",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Round-Robin",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Shortest-Job-First",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Highest-Response-Ratio-Next",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "First-Come-First-Served",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "SJF executes the shortest job very early, so throughput increases in the case of SJF.",
+            "pyq_sources": [
+                {
+                    "year": 2001,
+                    "set": null,
+                    "question_number": "Q1.9",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following scheduling algorithms is non-preemptive? (a) Round Robin (b) First-in-First-out (c) Multilevel Queue Scheduling (d) Multilevel Queue Scheduling with Feedback",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Non-preemptive Scheduling"
+            ],
+            "tags": [
+                "FCFS",
+                "non-preemptive",
+                "scheduling types",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Round Robin",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "First-in-First-out",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Multilevel Queue Scheduling",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Multilevel Queue Scheduling with Feedback",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "FCFS is a non-preemptive algorithm.",
+            "pyq_sources": [
+                {
+                    "year": 2001,
+                    "set": null,
+                    "question_number": "Q1.10",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following does not interrupt a running process? (a) A device (b) Timer (c) Scheduler process (d) Power failure",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Interrupts"
+            ],
+            "tags": [
+                "interrupt sources",
+                "device interrupt",
+                "timer interrupt",
+                "Introduction and System Calls"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "A device",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "Timer",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Scheduler process",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Power failure",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A device cannot interrupt a running process, but timer, scheduler, and power failure can.",
+            "pyq_sources": [
+                {
+                    "year": 2001,
+                    "set": null,
+                    "question_number": "Q1.11",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Which combination of the following features will suffice to characterize an OS as a multi-programmed OS? (i) more than one program may be loaded into main memory at the same time for execution. (ii) If a program waits for certain events such as I/O, another program is immediately scheduled for execution. (iii) If the execution of a program terminates, another program is immediately scheduled for execution. (a) (i) (b) (i) and (ii) (c) (i) and (iii) (d) (i), (ii) and (iii)",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Multiprogrammed OS"
+            ],
+            "tags": [
+                "multiprogramming",
+                "OS characterization"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "(i)",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "(i) and (ii)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "(i) and (iii)",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "(i), (ii) and (iii)",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "(i) Virtual memory helps load more than one program. (ii) Multiprogramming allows waiting for I/O of one process while executing another. (iii) After completion of one process, another process executes immediately. All three characterize a multiprogrammed OS.",
+            "pyq_sources": [
+                {
+                    "year": 2002,
+                    "set": null,
+                    "question_number": "Q1.12",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Draw the process state transition diagram of an OS in which (i) each process is in one of the five states: created, ready, running, blocked (i.e. sleep or wait), or terminated, and (ii) only non-preemptive scheduling is used by the OS. Label the transitions appropriately.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Process State Transition Diagram",
+                "Non-preemptive Scheduling"
+            ],
+            "tags": [
+                "process states",
+                "state diagram",
+                "non-preemptive",
+                "Process Concept and States"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [],
+            "correct_answer_text": "Created/New -> Ready -> Running -> Completion; Running -> Wait/Blocked -> Ready",
+            "explanation": "The diagram is drawn using all the given criteria: Created/New leads to Ready, Ready leads to Running, Running leads to Completion, and Running can also lead to Wait/Blocked, which then returns to Ready. Since scheduling is non-preemptive, there is no direct transition from Running back to Ready without going through Blocked.",
+            "pyq_sources": [
+                {
+                    "year": 2002,
+                    "set": null,
+                    "question_number": "Q1.13",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "A uni-processor computer system only has two processes, both of which alternate 10 ms CPU bursts with 90 ms I/O bursts. Both the processes were created at nearly the same time. The I/O of both processes can proceed in parallel. Which of the following scheduling strategies will result in the least CPU utilization (over a long period of time) for this system? (a) First come first served scheduling (b) Shortest remaining time first scheduling (c) Static priority scheduling with different priorities for the two processes (d) Round robin scheduling with a time quantum of 5 ms.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "CPU Utilization",
+                "Round Robin Scheduling"
+            ],
+            "tags": [
+                "CPU utilization",
+                "I/O bound processes",
+                "round robin",
+                "CPU Scheduling Algorithms",
+                "Scheduling Numerical Problems"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "First come first served scheduling",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Shortest remaining time first scheduling",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Static priority scheduling with different priorities for the two processes",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Round robin scheduling with a time quantum of 5 ms",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "With FCFS, CPU idle time is 80 ms per cycle of 200 ms. With Round Robin (quantum 5 ms), CPU idle time is 85 ms per cycle of 210 ms, since each process only gets 5 ms of the 10 ms burst at a time before switching, increasing idle waiting for I/O. Therefore, Round Robin scheduling with a time quantum of 5 ms has the least CPU utilization.",
+            "pyq_sources": [
+                {
+                    "year": 2003,
+                    "set": null,
+                    "question_number": "Q1.14",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following statements with respect to user-level threads and kernel-supported threads (i) Context switch is faster with Kernel-supported threads (ii) For user-level threads, a system call can block the entire process (iii) Kernel-supported threads can be scheduled independently (iv) User-level threads are transparent to the Kernel. Which of the above statements are true? (a) (ii), (iii) and (iv) only (b) (ii) and (iii) only (c) (i), and (iii) only (d) (i) and (ii) only",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "User-level Threads",
+                "Kernel-level Threads"
+            ],
+            "tags": [
+                "thread types",
+                "context switch",
+                "kernel threads",
+                "Threads"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "(ii), (iii) and (iv) only",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "(ii) and (iii) only",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "(i), and (iii) only",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "(i) and (ii) only",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "(i) is false because there is no direct connection between kernel-supported threads and context switch speed being universally faster. (ii) is true, as it is a known drawback of user-level threads. (iii) is true because kernel-supported threads have their own memory area and are scheduled independently by the OS. (iv) is true because the kernel is unaware of user-level threads, so they are transparent to the kernel.",
+            "pyq_sources": [
+                {
+                    "year": 2004,
+                    "set": null,
+                    "question_number": "Q1.15",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which one of the following is NOT shared by the threads of the same process? (a) Stack (b) Address Space (c) File Descriptor Table (d) Message Queue",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Thread Resource Sharing"
+            ],
+            "tags": [
+                "threads",
+                "stack",
+                "address space"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Stack",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "Address Space",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "File Descriptor Table",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Message Queue",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Stack and registers are not shared by the threads of the same process, while address space, message queue, etc. are shared.",
+            "pyq_sources": [
+                {
+                    "year": 2004,
+                    "set": null,
+                    "question_number": "Q1.16",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "A process executes the following segment of code: for(i = 1; i <= n; i++) fork(); The number of new processes created is (a) n (b) ((n(n + 1))/2) (c) 2^n − 1 (d) 3^n − 1",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "fork() Semantics",
+                "Process Creation Counting"
+            ],
+            "tags": [
+                "fork",
+                "loop",
+                "child processes",
+                "Fork System Call"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "n",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "((n(n + 1))/2)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "2^n − 1",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "3^n − 1",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The number of processes created will be 2^n − 1 (n forks in the loop, each doubling the number of active processes at each iteration, minus the original).",
+            "pyq_sources": [
+                {
+                    "year": 2004,
+                    "set": null,
+                    "question_number": "Q1.17",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following set of processes, with the arrival times and the CPU-burst times given in milliseconds: Process P1 Arrival time 0, Burst time 5; P2 Arrival time 1, Burst time 3; P3 Arrival time 2, Burst time 3; P4 Arrival time 4, Burst time 1. What is the average turnaround time for these processes with the preemptive Shortest Remaining Processing Time first (SRPT) algorithm? (a) 5.50 (b) 5.75 (c) 6.00 (d) 6.25",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "SRTF Scheduling",
+                "Turnaround Time"
+            ],
+            "tags": [
+                "SRTF",
+                "gantt chart",
+                "turnaround time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "5.50",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "5.75",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "6.00",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "6.25",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The Gantt chart for SRPT gives turnaround times: P1 = 12, P2 = 3, P3 = 6, P4 = 1. Average turnaround time = (12+3+6+1)/4 = 22/4 = 5.50.",
+            "pyq_sources": [
+                {
+                    "year": 2004,
+                    "set": null,
+                    "question_number": "Q1.18",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "We wish to schedule three processes P1, P2 and P3 on a uniprocessor system. The priorities, CPU time requirements and arrival times of the processes are: P1 Priority 10 (highest), CPU time 20 sec, Arrival time 00:00:05; P2 Priority 9, CPU time 10 sec, Arrival time 00:00:03; P3 Priority 8 (lowest), CPU time 15 sec, Arrival time 00:00:00. We have a choice of preemptive or non-preemptive scheduling. In preemptive scheduling, a late-arriving higher priority process can preempt a currently running process with lower priority. In non-preemptive scheduling, a late-arriving higher priority process must wait for the currently executing process to complete before it can be scheduled on the processor. What are the turnaround times (time from arrival till completion) of P2 using preemptive and non-preemptive scheduling respectively? (a) 30 sec, 30 sec (b) 30 sec, 10 sec (c) 42 sec, 42 sec (d) 30 sec, 42 sec",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Priority Scheduling",
+                "Preemptive vs Non-preemptive"
+            ],
+            "tags": [
+                "priority scheduling",
+                "turnaround time",
+                "preemption",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "30 sec, 30 sec",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "30 sec, 10 sec",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "42 sec, 42 sec",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "30 sec, 42 sec",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Using preemptive priority scheduling, the turnaround time of P2 is 30. Using non-preemptive priority scheduling, the turnaround time of P2 is 42 (Gantt chart: P3, P1, P2 at 0,15,35,45).",
+            "pyq_sources": [
+                {
+                    "year": 2005,
+                    "set": null,
+                    "question_number": "Q1.19",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Two shared resources R1 and R2 are used by processes P1 and P2. Each process has a certain priority for accessing each resource. Let Tij denote the priority of Pi for accessing Rj. A process Pi can snatch a resource Rk from process Pj if Tik is greater than Tjk. Given the following: I. T11 > T21  II. T12 > T22  III. T11 < T21  IV. T12 < T22. Which of the following conditions ensures that P1 and P2 can never deadlock? (a) (I) and (IV) (b) (II) and (III) (c) (I) and (II) (d) None of these",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Deadlock"
+            ],
+            "concepts": [
+                "Deadlock Avoidance",
+                "Resource Priority"
+            ],
+            "tags": [
+                "deadlock",
+                "resource priority",
+                "resource snatching"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "(I) and (IV)",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "(II) and (III)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "(I) and (II)",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "None of these",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "By following conditions I and II, process P1 will get both resources R1 and R2. If R1 and R2 are both allocated to P1, it will complete its job and release them, after which P2 will get both resources and complete its job, so deadlock never occurs.",
+            "pyq_sources": [
+                {
+                    "year": 2005,
+                    "set": null,
+                    "question_number": "Q1.20",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following code fragment: if (fork() == 0) {a = a + 5; printf(\"%d, %d\\n\", a, &a);} else {a = a − 5; printf(\"%d, %d\\n\", a, &a);}. Let u, v be the values printed by the parent process, and x, y be the values printed by the child process. Which one of the following is TRUE? (a) u = x + 10 and v = y (b) u = x + 10 and v ≠ y (c) u + 10 = x and v = y (d) u + 10 = x and v ≠ y",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "fork() Semantics",
+                "Process Address Space"
+            ],
+            "tags": [
+                "fork",
+                "parent child process",
+                "memory address",
+                "Fork System Call"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "u = x + 10 and v = y",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "u = x + 10 and v ≠ y",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "u + 10 = x and v = y",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "u + 10 = x and v ≠ y",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "fork() returns 0 in the child process, and the child's a is incremented (a = a + 5), while the parent's a is decremented (a = a − 5). Therefore x = u + 10. The physical addresses of the parent and child processes will be different, so v ≠ y.",
+            "pyq_sources": [
+                {
+                    "year": 2005,
+                    "set": null,
+                    "question_number": "Q1.21",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider three CPU-intensive processes, which require 10, 20 and 30 time units and arrive at times 0, 2, and 6, respectively. How many context switches are needed if the operating system implements a shortest remaining time first scheduling algorithm? Do not count the context switches at time zero and at the end. (a) 1 (b) 2 (c) 3 (d) 4",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "SRTF Scheduling",
+                "Context Switches"
+            ],
+            "tags": [
+                "SRTF",
+                "context switch count",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "1",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "2",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "3",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "4",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The Gantt chart for SRTF scheduling is P1(0-10), P2(10-30), P3(30-60), giving two context switches at time unit 10 (P1 to P2) and at time unit 30 (P2 to P3).",
+            "pyq_sources": [
+                {
+                    "year": 2006,
+                    "set": null,
+                    "question_number": "Q1.22",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "The process state transition diagram of an operating system is as given below: Create a new process -> Start -> Ready -> Schedule -> Running -> Exit -> Terminated; Running -> Wait for I/O completion or resource -> Blocked -> I/O complete or resource released -> Ready. Which of the following must be FALSE about the above operating system? (a) It is a multiprogrammed operating system (b) It uses preemptive scheduling (c) It uses non-preemptive scheduling (d) It is a multi-user operating system",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Process State Transition Diagram",
+                "Preemptive Scheduling"
+            ],
+            "tags": [
+                "process states",
+                "preemption",
+                "state diagram",
+                "Process Concept and States"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "It is a multiprogrammed operating system",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "It uses preemptive scheduling",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "It uses non-preemptive scheduling",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "It is a multi-user operating system",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If it were preemptive scheduling, there would be a transition from Running state to Ready state, which is absent in the diagram. So it is non-preemptive scheduling, making the statement 'It uses preemptive scheduling' FALSE.",
+            "pyq_sources": [
+                {
+                    "year": 2006,
+                    "set": null,
+                    "question_number": "Q1.23",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "The arrival time, priority, and durations of the CPU and I/O bursts for each of three processes P1, P2 and P3 are given in the table below. Each process has a CPU burst followed by an I/O burst followed by another CPU burst. Assume that each process has its own I/O resource. Process P1: Arrival time 0, Priority 2, Burst durations CPU,I/O,CPU = 1,5,3. Process P2: Arrival time 2, Priority 3 (lowest), Burst durations = 3,3,1. Process P3: Arrival time 3, Priority 1 (highest), Burst durations = 2,3,1. The multi-programmed operating system uses preemptive priority scheduling. What are the finish times of the processes P1, P2 and P3? (a) 11, 15, 9 (b) 10, 15, 9 (c) 11, 16, 10 (d) 12, 17, 11",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Preemptive Priority Scheduling",
+                "I/O and CPU Bursts"
+            ],
+            "tags": [
+                "priority scheduling",
+                "finish time",
+                "I/O burst",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "11, 15, 9",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "10, 15, 9",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "11, 16, 10",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "12, 17, 11",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Tracing the schedule considering priority and I/O overlap: P3 completes at t=9, P2 completes at t=15, and P1 completes at t=10.",
+            "pyq_sources": [
+                {
+                    "year": 2006,
+                    "set": null,
+                    "question_number": "Q1.24",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider three processes, all arriving at time zero, with total execution time of 10, 20 and 30 units, respectively. Each process spends the first 20% of execution time doing I/O, the next 70% of time doing computation, and the last 10% of time doing I/O again. The operating system uses a shortest remaining compute time first scheduling algorithm and schedules a new process either when the running process gets blocked on I/O or when the running process finishes its compute burst. Assume that all I/O operations can be overlapped as much as possible. For what percentage of time does the CPU remain idle? (a) 0% (b) 10.6% (c) 30.0% (d) 89.4%",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Shortest Remaining Compute Time",
+                "CPU Idle Time"
+            ],
+            "tags": [
+                "SRTF",
+                "CPU idle percentage",
+                "I/O overlap",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "0%",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "10.6%",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "30.0%",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "89.4%",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Total time spent = 47. Idle time = 2 + 3 = 5. Percentage of idle time = (5/47) × 100 = 10.6%.",
+            "pyq_sources": [
+                {
+                    "year": 2006,
+                    "set": null,
+                    "question_number": "Q1.25",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider three processes (process id 0, 1, 2, respectively) with compute time bursts 2, 4, and 8 time units. All processes arrive at time zero. Consider the longest remaining time first (LRTF) scheduling algorithm. In LRTF ties are broken by giving priority to the process with the lowest process id. The average turn around time is (a) 13 units (b) 14 units (c) 15 units (d) 16 units",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Longest Remaining Time First",
+                "Average Turnaround Time"
+            ],
+            "tags": [
+                "LRTF",
+                "turnaround time",
+                "tie-breaking",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "13 units",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "14 units",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "15 units",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "16 units",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Turnaround time for P0 = 12, P1 = 13, P2 = 14. Average turnaround time = 39/3 = 13.",
+            "pyq_sources": [
+                {
+                    "year": 2006,
+                    "set": null,
+                    "question_number": "Q1.26",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "List-I contains some CPU scheduling algorithms and List-II contains some applications. Match entries in List-I with entries in List-II. List-I: A. Gang Scheduling, B. Rate Monotonic Scheduling, C. Fair Share Scheduling. List-II: 1. Guaranteed Scheduling, 2. Real-time Scheduling, 3. Thread Scheduling. (a) A-3, B-2, C-1 (b) A-1, B-2, C-3 (c) A-2, B-3, C-1 (d) A-1, B-3, C-2",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Gang Scheduling",
+                "Rate Monotonic Scheduling",
+                "Fair Share Scheduling"
+            ],
+            "tags": [
+                "scheduling algorithms",
+                "matching",
+                "real-time scheduling",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "A-3, B-2, C-1",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "A-1, B-2, C-3",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "A-2, B-3, C-1",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "A-1, B-3, C-2",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Gang Scheduling relates to Thread Scheduling, Rate Monotonic Scheduling relates to Real-time Scheduling, and Fair Share Scheduling relates to Guaranteed Scheduling.",
+            "pyq_sources": [
+                {
+                    "year": 2007,
+                    "set": null,
+                    "question_number": "Q1.27",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following statements about user level threads and kernel level threads. Which one of the following statements is FALSE? (a) Context switch time is longer for Kernel level threads than for user level threads (b) User level threads do not need any hardware support (c) Related Kernel level threads can be scheduled on different processors in a multiprocessor system (d) Blocking one Kernel level thread blocks all related threads",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Kernel-level Threads",
+                "User-level Threads"
+            ],
+            "tags": [
+                "thread blocking",
+                "kernel threads",
+                "multiprocessor",
+                "Threads"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Context switch time is longer for Kernel level threads than for user level threads",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "User level threads do not need any hardware support",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Related Kernel level threads can be scheduled on different processors in a multiprocessor system",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Blocking one Kernel level thread blocks all related threads",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In kernel level threads, a blocking system call causes the kernel to schedule another thread in the application for execution. So statement (d) is false about kernel level threads.",
+            "pyq_sources": [
+                {
+                    "year": 2007,
+                    "set": null,
+                    "question_number": "Q1.28",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "An operating system uses Shortest Remaining Time first (SRT) process scheduling algorithm. Consider the arrival times and execution times for the following processes: P1 Execution time 20, Arrival time 0; P2 Execution time 25, Arrival time 15; P3 Execution time 10, Arrival time 30; P4 Execution time 15, Arrival time 45. What is the total waiting time for process P2? (a) 5 (b) 15 (c) 40 (d) 55",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Shortest Remaining Time",
+                "Waiting Time"
+            ],
+            "tags": [
+                "SRT",
+                "waiting time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "5",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "15",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "40",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "55",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The Gantt chart is P1(0-20), P2(20-30), P3(30-40), P2(40-55), P4(55-70). Waiting time for P2 = (20-15) + (40-30) = 5 + 10 = 15.",
+            "pyq_sources": [
+                {
+                    "year": 2007,
+                    "set": null,
+                    "question_number": "Q1.29",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "If the time-slice used in the round-robin scheduling policy is more than the maximum time required to execute any process, then the policy will (a) degenerate to shortest job first (b) degenerate to priority scheduling (c) degenerate to first come first serve (d) None of the above",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Round Robin Scheduling",
+                "Time Quantum"
+            ],
+            "tags": [
+                "round robin",
+                "large time quantum",
+                "FCFS",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "degenerate to shortest job first",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "degenerate to priority scheduling",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "degenerate to first come first serve",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "None of the above",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "When the time quantum used in round robin scheduling is more than the maximum time required to execute any process, it behaves like First Come First Serve.",
+            "pyq_sources": [
+                {
+                    "year": 2008,
+                    "set": null,
+                    "question_number": "Q1.30",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following statements about synchronous and asynchronous I/O is NOT true? (a) An ISR is invoked on completion of I/O in synchronous I/O but not in asynchronous I/O. (b) In both synchronous and asynchronous I/O an ISR (Interrupt Service Routine) is invoked after completion of the I/O. (c) A process making a synchronous I/O call waits until I/O is complete, but a process making an asynchronous I/O call does not wait for completion of the I/O. (d) In the case of synchronous I/O, the process waiting for the completion of I/O is woken up by the ISR that is invoked after the completion of I/O.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Synchronous I/O",
+                "Asynchronous I/O",
+                "Interrupt Service Routine"
+            ],
+            "tags": [
+                "synchronous I/O",
+                "asynchronous I/O",
+                "ISR",
+                "I/O and Spooling"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "An ISR is invoked on completion of I/O in synchronous I/O but not in asynchronous I/O",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "In both synchronous and asynchronous I/O an ISR is invoked after completion of the I/O",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "A process making a synchronous I/O call waits until I/O is complete, but a process making an asynchronous I/O call does not wait for completion of the I/O",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "In the case of synchronous I/O, the process waiting for the completion of I/O is woken up by the ISR that is invoked after the completion of I/O",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Statement (b) is not true because an ISR is invoked after completion of I/O in synchronous I/O, but not necessarily in asynchronous I/O.",
+            "pyq_sources": [
+                {
+                    "year": 2008,
+                    "set": null,
+                    "question_number": "Q1.31",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "A process executes the following code for (i = 0; i < n; i++) fork(); The total number of child processes created is (a) n (b) 2^n − 1 (c) 2^n (d) 2^(n+1) − 1",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "fork() Semantics",
+                "Process Creation Counting"
+            ],
+            "tags": [
+                "fork",
+                "loop",
+                "child processes",
+                "Fork System Call"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "n",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "2^n − 1",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "2^n",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "2^(n+1) − 1",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "fork() creates child processes; initially the number of processes is 0, after n fork() calls (n+1 including the original process concept), the total number of processes is 2^n, but subtracting the main process gives the total number of child processes as 2^n − 1.",
+            "pyq_sources": [
+                {
+                    "year": 2008,
+                    "set": null,
+                    "question_number": "Q1.32",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "In the following process state transition diagram for a uniprocessor system, assume that there are always some processes in the ready state: transitions labeled A (Start->Ready), B (Ready->Running), C (Running->Ready), D (Running->Terminated), E (Blocked->Ready), F (Running->Blocked). Now consider the following statements: I. If a process makes a transition D, it would result in another process making transition A immediately. II. A process P2 in blocked state can make transition E while another process P1 is in running state. III. The OS uses preemptive scheduling. IV. The OS uses non-preemptive scheduling. Which of the above statements are TRUE? (a) I and II (b) I and III (c) II and III (d) II and IV",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Process State Transition Diagram",
+                "Preemptive Scheduling"
+            ],
+            "tags": [
+                "process states",
+                "state diagram",
+                "preemption",
+                "Process Concept and States"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "I and II",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "I and III",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "II and III",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "II and IV",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Transition C (Running to Ready) indicates that the OS uses preemptive scheduling. Statement II is also true.",
+            "pyq_sources": [
+                {
+                    "year": 2009,
+                    "set": null,
+                    "question_number": "Q1.33",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following statements are true? I. Shortest remaining time first scheduling may cause starvation. II. Preemptive scheduling may cause starvation. III. Round-Robin is better than FCFS in terms of response time. (a) I only (b) I and III only (c) II and III only (d) I, II and III",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Starvation",
+                "Response Time"
+            ],
+            "tags": [
+                "starvation",
+                "round robin",
+                "response time",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "I only",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "I and III only",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "II and III only",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "I, II and III",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In shortest remaining time first scheduling, a large-CPU-burst process may starve if processes with smaller bursts keep arriving. Preemptive scheduling in general may cause starvation of low priority processes. Round Robin gives every process a first response after a certain time quantum, making it better than FCFS in terms of response time.",
+            "pyq_sources": [
+                {
+                    "year": 2010,
+                    "set": null,
+                    "question_number": "Q1.34",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Let the time taken to switch between user and Kernel modes of execution be t1 while the time taken to switch between two processes be t2. Which of the following is TRUE? (a) t1 > t2 (b) t1 = t2 (c) t1 < t2 (d) Nothing can be said about the relation between t1 and t2",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Mode Switching",
+                "Process Switching"
+            ],
+            "tags": [
+                "mode switch",
+                "process switch",
+                "context switch",
+                "Introduction and System Calls",
+                "Process Concept and States"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "t1 > t2",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "t1 = t2",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "t1 < t2",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Nothing can be said about the relation between t1 and t2",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Process switching includes mode switching. Context switching can occur only in Kernel mode, so t1 < t2.",
+            "pyq_sources": [
+                {
+                    "year": 2011,
+                    "set": null,
+                    "question_number": "Q1.35",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "A computer handles several interrupt sources of which the following are relevant for this question. Interrupt from CPU temperature sensor (raises interrupt if CPU temperature is too high), Interrupt from Mouse (raises interrupt if the mouse is moved or a button is pressed), Interrupt from Keyboard (raises interrupt when a key is pressed or released), Interrupt from Hard Disk (raises interrupt when a disk read is completed). Which one of these will be handled at the HIGHEST priority? (a) Interrupt from Hard Disk (b) Interrupt from Mouse (c) Interrupt from Keyboard (d) Interrupt from CPU temperature sensor",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Interrupt Priority"
+            ],
+            "tags": [
+                "interrupt priority",
+                "hardware interrupts",
+                "Introduction and System Calls"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Interrupt from Hard Disk",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Interrupt from Mouse",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Interrupt from Keyboard",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Interrupt from CPU temperature sensor",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Interrupt from CPU temperature sensor is given top priority to protect system resources; when CPU temperature is too high, the OS gives top priority to this interrupt and takes immediate protective action.",
+            "pyq_sources": [
+                {
+                    "year": 2011,
+                    "set": null,
+                    "question_number": "Q1.36",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "A thread is usually defined as a light weight process because an Operating System (OS) maintains smaller data structures for a thread than for a process. In relation to this, which of the following is TRUE? (a) On per-thread basis, the OS maintains only CPU register state (b) The OS does not maintain a separate stack for each thread (c) On per-thread basis, the OS does not maintain virtual memory state (d) On per-thread basis, the OS maintains only scheduling and accounting information",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Lightweight Process",
+                "Thread Data Structures"
+            ],
+            "tags": [
+                "thread",
+                "virtual memory",
+                "lightweight process",
+                "Threads"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "On per-thread basis, the OS maintains only CPU register state",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "The OS does not maintain a separate stack for each thread",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "On per-thread basis, the OS does not maintain virtual memory state",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "On per-thread basis, the OS maintains only scheduling and accounting information",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "(a) is false because the OS maintains both CPU register state and a stack per thread. (b) is false because the OS maintains a separate stack for each thread. (c) is true because virtual memory state is shared at the process level, not maintained per thread. (d) is false because the OS does maintain scheduling and accounting information but that is not the only thing.",
+            "pyq_sources": [
+                {
+                    "year": 2011,
+                    "set": null,
+                    "question_number": "Q1.37",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following table of arrival time and burst time for three processes P0, P1 and P2. Process P0: Arrival time 0 ms, Burst time 9 ms; P1: Arrival time 1 ms, Burst time 4 ms; P2: Arrival time 2 ms, Burst time 9 ms. The pre-emptive shortest job first scheduling algorithm is used. Scheduling is carried out only at arrival or completion of processes. What is the average waiting time for the three processes? (a) 5.0 ms (b) 4.33 ms (c) 6.33 ms (d) 7.33 ms",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Preemptive SJF",
+                "Average Waiting Time"
+            ],
+            "tags": [
+                "SJF",
+                "waiting time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "5.0 ms",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "4.33 ms",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "6.33 ms",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "7.33 ms",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Gantt chart: P0(0-1), P1(1-5), P0(5-13), P2(13-22). Average waiting time = [(5-1) + 0 + (13-2)]/3 = 5.0 ms.",
+            "pyq_sources": [
+                {
+                    "year": 2011,
+                    "set": null,
+                    "question_number": "Q1.38",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "A process executes the code: fork(); fork(); fork(); The total number of child processes created is (a) 3 (b) 4 (c) 7 (d) 8",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "fork() Semantics"
+            ],
+            "tags": [
+                "fork",
+                "child processes",
+                "Fork System Call"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "3",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "4",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "7",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "8",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The number of child processes created = 2^n − 1 = 2^3 − 1 = 7, where n is the number of fork() statements.",
+            "pyq_sources": [
+                {
+                    "year": 2012,
+                    "set": null,
+                    "question_number": "Q1.39",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the 3 processes, P1, P2 and P3 shown in the table: Process P1 Arrival Time 0, Time Unit Required 5; P2 Arrival Time 1, Time Unit Required 7; P3 Arrival Time 3, Time Unit Required 4. The completion order of the 3 processes under the policies FCFS and RR2 (Round Robin scheduling with CPU quantum of 2 time units) are: (a) FCFS: P1, P2, P3 RR2: P1, P2, P3 (b) FCFS: P1, P3, P2 RR2: P1, P3, P2 (c) FCFS: P1, P2, P3 RR2: P1, P3, P2 (d) FCFS: P1, P3, P2 RR2: P1, P2, P3",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "FCFS Scheduling",
+                "Round Robin Scheduling"
+            ],
+            "tags": [
+                "FCFS",
+                "round robin",
+                "completion order",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "FCFS: P1, P2, P3 RR2: P1, P2, P3",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "FCFS: P1, P3, P2 RR2: P1, P3, P2",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "FCFS: P1, P2, P3 RR2: P1, P3, P2",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "FCFS: P1, P3, P2 RR2: P1, P2, P3",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "For FCFS the completion order is P1, P2, P3. Tracing the RR2 (quantum 2) queue gives the completion order P1, P3, P2.",
+            "pyq_sources": [
+                {
+                    "year": 2012,
+                    "set": null,
+                    "question_number": "Q1.40",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "A scheduling algorithm assigns priority proportional to the waiting time of a process. Every process starts with priority zero (the lowest priority). The schedule reevaluates the process priorities every T time units and decides the next process to schedule. Which one of the following is TRUE if the processes have no I/O operations and all arrive at time zero? (a) This algorithm is equivalent to the first come first serve algorithm (b) This algorithm is equivalent to the round-robin algorithm (c) This algorithm is equivalent to the shortest-job-first algorithm (d) This algorithm is equivalent to the shortest-remaining-time-first algorithm",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Aging",
+                "Round Robin Scheduling"
+            ],
+            "tags": [
+                "aging",
+                "priority scheduling",
+                "round robin",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "This algorithm is equivalent to the first come first serve algorithm",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "This algorithm is equivalent to the round-robin algorithm",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "This algorithm is equivalent to the shortest-job-first algorithm",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "This algorithm is equivalent to the shortest-remaining-time-first algorithm",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since the scheduler reevaluates priorities every T time units (T less than the execution time of any process), each process gets executed in turn, which is exactly the same behavior as round robin.",
+            "pyq_sources": [
+                {
+                    "year": 2013,
+                    "set": null,
+                    "question_number": "Q1.41",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which one of the following is FALSE? (a) User level threads are not scheduled by the Kernel. (b) When a user level thread is blocked, all other threads of its process are blocked. (c) Context switching between user level threads is faster than context switching between Kernel level threads. (d) Kernel level threads cannot share the code segment.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "User-level Threads",
+                "Kernel-level Threads"
+            ],
+            "tags": [
+                "threads",
+                "code segment sharing"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "User level threads are not scheduled by the Kernel.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "When a user level thread is blocked, all other threads of its process are blocked.",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Context switching between user level threads is faster than context switching between Kernel level threads.",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Kernel level threads cannot share the code segment.",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Kernel level threads share the code segment, so statement (d) is false.",
+            "pyq_sources": [
+                {
+                    "year": 2014,
+                    "set": 1,
+                    "question_number": "Q1.42",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following set of processes that need to be scheduled on a single CPU. All the times are given in milliseconds. Process A: Arrival Time 0, Execution Time 6; B: Arrival Time 3, Execution Time 2; C: Arrival Time 5, Execution Time 4; D: Arrival Time 7, Execution Time 6; E: Arrival Time 10, Execution Time 3. Using the shortest remaining time first scheduling algorithm, the average process turnaround time (in msec) is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "SRTF Scheduling",
+                "Average Turnaround Time"
+            ],
+            "tags": [
+                "SRTF",
+                "turnaround time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "7.2",
+            "explanation": "Using SRTF, the Gantt chart is A, B, A, C, E, D. Turnaround times: A=8, B=2, C=7, D=14, E=5. Average turnaround time = (8+2+7+14+5)/5 = 7.2.",
+            "pyq_sources": [
+                {
+                    "year": 2014,
+                    "set": 1,
+                    "question_number": "Q1.43",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Three processes A, B and C each execute a loop of 100 iterations. In each iteration of the loop, a process performs a single computation that requires tc CPU milliseconds and then initiates a single I/O operation that lasts for tio milliseconds. It is assumed that the computer where the processes execute has a sufficient number of I/O devices and the OS of the computer assigns different I/O devices to each process. Also, the scheduling overhead of the OS is negligible. The processes have the following characteristics: Process A: tc = 100 ms, tio = 500 ms; B: tc = 350 ms, tio = 500 ms; C: tc = 200 ms, tio = 500 ms. The processes A, B, and C are started at times 0, 5 and 10 milliseconds respectively, in a pure time sharing system (round robin scheduling) that uses a time slice of 50 milliseconds. The time in milliseconds at which process C would complete its first I/O operation is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Round Robin Scheduling",
+                "I/O Completion Time"
+            ],
+            "tags": [
+                "round robin",
+                "I/O burst",
+                "time slice",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "1000",
+            "explanation": "Tracing the round robin schedule with a 50 ms time slice, process C completes its first I/O operation (200 ms of CPU accumulated) at time 1000 ms.",
+            "pyq_sources": [
+                {
+                    "year": 2014,
+                    "set": 2,
+                    "question_number": "Q1.44",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "An operating system uses shortest remaining time first scheduling algorithm for pre-emptive scheduling of processes. Consider the following set of processes with their arrival times and CPU burst times (in milliseconds): Process P1: Arrival Time 0, Burst Time 12; P2: Arrival Time 2, Burst Time 4; P3: Arrival Time 3, Burst Time 6; P4: Arrival Time 8, Burst Time 5. The average waiting time (in milliseconds) of the processes is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "SRTF Scheduling",
+                "Average Waiting Time"
+            ],
+            "tags": [
+                "SRTF",
+                "waiting time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "5.5",
+            "explanation": "Gantt chart: P1, P2, P3, P4, P1. Waiting times: P1=15, P2=0, P3=3, P4=4. Average waiting time = (15+0+3+4)/4 = 5.5.",
+            "pyq_sources": [
+                {
+                    "year": 2014,
+                    "set": 3,
+                    "question_number": "Q1.45",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider a uniprocessor system executing three tasks T1, T2 and T3, each of which is composed of an infinite sequence of jobs (or instances) which arrive periodically at intervals of 3, 7 and 20 milliseconds, respectively. The priority of each task is the inverse of its period, and the available tasks are scheduled in order of priority, with the highest priority task scheduled first. Each instance of T1, T2 and T3 requires an execution time of 1, 2 and 4 milliseconds, respectively. Given that all tasks initially arrive at the beginning of the 1st millisecond and task preemptions are allowed, the first instance of T3 completes its execution at the end of ____ milliseconds.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Rate Monotonic Scheduling",
+                "Preemptive Priority Scheduling"
+            ],
+            "tags": [
+                "rate monotonic",
+                "periodic tasks",
+                "preemption",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "12",
+            "explanation": "T1 has the highest priority (1/3) and T3 the lowest (1/20). Tracing the schedule with periodic arrivals and preemptions, the first instance of T3 (requiring 4 units) completes at the end of 12 ms.",
+            "pyq_sources": [
+                {
+                    "year": 2015,
+                    "set": 1,
+                    "question_number": "Q1.46",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "The maximum number of processes that can be in Ready state for a computer system with n CPUs is (a) n (b) n^2 (c) 2^n (d) Independent of n",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Process States",
+                "Ready Queue"
+            ],
+            "tags": [
+                "ready state",
+                "multiprocessor",
+                "Process Concept and States"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "n",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "n^2",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "2^n",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Independent of n",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The maximum number of processes that can be in Ready state is independent of the number of CPUs (n), since the ready queue can hold any number of waiting processes.",
+            "pyq_sources": [
+                {
+                    "year": 2015,
+                    "set": 3,
+                    "question_number": "Q1.47",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "For the processes listed in the following table, which of the following scheduling schemes will give the lowest average turnaround time? Process A: Arrival Time 0, Processing Time 3; B: Arrival Time 1, Processing Time 6; C: Arrival Time 4, Processing Time 4; D: Arrival Time 6, Processing Time 2. (a) First Come First Serve (b) Non-preemptive Shortest Job First (c) Shortest Remaining Time (d) Round-Robin with Quantum value two",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "FCFS",
+                "SJF",
+                "SRTF",
+                "Round Robin"
+            ],
+            "tags": [
+                "scheduling comparison",
+                "average turnaround time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "First Come First Serve",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Non-preemptive Shortest Job First",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Shortest Remaining Time",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Round-Robin with Quantum value two",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Computed average turnaround times: FCFS = 7.25, Non-preemptive SJF = 6.75, SRTF = 6.25, RR(2) = 8.25. SRTF gives the lowest average turnaround time.",
+            "pyq_sources": [
+                {
+                    "year": 2015,
+                    "set": 3,
+                    "question_number": "Q1.48",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider an arbitrary set of CPU-bound processes with unequal CPU burst lengths submitted at the same time to a computer system. Which one of the following process scheduling algorithms would minimize the average waiting time in the ready queue? (a) Shortest remaining time first (b) Round-robin with time quantum less than the shortest CPU burst (c) Uniform random (d) Highest priority first with priority proportional to CPU burst length",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Shortest Remaining Time First",
+                "Waiting Time Minimization"
+            ],
+            "tags": [
+                "SRTF",
+                "waiting time",
+                "CPU bound processes",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Shortest remaining time first",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "Round-robin with time quantum less than the shortest CPU burst",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Uniform random",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Highest priority first with priority proportional to CPU burst length",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "To minimize the average waiting time, we need to select the shortest remaining time process first, since all processes arrive at the same time and have unequal CPU burst times.",
+            "pyq_sources": [
+                {
+                    "year": 2016,
+                    "set": 1,
+                    "question_number": "Q1.49",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following processes, with the arrival time and the length of the CPU burst given in milliseconds. The scheduling algorithm used is preemptive shortest remaining-time first. Process P1: Arrival Time 0, Burst Time 10; P2: Arrival Time 3, Burst Time 6; P3: Arrival Time 7, Burst Time 1; P4: Arrival Time 8, Burst Time 3. The average turn around time of these processes is ____ milliseconds.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Preemptive SRTF",
+                "Average Turnaround Time"
+            ],
+            "tags": [
+                "SRTF",
+                "turnaround time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "8.25",
+            "explanation": "Gantt chart: P1(0-3), P2(3-7), P3(7-8), P2(8-10), P4(10-13), P1(13-20). Completion times give turnaround times of 20, 7, 1, 5. Average turnaround time = 33/4 = 8.25.",
+            "pyq_sources": [
+                {
+                    "year": 2016,
+                    "set": 2,
+                    "question_number": "Q1.50",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Threads of a process share (a) global variables but not heap (b) heap but not global variables (c) neither global variables nor heap (d) both heap and global variables",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Thread Resource Sharing"
+            ],
+            "tags": [
+                "threads",
+                "heap",
+                "global variables"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "global variables but not heap",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "heap but not global variables",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "neither global variables nor heap",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "both heap and global variables",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Generally every thread of a process has its own PC and stack. Both heap and global variables are shared by every thread of a process.",
+            "pyq_sources": [
+                {
+                    "year": 2017,
+                    "set": 1,
+                    "question_number": "Q1.51",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following CPU processes with arrival times (in milliseconds) and length of CPU bursts (in milliseconds) as given below: Process P1: Arrival time 0, Burst time 7; P2: Arrival time 3, Burst time 3; P3: Arrival time 5, Burst time 5; P4: Arrival time 6, Burst time 2. If the pre-emptive shortest remaining time first scheduling algorithm is used to schedule the processes, then the average waiting time across all processes is ____ milliseconds.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Preemptive SRTF",
+                "Average Waiting Time"
+            ],
+            "tags": [
+                "SRTF",
+                "waiting time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "3",
+            "explanation": "Gantt chart: P1(0-3), P2(3-6), P4(6-8), P1(8-12), P3(12-17). Waiting times: P1=5, P2=0, P3=7, P4=0. Average waiting time = (5+0+7+0)/4 = 3.0 ms.",
+            "pyq_sources": [
+                {
+                    "year": 2017,
+                    "set": 1,
+                    "question_number": "Q1.52",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following is/are shared by all the threads in a process? I. Program counter II. Stack III. Address space IV. Registers (a) I and II only (b) III only (c) IV only (d) III and IV only",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Thread Resource Sharing"
+            ],
+            "tags": [
+                "threads",
+                "address space",
+                "program counter"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "I and II only",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "III only",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "IV only",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "III and IV only",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "All threads share the address space, but other entities like stack, program counter, and registers are not shared; every thread has its own.",
+            "pyq_sources": [
+                {
+                    "year": 2017,
+                    "set": 2,
+                    "question_number": "Q1.53",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the set of processes with arrival time (in milliseconds), CPU burst time (in milliseconds), and priority (0 is the highest priority) shown below. None of the processes have I/O burst time. Process P1: Arrival Time 0, Burst Time 11, Priority 2; P2: Arrival Time 5, Burst Time 28, Priority 0; P3: Arrival Time 12, Burst Time 2, Priority 3; P4: Arrival Time 2, Burst Time 10, Priority 1; P5: Arrival Time 9, Burst Time 16, Priority 4. The average waiting time (in milliseconds) of all the processes using preemptive priority scheduling algorithm is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Preemptive Priority Scheduling",
+                "Average Waiting Time"
+            ],
+            "tags": [
+                "priority scheduling",
+                "waiting time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "29",
+            "explanation": "Tracing the Gantt chart based on priority preemption gives waiting times: P1=38, P2=0, P3=0, P4=37, P5=42. Total = 145. Average waiting time = 145/5 = 29.",
+            "pyq_sources": [
+                {
+                    "year": 2017,
+                    "set": 2,
+                    "question_number": "Q1.54",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following C program executed on a Unix/Linux system: #include<unistd.h> int main() { int i; for (i = 0; i < 10; i++) if (i % 2 == 0) fork(); return 0; } The total number of child processes created is ____.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "fork() Semantics",
+                "Conditional fork in Loop"
+            ],
+            "tags": [
+                "fork",
+                "conditional loop",
+                "child processes",
+                "Fork System Call"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "31",
+            "explanation": "The number of child processes created using n fork() calls is 2^n − 1. The fork() statement inside the loop executes when i = 0, 2, 4, 6, 8, so n = 5 times fork() is executed. So, number of child processes created = 2^5 − 1 = 31.",
+            "pyq_sources": [
+                {
+                    "year": 2019,
+                    "set": null,
+                    "question_number": "Q1.55",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following four processes with arrival times (in milliseconds) and their length of CPU burst (in milliseconds) as shown below: Process P1 Arrival time 0, CPU time 3; P2 Arrival time 1, CPU time 1; P3 Arrival time 3, CPU time 3; P4 Arrival time 4, CPU time Z. These processes are run on a single processor using preemptive Shortest Remaining Time First scheduling algorithm. If the average waiting time of the processes is 1 millisecond, then the value of Z is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Preemptive SRTF",
+                "Average Waiting Time"
+            ],
+            "tags": [
+                "SRTF",
+                "waiting time",
+                "unknown burst",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "2",
+            "explanation": "Assuming Z = 2, the Gantt chart is P1, P2, P1, P1, P4, P3. Waiting times: P1=1, P2=0, P3=3, P4=0. Average waiting time = (1+0+3+0)/4 = 1 ms, which matches. Hence Z = 2.",
+            "pyq_sources": [
+                {
+                    "year": 2019,
+                    "set": null,
+                    "question_number": "Q1.56",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following statements about process state transitions for a system using preemptive scheduling. I. A running process can move to ready state. II. A ready process can move to running state. III. A blocked process can move to running state. IV. A blocked process can move to ready state. Which of the above statements are TRUE? (a) I, II, III and IV (b) II and III only (c) I, II and III only (d) I, II and IV only",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Process State Transitions"
+            ],
+            "tags": [
+                "process states",
+                "blocked to running",
+                "preemptive scheduling",
+                "Process Concept and States"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "I, II, III and IV",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "II and III only",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "I, II and III only",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "I, II and IV only",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Statements I, II and IV are correct. A blocked process cannot move directly to the running state (III is false); it must first move to the ready state.",
+            "pyq_sources": [
+                {
+                    "year": 2020,
+                    "set": null,
+                    "question_number": "Q1.57",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following set of processes, assumed to have arrived at time 0. Consider the CPU scheduling algorithms Shortest Job First (SJF) and Round Robin (RR). For RR, assume that the processes are scheduled in the order P1, P2, P3, P4. Process P1: Burst time 8 ms; P2: Burst time 7 ms; P3: Burst time 2 ms; P4: Burst time 4 ms. If the time quantum for RR is 4 ms, then the absolute value of the difference between the average turnaround times (in ms) of SJF and RR (round off to 2 decimal places) is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "SJF",
+                "Round Robin",
+                "Average Turnaround Time"
+            ],
+            "tags": [
+                "SJF",
+                "round robin",
+                "turnaround time difference",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "5.25",
+            "explanation": "SJF Gantt chart: P3, P4, P2, P1 gives average TAT = 42/4 = 10.5. RR (quantum 4) Gantt chart: P1,P2,P3,P4,P1,P2 gives average TAT = 63/4 = 15.75. |SJF(TAT) − RR(TAT)| = |10.5 − 15.75| = 5.25.",
+            "pyq_sources": [
+                {
+                    "year": 2020,
+                    "set": null,
+                    "question_number": "Q1.58",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Three processes arrive at time zero with CPU bursts of 16, 20 and 10 milliseconds. If the scheduler has prior knowledge about the length of the CPU bursts, the minimum achievable average waiting time for these three processes in a non-preemptive scheduler (round to nearest integer) is ____ milliseconds.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Non-preemptive SJF",
+                "Minimum Average Waiting Time"
+            ],
+            "tags": [
+                "SJF",
+                "non-preemptive",
+                "waiting time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [],
+            "correct_answer_text": "12",
+            "explanation": "Scheduling in increasing order of burst time (SJF) minimizes average waiting time. Order: C(10), A(16), B(20). Waiting times: 0, 10, 26. Average = 36/3 = 12.",
+            "pyq_sources": [
+                {
+                    "year": 2021,
+                    "set": 1,
+                    "question_number": "Q1.59",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following standard C library functions will always invoke a system call when executed from a single-threaded process in a UNIX/Linux operating system? (a) exit (b) strlen (c) sleep (d) malloc",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "System Calls",
+                "C Library Functions"
+            ],
+            "tags": [
+                "system call",
+                "C library",
+                "UNIX",
+                "Introduction and System Calls"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "exit",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "strlen",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "sleep",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "malloc",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "exit and sleep always invoke a system call, while strlen and malloc may not always require a system call to be executed.",
+            "pyq_sources": [
+                {
+                    "year": 2021,
+                    "set": 1,
+                    "question_number": "Q1.60",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following statement(s) is/are correct in the context of CPU scheduling? (a) The goal is to only maximize CPU utilization and minimize throughput. (b) Turnaround time includes waiting time. (c) Round-robin policy can be used even when the CPU time required by each of the processes is not known apriori. (d) Implementing preemptive scheduling needs hardware support.",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Scheduling Goals",
+                "Turnaround Time"
+            ],
+            "tags": [
+                "scheduling goals",
+                "turnaround time",
+                "round robin",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The goal is to only maximize CPU utilization and minimize throughput.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Turnaround time includes waiting time.",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Round-robin policy can be used even when the CPU time required by each of the processes is not known apriori.",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Implementing preemptive scheduling needs hardware support.",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The goal is to maximize CPU utilization and maximize throughput, so (a) is false. (b) is true, as turnaround time = completion time − arrival time, which includes waiting time. (c) is true because round-robin can run processes using a time quantum even if burst time is not known initially. (d) is true, for example round robin scheduling requires a timer, which is hardware support.",
+            "pyq_sources": [
+                {
+                    "year": 2021,
+                    "set": 2,
+                    "question_number": "Q1.61",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider four processes P, Q, R, and S scheduled on a CPU as per round robin algorithm with a time quantum of 4 units. The processes arrive in the order P, Q, R, S, all at time t = 0. There is exactly one context switch from S to Q, exactly one context switch from R to Q, and exactly two context switches from Q to R. There is no context switch from S to P. Switching to a ready process after the termination of another process is also considered a context switch. Which one of the following is NOT possible as CPU burst time (in time units) of these processes? (a) P = 4, Q = 10, R = 6, S = 2 (b) P = 2, Q = 9, R = 5, S = 1 (c) P = 4, Q = 12, R = 5, S = 4 (d) P = 3, Q = 7, R = 7, S = 3",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Round Robin Scheduling",
+                "Context Switches"
+            ],
+            "tags": [
+                "round robin",
+                "context switches",
+                "gantt chart",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "P = 4, Q = 10, R = 6, S = 2",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "P = 2, Q = 9, R = 5, S = 1",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "P = 4, Q = 12, R = 5, S = 4",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "P = 3, Q = 7, R = 7, S = 3",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The Gantt chart P, Q, R, S, Q, R, Q satisfies all given conditions for options (a), (b), (c), but not for option (d). So the answer is option (d).",
+            "pyq_sources": [
+                {
+                    "year": 2022,
+                    "set": null,
+                    "question_number": "Q1.62",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Which one or more of the following need to be saved on a context switch from one thread (T1) of a process to another thread (T2) of the same process? (a) Page table base register (b) Stack pointer (c) Program counter (d) General purpose registers",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Thread Context Switch"
+            ],
+            "tags": [
+                "thread context switch",
+                "register save",
+                "page table",
+                "Threads"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Page table base register",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Stack pointer",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Program counter",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "General purpose registers",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The status of a process or thread is saved via context switching. During context switches between threads, registers (integer and floating-point), program counter, condition registers, and other thread execution state must be stored. The page table base register (already in the PCB) does not need to be preserved when threads are from the same process, since they share the same address space.",
+            "pyq_sources": [
+                {
+                    "year": 2023,
+                    "set": null,
+                    "question_number": "Q1.63",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which one or more of the following options guarantee that a computer system will transition from user mode to Kernel mode? (a) Function call (b) Malloc call (c) Page fault (d) System call",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Mode Switch",
+                "System Calls",
+                "Page Fault"
+            ],
+            "tags": [
+                "user mode",
+                "kernel mode",
+                "page fault",
+                "system call",
+                "Introduction and System Calls"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Function call",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Malloc call",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Page fault",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "System call",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Page fault and system call guarantee a transition to kernel mode, while a function call or malloc call may not necessarily require kernel mode transition.",
+            "pyq_sources": [
+                {
+                    "year": 2023,
+                    "set": null,
+                    "question_number": "Q1.64",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which one or more of the following CPU scheduling algorithms can potentially cause starvation? (a) First-in First-Out (b) Round Robin (c) Priority Scheduling (d) Shortest Job First",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Starvation"
+            ],
+            "tags": [
+                "starvation",
+                "priority scheduling",
+                "SJF",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "First-in First-Out",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Round Robin",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Priority Scheduling",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Shortest Job First",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In FCFS, other processes will definitely get their chance to execute eventually, so it does not suffer starvation. Round Robin has no starvation because every process has a defined time quantum turn. If higher priority processes keep arriving in priority-based scheduling, low priority processes will starve. If processes with short burst times continue to arrive in SJF, processes with longer burst times will have to wait indefinitely, causing starvation.",
+            "pyq_sources": [
+                {
+                    "year": 2023,
+                    "set": null,
+                    "question_number": "Q1.65",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following statements about threads is/are TRUE? (a) Threads can only be implemented in Kernel space (b) Each thread has its own file descriptor table for open files (c) Threads belonging to a process are by default not protected from each other (d) All the threads belonging to a process share a common stack",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Thread Protection",
+                "Thread Implementation"
+            ],
+            "tags": [
+                "threads",
+                "thread protection",
+                "stack"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Threads can only be implemented in Kernel space",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Each thread has its own file descriptor table for open files",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Threads belonging to a process are by default not protected from each other",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "All the threads belonging to a process share a common stack",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Threads of the same process are, by default, not protected from each other since they share the same address space, unlike processes which are protected from each other by the OS.",
+            "pyq_sources": [
+                {
+                    "year": 2024,
+                    "set": 1,
+                    "question_number": "Q1.66",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which of the following process state transitions is/are NOT possible? (a) Waiting to Running (b) Ready to Waiting (c) Running to Terminated (d) Running to Ready",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Process State Transitions"
+            ],
+            "tags": [
+                "process states",
+                "invalid transitions",
+                "Process Concept and States"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Waiting to Running",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "Ready to Waiting",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Running to Terminated",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Running to Ready",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A waiting/blocked process must move to the ready state before running, so Waiting to Running directly is not possible. Likewise, a ready process moves to running (not waiting) directly, so Ready to Waiting is also not possible. Running to Terminated and Running to Ready are both valid transitions.",
+            "pyq_sources": [
+                {
+                    "year": 2024,
+                    "set": 1,
+                    "question_number": "Q1.67",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following two threads T1 and T2 that update two shared variables a and b. Assume that initially a = b = 1. Though context switching between threads can happen at any time, each statement of T1 or T2 is executed atomically without interruption. T1: a = a + 1; b = b + 1; T2: b = 2 * b; a = 2 * a; Which one of the following options lists all the possible combinations of values of a and b after both T1 and T2 finish execution? (a) (a = 3, b = 4); (a = 4, b = 3) (b) (a = 4, b = 4); (a = 4, b = 3); (a = 3, b = 4) (c) (a = 2, b = 2); (a = 2, b = 3); (a = 3, b = 4) (d) (a = 4, b = 4); (a = 3, b = 3); (a = 4, b = 3)",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Concurrent Execution",
+                "Atomic Statements",
+                "Interleaving"
+            ],
+            "tags": [
+                "threads",
+                "shared variables",
+                "interleaving"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "(a = 3, b = 4); (a = 4, b = 3)",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "(a = 4, b = 4); (a = 4, b = 3); (a = 3, b = 4)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "(a = 2, b = 2); (a = 2, b = 3); (a = 3, b = 4)",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "(a = 4, b = 4); (a = 3, b = 3); (a = 4, b = 3)",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Tracing all possible interleavings of the atomic statements of T1 and T2 gives the final value combinations (a = 4, b = 4), (a = 3, b = 3), and (a = 4, b = 3).",
+            "pyq_sources": [
+                {
+                    "year": 2024,
+                    "set": 1,
+                    "question_number": "Q1.68",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider a process P running on a CPU. Which one or more of the following events will always trigger a context switch by the OS that results in process P moving to a non-running state (e.g., ready, blocked)? (a) A timer interrupt is raised by the hardware. (b) P tries to access a page that is in the swap space, triggering a page fault. (c) An interrupt is raised by the disk to deliver data requested by some other process. (d) P makes a blocking system call to read a block of data from the disk.",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Context Switch Triggers",
+                "Page Fault",
+                "Blocking System Calls"
+            ],
+            "tags": [
+                "context switch",
+                "page fault",
+                "blocking call",
+                "Process Concept and States"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "A timer interrupt is raised by the hardware.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "P tries to access a page that is in the swap space, triggering a page fault.",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "An interrupt is raised by the disk to deliver data requested by some other process.",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "P makes a blocking system call to read a block of data from the disk.",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A page fault requiring disk I/O (b) and a blocking system call (d) will always move P to a non-running (blocked) state. A timer interrupt (a) may or may not preempt P depending on scheduling policy, and a disk interrupt for another process's data (c) does not necessarily affect P's state.",
+            "pyq_sources": [
+                {
+                    "year": 2024,
+                    "set": 2,
+                    "question_number": "Q1.69",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider a multi-threaded program with two threads T1 and T2. The threads share two semaphores: s1 (initialized to 1) and s2 (initialized to 0). The threads also share a global variable x (initialized to 0). The threads execute the code shown below. Code of T1: wait(s1); x = x + 1; print(x); wait(s2); signal(s1); Code of T2: wait(s1); x = x + 1; print(x); signal(s2); signal(s1); Which of the following outcomes is/are possible when threads T1 and T2 execute concurrently? (a) T2 runs first and prints 1, T1 runs next and prints 2 (b) T2 runs first and prints 1, T1 does not print anything (deadlock) (c) T1 runs first and prints 1, T2 runs next and prints 2 (d) T1 runs first and prints 1, T2 does not print anything (deadlock)",
+            "question_type": "MSQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Semaphores",
+                "Deadlock",
+                "Thread Synchronization"
+            ],
+            "tags": [
+                "semaphore",
+                "deadlock",
+                "concurrency",
+                "Threads"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "T2 runs first and prints 1, T1 runs next and prints 2",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "T2 runs first and prints 1, T1 does not print anything (deadlock)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "T1 runs first and prints 1, T2 runs next and prints 2",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "T1 runs first and prints 1, T2 does not print anything (deadlock)",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Tracing the semaphore operations for both possible orderings shows that if T2 runs first, it releases s1 and s2, allowing T1 to also complete, printing 1 then 2. If T1 runs first, it acquires s1 but then waits on s2 which is never signaled by T1 itself, and since T1 holds s1, T2 cannot acquire s1 to signal s2, causing deadlock after T1 prints 1.",
+            "pyq_sources": [
+                {
+                    "year": 2024,
+                    "set": 2,
+                    "question_number": "Q1.70",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider a single processor system with four processes A, B, C, and D, represented as given below, where for each process the first value is its arrival time, and the second value is its CPU burst time. A(0, 10), B(2, 6), C(4, 3) and D(6, 7). Which one of the following options gives the average waiting times when preemptive Shortest Remaining Time First (SRTF) and Non-Preemptive Shortest Job First (NP-SJF) CPU scheduling algorithms are applied to the processes? (a) SRTF = 6, NP-SJF = 7 (b) SRTF = 7, NP-SJF = 7.5 (c) SRTF = 7, NP-SJF = 8.5 (d) SRTF = 6, NP-SJF = 7.5",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "SRTF",
+                "Non-preemptive SJF",
+                "Average Waiting Time"
+            ],
+            "tags": [
+                "SRTF",
+                "SJF",
+                "waiting time comparison",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "SRTF = 6, NP-SJF = 7",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "SRTF = 7, NP-SJF = 7.5",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "SRTF = 7, NP-SJF = 8.5",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "SRTF = 6, NP-SJF = 7.5",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Computing the Gantt charts for both SRTF and NP-SJF for processes A(0,10), B(2,6), C(4,3), D(6,7) gives average waiting time SRTF = 6 and NP-SJF = 7.5.",
+            "pyq_sources": [
+                {
+                    "year": 2024,
+                    "set": 2,
+                    "question_number": "Q1.71",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Suppose in a multiprogramming environment, the following C program segment is executed. A process goes into I/O queue whenever an I/O related operation is performed. Assume that there will always be a context switch whenever a process requests for an I/O, and also whenever the process returns from an I/O. The number of times the process will enter the ready queue during its lifetime (not counting the time the process enters the ready queue when it is run initially) is ____. (Answer in integer) int main() { int x = 0, i = 0; scanf(\"%d\", &x); for(i = 0; i < 20; i++) { x = x + 20; printf(\"%d\\n\", x); } return 0; }",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "I/O Queue",
+                "Ready Queue Re-entry"
+            ],
+            "tags": [
+                "I/O operations",
+                "ready queue",
+                "context switch",
+                "Process Concept and States"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "21",
+            "explanation": "The scanf() causes 1 I/O operation, moving the process to I/O and back to ready once. The loop runs 20 times, each printf() causing an I/O request and a return to the ready queue. Total entries to ready queue = 1 (after scanf) + 20 (after each printf) = 21.",
+            "pyq_sources": [
+                {
+                    "year": 2025,
+                    "set": 1,
+                    "question_number": "Q1.72",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "A computer has two processors, M1 and M2. Four processes P1, P2, P3, P4 with CPU bursts of 20, 16, 25, and 10 milliseconds, respectively, arrive at the same time and these are the only processes in the system. The scheduler uses non-preemptive priority scheduling, with priorities decided as follows: M1 uses priority of execution for the processes as, P1 > P3 > P2 > P4, i.e., P1 and P4 have highest and lowest priorities, respectively. M2 uses priority of execution for the processes as, P2 > P3 > P4 > P1, i.e., P2 and P1 have highest and lowest priorities, respectively. A process Pi is scheduled to a processor Mk, if the processor is free and no other process Pj is waiting with higher priority. At any given point of time, a process can be allocated to any one of the free processors without violating the execution priority rules. Ignore the context switch time. What will be the average waiting time of the processes in milliseconds? (a) 9.00 (b) 8.75 (c) 6.50 (d) 7.50",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Multiprocessor Scheduling",
+                "Priority Scheduling"
+            ],
+            "tags": [
+                "multiprocessor",
+                "priority scheduling",
+                "waiting time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "9.00",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "8.75",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "6.50",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "7.50",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "On M1, P1 and P3 run in order (waiting times 0, 20). On M2, P2 and P4 run in order (waiting times 0, 16). Average waiting time = (0+0+20+16)/4 = 36/4 = 9.00.",
+            "pyq_sources": [
+                {
+                    "year": 2025,
+                    "set": 1,
+                    "question_number": "Q1.73",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Processes P1, P2, P3, P4 arrive in that order at times 0, 1, 2, and 8 milliseconds respectively, and have execution times of 10, 13, 6, and 9 milliseconds respectively. Shortest Remaining Time First (SRTF) algorithm is used as the CPU scheduling policy. Ignore context switching times. Which ONE of the following correctly gives the average turnaround time of the four processes in milliseconds? (a) 22 (b) 15 (c) 37 (d) 19",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "SRTF",
+                "Average Turnaround Time"
+            ],
+            "tags": [
+                "SRTF",
+                "turnaround time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "22",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "15",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "37",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "19",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Gantt chart: P1, P3, P1, P4, P2. Turnaround times: P1=16, P2=37, P3=6, P4=17. Average turnaround time = (16+37+6+17)/4 = 76/4 = 19.",
+            "pyq_sources": [
+                {
+                    "year": 2025,
+                    "set": 2,
+                    "question_number": "Q1.74",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following program snippet. Assume that the program compiles and runs successfully. Further, assume that the fork() system call is always successful in creating a process. int main() { int i; for (i = 0; i < 3; i++){ if (fork() == 0){ continue; } break; } printf(\"Hello!\"); return 0; } The total number of times that the printf statement gets executed is ____. (answer in integer)",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "fork() Semantics",
+                "Conditional break/continue with fork"
+            ],
+            "tags": [
+                "fork",
+                "conditional loop",
+                "printf count",
+                "Fork System Call"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "4",
+            "explanation": "Tracing execution: at i=0 the original process forks; the child continues to i=1, the parent breaks and prints Hello (1). At i=1 the child forks again; its child continues to i=2, the parent (previous child) breaks and prints Hello (2). At i=2 that child forks again; its child exits the loop naturally (loop ends at i=3) and prints Hello (3), and the parent breaks and prints Hello (4). Total = 4.",
+            "pyq_sources": [
+                {
+                    "year": 2026,
+                    "set": 1,
+                    "question_number": "Q1.75",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider a CPU that has to execute two types of processes. The first type, Actuators (A), requires a CPU burst of 6 seconds. The second type, Controllers (C), requires a CPU burst of 8 seconds. A new process of type A arrives at time t = 10, 20, 30, 40, and 50 (in seconds). Similarly, a new process of type C arrives at time t = 11, 22, 33, 44, and 55 (in seconds). The CPU scheduling policy is First Come First Serve (FCFS). The first process of type A starts running at t = 10 seconds. The average waiting time (in seconds) for the 10 processes is ____ (rounded off to one decimal place)",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "FCFS",
+                "Periodic Process Arrivals",
+                "Average Waiting Time"
+            ],
+            "tags": [
+                "FCFS",
+                "periodic arrival",
+                "waiting time",
+                "Scheduling Numerical Problems",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "9.5",
+            "explanation": "Tracing the FCFS schedule for the 10 periodically arriving A and C processes and computing individual waiting times gives a total of 95, so average waiting time = 95/10 = 9.5.",
+            "pyq_sources": [
+                {
+                    "year": 2026,
+                    "set": 1,
+                    "question_number": "Q1.76",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Which one of the following CPU scheduling algorithms cannot be preemptive? (a) Shortest Remaining Time First (SRTF) Scheduling (b) First Come First Serve (FCFS) Scheduling (c) Round Robin Scheduling (d) Priority Scheduling",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-I"
+            ],
+            "concepts": [
+                "Preemptive vs Non-preemptive Scheduling"
+            ],
+            "tags": [
+                "FCFS",
+                "preemption",
+                "scheduling types",
+                "CPU Scheduling Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Shortest Remaining Time First (SRTF) Scheduling",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "First Come First Serve (FCFS) Scheduling",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Round Robin Scheduling",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Priority Scheduling",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "First Come First Serve is a non-preemptive algorithm; processes are executed in order of arrival time, and once a process starts, it cannot be preempted until it finishes.",
+            "pyq_sources": [
+                {
+                    "year": 2026,
+                    "set": 2,
+                    "question_number": "Q1.77",
+                    "marks": 1
+                }
+            ]
+        }
+    ]
+}

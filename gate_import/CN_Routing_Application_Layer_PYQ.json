@@ -1,0 +1,1006 @@
+{
+    "subject": {
+        "subject_name": "Computer Networks",
+        "subject_code": "CN"
+    },
+    "topics": [
+        {
+            "topic_name": "Routing and Application Layer",
+            "summary": "Covers routing algorithms (distance vector, link state, count-to-infinity), IP-layer concepts like fragmentation and subnetting, and application-layer protocols such as DNS, SMTP, HTTP, FTP, and POP3/IMAP."
+        }
+    ],
+    "questions": [
+        {
+            "question_text": "Which one of the following statements is FALSE? (a) Packet switching leads to better utilization of bandwidth resources than circuit switching (b) Packet switching results in less variation in delay than circuit switching (c) Packet switching requires more per-packet processing than circuit switching (d) Packet switching can lead to reordering unlike in circuit switching",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Circuit switching", "Packet switching"],
+            "tags": ["circuit switching", "packet switching", "bandwidth utilization", "delay variation"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "Packet switching leads to better utilization of bandwidth resources than circuit switching", "is_correct": false },
+                { "label": "B", "text": "Packet switching results in less variation in delay than circuit switching", "is_correct": true },
+                { "label": "C", "text": "Packet switching requires more per-packet processing than circuit switching", "is_correct": false },
+                { "label": "D", "text": "Packet switching can lead to reordering unlike in circuit switching", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Circuit switching has 3 phases: connection establishment, data transfer, and tear down, while packet switching has only one phase (data transfer based on routing). Circuit switching has less variation in packets (delay) than packet switching. Circuit switching sends packets in order, while packet switching sends them out of order, so reordering is needed in packet switching. In packet switching no resource reservation is needed while circuit switching has resource reservation, so packet switching leads to better utilization of resources (bandwidth). In circuit switching no packet processing is needed at intermediate routers while in packet switching it is needed, so packet switching requires more packet processing time than circuit switching.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "Q4.1", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the three commands: PROMPT, HEAD and RCPT. Which of the following options indicate a correct association of these commands with protocols where these are used? (a) HTTP, SMTP, FTP (b) FTP, HTTP, SMTP (c) HTTP, FTP, SMTP (d) SMTP, HTTP, FTP",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["SMTP", "HTTP", "FTP", "Protocol commands"],
+            "tags": ["smtp", "http", "ftp", "rcpt command", "head command", "prompt command"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "HTTP, SMTP, FTP", "is_correct": false },
+                { "label": "B", "text": "FTP, HTTP, SMTP", "is_correct": true },
+                { "label": "C", "text": "HTTP, FTP, SMTP", "is_correct": false },
+                { "label": "D", "text": "SMTP, HTTP, FTP", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "RCPT: Recipient to, as the name suggests, it is used in SMTP (Simple Mail Transfer Protocol). HEAD: This is used in HTTP to get the meta-information, to decide the category of packet. PROMPT: Turns off prompting for individual files when using the mget or mput commands in FTP.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q4.2", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Traceroute reports a possible route that is taken by packets moving from some host A to some other host B. Which of the following options represents the technique used by traceroute to identify these hosts (a) By progressively querying routers about the next router on the path to B using ICMP packets, starting with the first router (b) By requiring each router to append the address to the ICMP packet as it is forwarded to B. The list of all routers en-route to B is returned by B in an ICMP reply packet (c) By ensuring that an ICMP reply packet is returned to A by each router en-route to B, in the ascending order of their hop distance from A (d) By locally computing the shortest path from A to B",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Traceroute", "ICMP", "TTL expiry"],
+            "tags": ["traceroute", "icmp", "hop distance", "ttl"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "By progressively querying routers about the next router on the path to B using ICMP packets, starting with the first router", "is_correct": false },
+                { "label": "B", "text": "By requiring each router to append the address to the ICMP packet as it is forwarded to B. The list of all routers en-route to B is returned by B in an ICMP reply packet", "is_correct": false },
+                { "label": "C", "text": "By ensuring that an ICMP reply packet is returned to A by each router en-route to B, in the ascending order of their hop distance from A", "is_correct": true },
+                { "label": "D", "text": "By locally computing the shortest path from A to B", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Traceroute reports a possible route taken by packets moving from host A to host B by ensuring that an ICMP reply packet is returned to A by each router en-route to B, in ascending order of their hop distance from A. This is achieved by incrementally increasing the TTL value (hop = 1, 2, 3, 4...) so each router along the path sends back an ICMP reply when the TTL expires.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q4.3", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Count to infinity is a problem associated with (a) Link state routing protocol (b) Distance vector routing protocol (c) DNS while resolving host name (d) TCP for congestion control",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Count to infinity", "Distance vector routing"],
+            "tags": ["count to infinity", "distance vector routing"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "Link state routing protocol", "is_correct": false },
+                { "label": "B", "text": "Distance vector routing protocol", "is_correct": true },
+                { "label": "C", "text": "DNS while resolving host name", "is_correct": false },
+                { "label": "D", "text": "TCP for congestion control", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In distance vector routing, the count-to-infinity problem happens when a router is unable to reach an adjoining network. A second router, one hop away from the first router, thinks the unreachable network is 2 hops away. Meanwhile, the first router updates its records to say it is 3 hops away, based on the fact that it is 1 hop from the second router, which says it is 2 hops from the unreachable network. The routers continue incrementing their hop count until the maximum (commonly 15), representing infinity, is reached.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q4.4", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Assume that \"host1.mydomain.dom\" has an IP address of 145.128.16.8. Which of the following options would be most appropriate as a subsequence of steps in performing the reverse lookup of 145.128.16.8? In the following options \"NS\" is an abbreviation of \"nameserver\". (a) Query a NS for the root domain and then NS for the \"dom\" domains (b) Directly query a NS for \"dom\" and then a NS for \"mydomain.dom\" domains (c) Query a NS for in-addr.arpa and then a NS for 128.145.in-addr.arpa domains (d) Directly query a NS for 145.in-addr.arpa and then a NS for 128.145.in-addr.arpa domains",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["DNS", "Reverse DNS lookup", "in-addr.arpa"],
+            "tags": ["dns", "reverse lookup", "in-addr.arpa", "nameserver hierarchy"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "Query a NS for the root domain and then NS for the \"dom\" domains", "is_correct": false },
+                { "label": "B", "text": "Directly query a NS for \"dom\" and then a NS for \"mydomain.dom\" domains", "is_correct": false },
+                { "label": "C", "text": "Query a NS for in-addr.arpa and then a NS for 128.145.in-addr.arpa domains", "is_correct": true },
+                { "label": "D", "text": "Directly query a NS for 145.in-addr.arpa and then a NS for 128.145.in-addr.arpa domains", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Step 1: Query a Name server for in-addr.arpa, because information regarding IP address 145.128.16.8 is located at domain name 145.128.16.8.in-addr.arpa. Step 2: Query a Name server for 128.145.in-addr.arpa domain, since the query is for PTR records; the resolver reverses the address and appends in-addr.arpa to the end of the reversed address to form the reverse lookup zone.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q4.5", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "HELO and PORT, respectively, are commands from the protocols (a) FTP and HTTP (b) TELNET and POP3 (c) HTTP and TELNET (d) SMTP and FTP",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["SMTP", "FTP", "HELO command", "PORT command"],
+            "tags": ["helo", "port command", "smtp", "ftp"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "FTP and HTTP", "is_correct": false },
+                { "label": "B", "text": "TELNET and POP3", "is_correct": false },
+                { "label": "C", "text": "HTTP and TELNET", "is_correct": false },
+                { "label": "D", "text": "SMTP and FTP", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "HELO: Initiates a conversation with the mail server. Using this command you can specify your domain name so the mail server knows who you are (SMTP command). The PORT command is sent by an FTP client to establish a secondary connection (address and port) for data to travel over (FTP command).",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "Q4.6", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Linked Data for Q.4.7 and Q.4.8: Consider the diagram shown where a number of LANs are connected by (transparent) bridges. In order to avoid packets looping through circuits in the graph, the bridges organize themselves in a spanning tree. First, the root bridge is identified as the bridge with the least serial number. Next, the root sends out (one or more) data units to enable the setting up of the spanning tree of shortest paths from the root bridge to each bridge. The diagram shows bridges B1 to B5 connecting LAN segments with hosts H1 to H12, with numbered ports on each bridge indicating link connections. Each bridge identifies a port (the root port) through which it will forward frames to the root bridge. Port conflicts are always resolved in favour of the port with the lower index value. When there is a possibility of multiple bridges forwarding to the same LAN (but not through the root port), ties are broken as follows: bridges closest to the root get preference and between such bridges, the one with the lowest serial number is preferred. For the given connection of LANs by bridges, which one of the following choices represents a depth first traversal of the spanning tree of bridges? (a) B1, B5, B3, B4, B2 (b) B1, B3, B5, B2, B4 (c) B1, B5, B2, B3, B4 (d) B1, B3, B4, B5, B2",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Spanning tree bridges", "DFS traversal", "Transparent bridging"],
+            "tags": ["spanning tree", "transparent bridges", "dfs traversal", "lan interconnection"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "B1, B5, B3, B4, B2", "is_correct": true },
+                { "label": "B", "text": "B1, B3, B5, B2, B4", "is_correct": false },
+                { "label": "C", "text": "B1, B5, B2, B3, B4", "is_correct": false },
+                { "label": "D", "text": "B1, B3, B4, B5, B2", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The DFS traversal of the constructed spanning tree of bridges is B1-B5-B2-B3-B4.",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "Q4.7", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Linked Data for Q.4.7 and Q.4.8: (same diagram and setup as Q.4.7 - LANs connected by transparent bridges B1-B5, forming a spanning tree). Consider the correct spanning tree for the previous question. Let host H1 send out a broadcast ping packet. Which of the following options represents the correct forwarding table on B3? (a) Hosts H1,H2,H3,H4 -> Port 3; H5,H6,H9,H10 -> Port 1; H7,H8,H11,H12 -> Port 2 (b) Hosts H1,H2 -> Port 4; H3,H4 -> Port 3; H5,H6 -> Port 1; H7,H8,H9,H10 -> Port 2; H11,H12 -> (no port) (c) Hosts H3,H4 -> Port 3; H5,H6,H9,H10 -> Port 1; H1,H2 -> Port 4; H7,H8,H11,H12 -> Port 2 (d) Hosts H1,H2,H3,H4 -> Port 3; H5,H7,H9,H10 -> Port 1; H7,H8,H11,H12 -> Port 4",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Forwarding table", "Bridge learning", "Spanning tree", "Broadcast"],
+            "tags": ["forwarding table", "bridge learning", "broadcast ping", "spanning tree"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "H1,H2,H3,H4 -> Port 3; H5,H6,H9,H10 -> Port 1; H7,H8,H11,H12 -> Port 2", "is_correct": true },
+                { "label": "B", "text": "H1,H2 -> Port 4; H3,H4 -> Port 3; H5,H6 -> Port 1; H7,H8,H9,H10 -> Port 2; H11,H12 -> (no port)", "is_correct": false },
+                { "label": "C", "text": "H3,H4 -> Port 3; H5,H6,H9,H10 -> Port 1; H1,H2 -> Port 4; H7,H8,H11,H12 -> Port 2", "is_correct": false },
+                { "label": "D", "text": "H1,H2,H3,H4 -> Port 3; H5,H7,H9,H10 -> Port 1; H7,H8,H11,H12 -> Port 4", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Using the spanning tree generated in the previous question, the forwarding table learned by bridge B3 after H1's broadcast ping matches option (a).",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "Q4.8", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which one of the following uses UDP as the transport protocol? (a) HTTP (b) Telnet (c) DNS (d) SMTP",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Transport layer protocols", "UDP", "DNS"],
+            "tags": ["udp", "dns", "transport layer protocol"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "HTTP", "is_correct": false },
+                { "label": "B", "text": "Telnet", "is_correct": false },
+                { "label": "C", "text": "DNS", "is_correct": true },
+                { "label": "D", "text": "SMTP", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "DNS maps a name onto an IP address; an application program calls a library procedure called the resolver, passing the name as a parameter. The resolver sends a UDP packet to a local DNS server, which looks up the name and returns the IP address to the resolver, which then returns it to the caller. So DNS uses the transport layer protocol UDP.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "Q4.9", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "For the network given in the figure below, the routing tables of the four nodes A, E, D and G are shown. Suppose that F has estimated its delay to its neighbors, A, E, D and G as 8, 10, 12 and 6 msecs respectively and updates its routing table using distance vector routing technique. The network diagram shows nodes A, B, C, D, E, F, G interconnected, with node F connected to A, E, D and G. Routing Table of A: A-0, B-40, C-14, D-17, E-21, F-9, G-24. Routing Table of E: A-24, B-27, C-7, D-20, E-0, F-11, G-22. Routing Table of D: A-20, B-8, C-30, D-0, E-14, F-7, G-22. Routing Table of G: A-21, B-24, C-22, D-19, E-22, F-10, G-0. Which of the following options represents F's updated routing table? (a) A-8, B-20, C-17, D-12, E-10, F-0, G-6 (b) A-21, B-8, C-7, D-19, E-14, F-0, G-22 (c) A-8, B-20, C-17, D-12, E-10, F-16, G-6 (d) A-8, B-8, C-7, D-12, E-10, F-0, G-6",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Bellman-Ford update rule"],
+            "tags": ["distance vector routing", "routing table update", "bellman-ford"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "A-8, B-20, C-17, D-12, E-10, F-0, G-6", "is_correct": true },
+                { "label": "B", "text": "A-21, B-8, C-7, D-19, E-14, F-0, G-22", "is_correct": false },
+                { "label": "C", "text": "A-8, B-20, C-17, D-12, E-10, F-16, G-6", "is_correct": false },
+                { "label": "D", "text": "A-8, B-8, C-7, D-12, E-10, F-0, G-6", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Routing table of F is computed as: to A = min(F->A, F->E->A, F->D->A, F->G->A) = min(8,34,32,27) = 8. To B = min(48,37,20,30) = 20. To C = min(22,17,42,28) = 17. To D = min(25,30,12,25) = 12. To E = min(29,10,12,28) = 10. To F = 0. To G = min(32,32,34,6) = 6. This matches option (a).",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "Q4.10", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A group of 15 routers are interconnected in a centralized complete binary tree with a router at each tree node. Router i communicates with router j by sending a message to the root of the tree. The root then sends the message back down to router j. The mean number of hops per message, assuming all possible router pairs are equally likely is (a) 3 (b) 4.26 (c) 4.53 (d) 5.26",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Complete binary tree", "Mean hop count", "Centralized routing"],
+            "tags": ["binary tree routing", "mean hops", "centralized routing"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "3", "is_correct": false },
+                { "label": "B", "text": "4.26", "is_correct": false },
+                { "label": "C", "text": "4.53", "is_correct": false },
+                { "label": "D", "text": "5.26", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Consider the complete binary tree with 15 routers across 4 levels (Level 0: A; Level 1: B,C; Level 2: D,E,F,G; Level 3: H,I,J,K,L,M,N,O). Hops required if a level-3 node communicates with all other nodes = (8-1)*6 + 4*5 + 2*4 + 1*3 = 73; for all 8 level-3 nodes = 584. Similarly for level-2 nodes: 8*5 + (4-1)*4 + 2*3 + 1*2 = 60; for all 4 nodes = 240. For level-1 nodes: 8*4 + 4*3 + (2-1)*2 + 1*1 = 47; for both nodes = 94. For the root: 8*3+4*2+2*1 = 34. Total hops for all pairs = 584+240+94+34 = 952. Total number of messages = 2*15C2 = 2*105 = 210. Mean hops per message = 952/210 = 4.53 (note: as per the computation this equals 4.53, matching option (c); the answer key lists option (d) 5.26).",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "Q4.11", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following clauses: (i) Not inherently suitable for client authentication. (ii) Not a state sensitive protocol. (iii) Must be operated with more than one server. (iv) Suitable for structured message organization. (v) May need two ports on the server side for proper operation. The option that has the maximum number of correct matches is (a) IMAP-(i), FTP-(ii), HTTP-(iii), DNS-(iv), POP3-(v) (b) FTP-(i), POP3-(ii), SMTP-(iii), HTTP-(iv), IMAP-(v) (c) POP3-(i), SMTP-(ii), DNS-(iii), IMAP-(iv), HTTP-(v) (d) SMTP-(i), HTTP-(ii), IMAP-(iii), DNS-(iv), FTP-(v)",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Application layer protocols", "IMAP", "FTP", "HTTP", "SMTP", "POP3", "DNS"],
+            "tags": ["imap", "ftp", "http", "smtp", "pop3", "dns", "protocol characteristics"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "IMAP-(i), FTP-(ii), HTTP-(iii), DNS-(iv), POP3-(v)", "is_correct": false },
+                { "label": "B", "text": "FTP-(i), POP3-(ii), SMTP-(iii), HTTP-(iv), IMAP-(v)", "is_correct": false },
+                { "label": "C", "text": "POP3-(i), SMTP-(ii), DNS-(iii), IMAP-(iv), HTTP-(v)", "is_correct": false },
+                { "label": "D", "text": "SMTP-(i), HTTP-(ii), IMAP-(iii), DNS-(iv), FTP-(v)", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "IMAP: distributes mailboxes across multiple servers. FTP: requires two ports, 20 and 21, for FTP-data and FTP-control respectively. HTTP: is a stateless protocol, hence not a state-sensitive protocol. DNS: maintains its database in a structured and hierarchical manner. SMTP: is an internet standard for email transmission and is not suitable for client-server (interactive) communication in the way described.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "Q4.12", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Match the following: P. SMTP, Q. BGP, R. TCP, S. PPP with 1. Application layer, 2. Transport layer, 3. Data link layer, 4. Network layer, 5. Physical layer. Codes: (a) P-2, Q-1, R-3, S-5 (b) P-1, Q-4, R-2, S-3 (c) P-1, Q-4, R-2, S-5 (d) P-2, Q-4, R-1, S-3",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Protocol layering", "SMTP", "BGP", "TCP", "PPP"],
+            "tags": ["osi layers", "protocol mapping", "tcp/ip stack", "bgp"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "P-2, Q-1, R-3, S-5", "is_correct": false },
+                { "label": "B", "text": "P-1, Q-4, R-2, S-3", "is_correct": true },
+                { "label": "C", "text": "P-1, Q-4, R-2, S-5", "is_correct": false },
+                { "label": "D", "text": "P-2, Q-4, R-1, S-3", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "P. SMTP = Application Layer protocol. Q. BGP = Network Layer protocol. R. TCP = Transport Layer protocol. S. PPP = Data Link Layer protocol.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "Q4.13", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Two popular routing algorithms are Distance Vector (DV) and Link State (LS) routing. Which of the following are true? S1: Count to infinity is a problem only with DV and not LS routing. S2: In LS, the shortest path algorithm is run only at one node. S3: In DV, the shortest path algorithm is run only at one node. S4: DV requires lesser number of network messages than LS. (a) S1, S2 and S4 only (b) S2 and S3 only (c) S1, S2 and S3 only (d) S1 and S4 only",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Link state routing", "Count to infinity"],
+            "tags": ["dv vs ls routing", "count to infinity", "shortest path algorithm", "routing overhead"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "S1, S2 and S4 only", "is_correct": false },
+                { "label": "B", "text": "S2 and S3 only", "is_correct": false },
+                { "label": "C", "text": "S1, S2 and S3 only", "is_correct": false },
+                { "label": "D", "text": "S1 and S4 only", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Count to infinity occurs only in distance vector routing since each router depends only on its neighbours, whereas link state routing uses complete information of the network. Link state routing stabilizes faster than distance vector routing because it uses flooding. Both distance vector and link state routing apply the shortest path calculation at each router (not just one node), so S2 and S3 are false. Distance vector requires fewer network messages than link state routing.",
+            "pyq_sources": [
+                { "year": 2008, "set": null, "question_number": "Q4.14", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Linked Answer Questions 4.15 and 4.16: Consider a simple graph with unit edge costs. Each node in the graph represents a router. Each node maintains a routing table indicating the next hop router to be used to relay a packet to its destination and the cost of the path to the destination through that router. Initially, the routing table is empty. The routing table is synchronously updated as follows. In each update interval, three tasks are performed: (i) A node determines whether its neighbours in the graph are accessible. If so, it sets the tentative cost to each accessible neighbour as 1. Otherwise, the cost is set to infinity. (ii) From each accessible neighbour, it gets the costs to relay to other nodes via that neighbour (as the next hop). (iii) Each node updates its routing table based on the information received in the previous two steps by choosing the minimum cost. The graph has nodes A, B, C, D, E, F with edges A-B, A-C, B-C, B-D, C-D, C-E, D-E, D-F. For the graph given above, possible routing tables for various nodes after they have stabilized are shown in four options (each giving next-hop and cost entries for nodes A, B, C, D). Identify the correct table.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Routing table stabilization", "Unit edge cost graph"],
+            "tags": ["distance vector routing", "routing tables", "graph shortest path", "next hop"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "Routing table set as shown in option (a) of the original figure", "is_correct": false },
+                { "label": "B", "text": "Routing table set as shown in option (b) of the original figure", "is_correct": false },
+                { "label": "C", "text": "Routing table set as shown in option (c) of the original figure", "is_correct": true },
+                { "label": "D", "text": "Routing table set as shown in option (d) of the original figure", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "After stabilization, the routing table for node A is: A - -, B via B cost 1, C via C cost 1, D via B cost 2, E via C cost 2, F via C cost 3. For node C: A via A cost 1, B via B cost 1, C - -, D via D cost 1, E via E cost 1, F via D cost 2. For node D: A via B cost 2, B via B cost 1, C via C cost 1, D - -, E via E cost 1, F via F cost 1. This combination of tables matches option (c).",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q4.15", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Continuing from the earlier problem, suppose at some time t, when the costs have stabilized, node A goes down. The cost from node F to node A at time (t + 100) is: (a) > 100 but finite (b) infinity (c) 3 (d) > 3 and <= 100",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Node failure", "Count to infinity"],
+            "tags": ["distance vector routing", "node failure", "count to infinity"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "> 100 but finite", "is_correct": false },
+                { "label": "B", "text": "infinity", "is_correct": true },
+                { "label": "C", "text": "3", "is_correct": false },
+                { "label": "D", "text": "> 3 and <= 100", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": null,
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q4.16", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A computer on a 10 Mbps network is regulated by a token bucket. The token bucket is filled at a rate of 2 Mbps. It is initially filled to capacity with 16 Megabits. What is the maximum duration for which the computer can transmit at the full 10 Mbps? (a) 1.6 seconds (b) 2 seconds (c) 5 seconds (d) 8 seconds",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Token bucket algorithm", "Traffic shaping"],
+            "tags": ["token bucket", "traffic shaping", "burst duration"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "1.6 seconds", "is_correct": false },
+                { "label": "B", "text": "2 seconds", "is_correct": true },
+                { "label": "C", "text": "5 seconds", "is_correct": false },
+                { "label": "D", "text": "8 seconds", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Data transfer rate of the token bucket = 10 Mbps. Initially filled to capacity 16 Megabits. Maximum duration = 16 / (10 - 2) = 2 seconds.",
+            "pyq_sources": [
+                { "year": 2008, "set": null, "question_number": "Q4.17", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which one of the following is not a client-server application? (a) Internet chat (b) Web browsing (c) E-mail (d) Ping",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Client-server applications"],
+            "tags": ["client-server", "ping", "web browsing", "email", "internet chat"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "Internet chat", "is_correct": false },
+                { "label": "B", "text": "Web browsing", "is_correct": false },
+                { "label": "C", "text": "E-mail", "is_correct": false },
+                { "label": "D", "text": "Ping", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Internet chat, web browsing, and e-mail are all client-server applications. Ping is a utility used to check the connection between two computers; there is a chance both are clients, or one is a client and the other a server. In a chat system, first user authentication is required, and it requires a server.",
+            "pyq_sources": [
+                { "year": 2010, "set": null, "question_number": "Q4.18", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Linked Data Questions Q.4.19 and Q.4.20: Consider a network with 6 routers R1 to R6 connected with links having weights as shown in the diagram: R1-R2 (6), R1-R3 (3), R2-R3 (2), R2-R4 (7), R3-R5 (9), R4-R5 (1), R4-R6 (8), R5-R6 (4). All the routers use the distance vector based routing algorithm to update their routing tables. Each router starts with its routing table initialized to contain an entry for each neighbour with the weight of the respective connecting link. After all the routing tables stabilize, how many links in the network will never be used for carrying any data? (a) 4 (b) 3 (c) 2 (d) 1",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Shortest path", "Unused links"],
+            "tags": ["distance vector routing", "shortest path", "unused links", "routing table stabilization"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "4", "is_correct": false },
+                { "label": "B", "text": "3", "is_correct": false },
+                { "label": "C", "text": "2", "is_correct": true },
+                { "label": "D", "text": "1", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "After computing the routing tables for all six routers using next-hop costs based on shortest paths, it is clear from the constructed tables that the direct path between R1-R2 (weight 6) and the direct path between R4-R6 (weight 8) are never used, since shorter alternate paths always exist via other routers. So two links never carry any data.",
+            "pyq_sources": [
+                { "year": 2010, "set": null, "question_number": "Q4.19", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Suppose the weights of all unused links in the previous question are changed to 2 and the distance vector algorithm is used again until all routing tables stabilize. How many links will now remain unused? (a) 0 (b) 1 (c) 2 (d) 3",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Link weight change", "Route stabilization"],
+            "tags": ["distance vector routing", "link weight change", "unused links"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "0", "is_correct": false },
+                { "label": "B", "text": "1", "is_correct": true },
+                { "label": "C", "text": "2", "is_correct": false },
+                { "label": "D", "text": "3", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "As in the previous question, we now give the previously unused links (R1-R2 and R4-R6) a weight of 2. Applying the same method, only the R5-R6 link now remains unused, so one link remains unused.",
+            "pyq_sources": [
+                { "year": 2010, "set": null, "question_number": "Q4.20", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider different activities related to email m1: Send an email from a mail client to a mail server; m2: Download an email from mailbox server to a mail client; m3: Checking email in a web browser. Which of the following is the application-level protocol used in each activity? (a) m1:HTTP m2:SMTP m3:POP (b) m1:SMTP m2:FTP m3:HTTP (c) m1:SMTP m2:POP m3:HTTP (d) m1:POP m2:SMTP m3:IMAP",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["SMTP", "POP", "HTTP", "Email protocols"],
+            "tags": ["smtp", "pop", "http", "email delivery", "webmail"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "m1:HTTP m2:SMTP m3:POP", "is_correct": false },
+                { "label": "B", "text": "m1:SMTP m2:FTP m3:HTTP", "is_correct": false },
+                { "label": "C", "text": "m1:SMTP m2:POP m3:HTTP", "is_correct": true },
+                { "label": "D", "text": "m1:POP m2:SMTP m3:IMAP", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "SMTP is typically used by user clients for sending mails. POP is used by clients for receiving mails. Checking mails in a web browser is a simple HTTP process.",
+            "pyq_sources": [
+                { "year": 2011, "set": null, "question_number": "Q4.21", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Linked Data Question Q.4.22 and Q.4.23: Consider a network with five nodes, N1 to N5, as shown: edges N5-N2 (3), N2-N1 (1), N5-N4 (4), N2-N3 (6), N4-N3 (2). The network uses a Distance Vector Routing protocol. Once the routes have stabilized, the distance vectors at different nodes are as following: N1: (0, 1, 7, 8, 4), N2: (1, 0, 6, 7, 3), N3: (7, 6, 0, 2, 6), N4: (8, 7, 2, 0, 4), N5: (4, 3, 6, 4, 0). Each distance vector is the distance of the best known path at that instance to nodes N1 to N5, where the distance to itself is 0. Also, all links are symmetric and the cost is identical in both directions. In each round, all nodes exchange their distance vectors with their respective neighbors. Then all nodes update their distance vectors. In between two rounds, any change in cost of a link will cause the two incident nodes to change only that entry in their distance vectors. The cost of link N2-N3 reduces to 2 (in both directions). After the next round of updates, what will be the new distance vector at node N3? (a) (3, 2, 0, 2, 5) (b) (3, 2, 0, 2, 6) (c) (7, 2, 0, 2, 5) (d) (7, 2, 0, 2, 6)",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Link cost change", "Route update"],
+            "tags": ["distance vector routing", "link cost change", "route convergence"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "(3, 2, 0, 2, 5)", "is_correct": true },
+                { "label": "B", "text": "(3, 2, 0, 2, 6)", "is_correct": false },
+                { "label": "C", "text": "(7, 2, 0, 2, 5)", "is_correct": false },
+                { "label": "D", "text": "(7, 2, 0, 2, 6)", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In the next round, every node sends and receives distance vectors to and from neighbours and updates its distance vector. N3 will receive (1, 0, 2, 7, 3) from N2 and will update distances to N1 and N5 as 3 and 5 respectively.",
+            "pyq_sources": [
+                { "year": 2011, "set": null, "question_number": "Q4.22", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "After the update in the previous question, the link N1-N2 goes down. N2 will reflect this change immediately in its distance vector as cost infinity. After the NEXT ROUND of update, what will be the cost to N1 in the distance vector of N3? (a) 3 (b) 9 (c) 10 (d) infinity",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Link failure", "Route update"],
+            "tags": ["distance vector routing", "link failure", "route update"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "3", "is_correct": false },
+                { "label": "B", "text": "9", "is_correct": false },
+                { "label": "C", "text": "10", "is_correct": true },
+                { "label": "D", "text": "infinity", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In the next round, N3 will receive the distance from N2 to N1 as infinite, and will receive the distance from N4 to N1 as 8. So it will update its distance to N1 as 8 + 2 = 10.",
+            "pyq_sources": [
+                { "year": 2011, "set": null, "question_number": "Q4.23", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "The Protocol Data Unit (PDU) for the application layer in the Internet stack is (a) Segment (b) Datagram (c) Message (d) Frame",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Protocol Data Unit", "Application layer"],
+            "tags": ["pdu", "application layer", "message"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                { "label": "A", "text": "Segment", "is_correct": false },
+                { "label": "B", "text": "Datagram", "is_correct": false },
+                { "label": "C", "text": "Message", "is_correct": true },
+                { "label": "D", "text": "Frame", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "PDU mapping: Message -> Application layer, Segment -> Transport layer, Datagram -> Network layer, Frame -> Data link layer.",
+            "pyq_sources": [
+                { "year": 2012, "set": null, "question_number": "Q4.24", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "The transport layer protocols used for real time multimedia, file transfer, DNS and email respectively are (a) TCP, UDP, UDP and TCP (b) UDP, TCP, TCP and UDP (c) UDP, TCP, UDP and TCP (d) TCP, UDP, TCP and UDP",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Transport layer protocols", "TCP", "UDP"],
+            "tags": ["tcp", "udp", "transport layer", "application requirements"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "TCP, UDP, UDP and TCP", "is_correct": false },
+                { "label": "B", "text": "UDP, TCP, TCP and UDP", "is_correct": false },
+                { "label": "C", "text": "UDP, TCP, UDP and TCP", "is_correct": true },
+                { "label": "D", "text": "TCP, UDP, TCP and UDP", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "UDP is unreliable but fast, so it is suitable for real-time multimedia which needs fast processing. TCP is connection-oriented, secure and reliable but slower, so it is suitable for file transfer which needs reliability. DNS always uses UDP. Email needs reliability, so it uses TCP.",
+            "pyq_sources": [
+                { "year": 2013, "set": null, "question_number": "Q4.25", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Assume that source S and destination D are connected through two intermediate routers labeled R. Determine how many times each packet has to visit the network layer and the data link layer during a transmission from S to D. Topology: S - R - R - D. (a) Network layer - 4 times and Data link layer - 4 times (b) Network layer - 4 times and Data link layer - 3 times (c) Network layer - 4 times and Data link layer - 6 times (d) Network layer - 2 times and Data link layer - 6 times",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Layered architecture", "Network layer", "Data link layer"],
+            "tags": ["osi layers", "routers", "network layer visits", "data link layer visits"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "Network layer - 4 times and Data link layer - 4 times", "is_correct": false },
+                { "label": "B", "text": "Network layer - 4 times and Data link layer - 3 times", "is_correct": false },
+                { "label": "C", "text": "Network layer - 4 times and Data link layer - 6 times", "is_correct": true },
+                { "label": "D", "text": "Network layer - 2 times and Data link layer - 6 times", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In the layered architecture, the sender and receiver use all layers (application through physical), while a router processes up to the network layer. For S-R-R-D, the network layer is visited 4 times (once at S, once at each of the two routers, once at D) and the data link layer is visited 6 times (once per hop segment on each side of processing at each node).",
+            "pyq_sources": [
+                { "year": 2013, "set": null, "question_number": "Q4.26", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following three statements about link state and distance vector routing protocols, for a large network with 500 network nodes and 4000 links. S1: The computational overhead in link state protocols is higher than in distance vector protocols. S2: A distance vector protocol (with split horizon) avoids persistent routing loops, but not a link state protocol. S3: After a topology change, a link state protocol will converge faster than a distance vector protocol. Which one of the following is correct about S1, S2, and S3? (a) S1, S2, and S3 are all true. (b) S1, S2, and S3 are all false. (c) S1 and S2 are true, but S3 is false. (d) S1 and S3 are true, but S2 is false.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Link state routing", "Distance vector routing", "Split horizon", "Convergence"],
+            "tags": ["link state vs distance vector", "computational overhead", "convergence", "split horizon"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "S1, S2, and S3 are all true.", "is_correct": false },
+                { "label": "B", "text": "S1, S2, and S3 are all false.", "is_correct": false },
+                { "label": "C", "text": "S1 and S2 are true, but S3 is false.", "is_correct": false },
+                { "label": "D", "text": "S1 and S3 are true, but S2 is false.", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "S1 is TRUE: processing/computational overhead is high in link state protocol because of maintaining the link state database. S2 is FALSE: link state protocol is inherently a loop-free protocol, since it avoids persistent routing loops using complete topology information, not just distance vector with split horizon. S3 is TRUE: link state protocol converges faster because it has complete network information via the link state database, distributed through link state packets.",
+            "pyq_sources": [
+                { "year": 2014, "set": 1, "question_number": "Q4.27", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Which one of the following is TRUE about the interior gateway routing protocols - Routing Information Protocol (RIP) and Open Shortest Path First (OSPF)? (a) RIP uses distance vector routing and OSPF uses link state routing (b) OSPF uses distance vector routing and RIP uses link state routing (c) Both RIP and OSPF use link state routing (d) Both RIP and OSPF use distance vector routing",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["RIP", "OSPF", "Interior gateway protocols"],
+            "tags": ["rip", "ospf", "distance vector routing", "link state routing"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "RIP uses distance vector routing and OSPF uses link state routing", "is_correct": true },
+                { "label": "B", "text": "OSPF uses distance vector routing and RIP uses link state routing", "is_correct": false },
+                { "label": "C", "text": "Both RIP and OSPF use link state routing", "is_correct": false },
+                { "label": "D", "text": "Both RIP and OSPF use distance vector routing", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "RIP uses distance vector routing, while OSPF uses link state routing.",
+            "pyq_sources": [
+                { "year": 2014, "set": 2, "question_number": "Q4.28", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "An IP machine Q has a path to another IP machine H via three IP routers R1, R2, and R3: Q - R1 - R2 - R3 - H. H acts as an HTTP server, and Q connects to H via HTTP and downloads a file. Session layer encryption is used, with DES as the shared key encryption protocol. Consider the following four pieces of information: [I1] The URL of the file downloaded by Q, [I2] The TCP port numbers at Q and H, [I3] The IP addresses of Q and H, [I4] The link layer addresses of Q and H. Which of I1, I2, I3, and I4 can an intruder learn through sniffing at R2 alone? (a) Only I1 and I2 (b) Only I1 (c) Only I2 and I3 (d) Only I3 and I4",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Packet sniffing", "IP routing", "Session layer encryption", "TCP ports"],
+            "tags": ["sniffing", "ip routers", "tcp ports", "des encryption", "packet header"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "Only I1 and I2", "is_correct": false },
+                { "label": "B", "text": "Only I1", "is_correct": false },
+                { "label": "C", "text": "Only I2 and I3", "is_correct": true },
+                { "label": "D", "text": "Only I3 and I4", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "At R2 (an intermediate router), an intruder can learn the TCP port numbers and IP addresses of Q and H, since these headers are not encrypted at the transport/network layer, but the URL (application layer content) is encrypted by the session layer encryption, and the link layer addresses change at each hop so R2 only sees the addresses of the adjacent nodes (R1 and R3), not Q and H directly.",
+            "pyq_sources": [
+                { "year": 2014, "set": 2, "question_number": "Q4.29", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In one of the pairs of protocols given below, both the protocols can use multiple TCP connections between the same client and the server. Which one is that? (a) HTTP, FTP (b) HTTP, TELNET (c) FTP, SMTP (d) HTTP, SMTP",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["HTTP", "FTP", "TCP connections"],
+            "tags": ["http", "ftp", "multiple tcp connections", "control and data connection"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "HTTP, FTP", "is_correct": true },
+                { "label": "B", "text": "HTTP, TELNET", "is_correct": false },
+                { "label": "C", "text": "FTP, SMTP", "is_correct": false },
+                { "label": "D", "text": "HTTP, SMTP", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "HTTP and FTP protocols can use multiple TCP connections between the same client and server. FTP uses separate data and control connections, i.e., two separate TCP connections.",
+            "pyq_sources": [
+                { "year": 2015, "set": 1, "question_number": "Q4.30", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Identify the correct sequence in which the following packets are transmitted on the network by a host when a browser requests a webpage from a remote server, assuming that the host has just been restarted. (a) HTTP GET request, DNS query, TCP SYN (b) DNS query, HTTP GET request, TCP SYN (c) DNS query, TCP SYN, HTTP GET request (d) TCP SYN, DNS query, HTTP GET request",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["DNS", "HTTP", "TCP handshake", "Packet sequence"],
+            "tags": ["dns query", "tcp syn", "http get", "browser request sequence"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "HTTP GET request, DNS query, TCP SYN", "is_correct": false },
+                { "label": "B", "text": "DNS query, HTTP GET request, TCP SYN", "is_correct": false },
+                { "label": "C", "text": "DNS query, TCP SYN, HTTP GET request", "is_correct": true },
+                { "label": "D", "text": "TCP SYN, DNS query, HTTP GET request", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The correct sequence is: DNS query (to resolve the server's IP address), TCP SYN (to establish a connection), then HTTP GET request.",
+            "pyq_sources": [
+                { "year": 2016, "set": 2, "question_number": "Q4.31", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider an IP packet with a length of 4500 bytes that includes a 20-byte IPv4 header and a 40-byte TCP header. The packet is forwarded to an IPv4 router that supports a Maximum Transmission Unit (MTU) of 600 bytes. Assume that the length of the IP header in all the outgoing fragments of this packet is 20 bytes. Assume that the fragmentation offset value stored in the first fragment is 0. The fragmentation offset value stored in the third fragment is ______.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["IP fragmentation", "MTU", "Fragmentation offset"],
+            "tags": ["ip fragmentation", "mtu", "fragment offset", "ipv4 header"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "144",
+            "explanation": "Total data (excluding IP header) = 4500 - 20 = 4480 bytes. With MTU 600 and 20-byte IP header per fragment, each fragment carries 580 bytes of payload, but payload must be a multiple of 8, so 576 bytes per fragment. Fragment 1: bytes 0-575 (offset 0-71 in units of 8 bytes). Fragment 2: bytes 576-1151 (offset 72-143). Fragment 3: bytes 1152-1727 (offset 144-215). Fragment 4: remaining bytes (offset 216-287). So the fragmentation offset of the 3rd fragment is 144.",
+            "pyq_sources": [
+                { "year": 2018, "set": null, "question_number": "Q4.32", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which of the following protocol pairs can be used to send and retrieve e-mails (in that order)? (a) IMAP, SMTP (b) SMTP, MIME (c) IMAP, POP3 (d) SMTP, POP3",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Email protocols", "SMTP", "POP3", "IMAP"],
+            "tags": ["smtp", "pop3", "imap", "email send and retrieve"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "IMAP, SMTP", "is_correct": false },
+                { "label": "B", "text": "SMTP, MIME", "is_correct": false },
+                { "label": "C", "text": "IMAP, POP3", "is_correct": false },
+                { "label": "D", "text": "SMTP, POP3", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "SMTP is a push protocol used to send e-mail, and POP3 is a pull protocol used to retrieve e-mail.",
+            "pyq_sources": [
+                { "year": 2019, "set": null, "question_number": "Q4.33", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following statements about the functionality of an IP based router. I. A router does not modify the IP packets during forwarding. II. It is not necessary for a router to implement any routing protocol. III. A router should reassemble IP fragments if the MTU of the outgoing link is larger than the size of the incoming IP packet. Which of the above statements is/are TRUE? (a) I only (b) I and II only (c) II and III only (d) II only",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["IP router functionality", "Routing protocols", "IP fragmentation reassembly"],
+            "tags": ["ip router", "fragmentation", "mtu", "routing protocol implementation"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "I only", "is_correct": false },
+                { "label": "B", "text": "I and II only", "is_correct": false },
+                { "label": "C", "text": "II and III only", "is_correct": false },
+                { "label": "D", "text": "II only", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "I is FALSE: a router does modify the IP packet during forwarding, because the TTL field changes at each hop. II is TRUE: a router can also be used in a LAN network where it does not require a routing protocol at that time. III is FALSE: packet fragmentation is done if the outgoing packet size is more than the MTU, not reassembly based on incoming size vs outgoing MTU as stated.",
+            "pyq_sources": [
+                { "year": 2020, "set": null, "question_number": "Q4.34", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Assume that you have made a request for a web page through your web browser to a web server. Initially the browser cache is empty. Further, the browser is configured to send HTTP requests in non-persistent mode. The web page contains text and five very small images. The minimum number of TCP connections required to display the web page completely in your browser is ______.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Non-persistent HTTP", "TCP connections"],
+            "tags": ["http non-persistent", "tcp connections", "web page objects"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 90,
+            "options": [],
+            "correct_answer_text": "6",
+            "explanation": "In non-persistent HTTP, a separate TCP connection is required for every object. Hence 1 TCP connection is required for the text and 5 TCP connections for the 5 images, giving a total of 6 connections.",
+            "pyq_sources": [
+                { "year": 2020, "set": null, "question_number": "Q4.35", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider a computer network using the distance vector routing algorithm in its network layer. The partial topology of the network is shown below: router R connects to neighbouring routers X, Y and Z; X connects further to Q; Z connects further to P. The objective is to find the shortest-cost path from router R to routers P and Q. Assume that R does not initially know the shortest routes to P and Q. Assume that R has three neighbouring routers denoted as X, Y and Z. During one iteration, R measures its distance to its neighbours X, Y and Z as 3, 2 and 5, respectively. Router R gets routing vectors from its neighbours that indicate that the distance to router P from routers X, Y and Z are 7, 6 and 5, respectively. The routing vector also indicates that the distance to router Q from routers X, Y and Z are 4, 6 and 8, respectively. Which of the following statement(s) is/are correct with respect to the new routing table of R, after updation during this iteration? (a) The distance from R to Q will be stored as 7. (b) The distance from R to P will be stored as 10. (c) The next hop router for a packet from R to Q is Z. (d) The next hop router for a packet from R to P is Y.",
+            "question_type": "MSQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Routing table update", "Bellman-Ford"],
+            "tags": ["distance vector routing", "next hop selection", "routing update"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "The distance from R to Q will be stored as 7.", "is_correct": true },
+                { "label": "B", "text": "The distance from R to P will be stored as 10.", "is_correct": false },
+                { "label": "C", "text": "The next hop router for a packet from R to Q is Z.", "is_correct": false },
+                { "label": "D", "text": "The next hop router for a packet from R to P is Y.", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Distance vector from R to P via X, Y, Z = (3+7, 2+6, 5+5) = (10, 8, 10), so the minimum distance from R to P is 8 via Y. Distance vector from R to Q via X, Y, Z = (3+4, 2+6, 5+8) = (7, 8, 13), so the minimum distance from R to Q is 7 via X. Hence statements (a) and (d) are correct.",
+            "pyq_sources": [
+                { "year": 2021, "set": 2, "question_number": "Q4.36", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider an enterprise network with two Ethernet segments, a web server and a firewall, connected via three routers as shown: a firewall connects to the internet and to Router R2; Router R2 connects to Router R1, a web server, and Router R3; Router R1 and Router R3 each connect to their own Ethernet segment. What is the number of subnets inside the enterprise network? (a) 3 (b) 12 (c) 6 (d) 8",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Subnetting", "Router interfaces"],
+            "tags": ["subnets", "router interfaces", "ethernet segments"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "3", "is_correct": false },
+                { "label": "B", "text": "12", "is_correct": false },
+                { "label": "C", "text": "6", "is_correct": true },
+                { "label": "D", "text": "8", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Each interface of a router is a subnet. There are 3 routers R1, R2, R3. R1 has 2 interfaces, R2 has 3 interfaces, and R3 has 2 interfaces, giving a total of 2+3+2 = 7 interfaces, but R2 and R3 share a common interface. So there are finally 6 different interfaces (subnets) in the given enterprise network.",
+            "pyq_sources": [
+                { "year": 2022, "set": null, "question_number": "Q4.37", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the resolution of the domain name www.gate.org.in by a DNS resolver. Assume that no resource records are cached anywhere across the DNS servers and that iterative query mechanism is used in the resolution. The number of DNS query-response pairs involved in completely resolving the domain name is ______.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["DNS resolution", "Iterative query"],
+            "tags": ["dns", "iterative query", "root server", "tld server"],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [],
+            "correct_answer_text": "4",
+            "explanation": "In iterative query resolution, the DNS resolver goes to the root server, which forwards to the top-level domain server, which forwards to the second-level domain server, and finally gets the IP address from the authoritative DNS server. This requires 4 query-response pairs.",
+            "pyq_sources": [
+                { "year": 2022, "set": null, "question_number": "Q4.38", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the routing table of an organization's router shown below: Subnet number 12.20.164.0 with mask 255.255.252.0 -> Next hop R1; Subnet number 12.20.170.0 with mask 255.255.254.0 -> Next hop R2; Subnet number 12.20.168.0 with mask 255.255.254.0 -> Interface 0; Subnet number 12.20.166.0 with mask 255.255.254.0 -> Interface 1; Default -> Next hop R3. Which of the following prefixes in CIDR notation can be collectively used to correctly aggregate all of the subnets in the routing table? (a) 12.20.164.0/20 (b) 12.20.164.0/22 (c) 12.20.164.0/21 (d) 12.20.168.0/22",
+            "question_type": "MSQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["CIDR", "Subnet aggregation", "Route summarization"],
+            "tags": ["cidr", "subnetting", "route aggregation", "subnet mask"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "12.20.164.0/20", "is_correct": false },
+                { "label": "B", "text": "12.20.164.0/22", "is_correct": true },
+                { "label": "C", "text": "12.20.164.0/21", "is_correct": false },
+                { "label": "D", "text": "12.20.168.0/22", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Converting the subnets to binary and checking aggregation ranges: 12.20.164.0/22 covers 164.0 through 167.0 (which aggregates R1's /22 range and part of the /23 subnets), and 12.20.168.0/22 covers 168.0 through 171.0 (aggregating the Interface 0, Interface 1, and R2 subnets). So options (b) and (d) correctly aggregate all subnets in the routing table.",
+            "pyq_sources": [
+                { "year": 2022, "set": null, "question_number": "Q4.39", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a network with three routers P, Q, R shown in the figure below: P - Q - R. All the links have cost of unity. The routers exchange distance vector routing information and have converged on the routing tables, after which the link Q-R fails. Assume that P and Q send out routing updates at random times, each at the same average rate. The probability of a routing loop formation (rounded off to one decimal place) between P and Q, leading to count-to-infinity problem, is ______.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Count to infinity", "Routing loop probability", "Distance vector routing"],
+            "tags": ["count to infinity", "routing loop", "distance vector routing"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "0.5",
+            "explanation": "Since P and Q send routing updates at the same average rate, in a particular time period there are two equally likely possibilities: either Q sends its update before P, or P sends its update before Q. If Q sends first, P finds R's cost as infinity and count-to-infinity does not occur. If P sends first, Q finds that P has a way to reach R, causing the count-to-infinity problem. Since only one of the two equally likely possibilities leads to the problem, the probability is 1/2 = 0.5.",
+            "pyq_sources": [
+                { "year": 2022, "set": null, "question_number": "Q4.40", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which of the following statements is/are INCORRECT about the OSPF (Open Shortest Path First) routing protocol used in the Internet? (a) OSPF implements Bellman-Ford algorithm to find shortest paths. (b) OSPF uses Dijkstra's shortest path algorithm to implement least-cost path routing. (c) OSPF is used as an inter-domain routing protocol. (d) OSPF implements hierarchical routing.",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["OSPF", "Link state routing", "Dijkstra algorithm", "Hierarchical routing"],
+            "tags": ["ospf", "dijkstra algorithm", "bellman-ford", "hierarchical routing"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "OSPF implements Bellman-Ford algorithm to find shortest paths.", "is_correct": true },
+                { "label": "B", "text": "OSPF uses Dijkstra's shortest path algorithm to implement least-cost path routing.", "is_correct": false },
+                { "label": "C", "text": "OSPF is used as an inter-domain routing protocol.", "is_correct": true },
+                { "label": "D", "text": "OSPF implements hierarchical routing.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "OSPF minimizes the amount of routing protocol traffic it produces by employing the Dijkstra algorithm to recalculate routes whenever the network topology changes, so statement (a) claiming it uses Bellman-Ford is INCORRECT. OSPF offers support for numerous, equally expensive paths. OSPF is an interior gateway protocol (used within an autonomous system), so calling it an inter-domain protocol (c) is INCORRECT. Area routing offers a multi-level hierarchy (two levels in OSPF) that conceals the topology inside a specified area of the autonomous system from routers outside that area, reducing routing protocol traffic and adding a degree of protection, so statement (d) about hierarchical routing is correct (not incorrect).",
+            "pyq_sources": [
+                { "year": 2023, "set": null, "question_number": "Q4.41", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "A user starts browsing a webpage hosted at a remote server. The browser opens a single connection to fetch the entire webpage from the server. The webpage consists of a top-level index page with multiple embedded image objects. Assume that all caches (e.g., DNS cache, browser cache) are all initially empty. The following packets leave the user's computer in some order. (i) HTTP GET request for the index page. (ii) DNS request to resolve the web server's name to its IP address. (iii) HTTP GET request for an image object. (iv) TCP SYN to open a connection to the web server. Which one of the following is the CORRECT chronological order (earliest in time to latest) of the packets leaving the computer? (a) (iv), (ii), (iii), (i) (b) (iv), (ii), (i), (iii) (c) (ii), (iv), (i), (iii) (d) (ii), (iv), (iii), (i)",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["DNS resolution", "TCP handshake", "HTTP GET", "Packet ordering"],
+            "tags": ["dns", "tcp syn", "http get", "packet order"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "(iv), (ii), (iii), (i)", "is_correct": false },
+                { "label": "B", "text": "(iv), (ii), (i), (iii)", "is_correct": false },
+                { "label": "C", "text": "(ii), (iv), (i), (iii)", "is_correct": true },
+                { "label": "D", "text": "(ii), (iv), (iii), (i)", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The correct sequence from the client side is: (ii) DNS request to get the IP address of the server; (iv) make a TCP connection with the server; (i) HTTP GET request for the index page; (iii) HTTP GET request for an image object, since the image is referenced inside the index page.",
+            "pyq_sources": [
+                { "year": 2024, "set": 1, "question_number": "Q4.42", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider a network path P - Q - R between nodes P and R via router Q. Node P sends a file of size 10^6 bytes to R via this path by splitting the file into chunks of 10^3 bytes each. Node P sends these chunks one after the other without any wait time between the successive chunk transmissions. Assume that the size of extra headers added to these chunks is negligible, and that the chunk size is less than the MTU. Each of the links P-Q and Q-R has a bandwidth of 10^6 bits/sec, and negligible propagation latency. Router Q immediately transmits every packet it receives from P to R, with negligible processing and queueing delays. Router Q can simultaneously receive on link P-Q and transmit on link Q-R. Assume P starts transmitting the chunks at time t = 0. Which one of the following options gives the time (in seconds, rounded off to 3 decimal places) at which R receives all the chunks of the file? (a) 16.000 (b) 8.000 (c) 8.008 (d) 15.992",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Store and forward", "Pipelining", "Transmission delay"],
+            "tags": ["store and forward", "transmission delay", "pipelining", "chunk transmission"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "16.000", "is_correct": false },
+                { "label": "B", "text": "8.000", "is_correct": false },
+                { "label": "C", "text": "8.008", "is_correct": true },
+                { "label": "D", "text": "15.992", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": null,
+            "pyq_sources": [
+                { "year": 2024, "set": 1, "question_number": "Q4.43", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the routing protocols given in List-I and the names given in List-II: List-I: (i) Distance vector routing (ii) Link state routing. List-II: (a) Bellman-Ford (b) Dijkstra. For matching of items in List-I with those in List-II, which ONE of the following options is CORRECT? (a) (i)-(a) and (ii)-(b) (b) (i)-(a) and (ii)-(a) (c) (i)-(b) and (ii)-(a) (d) (i)-(b) and (ii)-(b)",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Routing and Application Layer"],
+            "concepts": ["Distance vector routing", "Link state routing", "Bellman-Ford algorithm", "Dijkstra algorithm"],
+            "tags": ["bellman-ford", "dijkstra", "distance vector routing", "link state routing"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "(i)-(a) and (ii)-(b)", "is_correct": true },
+                { "label": "B", "text": "(i)-(a) and (ii)-(a)", "is_correct": false },
+                { "label": "C", "text": "(i)-(b) and (ii)-(a)", "is_correct": false },
+                { "label": "D", "text": "(i)-(b) and (ii)-(b)", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The distance vector routing algorithm uses the Bellman-Ford algorithm to find the optimal path. Link state routing algorithm uses Dijkstra's algorithm to construct the shortest path tree.",
+            "pyq_sources": [
+                { "year": 2025, "set": 2, "question_number": "Q4.44", "marks": 1 }
+            ]
+        }
+    ]
+}

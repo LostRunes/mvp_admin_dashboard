@@ -1,0 +1,1 @@
+# python -c "import requests; print(requests.get('https://aptitude-gold.vercel.app/Random').json())"

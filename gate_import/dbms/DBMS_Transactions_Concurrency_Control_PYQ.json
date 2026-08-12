@@ -1,0 +1,947 @@
+{
+    "subject": {
+        "subject_name": "Database Management System",
+        "subject_code": "DBMS"
+    },
+    "topics": [
+        {
+            "topic_name": "Transactions and Concurrency Control",
+            "summary": "Covers transaction properties, schedules, conflict/view serializability, recoverability, locking protocols (2PL, strict 2PL), timestamp ordering, and crash recovery using logs and checkpoints."
+        }
+    ],
+    "questions": [
+        {
+            "question_text": "For the schedule given below, which of the following is correct?\n1. Read A\n2.    Read B\n3. Write A\n4.    Read A\n5.    Write A\n6.    Write B\n7. Read B\n8. Write B\n(a) This schedule is serializable and can occur in a scheme using 2PL protocol.\n(b) This schedule is serializable but cannot occur in a scheme using 2PL protocol.\n(c) This schedule is not serializable but can occur in a scheme using 2PL protocol.\n(d) This schedule is not serializable and cannot occur in a scheme using 2PL protocol.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Two-Phase Locking"],
+            "tags": ["schedule", "serializability", "2pl protocol", "conflicting operations"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "This schedule is serializable and can occur in a scheme using 2PL protocol.", "is_correct": false },
+                { "label": "B", "text": "This schedule is serializable but cannot occur in a scheme using 2PL protocol.", "is_correct": false },
+                { "label": "C", "text": "This schedule is not serializable but can occur in a scheme using 2PL protocol.", "is_correct": false },
+                { "label": "D", "text": "This schedule is not serializable and cannot occur in a scheme using 2PL protocol.", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The initial read of A is done by transaction 1 (the process that performs steps 1,3,4,5,7,8) whereas the final write of B is also done by that same transaction. W1(A), R2(A) and W2(B), R1(B) form conflicting pairs that create a cycle, so the schedule is neither serializable as T1 before T2 nor T2 before T1. Since the schedule is not conflict serializable, it cannot occur under a 2PL protocol either.",
+            "pyq_sources": [
+                { "year": 1999, "set": null, "question_number": "Q5.1", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which of the following scenarios may lead to an irrecoverable error in a database system?\n(a) A transaction writes a data item after it is read by an uncommitted transaction\n(b) A transaction reads a data item after it is read by an uncommitted transaction\n(c) A transaction reads a data item after it is written by a committed transaction\n(d) A transaction reads a data item after it is written by an uncommitted transaction",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Recoverability", "Dirty Read"],
+            "tags": ["irrecoverable schedule", "dirty read", "uncommitted transaction"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "A transaction writes a data item after it is read by an uncommitted transaction", "is_correct": false },
+                { "label": "B", "text": "A transaction reads a data item after it is read by an uncommitted transaction", "is_correct": false },
+                { "label": "C", "text": "A transaction reads a data item after it is written by a committed transaction", "is_correct": false },
+                { "label": "D", "text": "A transaction reads a data item after it is written by an uncommitted transaction", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Option (d) describes a dirty read, where a transaction reads a value written by an uncommitted transaction. If that writing transaction later commits before the reading transaction, but the reading transaction commits before it, this can lead to an irrecoverable situation because the read data can never be rolled back. The other options either do not form irrecoverable cycles or involve committed reads/writes which are safe.",
+            "pyq_sources": [
+                { "year": 2003, "set": null, "question_number": "Q5.2", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider three data items D1, D2, and D3 and the following execution schedule of transactions T1, T2 and T3. In the diagram, R(D) and W(D) denote the actions reading and writing the data item D respectively.\nTime order (top to bottom):\nT2: R(D3)\nT2: R(D2)\nT2: W(D2)\nT3: R(D2)\nT3: R(D3)\nT1: R(D1)\nT1: W(D1)\nT3: W(D2)\nT3: W(D3)\nT1: R(D2)\nT1: W(D2)\nT2: R(D1)\nT2: W(D1)\n(a) The schedule is serializable as T2; T3; T1;\n(b) The schedule is serializable as T2; T1; T3;\n(c) The schedule is serializable as T3; T2; T1;\n(d) The schedule is not serializable",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Precedence Graph"],
+            "tags": ["schedule", "precedence graph", "serializability", "cycle detection"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "The schedule is serializable as T2; T3; T1;", "is_correct": false },
+                { "label": "B", "text": "The schedule is serializable as T2; T1; T3;", "is_correct": false },
+                { "label": "C", "text": "The schedule is serializable as T3; T2; T1;", "is_correct": false },
+                { "label": "D", "text": "The schedule is not serializable", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The sequence W2(D2) followed later by W1(D1)... R2(D1) creates conflicting edges in both directions between T1 and T2 in the precedence graph (T2→T1 from one conflict and T1→T2 from another), forming a cycle. Since a cycle exists, the schedule is not conflict serializable.",
+            "pyq_sources": [
+                { "year": 2003, "set": null, "question_number": "Q5.3", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which level of locking provides the highest degree of concurrency in a relational database?\n(a) Page\n(b) Table\n(c) Row\n(d) Page, table and row level locking allow the same degree of concurrency",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Locking Granularity", "Concurrency Control"],
+            "tags": ["locking granularity", "row level locking", "concurrency degree"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                { "label": "A", "text": "Page", "is_correct": false },
+                { "label": "B", "text": "Table", "is_correct": false },
+                { "label": "C", "text": "Row", "is_correct": true },
+                { "label": "D", "text": "Page, table and row level locking allow the same degree of concurrency", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Locking granularity ranges from database, to table, to page, to row. As we move to finer (lower) granularity, concurrency increases because fewer records get locked at a time. Row-level locking, being the finest granularity, provides the highest degree of concurrency.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "Q5.4", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following schedule S of transactions T1 and T2:\nT1: Read(A); A = A-10; ... Write(A); Read(B); B = B+10; Write(B)\nT2: Read(A); Temp = 0.2*A; Write(A); Read(B); ... B = B+Temp; Write(B)\nOrder of operations: T1:Read(A); T1:A=A-10; T2:Read(A); T2:Temp=0.2*A; T2:Write(A); T2:Read(B); T1:Write(A); T1:Read(B); T1:B=B+10; T1:Write(B); T2:B=B+Temp; T2:Write(B)\nWhich of the following is TRUE about the schedule S?\n(a) S is serializable only as T1, T2\n(b) S is serializable only as T2, T1\n(c) S is serializable both as T1, T2 and T2, T1\n(d) S is not serializable either as T1 or as T2",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Precedence Graph"],
+            "tags": ["schedule", "serializability", "cycle", "banking transaction example"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "S is serializable only as T1, T2", "is_correct": false },
+                { "label": "B", "text": "S is serializable only as T2, T1", "is_correct": false },
+                { "label": "C", "text": "S is serializable both as T1, T2 and T2, T1", "is_correct": false },
+                { "label": "D", "text": "S is not serializable either as T1 or as T2", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "S is not serializable because T1 and T2 form a cycle in the precedence graph: conflicts on A require T1 before T2, while conflicts on B require T2 before T1, which is contradictory.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "Q5.5", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Amongst the ACID properties of a transaction, the 'Durability' property requires that the changes made to the database by a successful transaction persist\n(a) Except in case of an Operating System crash\n(b) Except in case of a Disk crash\n(c) Except in case of a power failure\n(d) Always, even if there is a failure of any kind",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["ACID Properties", "Durability"],
+            "tags": ["acid properties", "durability", "transaction persistence"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                { "label": "A", "text": "Except in case of an Operating System crash", "is_correct": false },
+                { "label": "B", "text": "Except in case of a Disk crash", "is_correct": false },
+                { "label": "C", "text": "Except in case of a power failure", "is_correct": false },
+                { "label": "D", "text": "Always, even if there is a failure of any kind", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Durability requires that once a transaction has committed, its changes to the database persist permanently, regardless of any subsequent system, power, or disk failure.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q5.6", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following log sequence of two transactions on a bank account, with initial balance 12000, that transfer 2000 to a mortgage payment and then apply a 5% interest.\n1. T1: start\n2. T1: B old = 12000, new = 10000\n3. T1: M old = 0, new = 2000\n4. T1: commit\n5. T2: start\n6. T2: B old = 10000, new = 10500\n7. T2: commit\nSuppose the database system crashed just before log record 7 is written. When the system is restarted, which one statement is true of the recovery procedure?\n(a) We must redo log record 6 to set B to 10500\n(b) We must undo log record 6 to set B to 10000 and then redo log records 2 and 3\n(c) We need not redo log records 2 and 3 because transaction T1 has committed\n(d) We can apply redo and undo operations in arbitrary order because they are idempotent",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Log-based Recovery", "Redo/Undo"],
+            "tags": ["write-ahead log", "crash recovery", "redo undo", "log records"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "We must redo log record 6 to set B to 10500", "is_correct": false },
+                { "label": "B", "text": "We must undo log record 6 to set B to 10000 and then redo log records 2 and 3", "is_correct": true },
+                { "label": "C", "text": "We need not redo log records 2 and 3 because transaction T1 has committed", "is_correct": false },
+                { "label": "D", "text": "We can apply redo and undo operations in arbitrary order because they are idempotent", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "During recovery, all write operations of active (uncommitted) transactions must be undone from the log, and all write operations of committed transactions must be redone. Since T2 did not commit (crash occurred before log record 7), log record 6 must be undone to reset B to 10000, and then log records 2 and 3 (belonging to the committed T1) must be redone.",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "Q5.7", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following schedules involving two transactions. Which one of the following statements is TRUE?\nS1: r1(X); r1(Y); r2(X); r2(Y); w2(Y); w1(X)\nS2: r1(X); r2(X); r2(Y); w2(Y); r1(Y); w1(X)\n(a) Both S1 and S2 are conflict serializable\n(b) S1 is conflict serializable and S2 is not conflict serializable\n(c) S1 is not conflict serializable and S2 is conflict serializable\n(d) Both S1 and S2 are not conflict serializable",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability"],
+            "tags": ["schedule", "conflict serializability", "read write conflicts"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "Both S1 and S2 are conflict serializable", "is_correct": false },
+                { "label": "B", "text": "S1 is conflict serializable and S2 is not conflict serializable", "is_correct": false },
+                { "label": "C", "text": "S1 is not conflict serializable and S2 is conflict serializable", "is_correct": true },
+                { "label": "D", "text": "Both S1 and S2 are not conflict serializable", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In S1, considering the statement w1(X), there is no serializable conflict resolution for S1, whereas in S2 there is a conflict but it can still be arranged into a serial order, making S2 conflict serializable.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "Q5.8", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following two transactions: T1 and T2.\nT1: read(A); read(B); If A = 0 then B ← B + 1; write(B);\nT2: read(B); read(A); If B ≠ 0 then A ← A - 1; write(A);\nWhich of the following schemes, using shared and exclusive locks, satisfy the requirements for strict two phase locking for the above transactions?\n(a) S1: lock S(A); read(A); lock S(B); read(B); if A=0 then B←B+1; write(B); commit; unlock(A); unlock(B);\nS2: lock S(B); read(B); lock S(A); read(A); if B≠0 then A←A-1; write(A); commit; unlock(B); unlock(A);\n(b) S1: lock X(A); read(A); lock X(B); read(B); if A=0 then B←B+1; write(B); unlock(A); commit; unlock(B);\nS2: lock X(B); read(B); lock X(A); read(A); if B≠0 then A←A-1; write(A); unlock(A); commit; unlock(A);\n(c) S1: lock S(A); read(A); lock X(B); read(B); if A=0 then B←B+1; write(B); unlock(A); commit; unlock(B);\nS2: lock S(B); read(B); lock X(A); read(A); if B≠0 then A←A-1; write(A); unlock(A); commit; unlock(A);\n(d) S1: lock S(A); read(A); lock X(B); read(B); if A=0 then B←B+1; write(B); unlock(A); unlock(B); commit;\nS2: lock S(B); read(B); lock X(A); read(A); if B≠0 then A←A-1; write(A); unlock(A); unlock(B); commit;",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Strict Two-Phase Locking", "Shared and Exclusive Locks"],
+            "tags": ["strict 2pl", "shared lock", "exclusive lock", "lock protocol"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "S1: lock S(A); read(A); lock S(B); read(B); ...; commit; unlock(A); unlock(B); S2 symmetric", "is_correct": false },
+                { "label": "B", "text": "S1: lock X(A); read(A); lock X(B); read(B); ...; unlock(A); commit; unlock(B); S2 symmetric", "is_correct": false },
+                { "label": "C", "text": "S1: lock S(A); read(A); lock X(B); read(B); ...; unlock(A); commit; unlock(B); S2 symmetric", "is_correct": true },
+                { "label": "D", "text": "S1: lock S(A); read(A); lock X(B); read(B); ...; unlock(A); unlock(B); commit; S2 symmetric", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Strict 2PL requires no locking after the first unlock, and all exclusive locks must be released only after commit. In option (c), no exclusive lock is released until the commit operation, satisfying the strict 2PL requirement.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "Q5.9", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following three schedules of transactions T1, T2 and T3. [Notation: In the following NYO represents the action Y (R for read, W for write) performed by transaction N on object O.]\nS1: 2RA 2WA 3RC 2WB 3WA 3WC 1RA 1RB 1WA 1WB\nS2: 3RC 2RA 2WA 2WB 3WA 1RA 1RB 1WA 1WB 3WC\nS3: 2RA 3RC 3WA 2WA 2WB 3WC 1RA 1RB 1WA 1WB\nWhich of the following statements is TRUE?\n(a) S1, S2 and S3 are all conflict equivalent to each other\n(b) No two of S1, S2 and S3 are conflict equivalent\n(c) S2 is conflict equivalent to S3, but not to S1\n(d) S1 is conflict equivalent to S2, but not to S3",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Equivalence", "Precedence Graph"],
+            "tags": ["conflict equivalence", "schedule comparison", "precedence graph"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "S1, S2 and S3 are all conflict equivalent to each other", "is_correct": false },
+                { "label": "B", "text": "No two of S1, S2 and S3 are conflict equivalent", "is_correct": false },
+                { "label": "C", "text": "S2 is conflict equivalent to S3, but not to S1", "is_correct": true },
+                { "label": "D", "text": "S1 is conflict equivalent to S2, but not to S3", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Analyzing precedence graphs: S1 gives serial order T2→T3→T1, S2 gives serial order T2→T3→T1 (same order, so S1 conflict equivalent to S2), while S3 forms a cycle among T2 and T3 (T2→T3→T1 with a reverse edge), making S3 not conflict serializable. Therefore, S1 and S2 are conflict equivalent, but S3 is not equivalent to either.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "Q5.10", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider two transactions T1 and T2, and four schedules S1, S2, S3, S4 of T1 and T2 as given below:\nT1: R1[x] W1[x] W1[y]\nT2: R2[x] R2[y] W2[y]\nS1: R1[x] R2[x] R2[y] W1[x] W1[y] W2[y]\nS2: R1[x] R2[x] R2[y] W1[x] W2[y] W1[y]\nS3: R1[x] W1[x] R2[x] W1[y] R2[y] W2[y]\nS4: R2[x] R2[y] R1[x] W1[x] W1[y] W2[y]\nWhich of the above schedules are conflict-serializable?\n(a) S1 and S2\n(b) S2 and S3\n(c) S3 only\n(d) S4 only",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Precedence Graph"],
+            "tags": ["conflict serializable schedules", "precedence graph", "dependency graph"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "S1 and S2", "is_correct": false },
+                { "label": "B", "text": "S2 and S3", "is_correct": true },
+                { "label": "C", "text": "S3 only", "is_correct": false },
+                { "label": "D", "text": "S4 only", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Building the dependency graph for each schedule: S1 forms a cycle T1↔T2 and is not conflict serializable. S2 has no cycle (T1→T2), so it is conflict serializable. S3 also has no cycle (T1→T2), so it is conflict serializable. Hence, S2 and S3 are conflict serializable.",
+            "pyq_sources": [
+                { "year": 2009, "set": null, "question_number": "Q5.11", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which of the following concurrency control protocols ensure both conflict serializability and freedom from deadlock?\nI. 2-phase locking\nII. Time-stamp ordering\n(a) I only\n(b) II only\n(c) Both I and II\n(d) Neither I nor II",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Two-Phase Locking", "Timestamp Ordering", "Deadlock Freedom"],
+            "tags": ["2pl", "timestamp ordering protocol", "deadlock freedom"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "I only", "is_correct": false },
+                { "label": "B", "text": "II only", "is_correct": true },
+                { "label": "C", "text": "Both I and II", "is_correct": false },
+                { "label": "D", "text": "Neither I nor II", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "2-phase locking ensures conflict serializability but does not guarantee freedom from deadlock, since transactions can wait on each other's locks in a cycle. Time-stamp ordering ensures both conflict serializability and freedom from deadlock, since transactions are ordered by timestamps and never wait for locks.",
+            "pyq_sources": [
+                { "year": 2010, "set": null, "question_number": "Q5.12", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following schedule for transactions T1, T2 and T3:\nT1: Read(X)\nT2: Read(Y)\nT3: Read(Y)\nT2: Write(Y)\nT1: Write(X)\nT3: Write(X)\nT2: Read(X)\nT2: Write(X)\nWhich one of the schedules below is the correct serialization of the above?\n(a) T1 → T3 → T2\n(b) T2 → T1 → T3\n(c) T2 → T3 → T1\n(d) T3 → T1 → T2",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Precedence Graph", "Serial Schedule"],
+            "tags": ["precedence graph", "serialization order", "schedule"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "T1 → T3 → T2", "is_correct": true },
+                { "label": "B", "text": "T2 → T1 → T3", "is_correct": false },
+                { "label": "C", "text": "T2 → T3 → T1", "is_correct": false },
+                { "label": "D", "text": "T3 → T1 → T2", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Using the precedence graph: Read(X) in T1 is followed by write(X) in T2, giving edge T1→T3 (via conflicting reads/writes traced through the graph), and Read(y) in T3 is followed by write(y) in T2, giving edge T3→T2. Combining these edges gives the topological order T1 → T3 → T2.",
+            "pyq_sources": [
+                { "year": 2010, "set": null, "question_number": "Q5.13", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following transactions with data items P and Q initialized to zero:\nT1: read(P); read(Q); if P = 0 then Q := Q + 1; write(Q);\nT2: read(Q); read(P); if Q = 0 then P := P + 1; write(P);\nAny non-serial interleaving of T1 and T2 for concurrent execution leads to\n(a) a serializable schedule\n(b) a schedule that is not conflict serializable\n(c) a conflict serializable schedule\n(d) a schedule for which a precedence graph cannot be drawn",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Precedence Graph"],
+            "tags": ["non-serial interleaving", "conflict serializability", "cycle"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "a serializable schedule", "is_correct": false },
+                { "label": "B", "text": "a schedule that is not conflict serializable", "is_correct": true },
+                { "label": "C", "text": "a conflict serializable schedule", "is_correct": false },
+                { "label": "D", "text": "a schedule for which a precedence graph cannot be drawn", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Any non-serial interleaving creates conflicting edges T1→T2 (through Q) and T2→T1 (through P) in the precedence graph, forming a cycle. A cycle in the precedence graph means the schedule is not conflict serializable.",
+            "pyq_sources": [
+                { "year": 2012, "set": null, "question_number": "Q5.14", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "An index is clustered, if\n(a) it is on a set of fields that form a candidate key.\n(b) it is on a set of fields that include the primary key.\n(c) the data record of the file are organized in the same order as the data entries of the index.\n(d) the data records of the file are organized not in the same order as the data entries of the index.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Clustered Index"],
+            "tags": ["clustered index", "indexing", "physical storage order"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "it is on a set of fields that form a candidate key.", "is_correct": false },
+                { "label": "B", "text": "it is on a set of fields that include the primary key.", "is_correct": false },
+                { "label": "C", "text": "the data record of the file are organized in the same order as the data entries of the index.", "is_correct": true },
+                { "label": "D", "text": "the data records of the file are organized not in the same order as the data entries of the index.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A clustered index sorts and stores the data rows in the table based on their key values, matching the order of the index's data entries.",
+            "pyq_sources": [
+                { "year": 2013, "set": null, "question_number": "Q5.15", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following four schedules due to three transactions (indicated by the subscripts) using read and write on a data item x, denoted by r(x) and w(x) respectively. Which one of them is conflict serializable?\n(a) r1(x); r2(x); w1(x); r3(x); w2(x)\n(b) r2(x); r1(x); w2(x); r3(x); w1(x)\n(c) r3(x); r2(x); r1(x); w2(x); w1(x)\n(d) r2(x); w2(x); r3(x); r1(x); w1(x)",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Precedence Graph"],
+            "tags": ["conflict serializable", "precedence graph", "cycle detection"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "r1(x); r2(x); w1(x); r3(x); w2(x)", "is_correct": false },
+                { "label": "B", "text": "r2(x); r1(x); w2(x); r3(x); w1(x)", "is_correct": false },
+                { "label": "C", "text": "r3(x); r2(x); r1(x); w2(x); w1(x)", "is_correct": false },
+                { "label": "D", "text": "r2(x); w2(x); r3(x); r1(x); w1(x)", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "For each option, a precedence graph among T1, T2, T3 is constructed based on conflicting read/write pairs. Options (a), (b) and (c) all contain a cycle among the transactions and are therefore not conflict serializable. Option (d) contains no cycle and is conflict serializable.",
+            "pyq_sources": [
+                { "year": 2014, "set": 1, "question_number": "Q5.16", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following schedule S of transactions T1, T2, T3 and T4:\nT1: Writes(X); Commit\nT2: Reads(X); Writes(Y); Reads(Z); Commit\nT3: Writes(X); Commit\nT4: Reads(X); Reads(Y); Commit\n(with interleaving as given in the original table)\nWhich one of the following statements is CORRECT?\n(a) S is conflict-serializable but not recoverable\n(b) S is not conflict-serializable but is recoverable\n(c) S is both conflict-serializable and recoverable\n(d) S is neither conflict-serializable nor is it recoverable",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Recoverability"],
+            "tags": ["schedule", "conflict serializability", "recoverable schedule", "precedence graph"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "S is conflict-serializable but not recoverable", "is_correct": false },
+                { "label": "B", "text": "S is not conflict-serializable but is recoverable", "is_correct": false },
+                { "label": "C", "text": "S is both conflict-serializable and recoverable", "is_correct": true },
+                { "label": "D", "text": "S is neither conflict-serializable nor is it recoverable", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The precedence graph T1→T2→T3→T4 contains no cycle, so S is conflict-serializable. Also, no transaction reads uncommitted data from another transaction that has not committed before it, so S is recoverable.",
+            "pyq_sources": [
+                { "year": 2014, "set": 2, "question_number": "Q5.17", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the transactions T1, T2, and T3 and the schedules S1 and S2 given below:\nT1: r1(X); r1(Z); w1(X); w1(Z)\nT2: r2(Y); r2(Z); w2(Z)\nT3: r3(Y); r3(X); w3(Y)\nS1: r1(X); r3(Y); r3(X); r2(Y); r2(Z); w3(Y); w2(Z); r1(Z); w1(X); w1(Z)\nS2: r1(X); r3(Y); r2(Y); r3(X); r1(Z); r2(Z); w3(Y); w1(X); w2(Z); w1(Z)\nWhich one of the following statements about the schedules is TRUE?\n(a) Only S1 is conflict-serializable.\n(b) Only S2 is conflict-serializable.\n(c) Both S1 and S2 are conflict-serializable.\n(d) Neither S1 nor S2 is conflict-serializable.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Precedence Graph"],
+            "tags": ["conflict serializability", "precedence graph", "cycle detection"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "Only S1 is conflict-serializable.", "is_correct": true },
+                { "label": "B", "text": "Only S2 is conflict-serializable.", "is_correct": false },
+                { "label": "C", "text": "Both S1 and S2 are conflict-serializable.", "is_correct": false },
+                { "label": "D", "text": "Neither S1 nor S2 is conflict-serializable.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The precedence graph for S1 (T2→T3→T1) has no cycle, so S1 is conflict-serializable. The precedence graph for S2 (T2→T3→T1 with an additional reverse edge) contains a cycle, so S2 is not conflict-serializable.",
+            "pyq_sources": [
+                { "year": 2014, "set": 3, "question_number": "Q5.18", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following transaction involving two bank accounts x and y.\nread(x); x := x - 50; write(x); read(y); y := y + 50; write(y)\nThe constraint that the sum of the accounts x and y should remain constant is that of\n(a) Atomicity\n(b) Consistency\n(c) Isolation\n(d) Durability",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["ACID Properties", "Consistency"],
+            "tags": ["acid properties", "consistency", "invariant constraint"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "Atomicity", "is_correct": false },
+                { "label": "B", "text": "Consistency", "is_correct": true },
+                { "label": "C", "text": "Isolation", "is_correct": false },
+                { "label": "D", "text": "Durability", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The consistency property of ACID ensures that any database transaction takes the database from one consistent state to another, preserving invariants such as the total sum of the accounts remaining constant.",
+            "pyq_sources": [
+                { "year": 2015, "set": 2, "question_number": "Q5.19", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider a simple checkpointing protocol and the following set of operations in the log.\n(start, T4); (write, T4, y, 2, 3); (start, T1); (commit, T4); (write, T1, z, 5, 7); (checkpoint); (start, T2); (write, T2, x, 1, 9); (commit, T2); (start, T3); (write, T3, z, 7, 2);\nIf a crash happens now and the system tries to recover using both undo and redo operations, what are the contents of the undo list and redo list\n(a) Undo: T3, T1; Redo: T2\n(b) Undo: T3, T1; Redo: T2, T4\n(c) Undo: none; Redo: T2, T4, T3, T1\n(d) Undo: T3, T1, T4; Redo: T2",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Checkpointing", "Log-based Recovery"],
+            "tags": ["checkpointing protocol", "undo list", "redo list", "crash recovery"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "Undo: T3, T1; Redo: T2", "is_correct": true },
+                { "label": "B", "text": "Undo: T3, T1; Redo: T2, T4", "is_correct": false },
+                { "label": "C", "text": "Undo: none; Redo: T2, T4, T3, T1", "is_correct": false },
+                { "label": "D", "text": "Undo: T3, T1, T4; Redo: T2", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Transactions committed before the checkpoint (T4) can be ignored since their updates are already retained in the database. Transactions committed after the checkpoint (T2) must be redone. Transactions not committed after the checkpoint (T1 and T3) must be undone. Hence Undo: T3, T1 and Redo: T2.",
+            "pyq_sources": [
+                { "year": 2015, "set": 2, "question_number": "Q5.20", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following partial Schedule S involving two transactions T1 and T2. Only the read and write operations have been shown. The read operation on data item P is denoted by read(P) and the write operation on data item P is denoted by write(P).\nTime instance 1: T1: read(A)\nTime instance 2: T1: write(A)\nTime instance 3: T2: read(C)\nTime instance 4: T2: write(C)\nTime instance 5: T2: read(B)\nTime instance 6: T2: write(B)\nTime instance 7: T2: read(A)\nTime instance 8: T2: commit\nTime instance 9: T1: read(B)\nSuppose that the transaction T1 fails immediately after time instance 9. Which one of the following statements is correct?\n(a) T2 must be aborted and then both T1 and T2 must be restarted to ensure transaction atomicity\n(b) Schedule S is nonrecoverable and cannot ensure transaction atomicity\n(c) Only T2 must be aborted and then restarted to ensure transaction atomicity\n(d) Schedule S is recoverable and can ensure transaction atomicity and nothing else needs to be done",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Recoverability", "Dirty Read", "Transaction Atomicity"],
+            "tags": ["nonrecoverable schedule", "dirty read", "transaction failure", "atomicity"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "T2 must be aborted and then both T1 and T2 must be restarted to ensure transaction atomicity", "is_correct": false },
+                { "label": "B", "text": "Schedule S is nonrecoverable and cannot ensure transaction atomicity", "is_correct": true },
+                { "label": "C", "text": "Only T2 must be aborted and then restarted to ensure transaction atomicity", "is_correct": false },
+                { "label": "D", "text": "Schedule S is recoverable and can ensure transaction atomicity and nothing else needs to be done", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "T1 writes A and T2 performs a read on A, and T2 commits before T1. This is a dirty (uncommitted) read since T2 commits before T1. Since T2 already committed based on the value written by T1 and T1 later fails, this cannot be undone — the schedule is nonrecoverable and transaction atomicity cannot be guaranteed.",
+            "pyq_sources": [
+                { "year": 2015, "set": 3, "question_number": "Q5.21", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following directed graph: vertices a, b, c, d, e, f with edges a→b, b→c, c→f, a→d, d→e, e→f. The number of different topological orderings of the vertices of the graph is ______.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Topological Ordering", "Precedence Graph"],
+            "tags": ["topological order", "directed acyclic graph", "counting orderings"],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "6",
+            "explanation": "The valid topological orderings of the graph are: a b c d e f; a b d e c f; a d b c e f; a d e b c f; a d b e c f. Enumerating all valid orderings that respect the edges gives a total of 6 orderings.",
+            "pyq_sources": [
+                { "year": 2016, "set": 1, "question_number": "Q5.22", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Which one of the following is NOT a part of the ACID properties of database transactions?\n(a) Atomicity\n(b) Consistency\n(c) Isolation\n(d) Deadlock-freedom",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["ACID Properties"],
+            "tags": ["acid properties", "atomicity", "consistency", "isolation", "durability"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                { "label": "A", "text": "Atomicity", "is_correct": false },
+                { "label": "B", "text": "Consistency", "is_correct": false },
+                { "label": "C", "text": "Isolation", "is_correct": false },
+                { "label": "D", "text": "Deadlock-freedom", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "ACID stands for Atomicity, Consistency, Isolation, and Durability. Deadlock-freedom is not one of the ACID properties.",
+            "pyq_sources": [
+                { "year": 2016, "set": 1, "question_number": "Q5.23", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following two phase locking protocol. Suppose a transaction T accesses (for read or write operations), a certain set of objects {O1,...,Ok}. This is done in the following manner:\nStep 1. T acquires exclusive locks to O1,...,Ok in increasing order of their addresses.\nStep 2. The required operations are performed.\nStep 3. All locks are released.\nThis protocol will\n(a) guarantee serializability and deadlock-freedom\n(b) guarantee neither serializability nor deadlock-freedom\n(c) guarantee serializability but not deadlock-freedom\n(d) guarantee deadlock-freedom but not serializability",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Two-Phase Locking", "Deadlock Prevention"],
+            "tags": ["2pl protocol", "exclusive locks", "deadlock freedom", "lock ordering"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "guarantee serializability and deadlock-freedom", "is_correct": true },
+                { "label": "B", "text": "guarantee neither serializability nor deadlock-freedom", "is_correct": false },
+                { "label": "C", "text": "guarantee serializability but not deadlock-freedom", "is_correct": false },
+                { "label": "D", "text": "guarantee deadlock-freedom but not serializability", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since the protocol follows 2PL (all locks acquired before any release), it guarantees serializability. Additionally, since locks on objects are always acquired in a fixed increasing order of addresses, circular wait cannot occur, which guarantees deadlock-freedom.",
+            "pyq_sources": [
+                { "year": 2016, "set": 1, "question_number": "Q5.24", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Suppose a database schedule S involves transactions T1,...,Tn. Construct the precedence graph of S with vertices representing the transactions and edges representing the conflicts. If S is serializable, which one of the following orderings of the vertices of the precedence graph is guaranteed to yield a serial schedule?\n(a) Topological order\n(b) Depth-first order\n(c) Breadth-first order\n(d) Ascending order of transaction indices",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Precedence Graph", "Topological Order"],
+            "tags": ["precedence graph", "topological order", "serial schedule"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "Topological order", "is_correct": true },
+                { "label": "B", "text": "Depth-first order", "is_correct": false },
+                { "label": "C", "text": "Breadth-first order", "is_correct": false },
+                { "label": "D", "text": "Ascending order of transaction indices", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "For an acyclic precedence graph of a conflict serializable schedule, an equivalent serial schedule is given by the topological order of the graph.",
+            "pyq_sources": [
+                { "year": 2016, "set": 2, "question_number": "Q5.25", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following database schedule with two transactions, T1 and T2.\nS = r2(X); r1(X); r2(Y); w1(X); r1(Y); w2(X); a1; a2\nwhere ri(Z) denotes a read operation by transaction Ti on a variable Z, wi(Z) denotes a write operation by Ti on a variable Z and ai denotes an abort by transaction Ti.\nWhich one of the following statements about the above schedule is TRUE?\n(a) S is non-recoverable\n(b) S is recoverable, but has a cascading abort\n(c) S does not have a cascading abort\n(d) S is strict",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Recoverability", "Cascading Abort"],
+            "tags": ["recoverable schedule", "cascadeless schedule", "abort"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "S is non-recoverable", "is_correct": false },
+                { "label": "B", "text": "S is recoverable, but has a cascading abort", "is_correct": false },
+                { "label": "C", "text": "S does not have a cascading abort", "is_correct": true },
+                { "label": "D", "text": "S is strict", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "There are no uncommitted reads of data written by the other transaction before that transaction commits or aborts, so the schedule is cascadeless (no cascading rollback) but it is not strict since T1 reads/writes before T2's write is followed by rollback.",
+            "pyq_sources": [
+                { "year": 2016, "set": 2, "question_number": "Q5.26", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In a database system, unique timestamps are assigned to each transaction using Lamport's logical clock. Let TS(T1) and TS(T2) be the timestamps of transactions T1 and T2 respectively. Besides, T1 holds a lock on the resource R and T2 has requested a conflicting lock on the same resource R. The following algorithm is used to prevent deadlocks in the database system assuming that a killed transaction is restarted with the same timestamp.\nif TS(T2) < TS(T1) then T1 is killed\nelse T2 waits\nAssume any transaction that is not killed terminates eventually. Which of the following is TRUE about the database system that uses the above algorithm to prevent deadlocks?\n(a) The database system is both deadlock-free and starvation-free.\n(b) The database system is deadlock-free, but not starvation-free.\n(c) The database system is starvation-free, but not deadlock-free.\n(d) The database system is neither deadlock-free nor starvation-free.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Timestamp Ordering", "Deadlock Prevention", "Starvation Freedom"],
+            "tags": ["lamport clock", "wait-die scheme", "deadlock prevention", "starvation"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "The database system is both deadlock-free and starvation-free.", "is_correct": true },
+                { "label": "B", "text": "The database system is deadlock-free, but not starvation-free.", "is_correct": false },
+                { "label": "C", "text": "The database system is starvation-free, but not deadlock-free.", "is_correct": false },
+                { "label": "D", "text": "The database system is neither deadlock-free nor starvation-free.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The wait-for relationship always points from the younger transaction toward the older one (since a younger transaction requesting a lock held by an older one gets killed, and an older one requesting a lock held by a younger one waits), so no cycle can form, ensuring deadlock-freedom. Since a killed transaction restarts with the same timestamp, it eventually becomes the oldest transaction and stops being killed, avoiding starvation, so the system is also starvation-free.",
+            "pyq_sources": [
+                { "year": 2017, "set": 1, "question_number": "Q5.27", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Two transactions T1 and T2 are given as\nT1: r1(X) w1(X) r1(Y) w1(Y)\nT2: r2(Y) w2(Y) r2(Z) w2(Z)\nwhere ri(V) denotes a read operation by transaction Ti on a variable V and wi(V) denotes a write operation by transaction Ti on a variable V. The total number of conflict serializable schedules that can be formed by T1 and T2 is ______.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Combinatorics"],
+            "tags": ["conflict serializable schedules", "combinatorics", "interleaving count"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 240,
+            "options": [],
+            "correct_answer_text": "54",
+            "explanation": "Counting schedules serializable as T1 then T2 gives 1 way (r1(X)w1(X)r1(Y)w1(Y)r2(Y)w2(Y)r2(Z)w2(Z)). Counting schedules serializable as T2 then T1 requires r1(X)w1(X) to occur before r1(Y), and combinations of placement of r2(Y)w2(Y) relative to r1(X)w1(X), plus placements of r2(Z)w2(Z), giving 53 ways by combinatorial counting (using combinations like ⁴C₂, ⁵C₂, ⁶C₂ for various interleavings). Total = 53 + 1 = 54.",
+            "pyq_sources": [
+                { "year": 2017, "set": 2, "question_number": "Q5.28", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following two statements about database transaction schedules:\nI. Strict two-phase locking protocol generates conflict serializable schedules that are also recoverable.\nII. Timestamp-ordering concurrency control protocol with Thomas' Write Rule can generate view serializable schedules that are not conflict serializable.\nWhich of the above statements is/are TRUE?\n(a) Neither I nor II\n(b) I only\n(c) II only\n(d) Both I and II",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Strict 2PL", "Timestamp Ordering", "Thomas Write Rule", "View Serializability"],
+            "tags": ["strict 2pl", "thomas write rule", "view serializability", "recoverable schedule"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "Neither I nor II", "is_correct": false },
+                { "label": "B", "text": "I only", "is_correct": false },
+                { "label": "C", "text": "II only", "is_correct": false },
+                { "label": "D", "text": "Both I and II", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Strict 2PL guarantees conflict serializable schedules that are also strict (hence recoverable), making statement I true. Thomas' Write Rule allows certain blind writes to be ignored, permitting view serializable schedules that need not be conflict serializable, making statement II also true.",
+            "pyq_sources": [
+                { "year": 2019, "set": null, "question_number": "Q5.29", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider a schedule of transactions T1 and T2:\nT1: RA, RC, WD, WB, Commit\nT2: RB, WB, RD, WC, Commit\ninterleaved as: T1:RA, T2:RB, T2:WB, T1:RC, T2:RD, T1:WD, T2:WC, T1:WB, T1:Commit, T2:Commit\nHere, RX stands for 'Read(X)' and WX stands for 'Write(X)'. Which one of the following schedules is conflict equivalent to the above schedule?\n(a) T1: RA, RC, WD, WB, Commit; T2: RB, WB, RD, WC, Commit (T1 then T2 fully serial)\n(b) T1: RA, RC, WD, WB; T2: RB, WB, RD, WC; with T1 committing before T2's final write and commit\n(c) T1: RA, RC, WD, WB, Commit (all T1 operations first); T2: RB, WB, RD, WC, Commit (all T2 operations after)\n(d) T1: RA, RC, WD, WB, Commit; T2: RB, WB, RD, WC, Commit (different interleaving order than (b))",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Equivalence"],
+            "tags": ["conflict equivalent schedule", "schedule comparison", "interleaving"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "Schedule option (a) as shown in the table", "is_correct": false },
+                { "label": "B", "text": "Schedule option (b) as shown in the table", "is_correct": true },
+                { "label": "C", "text": "Schedule option (c) as shown in the table", "is_correct": false },
+                { "label": "D", "text": "Schedule option (d) as shown in the table", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Comparing the order of conflicting operations (on B and D between T1 and T2) in each option against the original schedule, only option (b) preserves the same relative order of all conflicting operation pairs, making it conflict equivalent to the original schedule.",
+            "pyq_sources": [
+                { "year": 2020, "set": null, "question_number": "Q5.30", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Suppose a database system crashes again while recovering from a previous crash. Assume checkpointing is not done by the database either during the transactions or during recovery. Which of the following statements is/are correct?\n(a) The same undo and redo list will be used while recovering again.\n(b) The system cannot recover any further.\n(c) The database will become inconsistent.\n(d) All the transactions that are already undone and redone will not be recovered again.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Crash Recovery", "Idempotence of Redo/Undo"],
+            "tags": ["crash recovery", "repeated crash", "redo undo list", "idempotent operations"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "The same undo and redo list will be used while recovering again.", "is_correct": true },
+                { "label": "B", "text": "The system cannot recover any further.", "is_correct": false },
+                { "label": "C", "text": "The database will become inconsistent.", "is_correct": false },
+                { "label": "D", "text": "All the transactions that are already undone and redone will not be recovered again.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Without checkpointing, the log remains the same after a repeated crash, so the same undo and redo lists computed from the log will be reused for recovery, and since undo/redo operations are idempotent, recovery still completes correctly.",
+            "pyq_sources": [
+                { "year": 2021, "set": 1, "question_number": "Q5.31", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Let ri(z) and wi(z) denote read and write operations respectively on a data item z by a transaction Ti. Consider the following two schedules:\nS1: r1(x), r1(y), r2(x), r2(y), w2(y), w1(x)\nS2: r1(x), r2(x), r2(y), w2(y), r1(y), w1(x)\nWhich one of the following options is correct?\n(a) S1 is not conflict serializable, and S2 is conflict serializable.\n(b) Neither S1 nor S2 is conflict serializable.\n(c) Both S1 and S2 are conflict serializable.\n(d) S1 is conflict serializable, and S2 is not conflict serializable.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability"],
+            "tags": ["conflict serializability", "read write dependency graph", "cycle"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "S1 is not conflict serializable, and S2 is conflict serializable.", "is_correct": true },
+                { "label": "B", "text": "Neither S1 nor S2 is conflict serializable.", "is_correct": false },
+                { "label": "C", "text": "Both S1 and S2 are conflict serializable.", "is_correct": false },
+                { "label": "D", "text": "S1 is conflict serializable, and S2 is not conflict serializable.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The dependency graph of S1 forms a cycle between T1 and T2 (both a read-write and write-read conflict in opposite directions), so S1 is not conflict serializable. The dependency graph of S2 has no cycle, so S2 is conflict serializable.",
+            "pyq_sources": [
+                { "year": 2021, "set": 1, "question_number": "Q5.32", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Let S be the following schedule of operations of three transactions T1, T2 and T3 in a relational database system:\nR2(Y), R1(X), R3(Z), R1(Y), W1(X), R2(Z), W2(Y), R3(X), W3(Z)\nConsider the statements P and Q below:\nP: S is conflict-serializable.\nQ: If T3 commits before T1 finishes, then S is recoverable.\nWhich one of the following choices is correct?\n(a) P is true and Q is false\n(b) Both P and Q are false\n(c) Both P and Q are true\n(d) P is false and Q is true",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Recoverability"],
+            "tags": ["precedence graph", "recoverable schedule", "conflict serializability"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "P is true and Q is false", "is_correct": true },
+                { "label": "B", "text": "Both P and Q are false", "is_correct": false },
+                { "label": "C", "text": "Both P and Q are true", "is_correct": false },
+                { "label": "D", "text": "P is false and Q is true", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The precedence graph for the schedule has no cycle, so S is conflict-serializable, making P true. However, since T2 reads Z that is later written by T3 before T3 commits (a dependency where T3's commit ordering relative to T1 could still cause non-recoverability given the read/write dependencies among the transactions), Q is false.",
+            "pyq_sources": [
+                { "year": 2021, "set": 2, "question_number": "Q5.33", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Let Ri(z) and Wi(z) denote read and write operations on a data element z by a transaction Ti, respectively. Consider the schedule S with four transactions.\nS: R4(x), R2(x), R3(x), R1(y), W1(y), W2(x), W3(y), R4(y)\nWhich one of the following serial schedules is conflict equivalent to S?\n(a) T1 → T3 → T4 → T2\n(b) T1 → T4 → T3 → T2\n(c) T4 → T1 → T3 → T2\n(d) T3 → T1 → T4 → T2",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Equivalence", "Precedence Graph", "Topological Order"],
+            "tags": ["precedence graph", "topological order", "conflict equivalent schedule"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "T1 → T3 → T4 → T2", "is_correct": false },
+                { "label": "B", "text": "T1 → T4 → T3 → T2", "is_correct": false },
+                { "label": "C", "text": "T4 → T1 → T3 → T2", "is_correct": true },
+                { "label": "D", "text": "T3 → T1 → T4 → T2", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Constructing the precedence graph of schedule S and finding its topological order gives the conflict equivalent serial order T4 → T1 → T3 → T2.",
+            "pyq_sources": [
+                { "year": 2022, "set": null, "question_number": "Q5.34", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following read-write schedule S over three transactions T1, T2 and T3, where the subscripts in the schedule indicate transaction IDs:\nS: r1(z); w1(z); r2(x); r3(y); w3(y); r2(y); w2(x); w2(y);\nWhich of the following transaction schedules is/are conflict equivalent to S?\n(a) T3 T1 T2\n(b) T1 T2 T3\n(c) T3 T2 T1\n(d) T1 T3 T2",
+            "question_type": "MSQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Equivalence", "Precedence Graph"],
+            "tags": ["conflict equivalence", "precedence graph", "serial schedule"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "T3 T1 T2", "is_correct": true },
+                { "label": "B", "text": "T1 T2 T3", "is_correct": false },
+                { "label": "C", "text": "T3 T2 T1", "is_correct": true },
+                { "label": "D", "text": "T1 T3 T2", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The precedence graph of S has an edge T1→T2, with T3 having no dependency constraint relative to T1 or T2 (isolated in ordering). The serial schedules consistent with this graph are T1 T3 T2, T3 T1 T2, and T3 T2 T1.",
+            "pyq_sources": [
+                { "year": 2024, "set": 1, "question_number": "Q5.35", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Once the DBMS informs the user that a transaction has been successfully completed, its effect should persist even if the system crashes before all its changes are reflected on disk. This property is called\n(a) durability\n(b) atomicity\n(c) consistency\n(d) isolation",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["ACID Properties", "Durability"],
+            "tags": ["acid properties", "durability", "crash persistence"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                { "label": "A", "text": "durability", "is_correct": true },
+                { "label": "B", "text": "atomicity", "is_correct": false },
+                { "label": "C", "text": "consistency", "is_correct": false },
+                { "label": "D", "text": "isolation", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Durability requires that once a transaction commits successfully, its effect on the database must persist even in the event of a subsequent system failure.",
+            "pyq_sources": [
+                { "year": 2024, "set": 2, "question_number": "Q5.36", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Which of the following statements about the Two Phase Locking (2PL) protocol is/are TRUE?\n(a) 2PL permits only serializable schedules\n(b) With 2PL, a transaction always locks the data item being read or written just before every operation and always releases the lock just after the operation.\n(c) With 2PL, once a lock is released on any data item inside a transaction, no more locks on any data item can be obtained inside that transaction.\n(d) A deadlock is possible with 2PL.",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Two-Phase Locking"],
+            "tags": ["2pl protocol", "growing phase", "shrinking phase", "deadlock"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "2PL permits only serializable schedules", "is_correct": true },
+                { "label": "B", "text": "With 2PL, a transaction always locks the data item being read or written just before every operation and always releases the lock just after the operation.", "is_correct": false },
+                { "label": "C", "text": "With 2PL, once a lock is released on any data item inside a transaction, no more locks on any data item can be obtained inside that transaction.", "is_correct": true },
+                { "label": "D", "text": "A deadlock is possible with 2PL.", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "2PL guarantees conflict serializable schedules, so (a) is true. In 2PL, a transaction acquires all locks in a growing phase and releases all locks in a shrinking phase — once a lock is released, no further locks can be acquired, so (c) is true, and (b) is false since locks need not be acquired/released right before/after each individual operation. 2PL does not prevent deadlocks, so (d) is true.",
+            "pyq_sources": [
+                { "year": 2024, "set": 2, "question_number": "Q5.37", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "A schedule of three database transactions T1, T2, and T3 is shown. Ri(A) and Wi(A) denote read and write of data item A by transaction Ti, i = 1, 2, 3. The transaction T1 aborts at the end. Which other transaction(s) will be required to be rolled back?\nR1(X) W1(Y) R2(X) R2(Y) R3(Y) ABORT(T1)\n(a) Only T2\n(b) Only T3\n(c) Both T2 and T3\n(d) Neither T2 nor T3",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Cascading Rollback", "Dirty Read"],
+            "tags": ["cascading rollback", "dirty read", "abort", "transaction dependency"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "Only T2", "is_correct": false },
+                { "label": "B", "text": "Only T3", "is_correct": false },
+                { "label": "C", "text": "Both T2 and T3", "is_correct": true },
+                { "label": "D", "text": "Neither T2 nor T3", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "T1 wrote to Y, and T2 read data item X updated by T1 as well as depends on it; when T1 aborts, this triggers cascading rollback. T3 reads Y which was updated based on data connected to T1's writes as read by T2, so both T2 and T3, having read uncommitted data affected by T1's abort, must be rolled back.",
+            "pyq_sources": [
+                { "year": 2025, "set": 1, "question_number": "Q5.38", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "An audit of a banking transactions system has found that on an earlier occasion, two joint holders of account A attempted simultaneous transfers of Rs. 10000 each from account A to account B. Both transactions read the same value, Rs. 11000, as the initial balance in A and were allowed to go through. B was credited Rs. 10000 twice. A was debited only once and ended up with a balance of Rs. 1000.\nWhich of the following properties is/are certain to have been violated by the system?\n(a) Atomicity\n(b) Consistency\n(c) Isolation\n(d) Durability",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["ACID Properties", "Isolation", "Consistency"],
+            "tags": ["acid violation", "isolation", "consistency", "lost update"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "Atomicity", "is_correct": false },
+                { "label": "B", "text": "Consistency", "is_correct": true },
+                { "label": "C", "text": "Isolation", "is_correct": true },
+                { "label": "D", "text": "Durability", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Both transactions read the same stale balance value for A concurrently without proper isolation, causing a lost update, which violates isolation. This also results in an inconsistent final state (account balances no longer reflecting valid transfers), violating consistency.",
+            "pyq_sources": [
+                { "year": 2025, "set": 2, "question_number": "Q5.39", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the database transactions T1 and T2, and data items X and Y:\nTransaction T1: R1(X); W1(Y); R1(X); W1(X); COMMIT(T1)\nTransaction T2: W2(X); W2(Y); COMMIT(T2)\nWhich of the schedule(s) is/are conflict serializable?\n(a) R1(X), W2(X), W1(Y), W2(Y), R1(X), W1(X), COMMIT(T2), COMMIT(T1)\n(b) W2(X), R1(X), W2(Y), W1(Y), R1(X), COMMIT(T2), W1(X), COMMIT(T1)\n(c) R1(X), W1(Y), W2(X), W2(Y), R1(X), W1(X), COMMIT(T1), COMMIT(T2)\n(d) W2(X), R1(X), W1(Y), W2(Y), R1(X), COMMIT(T2), W1(X), COMMIT(T1)",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflict Serializability", "Precedence Graph"],
+            "tags": ["conflict serializability", "precedence graph", "schedule comparison"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "R1(X), W2(X), W1(Y), W2(Y), R1(X), W1(X), COMMIT(T2), COMMIT(T1)", "is_correct": false },
+                { "label": "B", "text": "W2(X), R1(X), W2(Y), W1(Y), R1(X), COMMIT(T2), W1(X), COMMIT(T1)", "is_correct": true },
+                { "label": "C", "text": "R1(X), W1(Y), W2(X), W2(Y), R1(X), W1(X), COMMIT(T1), COMMIT(T2)", "is_correct": false },
+                { "label": "D", "text": "W2(X), R1(X), W1(Y), W2(Y), R1(X), COMMIT(T2), W1(X), COMMIT(T1)", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Constructing the precedence graph for each schedule based on conflicting operations on X and Y between T1 and T2, only the schedule in option (b) yields an acyclic precedence graph (T1→T2), making it conflict serializable, while the others contain a cycle.",
+            "pyq_sources": [
+                { "year": 2025, "set": 2, "question_number": "Q5.40", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider concurrent execution of two transactions T1 and T2 in a DBMS, both of which access a data object A. For these two transactions to not conflict on A, which one of the following statements must be true?\n(a) Both T1 and T2 only read A\n(b) T1 reads A and T2 writes A\n(c) T1 writes A and T2 reads A\n(d) Both T1 and T2 write A",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Transactions and Concurrency Control"],
+            "concepts": ["Conflicting Operations"],
+            "tags": ["read write conflict", "conflicting operations", "concurrency"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "Both T1 and T2 only read A", "is_correct": true },
+                { "label": "B", "text": "T1 reads A and T2 writes A", "is_correct": false },
+                { "label": "C", "text": "T1 writes A and T2 reads A", "is_correct": false },
+                { "label": "D", "text": "Both T1 and T2 write A", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Two operations conflict only if they belong to different transactions, access the same data item, and at least one of them is a write. If both T1 and T2 only read A, neither operation is a write, so they do not conflict.",
+            "pyq_sources": [
+                { "year": 2026, "set": 2, "question_number": "Q5.41", "marks": 1 }
+            ]
+        }
+    ]
+}

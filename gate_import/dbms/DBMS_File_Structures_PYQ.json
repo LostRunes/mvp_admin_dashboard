@@ -1,0 +1,692 @@
+{
+    "subject": {
+        "subject_name": "Database Management Systems",
+        "subject_code": "DBMS"
+    },
+    "topics": [
+        {
+            "topic_name": "File Structures",
+            "summary": "Covers file organization, indexing techniques, and B-tree/B+ tree data structures used to efficiently store and access records on disk."
+        }
+    ],
+    "questions": [
+        {
+            "question_text": "Which of the following is correct?\n(a) B-trees are for storing data on disk and B+ trees are for main memory.\n(b) Range queries are faster on B+ trees.\n(c) B-trees are for primary indexes and B+ trees are for secondary indexes.\n(d) The height of a B+ tree is independent of the number of records.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["File Structures"],
+            "concepts": ["B-tree vs B+ tree", "Range queries", "Leaf node linking"],
+            "tags": ["b-tree", "b+ tree", "range query", "indexing basics"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "B-trees are for storing data on disk and B+ trees are for main memory.", "is_correct": false },
+                { "label": "B", "text": "Range queries are faster on B+ trees.", "is_correct": true },
+                { "label": "C", "text": "B-trees are for primary indexes and B+ trees are for secondary indexes.", "is_correct": false },
+                { "label": "D", "text": "The height of a B+ tree is independent of the number of records.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Most database systems use indexes built on some form of B+-tree due to its many advantages, particularly its support for range queries. Leaf nodes are linked together in B+ trees, hence range queries are faster.",
+            "pyq_sources": [
+                { "year": 1999, "set": null, "question_number": "6.1", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "B+ trees are preferred to binary trees in databases because\n(a) Disk capacities are greater than memory capacities\n(b) Disk access is much slower than memory access\n(c) Disk data transfer rates are much less than memory data transfer rates\n(d) Disks are more reliable than memory",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree fanout", "Disk I/O cost"],
+            "tags": ["b+ tree", "disk access", "binary search tree comparison", "indexing basics"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "Disk capacities are greater than memory capacities", "is_correct": false },
+                { "label": "B", "text": "Disk access is much slower than memory access", "is_correct": true },
+                { "label": "C", "text": "Disk data transfer rates are much less than memory data transfer rates", "is_correct": false },
+                { "label": "D", "text": "Disks are more reliable than memory", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Disk access is slow, and B+ trees provide search in fewer disk hits. This is primarily because, unlike binary search trees, B+ trees have very high fanout (typically on the order of 100 or more), which reduces the number of I/O operations required to find an element in the tree.",
+            "pyq_sources": [
+                { "year": 2000, "set": null, "question_number": "6.2", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "A B+ tree index is to be built on the Name attribute of the relation STUDENT. Assume that all student names are of length 8 bytes, disk blocks are of size 512 bytes, and index pointers are of size 4 bytes. Given this scenario, what would be the best choice of the degree (i.e. the number of pointers per node) of the B+-tree?\n(a) 16\n(b) 42\n(c) 43\n(d) 44",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree degree/order calculation", "Block size utilization"],
+            "tags": ["b+ tree order", "degree calculation", "index pointer size", "block size"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "16", "is_correct": false },
+                { "label": "B", "text": "42", "is_correct": false },
+                { "label": "C", "text": "43", "is_correct": true },
+                { "label": "D", "text": "44", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Let n be the degree, k = key size = 8 bytes, disk block size B = 512 bytes, index pointer size b = 4 bytes. Formula for max number of keys an internal node can have: (n-1)k + n*b = Block size. (n-1)8 + n*4 = 512 => 12n = 520 => n = 43.33, so n = 43.",
+            "pyq_sources": [
+                { "year": 2002, "set": null, "question_number": "6.3", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "The order of an internal node in a B+ tree index is the maximum number of children it can have. Suppose that a child pointer takes 6 bytes, the search field value takes 14 bytes, and the block size is 512 bytes. What is the order of the internal node?\n(a) 24\n(b) 25\n(c) 26\n(d) 27",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree internal node order calculation"],
+            "tags": ["b+ tree order", "internal node", "child pointer", "block size"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "24", "is_correct": false },
+                { "label": "B", "text": "25", "is_correct": false },
+                { "label": "C", "text": "26", "is_correct": true },
+                { "label": "D", "text": "27", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Size of child pointer = 6 bytes, search field value = 14 bytes, block size = 512. Order of internal node P: (P-1)*14 + P*6 <= 512 => P = 26.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "6.4", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a table T in a relational database with a key field K. A B-tree of order p is used as an access structure on K, where p denotes the maximum number of tree pointers in a B-tree index node. Assume that K is 10 bytes long; disk block size is 512 bytes; each data pointer PD is 8 bytes long and each block pointer PB is 5 bytes long. In order for each B-tree node to fit in a single disk block, the maximum value of p is\n(a) 20\n(b) 22\n(c) 23\n(d) 32",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["B-tree order calculation", "Data pointer vs block pointer"],
+            "tags": ["b-tree order", "block pointer", "data pointer", "block size"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "20", "is_correct": false },
+                { "label": "B", "text": "22", "is_correct": false },
+                { "label": "C", "text": "23", "is_correct": true },
+                { "label": "D", "text": "32", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Format of B-tree node with order P: P(P_B) + (P-1)(K + P_D) <= Block size. Substituting: P(5) + (P-1)(10+8) <= 512 => 5P + 18P - 18 <= 512 => 23P <= 530 => P = floor(530/23) = 23.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "6.5", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which one of the following is a key factor for preferring B+ trees to binary search trees for indexing database relations?\n(a) Database relations have a large number of record\n(b) Database relations are sorted on the primary key\n(c) B+ trees require less memory than binary search trees\n(d) Data transfer from disks is in blocks",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree vs binary search tree", "Disk block transfer"],
+            "tags": ["b+ tree", "binary search tree", "disk transfer", "indexing basics"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "Database relations have a large number of record", "is_correct": false },
+                { "label": "B", "text": "Database relations are sorted on the primary key", "is_correct": false },
+                { "label": "C", "text": "B+ trees require less memory than binary search trees", "is_correct": false },
+                { "label": "D", "text": "Data transfer from disks is in blocks", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The transfer of data from disk to primary memory is in the form of data blocks. If a data block is larger, indexing is easier due to this; the B+ tree is better than a binary search tree data structure when large amounts of data must be accessed.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "6.6", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "A B-tree used as an index for a large database table has four levels including the root node. If a new key is inserted in this index, then the maximum number of nodes that could be newly created in the process are\n(a) 5\n(b) 4\n(c) 3\n(d) 2",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["B-tree insertion", "Node splitting"],
+            "tags": ["b-tree insertion", "node split", "tree levels"],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "5", "is_correct": true },
+                { "label": "B", "text": "4", "is_correct": false },
+                { "label": "C", "text": "3", "is_correct": false },
+                { "label": "D", "text": "2", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Assume every node is at full capacity, i.e., if order is P then P-1 keys + data pointers. Since it has 4 levels, if a new element is inserted, each level overflows resulting in one new node, and an extra node comes at a new level 5. So a total of 5 new nodes can be created.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "6.7", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "A database table T1 has 2000 records and occupies 80 disk blocks. Another table T2 has 400 records and occupies 20 disk blocks. These two tables have to be joined as per a specified join condition that needs to be evaluated for every pair of records from these two tables. The memory buffer space available can hold exactly one block of records for T1 and one block of records for T2 simultaneously at any point in time. No index is available on either table.\n\nIf Nested-loop join algorithm is employed to perform the join, with the most appropriate choice of table to be used in outer loop, the number of block accesses required for reading the data are\n(a) 800000\n(b) 40080\n(c) 32020\n(d) 100",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["Nested-loop join", "Block access cost", "Join algorithms"],
+            "tags": ["nested loop join", "block access", "join cost", "outer table selection"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "800000", "is_correct": false },
+                { "label": "B", "text": "40080", "is_correct": false },
+                { "label": "C", "text": "32020", "is_correct": true },
+                { "label": "D", "text": "100", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In nested-loop join, for every record of the outer table, every block of the inner table is loaded. If T1 is outer: 2000*20 + 80 = 40080. If T2 is outer: 400*80 + 20 = 32020. Choosing T2 as outer table gives the minimum, 32020 block accesses.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "6.8", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A database table T1 has 2000 records and occupies 80 disk blocks. Another table T2 has 400 records and occupies 20 disk blocks. These two tables have to be joined as per a specified join condition that needs to be evaluated for every pair of records from these two tables. The memory buffer space available can hold exactly one block of records for T1 and one block of records for T2 simultaneously at any point in time. No index is available on either table.\n\nIf, instead of Nested-loop join, Block nested-loop join is used, again with the most appropriate choice of table in the outer loop, the reduction in number of block accesses required for reading the data will be\n(a) 0\n(b) 30400\n(c) 38400\n(d) 798400",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["Block nested-loop join", "Block access cost", "Join algorithms"],
+            "tags": ["block nested loop join", "block access", "join cost", "outer table selection"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "0", "is_correct": false },
+                { "label": "B", "text": "30400", "is_correct": true },
+                { "label": "C", "text": "38400", "is_correct": false },
+                { "label": "D", "text": "798400", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In block nested-loop join, for every block of the outer table, every block of the inner table is fetched (instead of per record). If T1 outer: 80*20 + 80 = 1680. If T2 outer: 80*20 + 20 = 1620. Choosing T2 as outer gives 1620. Reduction in block accesses = 32020 - 1620 = 30400.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "6.9", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In a database file structure, the search key field is 9 bytes long, the block size is 512 bytes, a record pointer is 7 bytes and a block pointer is 6 bytes. The largest possible order of a non-leaf node in a B+ tree implementing this file structure is\n(a) 23\n(b) 24\n(c) 34\n(d) 44",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree non-leaf node order calculation"],
+            "tags": ["b+ tree order", "non-leaf node", "block pointer", "record pointer"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "23", "is_correct": false },
+                { "label": "B", "text": "24", "is_correct": false },
+                { "label": "C", "text": "34", "is_correct": true },
+                { "label": "D", "text": "44", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Format of B+ tree non-leaf node with order p: (p-1)(key) + p*(block pointer) <= block size. (p-1)(9) + p(6) <= 512 => 9p - 9 + 6p <= 512 => 15p <= 521 => p = floor(521/15) = 34.",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "6.10", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "The order of a leaf node in a B+ tree is the maximum number of (value, data record pointer) pairs it can hold. Given that the block size is 1K bytes, data record pointer is 7 bytes long, the value field is 9 bytes long and a block pointer is 6 bytes long, what is the order of the leaf node?\n(a) 63\n(b) 64\n(c) 67\n(d) 68",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree leaf node order calculation"],
+            "tags": ["b+ tree order", "leaf node", "data record pointer", "block size"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "63", "is_correct": true },
+                { "label": "B", "text": "64", "is_correct": false },
+                { "label": "C", "text": "67", "is_correct": false },
+                { "label": "D", "text": "68", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Let order of leaf node be n. Block size = 1K = 1024 bytes. 6 + 7n + 9n <= 1024 => n = 63.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "6.11", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the B+ tree in the adjoining figure, where each node has at most two keys and three links (root K40; children K30 and K50; leaves K10 K20, K30, K40, K50). Keys K15 and then K25 are inserted into this tree in that order. Exactly how many of the following nodes (disregarding the links) will be present in the tree after the two insertions?\n[K30 K50]  [K25 K30]  [K20 K25]  [K50 K20]\n(a) 1\n(b) 2\n(c) 3\n(d) 4",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree insertion", "Node splitting"],
+            "tags": ["b+ tree insertion", "leaf split", "linked answer question"],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "1", "is_correct": true },
+                { "label": "B", "text": "2", "is_correct": false },
+                { "label": "C", "text": "3", "is_correct": false },
+                { "label": "D", "text": "4", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Inserting K15 causes the leaf [10 20] to split, promoting 15, giving structure with 15 added between 10 and 20/30. Inserting K25 similarly causes a leaf split promoting 20, resulting in a leaf node containing [20 25]. Among the listed candidate nodes, only [20 25] matches a node actually present in the resulting tree, so exactly one of the listed nodes is present.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "6.12", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Now the key K50 is deleted from the B+ tree resulting after the two insertions made earlier (insertion of K15 and K25). Consider the following statements about the B+ tree resulting after this deletion.\n(i) The height of the tree remains the same.\n(ii) The node [k20] (disregarding the links) is present in the tree.\n(iii) The root node remains unchanged (disregarding the links).\nWhich one of the following options is true?\n(a) Statements (i) and (ii) are true\n(b) Statements (ii) and (iii) are true\n(c) Statements (iii) and (i) are true\n(d) All the statements are false",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree deletion", "Node merging/redistribution"],
+            "tags": ["b+ tree deletion", "tree height", "root node", "linked answer question"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "Statements (i) and (ii) are true", "is_correct": true },
+                { "label": "B", "text": "Statements (ii) and (iii) are true", "is_correct": false },
+                { "label": "C", "text": "Statements (iii) and (i) are true", "is_correct": false },
+                { "label": "D", "text": "All the statements are false", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "After deleting key 50, the height of the tree remains the same (statement i is true). The key 20 remains present in the tree (statement ii is true). However, the root node now contains only key 20, whereas previously it contained keys 20 and 40, so the root node has changed (statement iii is false). Hence statements (i) and (ii) are true.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "6.13", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A clustering index is defined on the fields which are of type\n(a) Non-key and ordering\n(b) Non-key and non-ordering\n(c) Key and ordering\n(d) Key and non-ordering",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["File Structures"],
+            "concepts": ["Clustering index", "Ordering field"],
+            "tags": ["clustering index", "ordering field", "index types"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "Non-key and ordering", "is_correct": true },
+                { "label": "B", "text": "Non-key and non-ordering", "is_correct": false },
+                { "label": "C", "text": "Key and ordering", "is_correct": false },
+                { "label": "D", "text": "Key and non-ordering", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If records of a file are physically ordered on a non-key field which doesn't have a distinct value for each record, that field is called the clustering field, and the index defined on it is a clustering index.",
+            "pyq_sources": [
+                { "year": 2008, "set": null, "question_number": "6.14", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider a file of 16384 records. Each record is 32 bytes long and its key field is of size 6 bytes. The file is ordered on a non-key field, and the file organization is unspanned. The file is stored in a file system with block size 1024 bytes, and the size of a block pointer is 10 bytes. If the secondary index is built on the key field of the file, and a multilevel index scheme is used to store the secondary index, the number of first-level and second-level blocks in the multilevel index are respectively\n(a) 8 and 0\n(b) 128 and 6\n(c) 256 and 4\n(d) 512 and 5",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["Multilevel index", "Secondary index", "Block factor calculation"],
+            "tags": ["multilevel index", "secondary index", "block factor", "index blocks"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "8 and 0", "is_correct": false },
+                { "label": "B", "text": "128 and 6", "is_correct": false },
+                { "label": "C", "text": "256 and 4", "is_correct": true },
+                { "label": "D", "text": "512 and 5", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Total records = 16384, record size = 32 bytes, block size = 1024 bytes. Number of records per data block = 1024/32 = 32. Index entry size = key(6) + block pointer(10) = 16, so index entries per block = 1024/16 = 64. Since secondary indexing is dense, first-level index blocks = 16384/64 = 256. Second-level index blocks = 256/64 = 4.",
+            "pyq_sources": [
+                { "year": 2008, "set": null, "question_number": "6.15", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "The following key values are inserted into a B+ tree in which order of the internal nodes is 3, and that of the leaf nodes is 2, in the sequence given below. The order of internal nodes is the maximum number of tree pointers in each node, and the order of leaf nodes is the maximum number of data items that can be stored in it. The B+ tree is initially empty.\n10, 3, 6, 8, 4, 2, 1\nThe maximum number of times leaf nodes would get split up as a result of these insertions is\n(a) 2\n(b) 3\n(c) 4\n(d) 5",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree insertion sequence", "Leaf node splitting"],
+            "tags": ["b+ tree insertion", "leaf split count", "internal node order", "leaf node order"],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 240,
+            "options": [
+                { "label": "A", "text": "2", "is_correct": false },
+                { "label": "B", "text": "3", "is_correct": false },
+                { "label": "C", "text": "4", "is_correct": true },
+                { "label": "D", "text": "5", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Simulating the insertions one by one (10, 3, 6, 8, 4, 2, 1) into an initially empty B+ tree with leaf order 2 and internal order 3, leaf splits occur when inserting 6, 4, 2, and 1, giving a total of 4 leaf node splits.",
+            "pyq_sources": [
+                { "year": 2009, "set": null, "question_number": "6.16", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a B+ tree in which the maximum number of keys in a node is 5. What is the minimum number of keys in any non-root node?\n(a) 1\n(b) 2\n(c) 3\n(d) 4",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree minimum occupancy", "Order and key relationship"],
+            "tags": ["b+ tree order", "minimum keys", "non-root node", "half-full rule"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "1", "is_correct": false },
+                { "label": "B", "text": "2", "is_correct": true },
+                { "label": "C", "text": "3", "is_correct": false },
+                { "label": "D", "text": "4", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In a B+ tree, the root node has a minimum of two block pointers and a maximum of P block pointers, where P is the order; keys = order - 1. For a non-root node, minimum number of keys = ceil(P/2) - 1. Here max keys = 5, so order P = 6. Minimum keys in non-root node = ceil(6/2) - 1 = 2.",
+            "pyq_sources": [
+                { "year": 2010, "set": null, "question_number": "6.17", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "A file is organized so that the ordering of data records is the same as or close to the ordering of data entries in some index. Then that index is called\n(a) Dense\n(b) Sparse\n(c) Clustered\n(d) Unclustered",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["File Structures"],
+            "concepts": ["Clustered index", "Data ordering"],
+            "tags": ["clustered index", "index types", "data ordering"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                { "label": "A", "text": "Dense", "is_correct": false },
+                { "label": "B", "text": "Sparse", "is_correct": false },
+                { "label": "C", "text": "Clustered", "is_correct": true },
+                { "label": "D", "text": "Unclustered", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A file is organized so that the ordering of data records is the same as or close to the ordering of data entries in some index; such an index is called a clustered index.",
+            "pyq_sources": [
+                { "year": 2015, "set": 1, "question_number": "6.18", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "With reference to the B+ tree index of order 1 shown below, the minimum number of nodes (including the Root node) that must be fetched in order to satisfy the following query: \"Get all records with a search key greater than or equal to 7 and less than 15\" is ____.\n(Figure: root A[9]; children B[5] and E[13,17]; leaves C[1,3], D[5,7], F[9,11], G[13,15], H[17], with leaf nodes linked left to right)",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree range query", "Leaf node linked traversal"],
+            "tags": ["b+ tree range query", "leaf node linking", "block accesses", "search"],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "5",
+            "explanation": "Three node accesses (A, B, D) are needed to search for key 7. In a B+ tree all neighbouring leaf nodes are connected via block pointers, so after reaching key 7 it is possible to access remaining records less than 15 by linear traversal, needing two more node accesses (F and G). So nodes A, B, D, F, and G are needed, totaling 5.",
+            "pyq_sources": [
+                { "year": 2015, "set": 2, "question_number": "6.19", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider a B+ tree in which the search key is 12 bytes long, block size is 1024 bytes, record pointer is 10 bytes long and block pointer is 8 bytes long. The maximum number of keys that can be accommodated in each non-leaf node of the tree is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree non-leaf node order calculation"],
+            "tags": ["b+ tree order", "non-leaf node", "block pointer", "search key size"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [],
+            "correct_answer_text": "50",
+            "explanation": "For a non-leaf node: p * key size + (p+1) * block pointer size <= block size. p*12 + (p+1)*8 <= 1024 => 20p <= 1016 => p <= 50.8, so p = 51. Number of keys = p - 1 = 50.",
+            "pyq_sources": [
+                { "year": 2015, "set": 3, "question_number": "6.20", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "B+ trees are considered BALANCED because\n(a) the lengths of the paths from the root to all leaf nodes are all equal.\n(b) the lengths of the paths from the root to all leaf nodes differ from each other by at most 1.\n(c) the number of children of any two non-leaf sibling nodes differ by at most 1.\n(d) the number of records in any two leaf nodes differ by at most 1.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree balance property"],
+            "tags": ["b+ tree balance", "leaf path length", "height balanced tree"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "the lengths of the paths from the root to all leaf nodes are all equal.", "is_correct": true },
+                { "label": "B", "text": "the lengths of the paths from the root to all leaf nodes differ from each other by at most 1.", "is_correct": false },
+                { "label": "C", "text": "the number of children of any two non-leaf sibling nodes differ by at most 1.", "is_correct": false },
+                { "label": "D", "text": "the number of records in any two leaf nodes differ by at most 1.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "B+ trees are balanced because the lengths of the paths from the root to all leaf nodes are all equal, and every internal node must be filled to at least half capacity.",
+            "pyq_sources": [
+                { "year": 2016, "set": 2, "question_number": "6.21", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "In a B+ tree, if the search-key value is 8 bytes long, the block size is 512 bytes and the block pointer size is 2 bytes, then the maximum order of the B+ tree is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree order calculation"],
+            "tags": ["b+ tree order", "block pointer size", "search key size", "block size"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 90,
+            "options": [],
+            "correct_answer_text": "52",
+            "explanation": "P * (block pointer size) + (P-1) * (key size) <= block size. P*2 + (P-1)*8 <= 512 => 10P <= 520 => P = floor(520/10) = 52.",
+            "pyq_sources": [
+                { "year": 2017, "set": 2, "question_number": "6.22", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which one of the following statements is NOT correct about the B+ tree data structure used for creating an index of a relational database table?\n(a) Key values in each node are kept in sorted order\n(b) Each leaf node has a pointer to the next leaf node\n(c) B+ tree is a height balanced tree\n(d) Non-leaf nodes have pointers to data records",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree structural properties"],
+            "tags": ["b+ tree properties", "non-leaf node", "leaf node pointer", "height balanced tree"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "Key values in each node are kept in sorted order", "is_correct": false },
+                { "label": "B", "text": "Each leaf node has a pointer to the next leaf node", "is_correct": false },
+                { "label": "C", "text": "B+ tree is a height balanced tree", "is_correct": false },
+                { "label": "D", "text": "Non-leaf nodes have pointers to data records", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "B+ tree non-leaf nodes consist only of keys and tree/node pointers; they do not have pointers to data records. Only leaf nodes point to actual data records, so statement (d) is NOT correct.",
+            "pyq_sources": [
+                { "year": 2019, "set": null, "question_number": "6.23", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider a database implemented using B+ tree for file indexing and installed on a disk drive with block size of 4 KB. The size of search key is 12 bytes and the size of tree/disk pointer is 8 bytes. Assume that the database has one million records. Also assume that no node of the B+ tree and no records are present initially in main memory. Consider that each record fits into one disk block. The minimum number of disk accesses required to retrieve any record in the database is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree height calculation", "Disk access minimization"],
+            "tags": ["b+ tree height", "disk access", "record retrieval", "block factor"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 240,
+            "options": [],
+            "correct_answer_text": "4",
+            "explanation": "Order of B+ tree node P: P*8 + (P-1)*12 <= 4096 => 20P <= 4108 => P = floor(4108/20) = 205. Building the tree bottom-up from 1,000,000 records with a dense index and max fill factor at each level: number of blocks at each level reduces by factor of order (205) per level, requiring 3 index levels plus 1 record access, giving a minimum of 4 disk accesses.",
+            "pyq_sources": [
+                { "year": 2020, "set": null, "question_number": "6.24", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A data file consisting of 1,50,000 student-records is stored on a hard disk with block size of 4096 bytes. The data file is sorted on the primary key RollNo. The size of a record pointer for this disk is 7 bytes. Each student-record has a candidate key attribute called ANum of size 12 bytes. Suppose an index file with records consisting of two fields, ANum value and the record pointer to the corresponding student record, is built and stored on the same disk. Assume that the records of data file and index file are not split across disk blocks. The number of blocks in the index file is ____.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["Dense secondary index", "Block factor calculation"],
+            "tags": ["dense index", "secondary index", "block factor", "index file blocks"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "698",
+            "explanation": "Since the index is built on a candidate key (ANum), it is a dense index, so index entries = number of DB file records = 150,000. Index entry size = ANum(12) + record pointer(7) = 19 bytes. Block factor for index = floor(4096/19) = 215 entries per block. Number of index blocks = ceil(150000/215) = ceil(697.67) = 698.",
+            "pyq_sources": [
+                { "year": 2021, "set": 2, "question_number": "6.25", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider a database of fixed-length records, stored as an ordered file. The database has 25,000 records, with each record being 100 bytes, of which the primary key occupies 15 bytes. The data file is block-aligned in that each data record is fully contained within a block. The database is indexed by a primary index file, which is also stored as a block-aligned ordered file. The index file has a block anchor primary key and block pointer for each data block. Suppose the block size of the file system is 1024 bytes, and a pointer to a block occupies 5 bytes. The system uses binary search on the index file to search for a record with a given key. You may assume that a binary search on an index file of b blocks takes ceil(log2 b) block accesses in the worst case. Given a key, the number of block accesses required to identify the block in the data file that may contain a record with the key, in the worst case, is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["Sparse primary index", "Binary search on index file", "Block factor calculation"],
+            "tags": ["sparse index", "primary index", "binary search", "block factor"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 240,
+            "options": [],
+            "correct_answer_text": "6",
+            "explanation": "Block factor of DB file = floor(1024/100) = 10 records per block. Number of DB blocks = ceil(25000/10) = 2500. Since primary index is sparse, index entries = number of DB blocks = 2500. Block factor of index file = floor(1024/(15+5)) = 51 entries per block. Number of index blocks at level 1 = ceil(2500/51) = 49. Number of block accesses to identify the block using binary search = ceil(log2 49) = 6.",
+            "pyq_sources": [
+                { "year": 2023, "set": null, "question_number": "6.26", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In a B+ tree, the requirement of at least half-full (50%) node occupancy is relaxed for which one of the following cases?\n(a) Only the root node\n(b) Only the leftmost leaf node\n(c) All leaf nodes\n(d) All internal nodes",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree minimum occupancy rule", "Root node exception"],
+            "tags": ["b+ tree occupancy", "root node", "half-full rule"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                { "label": "A", "text": "Only the root node", "is_correct": true },
+                { "label": "B", "text": "Only the leftmost leaf node", "is_correct": false },
+                { "label": "C", "text": "All leaf nodes", "is_correct": false },
+                { "label": "D", "text": "All internal nodes", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In a B+ tree, every node must occupy at least 50% capacity except the root node. The root node can have a minimum of 2 block pointers with one key allowed.",
+            "pyq_sources": [
+                { "year": 2024, "set": 1, "question_number": "6.27", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Which of the following file organizations is/are I/O efficient for the scan operation in DBMS?\n(a) Heap\n(b) Sorted\n(c) Unclustered hash index\n(d) Unclustered tree index",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["File organization scan cost", "Heap vs sorted vs indexed files"],
+            "tags": ["file organization", "scan cost", "heap file", "sorted file", "unclustered index"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "Heap", "is_correct": true },
+                { "label": "B", "text": "Sorted", "is_correct": true },
+                { "label": "C", "text": "Unclustered hash index", "is_correct": false },
+                { "label": "D", "text": "Unclustered tree index", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "For Heap and Sorted file organizations, the scan cost is P*D (P = number of pages, D = time to read/write a page). For Unclustered hash index and Unclustered tree index, scan cost is higher: P*D*R + cost of reading the index (R = records per page). So Heap and Sorted files are I/O efficient for scans.",
+            "pyq_sources": [
+                { "year": 2024, "set": 2, "question_number": "6.28", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following B+ tree with 5 nodes, in which a node can store at most 3 key values (root node [6,12,19]; leaves [1,4,3], [7,9,10], [13,15,17], [20,21,22]). The value 23 is now inserted in the B+ tree. Which of the following options(s) is/are CORRECT?\n(a) None of the nodes will split.\n(b) At least one node will split and redistribute.\n(c) The total number of nodes will remain same.\n(d) The height of the tree will increase.",
+            "question_type": "MSQ",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree insertion", "Root and leaf node splitting", "Tree height increase"],
+            "tags": ["b+ tree insertion", "node split", "root split", "tree height"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "None of the nodes will split.", "is_correct": false },
+                { "label": "B", "text": "At least one node will split and redistribute.", "is_correct": true },
+                { "label": "C", "text": "The total number of nodes will remain same.", "is_correct": false },
+                { "label": "D", "text": "The height of the tree will increase.", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Inserting 23 into the already-full leaf node [20,21,22] causes the leaf node to split. Since the root [6,12,19] is already full with 3 keys, this split in turn causes the root node to split as well. This results in the tree height increasing from 1 to 2, so at least one node splits and redistributes, and the tree height increases.",
+            "pyq_sources": [
+                { "year": 2025, "set": 1, "question_number": "6.29", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "In a B+-tree where each node can hold at most four key values, a root to leaf path consists of the following nodes:\nA = (49, 77, 83, –), B = (7, 19, 33, 44), C = (20*, 22*, 25*, 26*)\nThe *-marked keys signify that these are data entries in a leaf.\nAssume that a pointer between keys k1 and k2 points to a subtree containing keys in [k1, k2], and that when a leaf is created, the smallest key in it is copied up into the parent.\nA record with key value 23 is inserted into the B+-tree.\nThe smallest key value in the parent of the leaf that contains 25* is ____.\n(Answer in integer)",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["File Structures"],
+            "concepts": ["B+ tree insertion", "Leaf node splitting", "Key propagation to parent"],
+            "tags": ["b+ tree insertion", "leaf split", "key propagation", "parent node"],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 240,
+            "options": [],
+            "correct_answer_text": "33",
+            "explanation": "Inserting key 23 into the full leaf node C = (20*, 22*, 25*, 26*) causes it to split into (20*, 22*) and (23*, 25*, 26*), with the smallest key of the new leaf (23) copied up into the parent node B. This causes B = (7, 19, 33, 44) to also split (since it becomes overfull), resulting in a new parent node structure where the leaf containing 25* has a parent starting with key 33.",
+            "pyq_sources": [
+                { "year": 2025, "set": 2, "question_number": "6.30", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "An index in a DBMS is said to be dense if an index entry appears for every search-key value in the indexed file. Otherwise it is called a sparse index. Consider the following two statements.\nS1: A hash index must be a dense index\nS2: A B+ tree index can be a sparse index\nWhich one of the following options is correct?\n(a) Both S1 and S2 are true\n(b) Both S1 and S2 are false\n(c) S1 is true and S2 is false\n(d) S1 is false and S2 is true",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["File Structures"],
+            "concepts": ["Dense vs sparse index", "Hash index", "B-tree/B+ tree index"],
+            "tags": ["dense index", "sparse index", "hash index", "b+ tree index"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "Both S1 and S2 are true", "is_correct": true },
+                { "label": "B", "text": "Both S1 and S2 are false", "is_correct": false },
+                { "label": "C", "text": "S1 is true and S2 is false", "is_correct": false },
+                { "label": "D", "text": "S1 is false and S2 is true", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A hash index must be a dense index, since every search-key value must have an entry to locate its hash bucket, so S1 is true. A B or B+ tree index can be either dense or sparse, so S2 is also true.",
+            "pyq_sources": [
+                { "year": 2026, "set": 2, "question_number": "6.31", "marks": 2 }
+            ]
+        }
+    ]
+}

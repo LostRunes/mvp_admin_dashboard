@@ -1,0 +1,5 @@
+customtkinter
+supabase
+imagekitio
+python-dotenv
+pillow

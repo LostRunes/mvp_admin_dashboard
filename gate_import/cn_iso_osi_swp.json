@@ -1,0 +1,2254 @@
+{
+  "subject": {
+    "subject_name": "Computer Networks",
+    "subject_code": "CN"
+  },
+  "topics": [
+    {
+      "topic_name": "ISO/OSI Stack and SWP",
+      "summary": "Covers layering concepts (OSI/TCP-IP stack), data link layer framing, error detection and correction (parity, CRC, Hamming codes), line coding schemes (Manchester, 4B/5B), and sliding window flow-control/ARQ protocols (Stop-and-Wait, Go-Back-N, Selective Reject)."
+    }
+  ],
+  "questions": [
+    {
+      "question_text": "Host A is sending data to host B over a full duplex link. A and B are using the sliding window protocol for flow control. The send and receive window sizes are 5 packets each. Data packets (sent only from A to B) are all 1000 bytes long and the transmission time for such a packet is 50 microseconds. Acknowledgment packets (sent only from B to A) are very small and require negligible transmission time. The propagation delay over the link is 200 microseconds. What is the maximum achievable throughput in this communication?\n(a) 7.69 x 10^6 Bps\n(b) 11.11 x 10^6 Bps\n(c) 12.33 x 10^6 Bps\n(d) 15.00 x 10^6 Bps",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Sliding Window Protocol",
+        "Throughput",
+        "Propagation Delay",
+        "Transmission Time"
+      ],
+      "tags": [
+        "sliding window",
+        "throughput calculation",
+        "flow control",
+        "full duplex link"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "7.69 x 10^6 Bps",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "11.11 x 10^6 Bps",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "12.33 x 10^6 Bps",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "15.00 x 10^6 Bps",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Window size n = 5 packets, packet size = 1000 bytes, total data = 5000 bytes. Total time = Transmission time + Propagation time = 5x50 + 200 = 450 microseconds. Maximum achievable throughput = Total Size / Total Time = 5000 / (450x10^-6) = 11.11 x 10^6 Bps.",
+      "pyq_sources": [
+        {
+          "year": 2003,
+          "set": null,
+          "question_number": "Q1.1",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Choose the best matching between List-I and List-II.\nList-I\nP. Data link layer\nQ. Network layer\nR. Transport layer\nList-II\n1. Ensures reliable transport of data over a physical point-to-point link\n2. Encodes/decodes data for physical transmission\n3. Allow end-to-end communication between two processes\n4. Routes data from one network node to the next\n(a) P-1, Q-4, R-3\n(b) P-2, Q-4, R-1\n(c) P-2, Q-3, R-1\n(d) P-1, Q-3, R-2",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "easy",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "OSI Layers",
+        "Data Link Layer",
+        "Network Layer",
+        "Transport Layer"
+      ],
+      "tags": [
+        "osi model",
+        "layer functions",
+        "protocol stack"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "P-1, Q-4, R-3",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "P-2, Q-4, R-1",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "P-2, Q-3, R-1",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "P-1, Q-3, R-2",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Data link layer ensures reliable transport of data over a physical point-to-point link via error correction/detection. Network layer routes data from one network node to the next according to the routing algorithm. Transport layer allows end-to-end communication between two processes with the help of TCP and UDP protocol.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "Q1.2",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "How many 8-bit characters can be transmitted per second over a 9600 baud serial communication link using asynchronous mode of transmission with one start bit, eight data bits, and one parity bit and two stop bits?\n(a) 600\n(b) 800\n(c) 876\n(d) 1200",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "easy",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Asynchronous Serial Transmission",
+        "Baud Rate",
+        "Start/Stop Bits"
+      ],
+      "tags": [
+        "serial communication",
+        "baud rate",
+        "asynchronous transmission",
+        "character rate"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "600",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "800",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "876",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "1200",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Total number of bits per character = 1(start)+8(data)+1(parity)+2(stop) = 12 bits. Modulation rate = 9600 baud. Number of characters transmitted = 9600/12 = 800.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "Q1.3",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "A serial transmission T1 uses 8 information bits, 2 start bits, 1 stop bit and 1 parity bit for each character. A synchronous transmission T2 uses 3 eight-bit sync characters followed by 30 eight-bit information characters. If the bit rate is 1200 bits/second in both cases, what are the transfer rates of T1 and T2?\n(a) 100 characters/sec, 153 characters/sec\n(b) 80 characters/sec, 136 characters/sec\n(c) 100 characters/sec, 136 characters/sec\n(d) 80 characters/sec, 153 characters/sec",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Asynchronous Transmission",
+        "Synchronous Transmission",
+        "Transfer Rate"
+      ],
+      "tags": [
+        "serial transmission",
+        "synchronous transmission",
+        "transfer rate",
+        "sync characters"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "100 characters/sec, 153 characters/sec",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "80 characters/sec, 136 characters/sec",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "100 characters/sec, 136 characters/sec",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "80 characters/sec, 153 characters/sec",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "For T1: 1 character = 8 data + 2 start + 1 stop + 1 parity = 12 bits. Transfer rate = 1200/12 = 100 characters/sec. For T2: to send 30 eight-bit characters = 30x8 = 240 bits, plus synchronize characters = 3x8 = 24 bits, total = 264 bits for 30 characters. Transfer rate (for 30 char) = 1200/264 = 4.545 (30 char/sec), so per character = 4.545 x 30 = 136.2 characters/sec.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "Q1.4",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "In a data link protocol, the frame delimiter flag is given by 0111. Assuming that bit stuffing is employed, the transmitter sends the data sequence 01110110 as\n(a) 01101011\n(b) 011010110\n(c) 011101100\n(d) 0110101100",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Bit Stuffing",
+        "Frame Delimiter",
+        "Data Link Protocol"
+      ],
+      "tags": [
+        "bit stuffing",
+        "framing",
+        "flag pattern",
+        "data link layer"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "01101011",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "011010110",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "011101100",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "0110101100",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Frame delimiter flag = 0111. A 0 bit is stuffed after every occurrence of two consecutive 1s followed by a 0 pattern risk to avoid confusion with the flag. Applying bit stuffing to 01110110 gives 0110101100.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "Q1.5",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "In a sliding window ARQ scheme, the transmitter's window size is N and the receiver's window size is M. The minimum number of distinct sequence numbers required to ensure correct operation of the ARQ scheme is\n(a) min (M, N)\n(b) max (M, N)\n(c) M + N\n(d) MN",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "easy",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Sliding Window ARQ",
+        "Sequence Numbers"
+      ],
+      "tags": [
+        "sliding window",
+        "arq",
+        "sequence numbers",
+        "window size"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "min (M, N)",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "max (M, N)",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "M + N",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "MN",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In sliding window protocol, the minimum number of sequence numbers required = M + N, since at any time the number of unacknowledged frames can be M at the receiver while N packets are transmitted by the sender, so M + N <= minimum sequence numbers.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "Q1.6",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "A 20 Kbps satellite link has a propagation delay of 400 ms. The transmitter employs the 'go back n ARQ' scheme with n set to 10. Assuming that each frame is 100 bytes long, what is the maximum data rate possible?\n(a) 5 Kbps\n(b) 10 Kbps\n(c) 15 Kbps\n(d) 20 Kbps",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Go-Back-N ARQ",
+        "Efficiency",
+        "Propagation Delay"
+      ],
+      "tags": [
+        "go-back-n",
+        "arq",
+        "satellite link",
+        "data rate"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "5 Kbps",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "10 Kbps",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "15 Kbps",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "20 Kbps",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Tx = (100x8 bits)/20Kbps = 40 ms, Tp = 400 ms, a = Tp/Tx = 400/40 = 10. Efficiency of GBN = W/(1+2a) = 10/(1+20) = 10/21. BW utilization = Efficiency x BW = (10/21) x 20 which is nearly 10 Kbps.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "Q1.7",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a parity check code with three data bits and four parity check bits. Three of the code words are 0101011, 1001101 and 1110001. Which of the following are also code words?\nI. 0010111\nII. 0110110\nIII. 1011010\nIV. 0111010\n(a) I and III\n(b) I, II and III\n(c) II and IV\n(d) I, II, III and IV",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Parity Check Code",
+        "Error Detection"
+      ],
+      "tags": [
+        "parity check",
+        "codewords",
+        "error detection code"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "I and III",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "I, II and III",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "II and IV",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "I, II, III and IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Taking first 3 bits x1,x2,x3 as data bits and last 4 bits c1,c2,c3,c4 as parity check bits, the parity relations derived from the given codewords are c1=x1 XOR x2, c2=x1 XOR x3, c3=x2 XOR x3, c4=x1 XOR x2 XOR x3. Applying this rule, only options I and III satisfy all parity relations and are valid codewords.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "Q1.8",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "The maximum window size for data transmission using the selective reject protocol with n-bit frame sequence numbers is\n(a) 2^n\n(b) 2^(n-1)\n(c) 2^n - 1\n(d) 2^(n-2)",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "easy",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Selective Reject Protocol",
+        "Sequence Numbers",
+        "Window Size"
+      ],
+      "tags": [
+        "selective reject",
+        "sliding window",
+        "sequence number bits"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "2^n",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "2^(n-1)",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "2^n - 1",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "2^(n-2)",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In case of the Selective Reject Protocol, the maximum window size = 2^n / 2 = 2^(n-1). The window size is half of that in Go-Back-N due to ambiguity avoidance in selective retransmission.",
+      "pyq_sources": [
+        {
+          "year": 2005,
+          "set": null,
+          "question_number": "Q1.9",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following message M = 1010001101. The cyclic redundancy check (CRC) for this message using the divisor polynomial x^5 + x^4 + x^2 + 1 is:\n(a) 01110\n(b) 01011\n(c) 10101\n(d) 10110",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Cyclic Redundancy Check",
+        "Generator Polynomial",
+        "Modulo-2 Division"
+      ],
+      "tags": [
+        "crc",
+        "generator polynomial",
+        "error detection",
+        "checksum"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "01110",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "01011",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "10101",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "10110",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The generator polynomial is of degree 5, so append 5 zeros to the end of data (M becomes 101000110100000) and divide by the generator polynomial x^5+x^4+x^2+1 = 110101 using modulo-2 division. The remainder obtained is 01110.",
+      "pyq_sources": [
+        {
+          "year": 2005,
+          "set": null,
+          "question_number": "Q1.10",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "A channel has a bit rate of 4 kbps and one-way propagation delay of 20 ms. The channel uses stop and wait protocol. The transmission time of the acknowledgement frame is negligible. To get a channel efficiency of at least 50%, the minimum frame size should be\n(a) 80 bytes\n(b) 80 bits\n(c) 160 bytes\n(d) 160 bits",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Stop-and-Wait Protocol",
+        "Channel Efficiency",
+        "Frame Size"
+      ],
+      "tags": [
+        "stop and wait",
+        "channel efficiency",
+        "frame size",
+        "propagation delay"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "80 bytes",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "80 bits",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "160 bytes",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "160 bits",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Propagation time = 20 ms, bandwidth = 4 Kbps. For efficiency at least 50%, transmission time must be at least twice the propagation time: x/4kbps >= 2x20ms, so x >= 2x20x10^-3 x 4x10^3 bits = 160 bits.",
+      "pyq_sources": [
+        {
+          "year": 2005,
+          "set": null,
+          "question_number": "Q1.11",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "In the 4B/5B encoding scheme, every 4 bits of data are encoded in a 5-bit codeword. It is required that the codewords have at most 1 leading and at most 1 trailing zero. How many such codewords are possible?\n(a) 14\n(b) 16\n(c) 18\n(d) 20",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "4B/5B Encoding",
+        "Codeword Constraints"
+      ],
+      "tags": [
+        "4b5b encoding",
+        "line coding",
+        "codeword counting"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "14",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "16",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "18",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "20",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "With 5 bits, total possible encodings = 2^5 = 32. Considering cases based on leading and trailing bit constraints (at most 1 leading zero and at most 1 trailing zero): Case 1 gives 4 encodings, Case 2 gives 8 encodings, Case 3 gives 2 encodings, Case 4 gives 4 encodings. Total encoding = 8+4+2+4 = 18.",
+      "pyq_sources": [
+        {
+          "year": 2006,
+          "set": null,
+          "question_number": "Q1.12",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "On a wireless link, the probability of packet error is 0.2. A stop-and-wait protocol is used to transfer data across the link. The channel condition is assumed to be independent from transmission to transmission. What is the average number of transmission attempts required to transfer 100 packets?\n(a) 100\n(b) 125\n(c) 150\n(d) 200",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Stop-and-Wait Protocol",
+        "Packet Error Probability",
+        "Expected Retransmissions"
+      ],
+      "tags": [
+        "stop and wait",
+        "packet error probability",
+        "retransmission",
+        "wireless link"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "100",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "125",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "150",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "200",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In sliding window protocol (stop and wait), the average number of transmissions of a single packet = 1/(1-P), where P is the probability of packet error. So for 100 packets = 100 x (1/(1-0.2)) = 100 x (1/0.8) = 125.",
+      "pyq_sources": [
+        {
+          "year": 2006,
+          "set": null,
+          "question_number": "Q1.13",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Station A uses 32 byte packets to transmit messages to Station B using a sliding window protocol. The round trip delay between A and B is 80 milliseconds and the bottleneck bandwidth on the path between A and B is 128 kbps. What is the optimal window size that A should use?\n(a) 20\n(b) 40\n(c) 160\n(d) 320",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Sliding Window Protocol",
+        "Optimal Window Size",
+        "Round Trip Delay"
+      ],
+      "tags": [
+        "sliding window",
+        "optimal window size",
+        "round trip delay",
+        "bandwidth"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "20",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "40",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "160",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "320",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Round trip delay t = 80x10^-3 sec, R = 128x10^3 bps. L = Rt = 128x10^3 x 80x10^-3 = 128x80. Optimal window size n = (128x80)/(32x8) = 10240/256 = 40.",
+      "pyq_sources": [
+        {
+          "year": 2006,
+          "set": null,
+          "question_number": "Q1.14",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Station A needs to send a message consisting of 9 packets to Station B using a sliding window (window size 3) and go-back-n error control strategy. All packets are ready and immediately available for transmission. If every 5th packet that A transmits gets lost (but no acks from B ever get lost), then what is the number of packets that A will transmit for sending the message to B?\n(a) 12\n(b) 14\n(c) 16\n(d) 18",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Go-Back-N",
+        "Sliding Window",
+        "Packet Loss Recovery"
+      ],
+      "tags": [
+        "go-back-n",
+        "sliding window",
+        "packet loss",
+        "retransmission count"
+      ],
+      "is_numerical": true,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "12",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "14",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "16",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "18",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Tracing the go-back-n transmission with window size 3, where every 5th transmitted packet is lost: packets 6, then resends after loss, then packet 8 lost, then further resends, ultimately requiring 16 total transmitted packets to successfully deliver all 9 packets, as shown by the transmission diagram.",
+      "pyq_sources": [
+        {
+          "year": 2006,
+          "set": null,
+          "question_number": "Q1.15",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "The message 11001001 is to be transmitted using the CRC polynomial x^3 + 1 to protect it from errors. The message that should be transmitted is:\n(a) 11001001000\n(b) 11001001011\n(c) 11001010\n(d) 110010010011",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Cyclic Redundancy Check",
+        "Generator Polynomial"
+      ],
+      "tags": [
+        "crc",
+        "generator polynomial",
+        "checksum appending"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "11001001000",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "11001001011",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "11001010",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "110010010011",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "P(x) = 11001001, divisor D(x) = 1001 (from x^3+1), the CRC remainder computed is 011. So the transmitted message is 11001001011.",
+      "pyq_sources": [
+        {
+          "year": 2007,
+          "set": null,
+          "question_number": "Q1.16",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "An error correcting code has the following code words: 00000000, 00001111, 01010101, 10101010, 11110000. What is the maximum number of bit errors that can be corrected?\n(a) 0\n(b) 1\n(c) 2\n(d) 3",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Hamming Distance",
+        "Error Correction"
+      ],
+      "tags": [
+        "hamming distance",
+        "error correction",
+        "codewords"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "0",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "1",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "3",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The maximum hamming distance among the given codewords is 8 (e.g. between 01010101 and 10101010), but the minimum of all hamming distances is 4. The number of errors d that can be corrected satisfies 2d+1 = minimum hamming distance, so 2d+1=4 gives d ~= 1. Hence maximum 1 bit error can be corrected.",
+      "pyq_sources": [
+        {
+          "year": 2007,
+          "set": null,
+          "question_number": "Q1.17",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "In the waveform (a) given below, a bit stream is encoded by Manchester encoding scheme. The same bit stream is encoded in a different coding scheme in waveform (b). The bit stream and the coding scheme are (waveform diagrams shown in the original document):\n(a) 1000010111 and Differential Manchester respectively\n(b) 0111101000 and Differential Manchester respectively\n(c) 1000010111 and Integral Manchester respectively\n(d) 0111101000 and Integral Manchester respectively",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Manchester Encoding",
+        "Differential Manchester Encoding",
+        "Line Coding"
+      ],
+      "tags": [
+        "manchester encoding",
+        "differential manchester",
+        "line coding",
+        "waveform decoding"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "1000010111 and Differential Manchester respectively",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "0111101000 and Differential Manchester respectively",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "1000010111 and Integral Manchester respectively",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "0111101000 and Integral Manchester respectively",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In Manchester encoding, '0' corresponds to a low-to-high transition and '1' corresponds to a high-to-low transition, with a transition at the middle of each bit period. Decoding waveform (a) gives the bit pattern 10000 10111. Waveform (b) represents the same bit stream using Differential Manchester encoding.",
+      "pyq_sources": [
+        {
+          "year": 2007,
+          "set": null,
+          "question_number": "Q1.18",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Let us consider a statistical time division multiplexing of packets. The number of sources is 10. In a time unit, a source transmits a packet of 1000 bits. The number of sources sending data for the first 20 time units is 6, 9, 3, 7, 2, 2, 2, 3, 4, 6, 1, 10, 7, 5, 8, 3, 6, 2, 9, 5 respectively. The output capacity of the multiplexer is 5000 bits per time unit. Then the average number of backlogged packets per time unit during the given period is\n(a) 5\n(b) 4.45\n(c) 3.45\n(d) 0",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Statistical Time Division Multiplexing",
+        "Backlog Calculation"
+      ],
+      "tags": [
+        "statistical multiplexing",
+        "backlog",
+        "output capacity",
+        "packet queueing"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "5",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "4.45",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "3.45",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "0",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Output capacity of multiplexer = 5000 bits per unit time, each packet = 1000 bits, so number of packets that can be sent in one time unit = 5000/1000 = 5. If the number of transmitted packets at any time unit exceeds 5, the extra packets become backlog carried to the next unit. Tracing through all 20 time units, the total backlog sums to 89, giving an average backlog of 89/20 = 4.45.",
+      "pyq_sources": [
+        {
+          "year": 2007,
+          "set": null,
+          "question_number": "Q1.19",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "You are given the following four bytes:\n10100011 00110111 11101001 10101011\nWhich of the following are substrings of the base 64 encoding of the above four bytes?\n(a) zdp\n(b) fpq\n(c) qwA\n(d) oze",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Base64 Encoding"
+      ],
+      "tags": [
+        "base64 encoding",
+        "byte encoding",
+        "substring matching"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "zdp",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "fpq",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "qwA",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "oze",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In base 64 encoding, the number of bits in data must be a multiple of 6 bits. The given data is 4 bytes = 32 bits, so the number of padding bits required is 36-32 = 4 bits (minimum), added at the LSB side. Regrouping the padded bits into 6-bit groups and converting to base64 characters gives values corresponding to o, z, f, p, q, w. The substring which matches among the options is fpq.",
+      "pyq_sources": [
+        {
+          "year": 2007,
+          "set": null,
+          "question_number": "Q1.20",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "How many bytes of data can be sent in 15 seconds over a serial link with baud rate of 9600 in asynchronous mode with odd parity and two stop bits in the frame?\n(a) 10,000 bytes\n(b) 12,000 bytes\n(c) 15,000 bytes\n(d) 27,000 bytes",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Asynchronous Serial Transmission",
+        "Baud Rate",
+        "Parity",
+        "Stop Bits"
+      ],
+      "tags": [
+        "asynchronous transmission",
+        "baud rate",
+        "parity bit",
+        "stop bits"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "10,000 bytes",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "12,000 bytes",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "15,000 bytes",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "27,000 bytes",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Number of bits needed to send 1 byte of data = 8 (data) + 1 (start) + 1 (parity) + 2 (stop) = 12 bits. Baud rate = 9600 bps = 800 char/sec, hence 800 bytes sent in 1 second. In 15 seconds = 15 x 800 = 12,000 bytes.",
+      "pyq_sources": [
+        {
+          "year": 2008,
+          "set": null,
+          "question_number": "Q1.21",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "A 1 Mbps satellite link connects two ground stations. The altitude of the satellite is 36,504 km and the speed of the signal is 3x10^8 m/s. What should be the packet size for a channel utilization of 25% for a satellite link using go-back-127 sliding window protocol? Assume that the acknowledgment packets are negligible in size and that there are no errors during communication.\n(a) 120 bytes\n(b) 60 bytes\n(c) 240 bytes\n(d) 90 bytes",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Go-Back-N Sliding Window",
+        "Channel Utilization",
+        "Propagation Delay"
+      ],
+      "tags": [
+        "go-back-n",
+        "channel utilization",
+        "satellite link",
+        "propagation delay"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "120 bytes",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "60 bytes",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "240 bytes",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "90 bytes",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Propagation delay Tp = distance/speed = (2x36504x10^3)/(3x10^8) = 24336x10^-5 sec = 243360 microseconds. Let transmission delay Tt = x microseconds. a = Tp/Tt = 243360/x. Efficiency = 1/(1+2a). Setting efficiency = 0.25 = 127x/(x+2x243360), solving gives x = 960 bits = 120 Bytes.",
+      "pyq_sources": [
+        {
+          "year": 2008,
+          "set": null,
+          "question_number": "Q1.22",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Data transmitted on a link uses the following 2D parity scheme for error detection: Each sequence of 28 bits is arranged in a 4x7 matrix (rows r0 through r3, and columns d7 through d1) and is padded with a column d0 and row r4 of parity bits computed using the Even parity scheme. Each bit of column d0 (respectively, row r4) gives the parity of the corresponding row (respectively, column). These 40 bits are transmitted over the data link.\nThe table shows data received by a receiver and has n corrupted bits. What is the minimum possible value of n?\n(Received data table, rows r0-r4 and columns d7-d0, as given in the original document, with computed row/column parities indicating errors at positions (r1,d5), (r4,d2) and (r4,d0))\n(a) 1\n(b) 2\n(c) 3\n(d) 4",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "2D Parity Scheme",
+        "Error Detection",
+        "Hamming Distance"
+      ],
+      "tags": [
+        "2d parity",
+        "error detection",
+        "parity matrix",
+        "corrupted bits"
+      ],
+      "is_numerical": true,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "1",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "3",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "4",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "To find the number of corrupted bits received, the hamming distance (parity mismatch) of every row and column is computed. Checking the given received matrix, parity mismatches occur at row r1, and at row r4 for columns d5, d2, and d0, together identifying error bits at positions (r1,d5), (r4,d2) and (r4,d0). After correcting these three bits, no corrupted bits remain, so the minimum possible value of n is 3.",
+      "pyq_sources": [
+        {
+          "year": 2008,
+          "set": null,
+          "question_number": "Q1.23",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Let G(x) be the generator polynomial used for CRC checking. What is the condition that should be satisfied by G(x) to detect odd number of bits in error?\n(a) G(x) contains more than two terms\n(b) G(x) does not divide 1 + x^k, for any k not exceeding the frame length\n(c) 1 + x is a factor of G(x)\n(d) G(x) has an odd number of terms",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Cyclic Redundancy Check",
+        "Generator Polynomial Properties"
+      ],
+      "tags": [
+        "crc",
+        "generator polynomial",
+        "odd error detection"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "G(x) contains more than two terms",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "G(x) does not divide 1 + x^k, for any k not exceeding the frame length",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "1 + x is a factor of G(x)",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "G(x) has an odd number of terms",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The polynomial generator used for CRC checking must satisfy at least two conditions to detect odd numbers of errors: it should not be divisible by x, and it should be divisible by 1+x. Therefore (1+x) must be a factor of G(x).",
+      "pyq_sources": [
+        {
+          "year": 2009,
+          "set": null,
+          "question_number": "Q1.24",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Linked answer for Q1.25 and Q1.26: Frames of 1000 bits are sent over a 10^6 bps duplex link between two hosts. The propagation time is 25 ms. Frames are to be transmitted into this link to maximally pack them in transit (within the link).\nWhat is the minimum number of bits (l) that will be required to represent the sequence numbers distinctly? Assume that no time gap needs to be given between transmission of two frames.\n(a) l = 2\n(b) l = 3\n(c) l = 4\n(d) l = 5",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Sliding Window",
+        "Sequence Number Bits",
+        "Propagation Delay"
+      ],
+      "tags": [
+        "sequence numbers",
+        "sliding window",
+        "propagation delay",
+        "duplex link"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "l = 2",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "l = 3",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "l = 4",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "l = 5",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The link is duplex, hence there is no need to wait for twice the propagation time before sending the frame belonging to the next window. If the sender window is of size N, transmitting 10^6 bits requires 1 sec, so N x 1000 bits requires N x 10^-3 sec = N milliseconds. Setting N milliseconds = 25 milliseconds gives N = 25, and since 25 < 2^5, the minimum number of bits required is 5 to represent sequence numbers distinctly.",
+      "pyq_sources": [
+        {
+          "year": 2009,
+          "set": null,
+          "question_number": "Q1.25",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Linked answer for Q1.25 and Q1.26: Frames of 1000 bits are sent over a 10^6 bps duplex link between two hosts. The propagation time is 25 ms. Frames are to be transmitted into this link to maximally pack them in transit (within the link).\nSuppose that the sliding window protocol is used with the sender window size of 2^l, where l is the number of bits identified in the earlier part, and acknowledgments are always piggybacked. After sending 2^l frames, what is the minimum time the sender will have to wait before starting transmission of the next frame? (Identify the closest choice ignoring the frame processing time).\n(a) 16 ms\n(b) 18 ms\n(c) 20 ms\n(d) 22 ms",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Sliding Window",
+        "Piggybacking",
+        "Waiting Time"
+      ],
+      "tags": [
+        "sliding window",
+        "piggybacked acknowledgment",
+        "waiting time",
+        "duplex link"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "16 ms",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "18 ms",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "20 ms",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "22 ms",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Time taken to send 10^6 bits = 1 sec, so time taken to send 2^5 frames (1 frame = 1000 bits) = 32 ms. Total time taken for the first frame to be acknowledged = 2Tx + 2Tp = 2 + 50 = 52 ms. Then waiting time = 52 - 32 = 20 ms.",
+      "pyq_sources": [
+        {
+          "year": 2009,
+          "set": null,
+          "question_number": "Q1.26",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "In the following pairs of OSI protocol layer/sub-layer and its functionality, the INCORRECT pair is\n(a) Network layer and Routing\n(b) Data Link Layer and Bit synchronization\n(c) Transport layer and End-to-end process communication\n(d) Medium Access Control sub-layer and Channel sharing",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "easy",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "OSI Layers",
+        "Physical Layer",
+        "Data Link Layer"
+      ],
+      "tags": [
+        "osi model",
+        "layer functions",
+        "bit synchronization",
+        "mac sublayer"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "Network layer and Routing",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Data Link Layer and Bit synchronization",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "Transport layer and End-to-end process communication",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Medium Access Control sub-layer and Channel sharing",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Bit synchronization is a functionality of the Physical layer, not the Data Link Layer, making this pair incorrect.",
+      "pyq_sources": [
+        {
+          "year": 2014,
+          "set": 3,
+          "question_number": "Q1.27",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "A bit-stuffing based framing protocol uses an 8-bit delimiter pattern of 01111110. If the output bit-string after stuffing is 01111100101, then the input bit-string is\n(a) 0111110100\n(b) 0111110101\n(c) 0111111101\n(d) 0111111111",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Bit Stuffing",
+        "Framing"
+      ],
+      "tags": [
+        "bit stuffing",
+        "framing",
+        "delimiter pattern"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "0111110100",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "0111110101",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "0111111101",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "0111111111",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Given output (stuffed) string: 01111100101. After five consecutive 1's in the input, a bit 0 is inserted during stuffing. Removing the stuffed bit gives the original input string as 0111110101.",
+      "pyq_sources": [
+        {
+          "year": 2014,
+          "set": 3,
+          "question_number": "Q1.28",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Suppose that the stop-and-wait protocol is used on a link with a bit rate of 64 kilobits per second and 20 milliseconds propagation delay. Assume that the transmission time for the acknowledgment and the processing time at nodes are negligible. Then the minimum frame size in bytes to achieve a link utilization of at least 50% is _______.",
+      "question_type": "NAT",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Stop-and-Wait Protocol",
+        "Link Utilization",
+        "Frame Size"
+      ],
+      "tags": [
+        "stop and wait",
+        "link utilization",
+        "minimum frame size"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [],
+      "correct_answer_text": "320",
+      "explanation": "For at least 50% efficiency: transmission delay >= 2 x propagation delay. Minimum frame size = 64 kbps x 40 ms = 2560 bits = 320 bytes.",
+      "pyq_sources": [
+        {
+          "year": 2015,
+          "set": 1,
+          "question_number": "Q1.29",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "A link has a transmission speed of 10^6 bits/sec. It uses data packets of size 1000 bytes each. Assume that the acknowledgment has negligible transmission delay, and that its propagation delay is the same as the data propagation delay. Also assume that the processing delays at nodes are negligible. The efficiency of the stop-and-wait protocol in this setup is exactly 25%. The value of the one-way propagation delay (in milliseconds) is _______.",
+      "question_type": "NAT",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Stop-and-Wait Protocol",
+        "Efficiency",
+        "Propagation Delay"
+      ],
+      "tags": [
+        "stop and wait",
+        "efficiency",
+        "one-way propagation delay"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [],
+      "correct_answer_text": "12",
+      "explanation": "Efficiency of Stop and wait = 1/(1+2a) where a = pd/td, td = 8 ms. Setting 0.25 = 1/(1+2x(pd/8ms)) gives pd = 12 ms.",
+      "pyq_sources": [
+        {
+          "year": 2015,
+          "set": 2,
+          "question_number": "Q1.30",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a network connecting two systems located 8000 kilometers apart. The bandwidth of the network is 500x10^6 bits per second. The propagation speed of the media is 4x10^6 meters per second. It is needed to design a Go-Back-N sliding window protocol for this network. The average packet size is 10^7 bits. The network is to be used to its full capacity. Assume that processing delays at nodes are negligible. Then, the minimum size in bits of the sequence number field has to be _______.",
+      "question_type": "NAT",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Go-Back-N Sliding Window",
+        "Sequence Number Field",
+        "Full Capacity Utilization"
+      ],
+      "tags": [
+        "go-back-n",
+        "sequence number field",
+        "full capacity",
+        "sliding window design"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [],
+      "correct_answer_text": "8",
+      "explanation": "d = 8000 km, Bandwidth = 500x10^6 bps. Propagation delay Pd = (8000x10^3)/(4x10^6) = 2 sec. Packet size = 10^7 bits, transmission delay td = 10^7/(500x10^6) = 1/50 sec. For 100% utilization, a = Pd/td = 2/(1/50) = 100, and N = 201 (from 100/100 = N/201). Since number of packets = 201, 8 bits are required for the sequence number field.",
+      "pyq_sources": [
+        {
+          "year": 2015,
+          "set": 3,
+          "question_number": "Q1.31",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Two hosts are connected via a packet switch with 10^7 bits per second links. Each link has a propagation delay of 20 microseconds. The switch begins forwarding a packet 35 microseconds after it receives the same. If 10000 bits of data are to be transmitted between the two hosts using a packet size of 5000 bits, the time elapsed between the transmission of the first bit of data and the reception of the last bit of the data in microseconds is _______.",
+      "question_type": "NAT",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Packet Switching",
+        "Store-and-Forward Delay",
+        "End-to-End Delay"
+      ],
+      "tags": [
+        "packet switching",
+        "store and forward",
+        "end-to-end delay",
+        "propagation delay"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 240,
+      "options": [],
+      "correct_answer_text": "1575",
+      "explanation": "Number of packets = 10000/5000 = 2. Transmission delay for one packet = 500 microseconds. Tracing the timeline: at t=500us the first packet is fully placed on link 1; at t=520us it reaches the switch; at t=555us the switch places its first bit on link 2; at t=1000us the second packet is fully placed on link 1 by A; at t=1020us it reaches the switch; the switch can only forward packet 2 after finishing packet 1 (at t=1055us, since 555+500=1055); at t=1055us packet 2's first bit is placed on link 2; the last bit of packet 2 reaches B at t=1055+500=1575us. So 1575 microseconds is required.",
+      "pyq_sources": [
+        {
+          "year": 2015,
+          "set": 3,
+          "question_number": "Q1.32",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider two hosts X and Y connected by a single direct link of rate 10^6 bits/sec. The distance between the two hosts is 10,000 km and the propagation speed along the link is 2x10^8 m/sec. Host X sends a file of 50,000 bytes as one large message to Host Y continuously. Let the transmission and propagation delays be p milliseconds and q milliseconds, respectively.\nThen the values of p and q are\n(a) p = 50 and q = 100\n(b) p = 50 and q = 400\n(c) p = 100 and q = 50\n(d) p = 400 and q = 50",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Transmission Delay",
+        "Propagation Delay"
+      ],
+      "tags": [
+        "transmission delay",
+        "propagation delay",
+        "message transfer"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "p = 50 and q = 100",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "p = 50 and q = 400",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "p = 100 and q = 50",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "p = 400 and q = 50",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Transmission time = Data size/Bandwidth = (50000x8 bits)/(10^6 bits/sec) = 400 msec. Propagation time = Distance/Velocity = (10000x10^3 m)/(2x10^8 m/sec) = 50 msec.",
+      "pyq_sources": [
+        {
+          "year": 2017,
+          "set": 2,
+          "question_number": "Q1.33",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following two statements:\nS1: Destination MAC address of an ARP reply is a broadcast address.\nS2: Destination MAC address of an ARP request is a broadcast address.\nWhich one of the following choices is correct?\n(a) S1 is false and S2 is true.\n(b) Both S1 and S2 are false.\n(c) Both S1 and S2 are true.\n(d) S1 is true and S2 is false.",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "easy",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "ARP Protocol",
+        "MAC Addressing"
+      ],
+      "tags": [
+        "arp request",
+        "arp reply",
+        "broadcast address",
+        "mac address"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "S1 is false and S2 is true.",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "Both S1 and S2 are false.",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Both S1 and S2 are true.",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "S1 is true and S2 is false.",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "An ARP request is sent as a broadcast, while an ARP reply is sent as a unicast to the requesting host. Hence S1 is false and S2 is true.",
+      "pyq_sources": [
+        {
+          "year": 2021,
+          "set": 1,
+          "question_number": "Q1.34",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the sliding window flow-control protocol operating between a sender and a receiver over a full-duplex error-free link. Assume the following:\n- The time taken for processing the data frame by the receiver is negligible.\n- The time taken for processing the acknowledgment frame by the sender is negligible.\n- The sender has infinite number of frames available for transmission.\n- The size of the data frame is 2000 bits and the size of the acknowledgment frame is 10 bits.\n- The link data rate in each direction is 1 Mbps (= 10^6 bits per second).\n- One way propagation delay of the link is 100 milliseconds.\nThe minimum value of the sender's window size in terms of the number of frames, (rounded to the nearest integer) needed to achieve a link utilization of 50% is _______.",
+      "question_type": "NAT",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Sliding Window Protocol",
+        "Link Utilization",
+        "Full Duplex Link"
+      ],
+      "tags": [
+        "sliding window",
+        "link utilization",
+        "full duplex",
+        "window size calculation"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [],
+      "correct_answer_text": "51",
+      "explanation": "Tt(packet) = L/BW = 2000 bits/10^6 bps = 2x10^-3 sec = 2 ms. Tt(Ack) = 10 bits/10^6 bps = 10^-2 ms = 0.01 ms. Tp = 100 ms. Total time = Tt(packet) + Tp + Tt(Ack) = 2+100+0.01 = 102.01 ms. Setting efficiency = 50% = (n x Tt)/Total time gives 2n = 102.01, so n = 51.005, and rounding up (ceiling) gives minimum window size = 51.",
+      "pyq_sources": [
+        {
+          "year": 2021,
+          "set": 1,
+          "question_number": "Q1.35",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Assume that a 12-bit Hamming codeword consisting of 8-bit data and 4 check bits is d8 d7 d6 d5 c8 d4 d3 d2 c4 d1 c2 c1, where the data bits and the check bits are given in the following tables:\nData bits: d8=1, d7=1, d6=0, d5=x, d4=0, d3=1, d2=0, d1=1\nCheck bits: c8=y, c4=0, c2=1, c1=0\nWhich one of the following choices gives the correct values of x and y?\n(a) x is 0 and y is 0\n(b) x is 0 and y is 1\n(c) x is 1 and y is 0\n(d) x is 1 and y is 1",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Hamming Code",
+        "Error Correction",
+        "Check Bit Computation"
+      ],
+      "tags": [
+        "hamming code",
+        "check bits",
+        "error correcting code"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "x is 0 and y is 0",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "x is 0 and y is 1",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "x is 1 and y is 0",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "x is 1 and y is 1",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Numbering the bit positions 1 through 12 and computing the parity for check bit c1 (covering positions 1,3,5,7,9,11) gives x=0. Computing the parity for check bit c8 (covering positions 8,9,10,11,12) gives y=0. Hence x is 0 and y is 0.",
+      "pyq_sources": [
+        {
+          "year": 2021,
+          "set": 1,
+          "question_number": "Q1.36",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the cyclic redundancy check (CRC) based error detecting scheme having the generator polynomial X^3 + X + 1. Suppose the message m4m3m2m1m0 = 11000 is to be transmitted. Check bits c2c1c0 are appended at the end of the message by the transmitter using the above CRC scheme. The transmitted bit string is denoted by m4m3m2m1m0c2c1c0. The value of the checkbit sequence c2c1c0 is\n(a) 110\n(b) 111\n(c) 100\n(d) 101",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Cyclic Redundancy Check",
+        "Generator Polynomial",
+        "Modulo-2 Division"
+      ],
+      "tags": [
+        "crc",
+        "generator polynomial",
+        "checkbit sequence"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "110",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "111",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "100",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "101",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The generator polynomial X^3+X+1 corresponds to divisor 1011. Appending 3 zeros to the message gives 11000000. Performing modulo-2 division of 11000000 by 1011 gives a remainder of 100, which is the checkbit sequence c2c1c0.",
+      "pyq_sources": [
+        {
+          "year": 2021,
+          "set": 2,
+          "question_number": "Q1.37",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a 100 Mbps link between an earth station (sender) and a satellite (receiver) at an altitude of 2100 km. The signal propagates at a speed of 3x10^8 m/s. The time taken (in milliseconds, rounded off to two decimal places) for the receiver to completely receive a packet of 1000 bytes transmitted by the sender is _______.",
+      "question_type": "NAT",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Transmission Delay",
+        "Propagation Delay",
+        "Satellite Link"
+      ],
+      "tags": [
+        "transmission delay",
+        "propagation delay",
+        "satellite link"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [],
+      "correct_answer_text": "7.08",
+      "explanation": "Transmission time = Data size/Bandwidth = (1000x8 bits)/(10^8 bits/sec) = 8x10^-5 sec = 0.08 milliseconds. Propagation time = Length/Velocity = (2100x10^3 m)/(3x10^8 m/sec) = 7x10^-3 sec = 7 milliseconds. Total time = 7 + 0.08 = 7.08 milliseconds.",
+      "pyq_sources": [
+        {
+          "year": 2022,
+          "set": null,
+          "question_number": "Q1.38",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Suppose two hosts are connected by a point-to-point link and they are configured to use the Stop-and-Wait protocol for reliable data transfer. Identify in which one of the following scenarios, the utilization of the link is the lowest.\n(a) Longer link length and lower transmission rate\n(b) Longer link length and higher transmission rate\n(c) Shorter link length and lower transmission rate\n(d) Shorter link length and higher transmission rate",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Stop-and-Wait Protocol",
+        "Link Utilization",
+        "Efficiency Factors"
+      ],
+      "tags": [
+        "stop and wait",
+        "link utilization",
+        "efficiency factors"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "Longer link length and lower transmission rate",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Longer link length and higher transmission rate",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "Shorter link length and lower transmission rate",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Shorter link length and higher transmission rate",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Utilization of the link equals the efficiency of the stop-and-wait protocol, which is inversely proportional to both distance d and bandwidth B. So longer distance combined with higher bandwidth gives the lowest efficiency, hence option (b) is correct.",
+      "pyq_sources": [
+        {
+          "year": 2023,
+          "set": null,
+          "question_number": "Q1.39",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Suppose a 5-bit message is transmitted from a source to a destination through a noisy channel. The probability that a bit of the message gets flipped during transmission is 0.01. Flipping of each bit is independent of one another. The probability that the message is delivered error-free to the destination is _______. (Rounded off to three decimal places)",
+      "question_type": "NAT",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Bit Error Probability",
+        "Independent Events"
+      ],
+      "tags": [
+        "bit error probability",
+        "error-free transmission",
+        "probability"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [],
+      "correct_answer_text": "0.951",
+      "explanation": "Number of bits = 5, P(error) = 0.01, so P(correct) = 1 - 0.01 = 0.99 for each bit. Since all 5 bits are independent, probability that all 5 bits are correctly received = (0.99)^5 = 0.95099 ~= 0.951.",
+      "pyq_sources": [
+        {
+          "year": 2025,
+          "set": 1,
+          "question_number": "Q1.40",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Suppose we are transmitting frames between two nodes using the Stop-and-Wait protocol. The frame size is 3000 bits. The transmission rate of the channel is 2000 bps (bits/second) and the propagation delay between the two nodes is 100 milliseconds. Assume that the processing times at the source and destination are negligible. Also, assume that the size of the acknowledgement packet is negligible. Which ONE of the following most accurately gives the channel utilization for the above scenario in percentage?\n(a) 88.23\n(b) 93.75\n(c) 85.44\n(d) 66.67",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Stop-and-Wait Protocol",
+        "Channel Utilization"
+      ],
+      "tags": [
+        "stop and wait",
+        "channel utilization",
+        "propagation delay"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "88.23",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "93.75",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "85.44",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "66.67",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Tdata = Frame size/Transmission rate = 3000 bits/2000 bps = 1.5 seconds. Channel utilization = Tdata/(Tdata + 2Tp) x 100% = 1.5/(1.5+2x0.1) x 100% = 1.5/1.7 x 100% = 88.23%.",
+      "pyq_sources": [
+        {
+          "year": 2026,
+          "set": 1,
+          "question_number": "Q1.41",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the implementation of sliding window protocol over a lossless link, with a window size of W frames, where each frame is of size 1000 bits (including header). The bandwidth of the link is 100 kbps (1k = 10^3) and the one-way propagation delay is 100 milliseconds. Assume that processing times at the sender and receiver are zero and the transmission time of acknowledgements is also zero. Which one of the following options gives the minimum size of W (in number of frames) required to achieve 100% link utilization?\n(a) 10\n(b) 21\n(c) 20\n(d) 11",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Sliding Window Protocol",
+        "Link Utilization",
+        "Window Size Calculation"
+      ],
+      "tags": [
+        "sliding window",
+        "link utilization",
+        "window size calculation"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "10",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "21",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "20",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "11",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Window size = W frames, frame size = 1000 bits, bandwidth = 100 kbps, propagation delay = 100 ms. For 100% link utilization: %LU = W x TT/(TT+2xPT) x 100 = 100, giving 1 = W x 10/(10+2x100), so 210 = W x 10, hence W = 21.",
+      "pyq_sources": [
+        {
+          "year": 2026,
+          "set": 1,
+          "question_number": "Q1.42",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a file of size 4 million bytes being transferred between two hosts connected via a path consisting of three consecutive links of bandwidth 2 Mbps, 500 kbps, and 1 Mbps, respectively. All processing delays and propagation delays are negligible. Assume that there is no other background traffic over the path and no other additional overhead to transfer the file.\nWhich one of the following is the total time (in seconds) to transfer the file?\nNote: 1M = 10^6, 1k = 10^3\n(a) 731\n(b) 64\n(c) 8\n(d) 16",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Bottleneck Bandwidth",
+        "File Transfer Time"
+      ],
+      "tags": [
+        "bottleneck bandwidth",
+        "file transfer time",
+        "multi-link path"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "731",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "64",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "8",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "16",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "File size = 4x10^6 x 8 bits. Transmission time over link 1 (2 Mbps) = 1 sec. Transmission time over link 2 (500 kbps) = 64 sec. Transmission time over link 3 (1 Mbps) = 32 sec. The bottleneck bandwidth is 500 kbps (link 2), so total time to transfer the file is governed by this link, giving 64 seconds.",
+      "pyq_sources": [
+        {
+          "year": 2026,
+          "set": 2,
+          "question_number": "Q1.43",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the transmission of data bits 11000101100 over a link that uses Cyclic Redundancy Check (CRC) code for error detection. If the generator bit pattern is given to be 1001, which one of the following options shows the remainder bit pattern appended to the data bits before transmission?\n(a) 011\n(b) 101\n(c) 000\n(d) 100",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "ISO/OSI Stack and SWP"
+      ],
+      "concepts": [
+        "Cyclic Redundancy Check",
+        "Generator Polynomial",
+        "Modulo-2 Division"
+      ],
+      "tags": [
+        "crc",
+        "generator polynomial",
+        "remainder computation"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "011",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "101",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "000",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "100",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Performing modulo-2 division of the data bits (padded with zeros equal to the degree of the generator) by the generator pattern 1001 gives a remainder of 100, which is appended to the data bits before transmission.",
+      "pyq_sources": [
+        {
+          "year": 2026,
+          "set": 2,
+          "question_number": "Q1.44",
+          "marks": 2
+        }
+      ]
+    }
+  ]
+}

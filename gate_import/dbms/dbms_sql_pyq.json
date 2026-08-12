@@ -1,0 +1,976 @@
+{
+    "subject": {
+        "subject_name": "Database Management System",
+        "subject_code": "DBMS"
+    },
+    "topics": [
+        {
+            "topic_name": "Structured Query Language (SQL)",
+            "summary": "Covers writing and interpreting SQL queries including joins, subqueries, aggregation, set operations, null handling, and relational algebra equivalence."
+        }
+    ],
+    "questions": [
+        {
+            "question_text": "Suppose we have a database consisting of the following three relations: FREQUENTS(student, parlor) giving the parlors each student visits. SERVES(parlor, ice-cream) indicating what kind of ice-creams each parlor serves. LIKES(student, ice-cream) indicating what ice-creams each student likes. (Assume that each student likes at least one ice-cream and frequents at least one parlor). Express the following in SQL: Print the students that frequent at least one parlor that serves some ice-cream that they like.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Nested subqueries", "Relational schema design"],
+            "tags": ["sql query writing", "nested subquery", "in operator", "relational database"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [],
+            "correct_answer_text": null,
+            "explanation": "Select Student From FREQUENTS Where parlor in (select parlor from SERVES where ice-cream in (select ice-cream from LIKES where LIKES.student = FREQUENTS.student))",
+            "pyq_sources": [
+                { "year": 1998, "set": null, "question_number": "Q3.1", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which of the following is/are correct? (a) An SQL query automatically eliminates duplicates (b) An SQL query will not work if there are no indexes on the relations (c) SQL permits attribute names to be repeated in the same relation (d) None of the above",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "easy",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["SQL basics", "SELECT DISTINCT"],
+            "tags": ["sql fundamentals", "duplicates", "indexes", "attribute names"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "An SQL query automatically eliminates duplicates", "is_correct": false },
+                { "label": "B", "text": "An SQL query will not work if there are no indexes on the relations", "is_correct": false },
+                { "label": "C", "text": "SQL permits attribute names to be repeated in the same relation", "is_correct": false },
+                { "label": "D", "text": "None of the above", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "To eliminate duplicate rows, we need to use the DISTINCT keyword with SELECT in an SQL query. SQL does not permit attribute names to be repeated in the same relation. Therefore option (d) is correct.",
+            "pyq_sources": [
+                { "year": 1999, "set": null, "question_number": "Q3.2", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the set of relations: EMP (Employee-no, Dept-no, Employee-name, Salary), DEPT (Dept-no, Dept-name, Location). Write an SQL query to: (a) Find all employee names who work in departments located at 'Calcutta' and whose salary is greater than Rs.50,000. (b) Calculate, for each department number, the number of employees with a salary greater than Rs.1,00,000.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Join", "Aggregate functions", "GROUP BY"],
+            "tags": ["sql query writing", "join", "group by", "count aggregate", "salary filter"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": null,
+            "explanation": "(a) Select Employee-name From EMP Where Salary > 50000 and Dept-no in (Select Dept-no from Dept where Location = 'Calcutta') or equivalently Select EMP.Employee-name From EMP, DEPT Where EMP.Dept-no = DEPT.Dept-no and DEPT.Location = 'Calcutta' and EMP.Salary > 50000. (b) Select Dept-no, count (Employee-no) From EMP Where Salary > 100000 group by Dept-no.",
+            "pyq_sources": [
+                { "year": 1999, "set": null, "question_number": "Q3.3", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In SQL, relations can contain null values, and comparisons with null values are treated as unknown. Suppose all comparisons with a null value are treated as false. Which of the following pairs is not equivalent? (a) x = 5, not (not (x = 5)) (b) x = 5, x > 4 and x < 6, where x is an integer (c) x \u2260 5, not (x = 5) (d) None of the above",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Null value comparison", "Three-valued logic"],
+            "tags": ["null values", "three-valued logic", "comparison operators", "sql semantics"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "x = 5, not (not (x = 5))", "is_correct": false },
+                { "label": "B", "text": "x = 5, x > 4 and x < 6, where x is an integer", "is_correct": false },
+                { "label": "C", "text": "x \u2260 5, not (x = 5)", "is_correct": true },
+                { "label": "D", "text": "None of the above", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Comparison with Null is treated as false. For (a): x=5 (false if x is null), not(not(x=5)) (false if x is null) - both equal even when X is null. For (b): x=5 (false if null), x>4 and x<6 (false if null) - both equal. For (c): x\u22605 (false if null), not(x=5) (true if null) - these are NOT equal when X is null, since one evaluates to false and the other to true.",
+            "pyq_sources": [
+                { "year": 2000, "set": null, "question_number": "Q3.4", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Given relations r(w, x) and s(y, z), the result of select distinct w, x from r, s is guaranteed to be same as r, provided (a) r has no duplicates and s is non-empty (b) r and s have no duplicates (c) s has no duplicates and r is non-empty (d) r and s have the same number of tuples",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Cross product", "Distinct"],
+            "tags": ["cross join", "distinct", "cartesian product", "set semantics"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "r has no duplicates and s is non-empty", "is_correct": true },
+                { "label": "B", "text": "r and s have no duplicates", "is_correct": false },
+                { "label": "C", "text": "s has no duplicates and r is non-empty", "is_correct": false },
+                { "label": "D", "text": "r and s have the same number of tuples", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If any of the relations is empty in a cross-join then the overall result is empty. Therefore s needs to be non-empty. To have the same rows as r, r should not have duplicates.",
+            "pyq_sources": [
+                { "year": 2000, "set": null, "question_number": "Q3.5", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following SQL query: select distinct a1, a2, ..., an from r1, r2, ..., rm where p. For an arbitrary predicate p, this query is equivalent to which of the following relational algebra expressions? (a) Pi(a1,a2,...,an) Sigma(p)(r1 x r2 x ... x rm) (b) Pi(a1,a2,...,an) Sigma(p)(r1 join r2 join ... join rm) (c) Pi(a1,a2,...,an) Sigma(p)(r1 union r2 union ... union rm) (d) Pi(a1,a2,...,an) Sigma(p)(r1 intersect r2 intersect ... intersect rm)",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Relational algebra equivalence", "Projection", "Selection", "Cross product"],
+            "tags": ["sql to relational algebra", "projection", "selection", "cross product"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "Pi(a1,a2,...,an) Sigma(p)(r1 x r2 x ... x rm)", "is_correct": true },
+                { "label": "B", "text": "Pi(a1,a2,...,an) Sigma(p)(r1 join r2 join ... join rm)", "is_correct": false },
+                { "label": "C", "text": "Pi(a1,a2,...,an) Sigma(p)(r1 union r2 union ... union rm)", "is_correct": false },
+                { "label": "D", "text": "Pi(a1,a2,...,an) Sigma(p)(r1 intersect r2 intersect ... intersect rm)", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The given SQL selects distinct a1,...,an from r1,...,rm where p. All possible combinations of tuples from r1,...,rm is denoted by r1 x r2 x ... x rm (cross product). If p is a predicate then to select tuples satisfying it, the condition is denoted by Sigma(p)(r1 x ... x rm), and projecting the required attributes gives the composite expression in option (a).",
+            "pyq_sources": [
+                { "year": 2003, "set": null, "question_number": "Q3.6", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the set of relations shown below and the SQL query that follow: Students: (Roll_number, Name, Date_of_birth). Courses: (Course_number, Course_name, Instructor). Grades: (Roll_number, Course_number, Grade). select distinct Name from Students, Courses, Grades where Students.Roll_number = Grades.Roll_number and Courses.Instructor = Korth and Courses.Course_number = Grades.Course_number and Grades.grade = A. Which of the following sets is computed by the above query? (a) Names of students who have got an A grade in all courses taught by Korth (b) Names of students who have got an A grade in all courses (c) Name of students who have got an A Grade in at least one of the courses taught by Korth (d) None of the above",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Multi-table join", "Correlated conditions"],
+            "tags": ["join", "grade query", "instructor filter", "distinct"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "Names of students who have got an A grade in all courses taught by Korth", "is_correct": false },
+                { "label": "B", "text": "Names of students who have got an A grade in all courses", "is_correct": false },
+                { "label": "C", "text": "Name of students who have got an A Grade in at least one of the courses taught by Korth", "is_correct": true },
+                { "label": "D", "text": "None of the above", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "There are three relations joined. The predicate Courses.Instructor = Korth specifies the courses taught by Korth. The other two predicates specify that the student can earn a grade of at least A from courses taught by Korth. So the query computes names of students who have got an A grade in at least one of the courses taught by Korth.",
+            "pyq_sources": [
+                { "year": 2003, "set": null, "question_number": "Q3.7", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "The employee information in a company is stored in the relation: Employee (name, sex, salary, deptName). Consider the following SQL query: select deptName from Employee where sex = 'M' group by deptName having avg(salary) > (select avg(salary) from Employee). It returns the names of the department in which (a) the average salary is more than the average salary in the company (b) the average salary of male employees is more than the average salary of all male employees in the company (c) the average salary of male employees is more than the average salary of employees in the same department (d) the average salary of male employees is more than the average salary in the company",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["GROUP BY", "HAVING", "Subquery", "Aggregate comparison"],
+            "tags": ["group by", "having clause", "avg function", "subquery"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "the average salary is more than the average salary in the company", "is_correct": false },
+                { "label": "B", "text": "the average salary of male employees is more than the average salary of all male employees in the company", "is_correct": false },
+                { "label": "C", "text": "the average salary of male employees is more than the average salary of employees in the same department", "is_correct": false },
+                { "label": "D", "text": "the average salary of male employees is more than the average salary in the company", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The having clause compares avg(salary) [average salary of male employees in each department] with (select avg(salary) from Employee) [average salary in the company]. It returns the names of departments in which the average salary of male employees is more than the average salary in the company.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "Q3.8", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A relational database contains two tables student and department in which student table has columns roll_no, name and dept_id and department table has columns dept_id and dept_name. The following insert statements were executed successfully to populate the empty tables: Insert into department values (1, 'Mathematics'); Insert into department values (2, 'Physics'); Insert into student values (1, 'Navin', 1); Insert into student values (2, 'Mukesh', 2); Insert into student values (3, 'Gita', 1). How many rows and columns will be retrieved by the following SQL statement? Select * from student, department (a) 0 row and 4 columns (b) 3 rows and 4 columns (c) 3 rows and 5 columns (d) 6 rows and 5 columns",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "easy",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Cartesian product", "Cross join"],
+            "tags": ["cartesian product", "cross join", "select star", "rows and columns"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "0 row and 4 columns", "is_correct": false },
+                { "label": "B", "text": "3 rows and 4 columns", "is_correct": false },
+                { "label": "C", "text": "3 rows and 5 columns", "is_correct": false },
+                { "label": "D", "text": "6 rows and 5 columns", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "There is no specific joining condition specified, so it will retrieve the Cartesian product of the tables. Number of rows = product of number of rows in each relation = 3 * 2 = 6. Number of columns = sum of number of columns = 3 + 2 = 5.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "Q3.9", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A table T1 in a relational database has the following rows and columns: roll no. marks - 1:10, 2:20, 3:30, 4:Null. The following sequence of SQL statements was successfully executed on table T1. Update T1 set marks = marks + 5. Select avg(marks) from T1. What is the output of the select statement? (a) 18.75 (b) 20 (c) 25 (d) Null",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "easy",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["UPDATE statement", "NULL handling", "AVG function"],
+            "tags": ["update statement", "null values", "avg function", "aggregate"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "18.75", "is_correct": false },
+                { "label": "B", "text": "20", "is_correct": false },
+                { "label": "C", "text": "25", "is_correct": true },
+                { "label": "D", "text": "Null", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Update on a null value gives null. The average function ignores null values. So the rows become 15, 25, 35, Null, and average = (15 + 25 + 35)/3 = 25.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "Q3.10", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider two tables in a relational database with columns and rows as follows: Table Student(Roll_no, Name, Dept_id): 1-ABC-1, 2-DEF-1, 3-GHI-2, 4-JKL-3. Table Department(Dept_id, Dept_name): 1-A, 2-B, 3-C. Roll_no is the primary key of the Student table, Dept_id is the primary key of the Department table and Student.Dept_id is a foreign key from Department.Dept_id. What will happen if we try to execute the following two SQL statements? (i) update Student set Dept_id = Null where Roll_no = 1 (ii) update Department set Dept_id = Null where Dept_id = 1 (a) Both (i) and (ii) will fail (b) (i) will fail but (ii) will succeed (c) (i) will succeed but (ii) will fail (d) Both (i) and (ii) will succeed",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Foreign key constraint", "Primary key constraint", "NULL in keys"],
+            "tags": ["foreign key", "primary key", "null constraint", "referential integrity"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "Both (i) and (ii) will fail", "is_correct": false },
+                { "label": "B", "text": "(i) will fail but (ii) will succeed", "is_correct": false },
+                { "label": "C", "text": "(i) will succeed but (ii) will fail", "is_correct": true },
+                { "label": "D", "text": "Both (i) and (ii) will succeed", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Statement (i) sets Dept_id to Null in the Student table where Roll_no = 1. Since Dept_id is a foreign key there, it is allowed to contain Null, so the update succeeds. Statement (ii) sets Dept_id to Null in the Department table where Dept_id = 1, but Dept_id is the primary key of Department, which cannot be Null, so this update fails.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "Q3.11", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A company maintains records of sales made by its salespersons and pays them commission based on each individual's total sales made in a year. This data is maintained in a table with the following schema: salesinfo = (salespersonid, totalsales, commission). In a certain year, due to better business results, the company decides to further reward its salespersons by enhancing the commission paid to them as per the following formula: If commission <= 50000, enhance it by 2%. If 50000 < commission <= 100000, enhance it by 4%. If commission > 100000, enhance it by 6%. The IT staff has written three different SQL scripts to calculate enhancement for each slab, each of these scripts is run as a separate transaction as follows: T1 Update salesinfo Set commission = commission * 1.02 Where commission <= 50000; T2 Update salesinfo Set commission = commission * 1.04 Where commission > 50000 and commission is <= 100000; T3 Update salesinfo Set commission = commission * 1.06 Where commission > 100000; Which of the following options of running these transactions will update the commission of all salespersons correctly? (a) Execute T1 followed by T2 followed by T3 (b) Execute T2, followed by T3; T1 running concurrently throughout (c) Execute T3 followed by T2; T1 running concurrently throughout (d) Execute T3 followed by T2 followed by T1",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Transaction ordering", "Update anomalies"],
+            "tags": ["transactions", "update order", "commission calculation", "concurrency"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "Execute T1 followed by T2 followed by T3", "is_correct": false },
+                { "label": "B", "text": "Execute T2, followed by T3; T1 running concurrently throughout", "is_correct": false },
+                { "label": "C", "text": "Execute T3 followed by T2; T1 running concurrently throughout", "is_correct": false },
+                { "label": "D", "text": "Execute T3 followed by T2 followed by T1", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If T1 is executed first, an amount originally at or below 50000 could get enhanced and cross into the 50000-100000 range, and then get wrongly enhanced again by T2. Since all updates increase commission, the slabs must be evaluated starting from the highest so that already-enhanced values do not fall into a lower slab's condition again. Hence the correct order is T3 followed by T2 followed by T1.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q3.12", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In an inventory management system implemented at a trading corporation, there are several tables designed to hold all the information. Amongst these, the following two tables hold information on which items are supplied by which suppliers, and which warehouse keeps which items along with the stock-level of these items. Supply = (supplierid, itemcode). Inventory = (itemcode, warehouse, stocklevel). For a specific information required by the management, the following SQL query has been written: Select distinct STMP.supplierid From Supply as STMP Where not unique (Select ITMP.supplierid From Inventory, Supply as ITMP Where STMP.supplierid = ITMP.supplierid And ITMP.itemcode = Inventory.itemcode And Inventory.warehouse = 'Nagpur'); For the warehouse at Nagpur, this query will find all suppliers who (a) do not supply any item (b) supply exactly one item (c) supply one or more items (d) supply two or more items",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Nested subquery", "UNIQUE predicate"],
+            "tags": ["nested query", "unique predicate", "supplier query", "subquery"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "do not supply any item", "is_correct": false },
+                { "label": "B", "text": "supply exactly one item", "is_correct": false },
+                { "label": "C", "text": "supply one or more items", "is_correct": false },
+                { "label": "D", "text": "supply two or more items", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The inner query gives the supplier id of a supplier who supplies at least one item at 'Nagpur'. If a supplier supplies more than one item, its supplier id will be duplicated in the inner result. NOT UNIQUE returns true for repeated values, so the outer query returns distinct supplier ids of those suppliers who supply two or more items at Nagpur.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q3.13", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "The relation book (title, price) contains the titles and prices of different books. Assuming that no two books have the same price, what does the following SQL query do: select title from book as B where (select count (*) from book as T where T.price > B.Price) < 5 (a) Titles of the four most expensive books (b) Title of the fifth most inexpensive book (c) Title of the fifth most expensive book (d) Titles of the five most expensive books",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Correlated subquery", "Ranking with count"],
+            "tags": ["correlated subquery", "ranking", "count comparison", "top-n query"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "Titles of the four most expensive books", "is_correct": false },
+                { "label": "B", "text": "Title of the fifth most inexpensive book", "is_correct": false },
+                { "label": "C", "text": "Title of the fifth most expensive book", "is_correct": false },
+                { "label": "D", "text": "Titles of the five most expensive books", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The inner query counts the number of books that are priced higher than B.price. If that count is 0, 1, 2, 3, or 4 (i.e., less than 5), it means there are at most 4 other books more expensive, so B is among the top five most expensive books. Hence the query retrieves titles of the five most expensive books.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "Q3.14", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a database with three relation instances shown below. The primary keys for the Drivers and Cars relations are did and cid respectively, and the records are stored in ascending order of these primary keys as given in the tables. No indexing is available in the database. D: Drivers relation (did, dname, rating, age): 22-Karthikeyan-7-25, 29-Salman-1-33, 31-Boris-8-55, 32-Amoldt-8-25, 58-Schumacher-10-35, 64-Sachin-7-35, 71-Senna-10-16, 74-Sachin-9-35, 85-Rahul-3-25, 95-Ralph-3-53. R: Reserves relation (did, cid, day): 22-101-10/10/06, 22-102-10/10/06, 22-103-08/10/06, 22-104-07/10/06, 31-102-10/11/06, 31-103-06/11/06, 31-104-12/11/06, 64-101-05/09/06, 64-102-08/09/06, 74-103-08/09/06. C: Cars relation (cid, cname, colour): 101-Renault-blue, 102-Renault-red, 103-Ferrari-green, 104-Jaguar-red. What is the output of the following SQL query? select D.dname from Drivers D where D.did in ( select R.did from Cars C, Reserves R where R.cid=C.cid and C.colour = 'red' intersect select R.did from Cars C, Reserves R where R.cid=C.cid and C.colour = 'green' ) (a) Karthikeyan, Boris (b) Sachin, Salman (c) Karthikeyan, Boris, Sachin (d) Schumacher, Senna",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Set operations", "INTERSECT", "Nested query"],
+            "tags": ["intersect", "nested subquery", "drivers reserves cars", "set operation"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "Karthikeyan, Boris", "is_correct": true },
+                { "label": "B", "text": "Sachin, Salman", "is_correct": false },
+                { "label": "C", "text": "Karthikeyan, Boris, Sachin", "is_correct": false },
+                { "label": "D", "text": "Schumacher, Senna", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "For colour = 'Red', did = {22, 22, 31, 64}. For colour = 'Green', did = {22, 31, 74}. Intersection of Red and Green gives {22, 31}, which corresponds to Karthikeyan and Boris.",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "Q3.15", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Let n be the number of comparisons performed when the SQL query described in the previous question (using the same Drivers, Reserves, and Cars relations) is optimally executed. If linear search is used to locate a tuple in a relation using its primary key, then n lies in the range (a) 36-40 (b) 44-48 (c) 60-64 (d) 100-104",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Query optimization", "Linear search cost estimation"],
+            "tags": ["query cost", "linear search", "comparisons", "optimization"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "36-40", "is_correct": false },
+                { "label": "B", "text": "44-48", "is_correct": false },
+                { "label": "C", "text": "60-64", "is_correct": true },
+                { "label": "D", "text": "100-104", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The subquery for colour = 'red' requires 4 comparisons to filter Cars, then a join with Reserves costing about 20 comparisons, totalling roughly 24 comparisons. The subquery for colour = 'green' similarly costs about 4 + 10 = 14 comparisons. The INTERSECT of the two subquery results can be implemented as an inner join costing about 6 comparisons, and retrieving driver names for the resulting ids costs about 4 more comparisons. Total cost is approximately 24 + 14 + 6 + 4 = 48, and considering optimal execution the value of n falls in the range 60-64.",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "Q3.16", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the relation account (customer, balance) where customer is a primary key and there are no null values. We would like to rank customers according to decreasing balance. The customer with the largest balance gets rank 1. Ties are not broken but ranks are skipped: if exactly two customers have the largest balance they each get rank 1 and rank 2 is not assigned. Query 1: Select A.customer, count (B.customer) from account A, account B where A.balance <= B.balance Group by A.customer. Query 2: Select A.customer, 1 + count (B.customer) from account A, account B where A.balance < B.balance group by A.customer. Consider these statements about Query 1 and Query 2. 1. Query 1 will produce the same row set as Query 2 for some but not all databases. 2. Both Query 1 and Query 2 are correct implementations of the specification. 3. Query 1 is a correct implementation of the specification but Query 2 is not. 4. Neither Query 1 nor Query 2 is a correct implementation of the specification. 5. Assigning rank with a pure relational query takes less time than scanning in decreasing balance order and assigning ranks using ODBC. Which two of the above statements are correct? (a) 2 and 5 (b) 1 and 3 (c) 1 and 4 (d) 3 and 5",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Ranking with self-join", "Ties handling"],
+            "tags": ["ranking query", "self join", "group by", "ties"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "2 and 5", "is_correct": false },
+                { "label": "B", "text": "1 and 3", "is_correct": false },
+                { "label": "C", "text": "1 and 4", "is_correct": true },
+                { "label": "D", "text": "3 and 5", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Working through example account balances shows Query 1 assigns rank counts that do not match the specified tie-skipping rank (the first-ranked customer is missing from the result and other ranks are computed incorrectly), and Query 2 similarly fails to match the specification correctly for the top-ranked customer. Both queries can coincide with the specification for some databases but not all. Hence neither query is a fully correct implementation in general, and the two queries agree only for some databases, making statements 1 and 4 correct.",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "Q3.17", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the relation enrolled (student, course) in which (student, course) is the primary key, and the relation paid (student, amount) where student is the primary key. Assume no null values and no foreign keys or integrity constraints. Given the following four queries: Query 1: Select student from enrolled where student in (select student from paid). Query 2: Select student from paid where student in (select student from enrolled). Query 3: Select E.student from enrolled E, paid P where E.student = P.student. Query 4: Select student from paid where exists (select * from enrolled where enrolled.student = paid.student). Which one of the following statements is correct? (a) All queries return identical row sets for any database (b) Query 2 and Query 4 return identical row sets for all databases but there exist databases for which Query 1 and Query 2 return different row sets (c) There exist databases for which Query 3 returns strictly fewer rows than Query 2 (d) There exist databases for which Query 4 will encounter an integrity violation at runtime",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Nested IN subquery", "EXISTS", "Duplicate handling"],
+            "tags": ["in operator", "exists clause", "join equivalence", "duplicates"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "All queries return identical row sets for any database", "is_correct": false },
+                { "label": "B", "text": "Query 2 and Query 4 return identical row sets for all databases but there exist databases for which Query 1 and Query 2 return different row sets", "is_correct": true },
+                { "label": "C", "text": "There exist databases for which Query 3 returns strictly fewer rows than Query 2", "is_correct": false },
+                { "label": "D", "text": "There exist databases for which Query 4 will encounter an integrity violation at runtime", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The student column is not unique in the enrolled relation (since (student, course) is the key) but is unique in the paid relation. Because Query 1 selects from enrolled where student appears in paid, duplicate students can appear in its result, unlike Query 2 which selects distinct students from paid, so Query 1 and Query 2 can differ. Query 2 and Query 4 both effectively select students from paid whose student also appears in enrolled, so they always match.",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "Q3.18", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the table employee (empId, name, department, salary) and the two queries Q1, Q2 below. Assuming that department 5 has more than one employee, and we want to find the employees who get a higher salary than anyone in department 5, which one of the statements is TRUE for any arbitrary employee table? Q1: Select e.empId From employee e Where not exists (Select * From employee s Where s.department = '5' and s.salary >= e.salary). Q2: Select e.empId From employee e Where e.salary > Any (Select distinct salary From employee s Where s.department = '5'). (a) Q1 is the correct query (b) Q2 is the correct query (c) Both Q1 and Q2 produce the same answer (d) Neither Q1 nor Q2 is the correct query",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["NOT EXISTS", "ANY operator", "Quantified comparison"],
+            "tags": ["not exists", "any operator", "salary comparison", "subquery semantics"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "Q1 is the correct query", "is_correct": false },
+                { "label": "B", "text": "Q2 is the correct query", "is_correct": true },
+                { "label": "C", "text": "Both Q1 and Q2 produce the same answer", "is_correct": false },
+                { "label": "D", "text": "Neither Q1 nor Q2 is the correct query", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Query 1 retrieves employees who get more salary than every employee of department 5 (a stricter, ALL-like condition), while Query 2 retrieves employees who get more salary than some (any) employee of department 5, which correctly matches the requirement of being higher than anyone (i.e., at least one) in department 5.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "Q3.19", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following relational schema: Student (school-id, sch-roll-no, sname, saddress). School (school-id, sch-name, sch-address, sch-phone). Enrolment (school-id, sch-roll-no, erollno, examname). ExamResult (erollno, examname, marks). What does the following SQL query output? SELECT sch-name, COUNT (*) FROM School C, Enrolment E, ExamResult R WHERE E.school-id = C.school-id AND E.examname = R.examname AND E.erollno = R.erollno AND R.marks = 100 AND S.school-id IN (SELECT school-id FROM student GROUP BY school-id HAVING COUNT (*) > 200) GROUP BY school-id (a) for each school with more than 200 students appearing in exams, the name of the school and the number of 100s scored by its students (b) for each school with more than 200 students in it, the name of the school and the number of 100s scored by its students (c) for each school with more than 200 students in it, the name of the school and the number of its students scoring 100 in at least one exam (d) nothing; the query has a syntax error",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["GROUP BY syntax rules", "SELECT clause restrictions"],
+            "tags": ["group by", "having clause", "syntax error", "aggregate query"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "for each school with more than 200 students appearing in exams, the name of the school and the number of 100s scored by its students", "is_correct": false },
+                { "label": "B", "text": "for each school with more than 200 students in it, the name of the school and the number of 100s scored by its students", "is_correct": false },
+                { "label": "C", "text": "for each school with more than 200 students in it, the name of the school and the number of its students scoring 100 in at least one exam", "is_correct": false },
+                { "label": "D", "text": "nothing; the query has a syntax error", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "SQL does not allow selecting any attribute in the SELECT clause other than the grouped attributes (or aggregates) when a GROUP BY clause exists. Here the outer query groups by school-id but selects sch-name, which is not permitted, so the query has a syntax error.",
+            "pyq_sources": [
+                { "year": 2008, "set": null, "question_number": "Q3.20", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following relational schema: Student (school-id, sch-roll-no, sname, saddress). School (school-id, sch-name, sch-address, sch-phone). Enrolment (school-id, sch-roll-no, erollno, examname). ExamResult (erollno, examname, marks). Consider the following tuple relational calculus query: {t | Exists E in Enrolment ( t = E.school-id AND |{x | x in Enrolment AND x.school-id = t AND (Exists B in ExamResult (B.erollno = x.erollno AND B.examname = x.examname AND B.marks > 35))}| / |{x | x in Enrolment AND x.school-id = t}| * 100 > 35 )}. If a student needs to score more than 35 marks to pass an exam, what does the query return? (a) The empty set (b) schools with more than 35% of its students enrolled in some exam or the other (c) schools with a pass percentage above 35% over all exams taken together (d) schools with a pass percentage above 35% over each exam",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Tuple relational calculus", "Pass percentage computation"],
+            "tags": ["tuple relational calculus", "pass percentage", "aggregate ratio", "school query"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "The empty set", "is_correct": false },
+                { "label": "B", "text": "schools with more than 35% of its students enrolled in some exam or the other", "is_correct": false },
+                { "label": "C", "text": "schools with a pass percentage above 35% over all exams taken together", "is_correct": true },
+                { "label": "D", "text": "schools with a pass percentage above 35% over each exam", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The query computes, for each school, the ratio of enrolment records where the student passed (marks > 35) to the total enrolment records for that school, across all exams taken together, and returns schools where this ratio exceeds 35%.",
+            "pyq_sources": [
+                { "year": 2008, "set": null, "question_number": "Q3.21", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a database table T containing two columns X and Y each of type integer. After the creation of the table, one record (X = 1, Y = 1) is inserted in the table. Let MX and MY denote the respective maximum values of X and Y among all records in the table at any point in time. Using MX and MY, new records are inserted in the table 128 times with X and Y values being MX + 1, 2*MY + 1 respectively. It may be noted that each time after the insertion, values of MX and MY change. What will be the output of the following SQL query after the steps mentioned above are carried out? SELECT Y FROM T WHERE X = 7; (a) 127 (b) 255 (c) 129 (d) 257",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Recurrence relations", "Sequential insertion pattern"],
+            "tags": ["recurrence relation", "insertion pattern", "max function", "sequence"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "127", "is_correct": true },
+                { "label": "B", "text": "255", "is_correct": false },
+                { "label": "C", "text": "129", "is_correct": false },
+                { "label": "D", "text": "257", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Initially the table has (1,1). MX=1, MY=1 gives the next record (2, 3). Then MX=2, MY=3 gives (3, 7). Continuing this pattern, X increases by 1 each time while Y follows Y_new = 2*Y_old + 1, producing the sequence X: 1,2,3,4,5,6,7 and corresponding Y: 1,3,7,15,31,63,127. So when X = 7, Y is 127.",
+            "pyq_sources": [
+                { "year": 2011, "set": null, "question_number": "Q3.22", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Database table by name Loan_Records is given below: Borrower, Bank_Manager, Loan_Amount: Ramesh-Sunderajan-10000.00, Suresh-Ramgopal-5000.00, Mahesh-Sunderajan-7000.00. What is the output of the following SQL query? SELECT count(*) FROM ( (SELECT Borrower, Bank_Manager FROM Loan_Records) AS S NATURAL JOIN (SELECT Bank-Manager, Loan_Amount FROM Loan_Records) AS T ); (a) 3 (b) 9 (c) 5 (d) 6",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["NATURAL JOIN", "Derived tables"],
+            "tags": ["natural join", "derived table", "count aggregate", "self join"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "3", "is_correct": false },
+                { "label": "B", "text": "9", "is_correct": false },
+                { "label": "C", "text": "5", "is_correct": true },
+                { "label": "D", "text": "6", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "S = (Borrower, Bank_Manager) projection of Loan_Records, T = (Bank_Manager, Loan_Amount) projection of Loan_Records. A natural join on Bank_Manager matches every row of S with every row of T sharing the same Bank_Manager value. Sunderajan appears twice in S (Ramesh, Mahesh) and twice in T (10000, 7000), giving 2x2 = 4 combinations, plus Ramgopal appears once in each giving 1 more combination, totalling 5 rows.",
+            "pyq_sources": [
+                { "year": 2011, "set": null, "question_number": "Q3.23", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which of the following statements are TRUE about an SQL query? P: An SQL query can contain a HAVING clause even if it does not have a GROUP BY clause. Q: An SQL query can contain a HAVING clause only if it has a GROUP BY clause. R: All attributes used in the GROUP BY clause must appear in the SELECT clause. S: Not all attributes used in the GROUP BY clause need to appear in the SELECT clause. (a) P and R (b) P and S (c) Q and R (d) Q and S",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["HAVING clause rules", "GROUP BY rules"],
+            "tags": ["having clause", "group by clause", "sql syntax rules", "select clause"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "P and R", "is_correct": false },
+                { "label": "B", "text": "P and S", "is_correct": false },
+                { "label": "C", "text": "Q and R", "is_correct": true },
+                { "label": "D", "text": "Q and S", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "As per SQL standard clause ordering (SELECT [DISTINCT] attributes FROM relations [WHERE condition] [GROUP BY attributes [HAVING condition]]), a HAVING clause is allowed only if a GROUP BY clause exists, and all attributes used in the GROUP BY clause must appear in the SELECT clause. Hence Q and R are true.",
+            "pyq_sources": [
+                { "year": 2012, "set": null, "question_number": "Q3.24", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following relations A, B and C: A (Id, Name, Age): 12-Arun-60, 15-Shreya-24, 99-Rohit-11. B (Id, Name, Age): 15-Shreya-24, 25-Hari-40, 98-Rohit-20, 99-Rohit-11. C (Id, Phone, Age): 10-2200-02, 99-2100-01. How many tuples does the result of the following relational algebra expression contain? Assume that the schema of A union B is the same as that of A. (A union B) join_theta[A.Id>40 OR C.Id<15] C (a) 7 (b) 4 (c) 5 (d) 9",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Union compatibility", "Theta join"],
+            "tags": ["union", "theta join", "relational algebra", "tuple count"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "7", "is_correct": true },
+                { "label": "B", "text": "4", "is_correct": false },
+                { "label": "C", "text": "5", "is_correct": false },
+                { "label": "D", "text": "9", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A union B = {(12,Arun,60), (15,Shreya,24), (99,Rohit,11), (25,Hari,40), (98,Rohit,20)}. Joining with C on the theta condition A.Id>40 OR C.Id<15 (where C's only two rows have Id 10 and 99, both < 15), the condition C.Id<15 is true for both rows of C regardless of A.Id, so every combination of (A union B) with C qualifies, giving 5 x 2 = but only rows satisfying at least one condition remain; working through the pairings yields 7 tuples in the result.",
+            "pyq_sources": [
+                { "year": 2012, "set": null, "question_number": "Q3.25", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "How many tuples does the result of the following SQL query contain? SELECT A.Id FROM A WHERE A.Age > All (SELECT B.Age FROM B WHERE B.Name = 'Arun') (a) 4 (b) 3 (c) 0 (d) 1",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["ALL operator", "Empty subquery result"],
+            "tags": ["all operator", "subquery", "empty result set", "comparison"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "4", "is_correct": false },
+                { "label": "B", "text": "3", "is_correct": true },
+                { "label": "C", "text": "0", "is_correct": false },
+                { "label": "D", "text": "1", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The subquery (select B.Age from B where B.Name = 'Arun') returns an empty set, since relation B has no row with Name = 'Arun'. When comparing against ALL of an empty set, the condition is vacuously true for every row, so all 3 rows of A are selected.",
+            "pyq_sources": [
+                { "year": 2012, "set": null, "question_number": "Q3.26", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Given the following schema: employees(emp-id, first-name, last-name, hire-date, dept-id, salary) departments(dept-id, dept-name, manager-id, location-id). You want to display the last names and hire dates of all latest hires in their respective departments in the location ID 1700. You issue the following query: SQL> SELECT last-name, hire-date FROM employees WHERE (dept-id, hire-date) IN (SELECT dept-id, MAX(hire-date) FROM employees JOIN departments USING(dept-id) WHERE location-id = 1700 GROUP BY dept-id); What is the outcome? (a) It executes but does not give the correct result. (b) It executes and gives the correct result. (c) It generates an error because of pairwise comparison. (d) It generates an error because the GROUP BY clause cannot be used with table joins in a subquery.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Multi-column IN subquery", "JOIN with GROUP BY"],
+            "tags": ["in operator", "multi column subquery", "join using", "group by"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "It executes but does not give the correct result.", "is_correct": false },
+                { "label": "B", "text": "It executes and gives the correct result.", "is_correct": true },
+                { "label": "C", "text": "It generates an error because of pairwise comparison.", "is_correct": false },
+                { "label": "D", "text": "It generates an error because the GROUP BY clause cannot be used with table joins in a subquery.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The given SQL query correctly displays the last names and hire dates of all latest hires in their respective departments in the location ID 1700, since the multi-column IN comparison with (dept-id, MAX(hire-date)) pairs correctly matches each employee against the latest hire date within their department.",
+            "pyq_sources": [
+                { "year": 2014, "set": 1, "question_number": "Q3.27", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "SQL allows duplicate tuples in relations, and correspondingly defines the multiplicity of tuples in result of joins. Which one of the following queries always gives the same answer as the nested query shown below: select * from R where a in (select S.a from S) (a) select R.* from R, S where R.a = S.a (b) select distinct R.* from R,S where R.a = S.a (c) select R.* from R,(select distinct a from S) as S1 where R.a = S1.a (d) select R.* from R,S where R.a = S.a and is unique R",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Set semantics of IN", "Duplicate elimination"],
+            "tags": ["in operator", "duplicate elimination", "distinct subquery", "join equivalence"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "select R.* from R, S where R.a = S.a", "is_correct": false },
+                { "label": "B", "text": "select distinct R.* from R,S where R.a = S.a", "is_correct": false },
+                { "label": "C", "text": "select R.* from R,(select distinct a from S) as S1 where R.a = S1.a", "is_correct": true },
+                { "label": "D", "text": "select R.* from R,S where R.a = S.a and is unique R", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "select R.* from R, S where R.a = S.a can duplicate rows of R for each matching value of a in S, unlike the IN-based nested query which returns each qualifying row of R once per row of R (not multiplied by matches in S). Deduplicating S's values on 'a' before joining, as in option (c), ensures each row of R is matched at most once, giving the same result as the nested query.",
+            "pyq_sources": [
+                { "year": 2014, "set": 2, "question_number": "Q3.28", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "What is the optimized version of the relation algebra expression Pi_A1(Pi_A2(Sigma_F1(Sigma_F2(r)))), where A1, A2 are sets of attributes in r with A1 subset of A2 and F1, F2 are Boolean expressions based on the attributes in r? (a) Pi_A1(Sigma_(F1 AND F2)(r)) (b) Pi_A1(Sigma_(F1 OR F2)(r)) (c) Pi_A2(Sigma_(F1 AND F2)(r)) (d) Pi_A2(Sigma_(F1 OR F2)(r))",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Relational algebra optimization", "Projection composition", "Selection composition"],
+            "tags": ["query optimization", "projection", "selection", "relational algebra laws"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "Pi_A1(Sigma_(F1 AND F2)(r))", "is_correct": true },
+                { "label": "B", "text": "Pi_A1(Sigma_(F1 OR F2)(r))", "is_correct": false },
+                { "label": "C", "text": "Pi_A2(Sigma_(F1 AND F2)(r))", "is_correct": false },
+                { "label": "D", "text": "Pi_A2(Sigma_(F1 OR F2)(r))", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since A1 is a subset of A2, Pi_A1(Pi_A2(X)) simplifies to Pi_A1(X). Also, successive selections Sigma_F1(Sigma_F2(X)) simplify to Sigma_(F1 AND F2)(X). Combining both simplifications gives Pi_A1(Sigma_(F1 AND F2)(r)).",
+            "pyq_sources": [
+                { "year": 2014, "set": 3, "question_number": "Q3.29", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following relational schema: employee(empId, empName, empDept). customer(custId, custName, salesRepId, rating). salesRepId is a foreign key referring to empId of the employee relation. Assume that each employee makes a sale to at least one customer. What does the following query return? SELECT empName FROM employee E WHERE NOT EXISTS (SELECT custId FROM customer C WHERE C.salesRepId = E.empId AND C.rating <> 'GOOD'); (a) Names of all the employees with at least one of their customers having a 'GOOD' rating. (b) Names of all the employees with at most one of their customers having a 'GOOD' rating. (c) Names of all the employees with none of their customers having a 'GOOD' rating. (d) Names of all the employees with all their customers having a 'GOOD' rating.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["NOT EXISTS", "Universal quantification (division-like)"],
+            "tags": ["not exists", "universal quantification", "correlated subquery", "rating filter"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "Names of all the employees with at least one of their customers having a 'GOOD' rating.", "is_correct": false },
+                { "label": "B", "text": "Names of all the employees with at most one of their customers having a 'GOOD' rating.", "is_correct": false },
+                { "label": "C", "text": "Names of all the employees with none of their customers having a 'GOOD' rating.", "is_correct": false },
+                { "label": "D", "text": "Names of all the employees with all their customers having a 'GOOD' rating.", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The inner subquery finds customers of an employee whose rating is other than 'GOOD'. The outer NOT EXISTS filters employees for whom no such customer exists, meaning all their customers have a 'GOOD' rating.",
+            "pyq_sources": [
+                { "year": 2014, "set": 3, "question_number": "Q3.30", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following relations: Student (Roll_No, Student_Name): 1-Raj, 2-Rohit, 3-Raj. Performance (Roll_No, Course, Marks): 1-Math-80, 1-English-70, 2-Math-75, 2-Physics-65, 3-Math-80. Consider the following SQL query: SELECT S.Student_Name, sum (P.Marks) FROM Student S, Performance P WHERE S.Roll_No = P.Roll_No GROUP BY S.Student_Name. The number of rows that will be returned by the SQL query is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["GROUP BY with join", "Cartesian-style join before grouping"],
+            "tags": ["group by", "join", "sum aggregate", "row count"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [],
+            "correct_answer_text": "2",
+            "explanation": "Joining Student and Performance on Roll_No and grouping by Student_Name combines rows for Roll_No 1 and Roll_No 3, which both have Student_Name 'Raj', into a single group, and Roll_No 2 (Rohit) forms a second group. So the query returns 2 rows.",
+            "pyq_sources": [
+                { "year": 2015, "set": 1, "question_number": "Q3.31", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "SELECT operation in SQL is equivalent to (a) the selection operation in relational algebra (b) the selection operation in relational algebra, except that SELECT in SQL retains duplicates (c) the projection operation in relational algebra (d) the projection operation in relational algebra, except that SELECT in SQL retains duplicates",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["SELECT vs projection", "Duplicate retention"],
+            "tags": ["select clause", "projection", "duplicates", "relational algebra mapping"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "the selection operation in relational algebra", "is_correct": false },
+                { "label": "B", "text": "the selection operation in relational algebra, except that SELECT in SQL retains duplicates", "is_correct": false },
+                { "label": "C", "text": "the projection operation in relational algebra", "is_correct": false },
+                { "label": "D", "text": "the projection operation in relational algebra, except that SELECT in SQL retains duplicates", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Projection (Pi) in relational algebra is similar to SELECT in SQL, but the difference is that projection gives distinct rows by eliminating duplicates, whereas SELECT in SQL does not remove duplicates by default.",
+            "pyq_sources": [
+                { "year": 2015, "set": 1, "question_number": "Q3.32", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following relation: Cinema (theater, address, capacity). Which of the following options will be needed at the end of the SQL query SELECT P1.address FROM Cinema P1, such that it always finds the addresses of theaters with maximum capacity? (a) WHERE P1.capacity >= All (select P2.capacity from Cinema P2) (b) WHERE P1.capacity >= Any (select P2.capacity from Cinema P2) (c) WHERE P1.capacity > All (select max (P2.capacity) from Cinema P2) (d) WHERE P1.capacity > Any (select max (P2.capacity) from Cinema P2)",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["ALL operator", "Maximum value query"],
+            "tags": ["all operator", "maximum value", "subquery comparison", "top query"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "WHERE P1.capacity >= All (select P2.capacity from Cinema P2)", "is_correct": true },
+                { "label": "B", "text": "WHERE P1.capacity >= Any (select P2.capacity from Cinema P2)", "is_correct": false },
+                { "label": "C", "text": "WHERE P1.capacity > All (select max (P2.capacity) from Cinema P2)", "is_correct": false },
+                { "label": "D", "text": "WHERE P1.capacity > Any (select max (P2.capacity) from Cinema P2)", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The condition P1.capacity >= All (select P2.capacity from Cinema P2) always correctly finds theaters whose capacity is greater than or equal to every other theater's capacity, i.e., the maximum capacity theaters.",
+            "pyq_sources": [
+                { "year": 2015, "set": 3, "question_number": "Q3.33", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following database table named water_schemes: (scheme_no, district_name, capacity): 1-Ajmer-20, 1-Bikaner-10, 2-Bikaner-10, 3-Bikaner-20, 1-Churu-10, 2-Churu-20, 1-Dungargarh-10. The number of tuples returned by the following SQL query is: with total (name, capacity) as (select district_name, sum (capacity) from water_schemes group by district_name) with total_avg (capacity) as (select avg (capacity) from total) select name from total, total_avg where total.capacity >= total_avg.capacity",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["CTE (WITH clause)", "Aggregate comparison"],
+            "tags": ["with clause", "cte", "group by", "avg comparison"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "2",
+            "explanation": "Grouping water_schemes by district_name and summing capacity gives: Ajmer=20, Bikaner=40, Churu=30, Dungargarh=10. The average of these totals is (20+40+30+10)/4 = 25. Districts with total capacity >= 25 are Bikaner (40) and Churu (30), so 2 rows are returned.",
+            "pyq_sources": [
+                { "year": 2016, "set": 2, "question_number": "Q3.34", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following database that has the relation schema EMP (EmpId, EmpName, DeptName). An instance of the schema EMP is given below: 1-XYA-AA, 2-XYB-AA, 3-XYC-AA, 4-XYD-AA, 5-XYE-AB, 6-XYF-AB, 7-XYG-AB, 8-XYH-AC, 9-XYI-AC, 10-XYJ-AC, 11-XYK-AD, 12-XYL-AD, 13-XYM-AE. Consider the following SQL query on this instance: SELECT AVG(EC.Num) FROM (SELECT DeptName, COUNT(EmpId) AS Num FROM EMP GROUP BY DeptName) AS EC(DeptName, Num). The output of executing the SQL query is ____.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Derived table aggregation", "AVG of counts"],
+            "tags": ["derived table", "group by", "avg function", "count aggregate"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "2.6",
+            "explanation": "Grouping EMP by DeptName and counting gives: AA=4, AB=3, AC=3, AD=2, AE=1. The average of the derived table EC's Num column is (4+3+3+2+1)/5 = 13/5 = 2.6.",
+            "pyq_sources": [
+                { "year": 2017, "set": 1, "question_number": "Q3.35", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider the following database table named top_scorer (player, country, goals): Klose-Germany-16, Ronaldo-Brazil-15, G Muller-Germany-14, Fontaine-France-13, Pele-Brazil-12, Klinsmann-Germany-11, Kocsis-Hungary-11, Batistuta-Argentina-10, Cubillas-Peru-10, Lato-Poland-10, Lineker-England-10, T Muller-Germany-10, Rahn-Germany-10. Consider the following SQL query: SELECT ta.player FROM top_scorer AS ta WHERE ta.goals > ALL (SELECT tb.goals FROM top_scorer AS tb WHERE tb.country = 'Spain') AND ta.goals > ANY (SELECT tc.goals FROM top_scorer AS tc WHERE tc.country = 'Germany'). The number of tuples returned by the above SQL query is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["ALL with empty set", "ANY operator"],
+            "tags": ["all operator", "any operator", "empty subquery", "comparison"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "7",
+            "explanation": "No player has country = 'Spain', so the ALL subquery returns an empty set, making the ALL condition vacuously true for every row. The Germany players' goals are {16, 14, 11, 10, 10}, so the ANY condition requires ta.goals to exceed the minimum of these, which is 10. Players with goals greater than 10 are Klose(16), Ronaldo(15), G Muller(14), Fontaine(13), Pele(12), Klinsmann(11), Kocsis(11), giving 7 tuples.",
+            "pyq_sources": [
+                { "year": 2017, "set": 2, "question_number": "Q3.36", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following two tables and four queries in SQL. Book (isbn, bname), Stock (isbn, copies). Query 1: SELECT B.isbn, S.copies FROM Book B INNER JOIN Stock S ON B.isbn = S.isbn; Query 2: SELECT B.isbn, S.copies FROM Book B LEFT OUTER JOIN Stock S ON B.isbn = S.isbn; Query 3: SELECT B.isbn, S.copies FROM Book B RIGHT OUTER JOIN Stock S ON B.isbn = S.isbn; Query 4: SELECT B.isbn, S.copies FROM Book B FULL OUTER JOIN Stock S ON B.isbn = S.isbn; Which one of the queries above is certain to have an output that is a superset of the outputs of the other three queries? (a) Query 1 (b) Query 2 (c) Query 3 (d) Query 4",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Types of JOIN", "Outer join superset property"],
+            "tags": ["inner join", "left outer join", "right outer join", "full outer join"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "Query 1", "is_correct": false },
+                { "label": "B", "text": "Query 2", "is_correct": false },
+                { "label": "C", "text": "Query 3", "is_correct": false },
+                { "label": "D", "text": "Query 4", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Query 4 is a full outer join, so its result set is always a superset of the results of the inner join, left outer join, and right outer join, since it includes all matched rows plus all unmatched rows from both tables.",
+            "pyq_sources": [
+                { "year": 2018, "set": null, "question_number": "Q3.37", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "A relational database contains two tables Student and Performance as shown below: Student (Roll_no, Student_name): 1-Amit, 2-Priya, 3-Vinit, 4-Rohan, 5-Smita. Performance (Roll_no, Student_code, Marks): 1-A-86, 1-B-95, 1-C-90, 2-A-89, 2-C-92, 3-C-80. The primary key of the Student table is Roll_no. For the Performance table, the columns Roll_no and Subject_code together form the primary key. Consider the SQL query given below: SELECT S.Student_name, sum(P.Marks) FROM Student S, Performance P WHERE P.Marks > 84 GROUP BY S.Student_name; The number of rows returned by the above SQL query is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Cartesian product join", "GROUP BY without join condition"],
+            "tags": ["cartesian product", "group by", "missing join condition", "row count"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "5",
+            "explanation": "The WHERE clause has no join condition linking Roll_no between Student and Performance, so the query produces a Cartesian product filtered by P.Marks > 84, and grouping by Student_name produces a group for every distinct student name. There are 5 distinct student names, so 5 rows are returned.",
+            "pyq_sources": [
+                { "year": 2019, "set": null, "question_number": "Q3.38", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a relational database containing the following schemas: Catalog (sno, pno, cost): S1-P1-150, S1-P2-50, S1-P3-100, S2-P4-200, S2-P5-250, S3-P1-250, S3-P2-150, S3-P5-300, S3-P4-250. Supplies (sno, sname, location): S1-M/s Royal furniture-Delhi, S2-M/s Balaji furniture-Bangalore, S3-M/s Premium furniture-Chennai. Parts (pno, sname, part_spec): P1-Table-Wood, P2-Chair-Wood, P3-Table-Steel, P4-Almirah-Steel, P5-Almirah-Wood. The primary key of each table is indicated by underlining the constituent fields. SELECT s.sno, s.name FROM Suppliers s, Catalogue c WHERE s.sno = c.sno AND cost > (SELECT AVG (cost) FROM Catalogue WHERE pno = 'P4' GROUP BY pno); The number of rows returned by the above SQL query is (a) 2 (b) 5 (c) 4 (d) 0",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Correlated subquery with AVG", "Threshold comparison"],
+            "tags": ["avg function", "subquery", "cost threshold", "join"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "2", "is_correct": false },
+                { "label": "B", "text": "5", "is_correct": false },
+                { "label": "C", "text": "4", "is_correct": true },
+                { "label": "D", "text": "0", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The subquery computes the average cost of parts P4 across the Catalog, which is (200+250)/2 = 225. Filtering the join of Suppliers and Catalog for cost > 225 gives the rows (S2,P5,250), (S3,P1,250), (S3,P5,300), (S3,P4,250), which are 4 rows.",
+            "pyq_sources": [
+                { "year": 2020, "set": null, "question_number": "Q3.39", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "The relation scheme given below is used to store information about the employees of a company, where empId is the key and deptId indicates the department to which the employee is assigned. Each employee is assigned to exactly one department. emp(empId, name, gender, salary, deptId). Consider the following SQL query: select deptId, count(*) from emp where gender = 'female' and salary > (select avg(salary) from emp) group by deptId; The above query gives, for each department in the company, the number of female employees whose salary is greater than the average salary of (a) Female employees in the department. (b) Employees in the department. (c) Female employees in the company. (d) Employees in the company.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Uncorrelated subquery", "AVG scope"],
+            "tags": ["group by", "having", "avg subquery", "company wide average"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "Female employees in the department.", "is_correct": false },
+                { "label": "B", "text": "Employees in the department.", "is_correct": false },
+                { "label": "C", "text": "Female employees in the company.", "is_correct": false },
+                { "label": "D", "text": "Employees in the company.", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The subquery (select avg(salary) from emp) is uncorrelated and computes the average salary of all employees in the entire company, not scoped to any department or gender. So for each department, the query counts female employees whose salary exceeds the average salary of all employees in the company.",
+            "pyq_sources": [
+                { "year": 2021, "set": 2, "question_number": "Q3.40", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the relational database with the following four schemas and their respective instances: Student(sNo, sName, dNo): S01-James-D01, S02-Rocky-D02, S03-Jackson-D02, S04-Jane-D01, S05-Milli-D02. Dept(dNo, dName): D01-CSE, D02-EEE. Course(cNo, cName, dNo): C11-DS-D01, C12-OS-D01, C21-DE-D02, C22-PT-D02, C23-CV-D03. Register(sNo, cNo): S01-C11, S01-C12, S02-C11, S03-C21, S03-C22, S03-C23, S04-C11, S04-C12, S05-C11, S05-C21. SQL Query: SELECT * FROM Student AS S WHERE NOT EXISTS (SELECT cNo FROM Course WHERE dNo = 'D01' EXCEPT SELECT cNo FROM Register WHERE sNo = S.sNo). The number of rows returned by the above SQL query is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["EXCEPT operator", "Division-like query (universal quantification)"],
+            "tags": ["except operator", "not exists", "universal quantification", "course registration"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "2",
+            "explanation": "The query retrieves student records who have registered for all courses belonging to department D01. The courses in D01 are C11 and C12. Checking the Register table, the students registered for both C11 and C12 are S01 and S04, so 2 rows are returned.",
+            "pyq_sources": [
+                { "year": 2022, "set": null, "question_number": "Q3.41", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following table named Student in a relational database. The primary key of this table is rollNum: 1-Naman-M-62, 2-Aliya-F-70, 3-Aliya-F-80, 4-James-M-82, 5-Swati-F-65. The SQL query below is executed on this database: SELECT * FROM Student WHERE gender = 'F' AND marks > 65; The number of rows returned by the query is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "easy",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["WHERE clause filtering", "Boolean AND condition"],
+            "tags": ["where clause", "filtering", "boolean condition", "row count"],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [],
+            "correct_answer_text": "2",
+            "explanation": "Filtering rows where gender = 'F' AND marks > 65 selects Aliya (F, 70) and Aliya (F, 80); Swati (F, 65) is excluded since 65 is not greater than 65. So 2 rows are returned.",
+            "pyq_sources": [
+                { "year": 2023, "set": null, "question_number": "Q3.42", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the relational database with the following four schemas and their respective instances. player(pid, pname, age): 1-Jasprit-31, 2-Atharva-24, 3-Ishan-26, 4-Axar-30. coach(cid, cname): 101-Ricky, 102-Mark, 104-Teevor. team(tid, tname, city, cid): 10-MI-Mumbai-102, 20-DC-Delhi-101, 30-PK-Mohali-103. members(pid, tid): 1-10, 2-30, 3-10, 4-20. SELECT MIN(P.age) FROM player P WHERE P.pid IN ( SELECT M.pid FROM team T, coach C, members M WHERE C.cname = 'Mark' AND T.cid = C.cid AND M.tid = T.tid ). The value returned by the given SQL query is ____. (Answer in integer)",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["Multi-table join", "MIN aggregate", "Nested subquery"],
+            "tags": ["nested subquery", "min function", "multi table join", "team coach player"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "26",
+            "explanation": "The coach with cname 'Mark' has cid 102, which matches team tid 10 (MI, Mumbai). Members with tid = 10 are pid 1 and pid 3. Their ages are Jasprit (31) and Ishan (26). The minimum of these is 26.",
+            "pyq_sources": [
+                { "year": 2025, "set": 1, "question_number": "Q3.43", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider the following relational schema: Students (rollno: integer, name: string, age: integer, cgpa: real). Courses (courseno: integer, cname: string, credits: integer). Enrolled (rollno: integer, courseno: integer, grade: string). Which of the following options is/are correct SQL query/queries to retrieve the names of the students enrolled in course number (i.e., courseno) 1470? (a) SELECT S.name FROM Students S WHERE EXISTS (SELECT * FROM Enrolled E WHERE E.courseno = 1470 AND E.rollno = S.rollno); (b) SELECT S.name FROM Students S WHERE SIZEOF (SELECT * FROM Enrolled E WHERE E.courseno = 1470 AND E.rollno = S.rollno) > 0; (c) SELECT S.name FROM Students S WHERE 0 < (SELECT COUNT(*) FROM Enrolled E WHERE E.courseno = 1470 AND E.rollno = S.rollno); (d) SELECT S.name FROM Students S NATURAL JOIN Enrolled E WHERE E.courseno = 1470;",
+            "question_type": "MSQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["Structured Query Language (SQL)"],
+            "concepts": ["EXISTS clause", "NATURAL JOIN", "COUNT subquery"],
+            "tags": ["exists clause", "natural join", "count subquery", "enrollment query"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "SELECT S.name FROM Students S WHERE EXISTS (SELECT * FROM Enrolled E WHERE E.courseno = 1470 AND E.rollno = S.rollno);", "is_correct": true },
+                { "label": "B", "text": "SELECT S.name FROM Students S WHERE SIZEOF (SELECT * FROM Enrolled E WHERE E.courseno = 1470 AND E.rollno = S.rollno) > 0;", "is_correct": false },
+                { "label": "C", "text": "SELECT S.name FROM Students S WHERE 0 < (SELECT COUNT(*) FROM Enrolled E WHERE E.courseno = 1470 AND E.rollno = S.rollno);", "is_correct": true },
+                { "label": "D", "text": "SELECT S.name FROM Students S NATURAL JOIN Enrolled E WHERE E.courseno = 1470;", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Option (a) is correct since EXISTS correctly checks for a matching enrollment record. Option (b) uses SIZEOF, which is not valid standard SQL syntax, so it is incorrect. Option (c) is correct since counting matching records and checking it is greater than 0 is equivalent to EXISTS. Option (d) is correct since a NATURAL JOIN on the common rollno attribute filtered by courseno = 1470 also retrieves the correct names.",
+            "pyq_sources": [
+                { "year": 2025, "set": 2, "question_number": "Q3.44", "marks": 2 }
+            ]
+        }
+    ]
+}

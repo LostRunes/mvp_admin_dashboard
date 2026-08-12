@@ -1,0 +1,3148 @@
+{
+  "subject": {
+    "subject_name": "Database Management System",
+    "subject_code": "DBMS"
+  },
+  "topics": [
+    {
+      "topic_name": "Database Design: Functional Dependencies and Normalization",
+      "summary": "Covers functional dependencies, normal forms (1NF-BCNF), candidate keys, superkeys, decomposition properties (lossless join and dependency preservation), and Armstrong's axioms."
+    }
+  ],
+  "questions": [
+    {
+      "question_text": "For a database relation R(a, b, c, d), where the domains of a, b, c, d include only atomic values, only the following functional dependencies and those that can be inferred from them hold: a→c, b→d. This relation is",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Candidate Key",
+        "Partial Dependency"
+      ],
+      "tags": [
+        "1NF",
+        "2NF",
+        "candidate key",
+        "partial dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "in first normal form but not in second normal form",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "in second normal form but not in third normal form",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "in third normal form",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "None of the above",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The candidate key of R is {a,b}. Since a and b are prime attributes while c and d are non-prime, and each FD has a proper subset of the candidate key determining a non-prime attribute, this is a partial dependency, which is disallowed in 2NF. Hence R is in 1NF but not 2NF.",
+      "pyq_sources": [
+        {
+          "year": 1997,
+          "set": null,
+          "question_number": "2.1",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Let R(a, b, c) and S(d, e, f) be two relations in which d is the foreign key of S that refers to the primary key of R. Consider the following four operations on R and S: (i) Insert into R (ii) Insert into S (iii) Delete from R (iv) Delete from S. Which of the following is true about the referential integrity constraint above?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Referential Integrity",
+        "Foreign Key"
+      ],
+      "tags": [
+        "referential integrity",
+        "foreign key",
+        "insert anomaly",
+        "delete anomaly"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "None of (i), (ii), (iii) or (iv) can cause its violation",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "All of (i), (ii), (iii) and (iv) can cause its violation",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Both (i) and (iv) can cause its violation",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Both (ii) and (iii) can cause its violation",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Inserting into S can violate referential integrity since S has a foreign key referencing R's primary key; the inserted value may not exist in R. Deleting from R can violate integrity since a deleted primary key value may still be referenced by S. Hence (ii) and (iii) can cause violations.",
+      "pyq_sources": [
+        {
+          "year": 1997,
+          "set": null,
+          "question_number": "2.2",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Which normal form is considered adequate for normal relational database design?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "easy",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms"
+      ],
+      "tags": [
+        "3NF",
+        "normalization adequacy"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 30,
+      "options": [
+        {
+          "label": "A",
+          "text": "2 NF",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "5 NF",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "4 NF",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "3 NF",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "A lossless-join, dependency-preserving decomposition into BCNF is not always possible, whereas it is always possible into 3NF. Hence 3NF is considered adequate for normal relational database design.",
+      "pyq_sources": [
+        {
+          "year": 1998,
+          "set": null,
+          "question_number": "2.3",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "There are five records in a database with fields Name, Age, Occupation and Category (Rama/27/CON/A, Abdul/22/ENG/A, Jeniffer/28/DOC/B, Maya/32/SER/D, Dev/24/MUS/C). There is an index file associated with this and it contains the values 1, 3, 2, 5 and 4. Which one of the fields is the index built from?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Indexing",
+        "Index File"
+      ],
+      "tags": [
+        "indexing",
+        "index file",
+        "file organization"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "Age",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Name",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Occupation",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "Category",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The index entries 1, 3, 2, 5, 4 correspond to records sorted alphabetically by Occupation (CON, DOC, ENG, MUS, SER), with pointers back to the original record positions. Hence the index is built from the Occupation field.",
+      "pyq_sources": [
+        {
+          "year": 1998,
+          "set": null,
+          "question_number": "2.4",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following database relations containing attributes: Book_id, Subject_Category_of_book, Name_of_Author, Nationality_of_Author, with book_id as the primary key. (a) What is the highest normal form satisfied by this relation? (b) Suppose the attributes Book_title and Author_address are added to the relation, and the primary key is changed to {Name_of_Author, Book_title}, what will be the highest normal form satisfied by the relation?",
+      "question_type": "NAT",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Candidate Key",
+        "Partial Dependency"
+      ],
+      "tags": [
+        "BCNF",
+        "primary key change",
+        "functional dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [],
+      "correct_answer_text": "(a) BCNF, since book_id is the primary key and all other attributes are fully functionally dependent on it. (b) 1NF, since with the new composite key {Name_of_Author, Book_title}, Book_id determines the other non-key attributes, creating a partial dependency that violates 2NF.",
+      "explanation": "Part (a): with book_id as primary key, {book_id} determines Subject_Category_of_book, Name_of_Author, and Nationality_of_Author, so the relation is in BCNF. Part (b): after adding Book_title and Author_address and changing the primary key to {Name_of_Author, Book_title}, book_id still functionally determines the other attributes, which is a partial dependency on a proper subset of the new key, so the relation drops to 1NF.",
+      "pyq_sources": [
+        {
+          "year": 1998,
+          "set": null,
+          "question_number": "2.5",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Let R = (A, B, C, D, E, F) be a relation scheme with the following dependencies: C→F, E→A, EC→D, A→B. Which of the following is a key for R?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Candidate Key",
+        "Attribute Closure"
+      ],
+      "tags": [
+        "candidate key",
+        "attribute closure",
+        "functional dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "CD",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "EC",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "AE",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "AC",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Computing the closure of EC gives {E,C,A,D,F,B} which is all attributes of R, so EC is a key. Closures of CD, AE, and AC do not yield all attributes of R.",
+      "pyq_sources": [
+        {
+          "year": 1999,
+          "set": null,
+          "question_number": "2.6",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the schema R = (S T U V) and the dependencies S→T, T→U, U→V and V→S. Let R = (R1 and R2) be a decomposition such that R1 ∩ R2 = φ. The decomposition is",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Decomposition",
+        "2NF",
+        "3NF"
+      ],
+      "tags": [
+        "lossy decomposition",
+        "2NF",
+        "3NF",
+        "BCNF"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "not in 2NF",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "in 2NF but not 3NF",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "in 3NF but not 2NF",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "in both 2NF and 3NF",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Since R1 ∩ R2 = φ (empty intersection), the decomposition is a lossy join decomposition, which is not allowed under 2NF, 3NF, or BCNF criteria.",
+      "pyq_sources": [
+        {
+          "year": 1999,
+          "set": null,
+          "question_number": "2.7",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Given the following relation instance with attributes X, Y, Z and rows (1,4,2), (1,5,3), (1,6,3), (3,2,2): Which of the following functional dependencies are satisfied by the instance?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Functional Dependency Satisfaction"
+      ],
+      "tags": [
+        "FD satisfaction",
+        "relation instance"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "XY→Z and Z→Y",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "YZ→X and Y→Z",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "YZ→X and X→Z",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "XZ→Y and Y→X",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Checking the given rows against each candidate FD shows that both YZ→X and Y→Z hold across all tuples in the instance, while the other listed pairs each contain one FD that is violated by some pair of rows.",
+      "pyq_sources": [
+        {
+          "year": 2000,
+          "set": null,
+          "question_number": "2.8",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a schema R(A,B,C,D) and functional dependencies A→B and C→D. Then the decomposition of R into R1(AB) and R2(CD) is",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Decomposition",
+        "Lossless Join",
+        "Dependency Preservation"
+      ],
+      "tags": [
+        "lossless join",
+        "dependency preserving",
+        "decomposition"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "dependency preserving and lossless join",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "lossless join but not dependency preserving",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "dependency preserving but not lossless join",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "not dependency preserving and not lossless join",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "All the original functional dependencies (A→B and C→D) can be derived from the FDs on the two sub-relations, so the decomposition is dependency preserving. However, attribute B does not determine A, C, or D, and D does not determine A, B, or C, so there is no common key relationship between R1 and R2, making the join lossy.",
+      "pyq_sources": [
+        {
+          "year": 2001,
+          "set": null,
+          "question_number": "2.9",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "R(A, B, C, D) is a relation. Which of the following does not have a lossless join, dependency preserving BCNF decomposition?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "BCNF Decomposition",
+        "Lossless Join",
+        "Dependency Preservation"
+      ],
+      "tags": [
+        "BCNF decomposition",
+        "lossless join",
+        "dependency preserving"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "A→B, B→CD",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "A→B, B→C, C→D",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "AB→C, C→D",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "A→BCD",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The decomposition corresponding to option (c), {CAD, BC}, gives a lossless join but is not dependency preserving, since the FD AB→C cannot be verified without a join. The other options each yield decompositions that are both lossless-join and dependency-preserving BCNF decompositions.",
+      "pyq_sources": [
+        {
+          "year": 2001,
+          "set": null,
+          "question_number": "2.10",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Relation R with an associated set of functional dependencies, F, is decomposed into BCNF. The redundancy (arising out of functional dependencies) in the resulting set of relations is",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "BCNF",
+        "Redundancy"
+      ],
+      "tags": [
+        "BCNF decomposition",
+        "redundancy"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "Zero",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "More than zero but less than that of an equivalent 3NF decomposition",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Proportional to the size of F+",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Indeterminate",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "A BCNF decomposition eliminates all redundancy arising from single-valued functional dependencies, so the degree of such redundancy is zero.",
+      "pyq_sources": [
+        {
+          "year": 2002,
+          "set": null,
+          "question_number": "2.11",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Relation R is decomposed using a set of functional dependencies, F, and relation S is decomposed using another set of functional dependencies, G. One decomposition is definitely BCNF, the other is definitely 3NF, but it is not known which is which. To make a guaranteed identification, which one of the following tests should be used on the decompositions? (Assume that the closures of F and G are available.)",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "BCNF",
+        "3NF",
+        "Normal Form Testing"
+      ],
+      "tags": [
+        "BCNF test",
+        "3NF test",
+        "decomposition testing"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "Dependency-preservation",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Lossless-join",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "BCNF definition",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "3NF definition",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Every relation in BCNF is also in 3NF, but a relation in 3NF may not satisfy BCNF. So testing both decompositions against the BCNF definition guarantees correct identification, since only the true BCNF one will pass.",
+      "pyq_sources": [
+        {
+          "year": 2002,
+          "set": null,
+          "question_number": "2.12",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "From the following instance of a relation scheme R(A, B, C), with rows (1,1,1), (1,1,0), (2,3,2), (2,3,2), we can conclude that:",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Functional Dependency Inference from Instance"
+      ],
+      "tags": [
+        "FD inference",
+        "relation instance"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "A functionally determines B and B functionally determines C",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "A functionally determines B and B does not functionally determine C",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "B does not functionally determine C",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "A does not functionally determine B and B does not functionally determine C",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "A single relation instance (snapshot) cannot be used to positively confirm that a functional dependency holds, since a later insertion could violate it. However, an instance can be used to definitively rule out a dependency. Here, since rows with B=1 map to both C=1 and C=0, B does not functionally determine C.",
+      "pyq_sources": [
+        {
+          "year": 2002,
+          "set": null,
+          "question_number": "2.13",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following functional dependencies in a database: Data_of_Birth→Age, Age→Eligibility, Name→Roll_number, Roll_number→Name, Course_number→Course_name, Course_number→Instructor, (Roll_number, Course_number)→Grade. The relation (Roll_number, Name, Date_of_birth, Age) is",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Partial Dependency"
+      ],
+      "tags": [
+        "2NF",
+        "3NF",
+        "BCNF",
+        "partial dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "in second normal form but not in third normal form",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "in third normal form but not in BCNF",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "in BCNF",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "in none of the above",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The relevant FDs are Date_of_Birth→Age, Name→Roll_number, Roll_number→Name, giving candidate keys {Name, Date_of_birth} and {Roll_number, Date_of_birth}. Date_of_Birth→Age is a partial dependency (Date_of_Birth is a proper subset of both candidate keys), which is not allowed in 2NF, so the relation is in 1NF only, i.e. none of the above.",
+      "pyq_sources": [
+        {
+          "year": 2003,
+          "set": null,
+          "question_number": "2.14",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following relation schema pertaining to a students database: Student(rollno, name, address), Enroll(rollno, courseno, coursename), where the primary keys are shown underlined. The number of tuples in the student and Enroll tables are 120 and 8 respectively. What are the maximum and minimum number of tuples that can be present in (Student * Enroll), where '*' denotes natural join?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "easy",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Natural Join",
+        "Referential Integrity"
+      ],
+      "tags": [
+        "natural join",
+        "foreign key",
+        "tuple count"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "8, 8",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "120, 8",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "960, 8",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "960, 120",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Since rollno in Enroll is a foreign key referencing Student, each of the 8 Enroll records maps to exactly one Student record via the natural join, giving both a maximum and minimum of 8 tuples in the result.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "2.15",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "The relation scheme student Performance(name, courseNo, rollNo, grade) has the following functional dependencies: name, courseNo→grade; RollNo, courseNo→grade; name→rollNo; rollNo→name. The highest normal form of this relation scheme is",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Candidate Key"
+      ],
+      "tags": [
+        "3NF",
+        "BCNF",
+        "candidate key"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "2 NF",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "3 NF",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "BCNF",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "4 NF",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The candidate keys are {name, courseNo} and {rollNo, courseNo}. All attributes are prime (part of some candidate key), so there is no partial or transitive dependency of a non-prime attribute, but name→rollNo and rollNo→name mean a proper subset of a key determines another prime attribute, which is disallowed in BCNF but permitted in 3NF. Hence the relation is in 3NF but not BCNF.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "2.16",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "A relation Empdtl is defined with attributes empcode (unique), name, street, city, state and pincode. For any pincode, there is only one city and state. Also, for any given street, city and state, there is just one pincode. In normalization terms, Empdtl is a relation in",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Transitive Dependency"
+      ],
+      "tags": [
+        "2NF",
+        "3NF",
+        "transitive dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "1NF only",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "2NF and hence also in 1NF",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "3NF and hence also in 2NF and 1NF",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "BCNF and hence also in 3NF, 2NF and 1NF",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The candidate key is empcode, so empcode→name, street, city, state, pincode. Since pincode→state, city forms a transitive dependency of non-prime attributes on the key, this is not allowed in 3NF. As the key is a single attribute, no partial dependency exists, so the relation is in 2NF but not 3NF.",
+      "pyq_sources": [
+        {
+          "year": 2004,
+          "set": null,
+          "question_number": "2.17",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "A table has fields F1, F2, F3, F4, F5 with the following functional dependencies: F1→F3, F2→F4, (F1, F2)→F5. In terms of Normalization, this table is in",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Partial Dependency"
+      ],
+      "tags": [
+        "1NF",
+        "partial dependency",
+        "candidate key"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "1 NF",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "2 NF",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "3 NF",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "None of these",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The candidate key is {F1, F2}. Since F1→F3 and F2→F4 are each partial dependencies (a proper subset of the candidate key determining a non-prime attribute), 2NF is violated, so the table is only in 1NF.",
+      "pyq_sources": [
+        {
+          "year": 2005,
+          "set": null,
+          "question_number": "2.18",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Which one of the following statements about normal forms is FALSE?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "BCNF Decomposition"
+      ],
+      "tags": [
+        "BCNF",
+        "3NF",
+        "dependency preservation"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "BCNF is stricter than 3 NF",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Loss less, dependency-preserving decomposition into 3 NF is always possible",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Loss less, dependency-preserving decomposition into BCNF is always possible",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "Any relation with two attributes is in BCNF",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "A lossless-join decomposition into BCNF is always possible, but it is not guaranteed to be dependency-preserving. Hence the statement that lossless, dependency-preserving decomposition into BCNF is always possible is false.",
+      "pyq_sources": [
+        {
+          "year": 2005,
+          "set": null,
+          "question_number": "2.19",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a relation scheme R = (A, B, C, D, E, H) on which the following functional dependencies hold: {A→B, BC→D, E→C, D→A}. What are the candidate keys of R?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Candidate Key"
+      ],
+      "tags": [
+        "candidate key",
+        "attribute closure"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "AE, BE",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "AE, BE, DE",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "AEH, BEH, BCH",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "AEH, BEH, DEH",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Computing closures of AEH, BEH, and DEH each yields all attributes {A,B,C,D,E,H} of R, so these three are the candidate keys.",
+      "pyq_sources": [
+        {
+          "year": 2005,
+          "set": null,
+          "question_number": "2.20",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "In a schema with attributes A, B, C, D and E, the following set of functional dependencies are given: A→B, A→C, CD→E, B→D, E→A. Which of the following functional dependencies is NOT implied by the above set?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Functional Dependency Implication",
+        "Membership Test"
+      ],
+      "tags": [
+        "FD implication",
+        "membership algorithm"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "CD→AC",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "BD→CD",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "BC→CD",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "AC→BD",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Using the membership test, the closure of CD includes {C,D,E,A,B}, so CD→AC holds. But the closure of BD is just {B,D}, so BD cannot derive CD, meaning BD→CD is not implied by the given set.",
+      "pyq_sources": [
+        {
+          "year": 2005,
+          "set": null,
+          "question_number": "2.21",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the relations r1(P,Q,R) and r2(R,S,T) with primary keys P and R respectively. The relation r1 contains 2000 tuples and r2 contains 2500 tuples. The maximum size of the join r1 ⋈ r2 is",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Natural Join",
+        "Foreign Key"
+      ],
+      "tags": [
+        "natural join",
+        "referential integrity",
+        "join size"
+      ],
+      "is_numerical": true,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "2000",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "2500",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "4500",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "5000",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Since R is the primary key of r2 and presumably referenced from r1, each r1 tuple joins with at most one r2 tuple. The maximum possible number of common R values equals the smaller relation's tuple count, giving a maximum join size of 2000.",
+      "pyq_sources": [
+        {
+          "year": 2006,
+          "set": null,
+          "question_number": "2.22",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a relation R with five attributes V, W, X, Y, and Z. The following functional dependencies hold: VY→W, WX→Z, ZY→V. Which of the following is a candidate key for R?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Candidate Key",
+        "Attribute Closure"
+      ],
+      "tags": [
+        "candidate key",
+        "attribute closure"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "VXZ",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "VXY",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "VWXY",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "VWXYZ",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Computing closures shows (VY)+ = VYW and (VYX)+ = VYWXZ, which is all attributes. Since ZY→V and WX→Z, VXY, ZYX, and WXY are each candidate keys, so VXY is a candidate key for R.",
+      "pyq_sources": [
+        {
+          "year": 2006,
+          "set": null,
+          "question_number": "2.23",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "The following functional dependencies are given: AB→CD, AF→D, DE→F, C→G, F→E, G→A. Which one of the following options is false?",
+      "question_type": "MSQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Attribute Closure"
+      ],
+      "tags": [
+        "attribute closure",
+        "functional dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "{CF}+ = {ACDEFG}",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "{BG}+ = {ABCDG}",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "{AF}+ = {ACDEFG}",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "{AB}+ = {ACDFG}",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Computing the closure of AF gives {A,F,D,E} only (not the full set claimed), so option (c) is false. Computing the closure of AB gives {A,B,C,D,G} only, not {ACDFG} as claimed, so option (d) is also false. Options (a) and (b) compute correctly.",
+      "pyq_sources": [
+        {
+          "year": 2006,
+          "set": null,
+          "question_number": "2.24",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Which one of the following statements is FALSE?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "BCNF",
+        "3NF"
+      ],
+      "tags": [
+        "BCNF",
+        "3NF",
+        "2NF",
+        "transitive dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "Any relation with two attributes is in BCNF",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "A relation in which every key has only one attribute is in 2NF",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "A prime attribute can be transitively dependent on a key in 3NF relation",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "A prime attribute can be transitively dependent on a key in a BCNF relation",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In a BCNF relation, no prime attribute can be transitively dependent on a key, since every determinant of a non-trivial functional dependency must be a superkey. Hence statement (d) is false.",
+      "pyq_sources": [
+        {
+          "year": 2007,
+          "set": null,
+          "question_number": "2.25",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following implications relating to functional and multivalued dependencies given below, which may or may not be correct: (i) If A→→B and A→→C then A→BC (ii) If A→B and A→C then A→→BC (iii) If A→→BC and A→B then A→C (iv) If A→BC and A→B then A→→C. Exactly how many of the above implications are valid?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Multivalued Dependency",
+        "Functional Dependency"
+      ],
+      "tags": [
+        "MVD",
+        "FD",
+        "multivalued dependency rules"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "0",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "1",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "2",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "3",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Implication (i) is not valid since a multivalued dependency does not imply the corresponding functional dependency. Implication (ii) is valid, since every FD can be treated as a special case of an MVD. Implication (iii) is not valid for the same reason as (i). Implication (iv) is valid, since A→BC and A→B together imply A→C, which in turn implies A→→C. So exactly 2 implications are valid.",
+      "pyq_sources": [
+        {
+          "year": 2007,
+          "set": null,
+          "question_number": "2.26",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Let R (A, B, C, D) be a relational schema with the following functional dependencies: A→B, B→C, C→D and D→B. The decomposition of R into (A, B), (B, C), (B, D)",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Decomposition",
+        "Lossless Join",
+        "Dependency Preservation"
+      ],
+      "tags": [
+        "lossless join",
+        "dependency preserving"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "Gives a lossless join, and is dependency preserving",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "Gives a lossless join, but is not dependency preserving",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Does not give a lossless join, but is dependency preserving",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Does not give a lossless join and is not dependency preserving",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Joining R1(AB) and R2(BC) on the common key B gives a lossless join, and joining the result with R3(BD) on B is also lossless, so the overall decomposition is lossless. All original functional dependencies are implied by the FDs holding on the sub-relations, so the decomposition is also dependency preserving.",
+      "pyq_sources": [
+        {
+          "year": 2008,
+          "set": null,
+          "question_number": "2.27",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Let R (A, B, C, D, E, P, G) be a relational schema in which the following functional dependencies are known to hold: AB→CD, DE→P, C→E, P→C and B→G. The relational schema R is",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Partial Dependency"
+      ],
+      "tags": [
+        "2NF",
+        "BCNF",
+        "partial dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "in BCNF",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "in 3NF, but not in BCNF",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "in 2NF, but not in 3NF",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "not in 2NF",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The candidate key is AB. Since B→G is a partial dependency (B, a proper subset of the candidate key AB, determines the non-prime attribute G), the relation violates 2NF.",
+      "pyq_sources": [
+        {
+          "year": 2008,
+          "set": null,
+          "question_number": "2.28",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following relational schemes for a library database: Book (Title, Author, Catalog_no, Publisher, Year, price), Collection (Title, Author, Catalog_no), with the following functional dependencies: I. Title Author→Catalog_no II. Catalog_no→Title Author Publisher Year III. Publisher Title Year→Price. Assume {Author, Title} is the key for both schemes. Which of the following statements is true?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Partial Dependency"
+      ],
+      "tags": [
+        "2NF",
+        "3NF",
+        "BCNF",
+        "candidate key"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "Both Book and Collection are in BCNF",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Both Book and Collection are in 3NF only",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Book is in 2NF and Collection is in 3NF",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "Both Book and Collection are in 2NF only",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "For Book, the candidate keys are {Author,Title} and {Catalog_no}, and Catalog_no→Title Author Publisher Year is a partial dependency since Catalog_no is part of one candidate key but the FD determines non-prime attributes, so Book is in 2NF. For Collection(Title,Author,Catalog_no), both FDs are non-partial and non-transitive, so Collection is in 3NF (in fact BCNF, as all determinants are candidate keys).",
+      "pyq_sources": [
+        {
+          "year": 2008,
+          "set": null,
+          "question_number": "2.29",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "The following functional dependencies hold for relations R(A, B, C) and S(B, D, E): B→A, A→C. The relation R contains 200 tuples and the relation S contains 100 tuples. What is the maximum number of tuples possible in the natural join R ⋈ S?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Natural Join",
+        "Foreign Key"
+      ],
+      "tags": [
+        "natural join",
+        "join size"
+      ],
+      "is_numerical": true,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "100",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "200",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "300",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "2000",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Since B→A holds in R, each value of B corresponds to a single value of A. The natural join is on the common attribute B; the maximum number of matching tuples equals the number of tuples in the smaller relation, S, giving a maximum of 100 tuples.",
+      "pyq_sources": [
+        {
+          "year": 2010,
+          "set": null,
+          "question_number": "2.30",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a relational table with a single record from each registered student with the following attributes: 1. Registration_Num: Unique registration number of each registered student 2. UID: Unique identity number, unique at the national level for each citizen 3. BankAccount_Num: Unique account number at the bank. A student can have multiple accounts or joint accounts; this attribute stores the primary account number 4. Name: Name of the student 5. Hostel_Room: Room number of the hostel. Which of the following options is INCORRECT?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Candidate Key",
+        "Superkey"
+      ],
+      "tags": [
+        "candidate key",
+        "superkey"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "BankAccount_Num is a candidate key",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "Registration_Num can be a primary key",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "UID is a candidate key if all students are from the same country",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "If S is a superkey such that S ∩ UID is NULL then S ∪ UID is also a superkey",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "BankAccount_Num cannot be a candidate key, because a student may have joint accounts, so the same account number could correspond to multiple students, meaning it does not uniquely identify a student.",
+      "pyq_sources": [
+        {
+          "year": 2011,
+          "set": null,
+          "question_number": "2.31",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Which of the following is TRUE?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "BCNF",
+        "3NF"
+      ],
+      "tags": [
+        "BCNF",
+        "3NF",
+        "normal form hierarchy"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "Every relation in 3NF is also in BCNF",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "A relation R is in 3NF if every non-prime attribute of R is fully functionally dependent on every key of R",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Every relation in BCNF is also in 3NF",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "No relation can be in both BCNF and 3NF",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "BCNF is a stricter condition than 3NF: every relation satisfying BCNF automatically satisfies 3NF, though the converse is not true.",
+      "pyq_sources": [
+        {
+          "year": 2012,
+          "set": null,
+          "question_number": "2.32",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Relation R has eight attributes ABCDEFGH. Fields of R contain only atomic values. F = {CH→G, A→BC, B→CFH, E→A, F→EG} is a set of functional dependencies (FDs) so that F is exactly the set of FDs that hold for R. How many candidate keys does the relation R have?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Candidate Key",
+        "Attribute Closure"
+      ],
+      "tags": [
+        "candidate key",
+        "attribute closure",
+        "linked question"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "3",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "4",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "5",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "6",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Computing closures of AD, ED, BD, and FD each yields all eight attributes of R, giving 4 candidate keys: AD, ED, BD, FD.",
+      "pyq_sources": [
+        {
+          "year": 2013,
+          "set": null,
+          "question_number": "2.33",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Relation R has eight attributes ABCDEFGH, with F = {CH→G, A→BC, B→CFH, E→A, F→EG} as exactly the set of functional dependencies that hold for R. The relation R is",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Partial Dependency"
+      ],
+      "tags": [
+        "1NF",
+        "2NF",
+        "partial dependency",
+        "linked question"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "in 1NF, but not in 2NF",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "in 2NF, but not in 3NF",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "in 3NF, but not in BCNF",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "in BCNF",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "With candidate keys AD, ED, BD, and FD, partial dependencies exist (e.g., A→BC where A is a proper subset of the candidate key AD and determines non-prime attributes), which violates 2NF, so R is in 1NF but not 2NF.",
+      "pyq_sources": [
+        {
+          "year": 2013,
+          "set": null,
+          "question_number": "2.34",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the relation scheme R = (E, F, G, H, I, J, K, L, M, N) and the set of functional dependencies {{E,F}→{G}, {F}→{I,J}, {E,H}→{K,L}, {K}→{M}, {L}→{N}} on R. What is the key for R?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Candidate Key",
+        "Attribute Closure"
+      ],
+      "tags": [
+        "candidate key",
+        "attribute closure"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "{E, F}",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "{E, F, H}",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "{E, F, H, K, L}",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "{E}",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Computing the closure of {E,F,H} yields {E,F,H,G,I,J,K,L,M,N}, which is all attributes of R, so {E,F,H} is the key for R.",
+      "pyq_sources": [
+        {
+          "year": 2014,
+          "set": 1,
+          "question_number": "2.35",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Given the following two statements: S1: A foreign key declaration can always be replaced by an equivalent check assertion in SQL. S2: Given the table R(a,b,c) where a and b together form the primary key, the following is a valid table definition: CREATE TABLE S (a INTEGER, d INTEGER, e INTEGER, PRIMARY KEY (d), FOREIGN KEY (a) references R). Which one of the following statements is CORRECT?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Foreign Key",
+        "SQL Constraints"
+      ],
+      "tags": [
+        "foreign key",
+        "check constraint",
+        "SQL DDL"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "S1 is TRUE and S2 is FALSE.",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Both S1 and S2 are TRUE.",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "S1 is FALSE and S2 is TRUE.",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Both S1 and S2 are FALSE.",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "S1 is false because a check assertion cannot fully replace a foreign key constraint, as check constraints operate on fixed value ranges rather than dynamically referencing another table's key values and permitting NULLs appropriately. S2 is false because in R(a,b,c) the primary key is the composite (a,b), so a foreign key referencing R must reference both attributes, not just a alone.",
+      "pyq_sources": [
+        {
+          "year": 2014,
+          "set": 1,
+          "question_number": "2.36",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Given the following two statements: S1: Every table with two single-valued attributes is in 1NF, 2NF, 3NF and BCNF. S2: AB→C, D→E, E→C is a minimal cover for the set of functional dependencies AB→C, D→E, AB→E, E→C. Which one of the following is CORRECT?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Minimal Cover"
+      ],
+      "tags": [
+        "BCNF",
+        "minimal cover",
+        "functional dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "S1 is TRUE and S2 is FALSE.",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "Both S1 and S2 are TRUE.",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "S1 is FALSE and S2 is TRUE.",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Both S1 and S2 are FALSE.",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "S1 is true, since a relation with only two attributes cannot have any non-trivial partial or transitive dependency, so it satisfies all normal forms. S2 is false, because AB→C, D→E, AB→E, E→C is not a minimal cover — AB cannot determine E, so AB→E is extraneous, meaning the given set is not minimal in the way stated.",
+      "pyq_sources": [
+        {
+          "year": 2014,
+          "set": 1,
+          "question_number": "2.37",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "The maximum number of superkeys for the relation schema R(E,F,G,H) with E as the key is ______.",
+      "question_type": "NAT",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Superkey"
+      ],
+      "tags": [
+        "superkey",
+        "candidate key"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 60,
+      "options": [],
+      "correct_answer_text": "8",
+      "explanation": "Since E is the only candidate key, every superkey must contain E along with any subset of the remaining attributes {F,G,H}. This gives 2^3 = 8 possible superkeys: E, EF, EG, EH, EFG, EFH, EGH, EFGH.",
+      "pyq_sources": [
+        {
+          "year": 2014,
+          "set": 2,
+          "question_number": "2.38",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Given an instance of the STUDENTS relation with attributes StudentID, StudentName, StudentEmail, StudentAge, CPI, and rows (2345,Shankar,shankar@math,X,9.4), (1287,Swati,swati@ee,19,9.5), (7853,Shankar,shankar@cse,19,9.4), (9876,Swati,swati@mech,18,9.3), (8765,Ganesh,ganesh@civil,19,8.7): For (StudentName, StudentAge) to be a key for this instance, the value X should NOT be equal to ______.",
+      "question_type": "NAT",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Candidate Key",
+        "Relation Instance"
+      ],
+      "tags": [
+        "candidate key",
+        "relation instance"
+      ],
+      "is_numerical": true,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [],
+      "correct_answer_text": "19",
+      "explanation": "For (StudentName, StudentAge) to uniquely identify each row, no two rows can share the same (StudentName, StudentAge) pair. Since there is already a row (Shankar, 19), the first row's age X must not equal 19, or it would create a duplicate combination with the existing Shankar,19 row.",
+      "pyq_sources": [
+        {
+          "year": 2014,
+          "set": 2,
+          "question_number": "2.39",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "A prime attribute of a relation scheme R is an attribute that appears",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "easy",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Prime Attribute",
+        "Candidate Key"
+      ],
+      "tags": [
+        "prime attribute",
+        "candidate key definition"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 45,
+      "options": [
+        {
+          "label": "A",
+          "text": "in all candidate keys of R.",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "in some candidate key of R.",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "in a foreign key of R.",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "only in the primary key of R.",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "By definition, a prime attribute is one that is a member of at least one candidate key of the relation R, not necessarily all of them.",
+      "pyq_sources": [
+        {
+          "year": 2014,
+          "set": 3,
+          "question_number": "2.40",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the relation X(P, Q, R, S, T, U) with the following set of functional dependencies F = { {P,R}→{S,T}, {P,S,U}→{Q,R} }. Which of the following is the trivial functional dependency in F+, the closure of F?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Trivial Functional Dependency"
+      ],
+      "tags": [
+        "trivial FD",
+        "closure"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "{P,R}→{S,T}",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "{P,R}→{R,T}",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "{P,S}→{S}",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "{P,S,U}→{Q}",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "A functional dependency X→Y is trivial if Y is a subset of X. Here {P,S}→{S} is trivial since {S} ⊆ {P,S}.",
+      "pyq_sources": [
+        {
+          "year": 2015,
+          "set": 3,
+          "question_number": "2.41",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Which of the following is NOT a superkey in a relational schema with attributes V, W, X, Y, Z and primary key VY?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Superkey"
+      ],
+      "tags": [
+        "superkey",
+        "primary key"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 60,
+      "options": [
+        {
+          "label": "A",
+          "text": "VXYZ",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "VWXZ",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "VWXY",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "VWXYZ",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "VWXZ does not contain a complete candidate key (VY), since it lacks Y, so it cannot function as a superkey. All other options contain both V and Y.",
+      "pyq_sources": [
+        {
+          "year": 2016,
+          "set": 1,
+          "question_number": "2.42",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "A database of research articles in a journal uses the schema (VOLUME, NUMBER, STARTPAGE, ENDPAGE, TITLE, YEAR, PRICE). The primary key is (VOLUME, NUMBER, STARTPAGE, ENDPAGE) and the following functional dependencies exist: (VOLUME, NUMBER, STARTPAGE, ENDPAGE)→TITLE, (VOLUME, NUMBER)→YEAR, (VOLUME, NUMBER, STARTPAGE, ENDPAGE)→PRICE. The database is redesigned to use the following schemas: (VOLUME, NUMBER, STARTPAGE, ENDPAGE, TITLE, PRICE) and (VOLUME, NUMBER, YEAR). Which is the weakest normal form that the new database satisfies, but the old one does not?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "Partial Dependency"
+      ],
+      "tags": [
+        "1NF",
+        "2NF",
+        "BCNF",
+        "partial dependency"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "1NF",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "2NF",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "3NF",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "BCNF",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In the original schema, (VOLUME, NUMBER)→YEAR is a partial dependency since (VOLUME, NUMBER) is a proper subset of the full primary key, violating 2NF; the old schema is only in 1NF. The redesigned schemas each have (VOLUME,NUMBER,STARTPAGE,ENDPAGE) or (VOLUME,NUMBER) as full keys with no partial dependency, so they are in BCNF, but the weakest new normal form not satisfied by the old schema is 2NF.",
+      "pyq_sources": [
+        {
+          "year": 2016,
+          "set": 1,
+          "question_number": "2.43",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "The following functional dependencies hold true for the relational schema R{V, W, X, Y, Z}: V→W, VW→X, Y→VX, Y→Z. Which of the following is the irreducible equivalent for this set of functional dependencies?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Minimal Cover",
+        "Extraneous Attribute"
+      ],
+      "tags": [
+        "minimal cover",
+        "irreducible set",
+        "extraneous attribute"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "V→W, V→X, Y→V, Y→Z",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "V→W, W→X, Y→V, Y→Z",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "V→W, V→X, Y→V, Y→X, Y→Z",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "V→W, W→X, Y→V, Y→X, Y→Z",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In VW→X, W is extraneous since V alone (given V→W) already determines X via V→W→X reasoning, simplifying VW→X to V→X. Also, Y→X becomes redundant once Y→V and V→X are present. This reduces the set to V→W, V→X, Y→V, Y→Z, which is the minimal/irreducible cover.",
+      "pyq_sources": [
+        {
+          "year": 2016,
+          "set": 1,
+          "question_number": "2.44",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following tables T1 and T2: T1(P,Q) with rows (2,2),(3,8),(7,3),(5,8),(6,9),(8,5),(9,8); T2(R,S) with rows (2,2),(8,3),(3,2),(9,7),(5,7),(7,2). In table T1, P is the primary key and Q is the foreign key referencing R in table T2 with on-delete cascade and on-update cascade. In table T2, R is the primary key and S is the foreign key referencing P in table T1 with on-delete set NULL and on-update cascade. In order to delete record (3, 8) from table T1, the number of additional records that need to be deleted from table T1 is ______.",
+      "question_type": "NAT",
+      "marks": 1,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Referential Integrity",
+        "Cascade Delete"
+      ],
+      "tags": [
+        "foreign key",
+        "on-delete cascade",
+        "referential actions"
+      ],
+      "is_numerical": true,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [],
+      "correct_answer_text": "0",
+      "explanation": "Deleting (3,8) from T1 triggers on-delete set NULL on T2's S values referencing P=3, not a cascade back into T1, so no additional T1 records need to be deleted.",
+      "pyq_sources": [
+        {
+          "year": 2017,
+          "set": 1,
+          "question_number": "2.45",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following four relational schemas, where for each schema all non-trivial functional dependencies are listed and the underlined attributes are the respective primary keys: Schema I: Registration(rollno, courses) — 'courses' is a set-valued attribute; non-trivial FD: rollno→courses. Schema II: Registration(rollno, courseid, email); non-trivial FDs: rollno,courseid→email, email→rollno. Schema III: Registration(rollno, courseid, marks, grade); non-trivial FDs: rollno,courseid→marks,grade; marks→grade. Schema IV: Registration(rollno, courseid, credit); non-trivial FDs: rollno,courseid→credit, courseid→credit. Which one of the relational schemas above is in 3NF but not in BCNF?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "BCNF"
+      ],
+      "tags": [
+        "3NF",
+        "BCNF",
+        "candidate key"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "Schema I",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Schema II",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "Schema III",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Schema IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In Schema II, the candidate keys are {rollno,courseid} and {email,courseid}. The FD email→rollno has a determinant (email) that is not a superkey, but rollno is a prime attribute, so this is allowed in 3NF but violates BCNF, making Schema II in 3NF but not BCNF.",
+      "pyq_sources": [
+        {
+          "year": 2017,
+          "set": 2,
+          "question_number": "2.46",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Let the set of functional dependencies F = {QR→S, R→P, S→Q} hold on a relation schema X = (PQRS). X is not in BCNF. Suppose X is decomposed into two schemas Y and Z, where Y = (PR) and Z = (QRS). Consider the two statements given below: I. Both Y and Z are in BCNF. II. Decomposition of X into Y and Z is dependency preserving and lossless. Which of the above statements is/are correct?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Decomposition",
+        "BCNF",
+        "Lossless Join",
+        "Dependency Preservation"
+      ],
+      "tags": [
+        "BCNF decomposition",
+        "lossless join",
+        "dependency preserving"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "I only",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Neither I nor II",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Both I and II",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "II only",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "In Y(PR), R is the sole candidate key, and R→P is the only FD, so Y is in BCNF. In Z(QRS), the candidate keys are QR and RS, but S→Q has a determinant S that is not a superkey, so Z is in 3NF but not BCNF. Statement I is therefore false. The common attribute R is a key of Y, making the join lossless, and both original FDs (R→P in Y, and QR→S, S→Q in Z) are preserved, so statement II is true.",
+      "pyq_sources": [
+        {
+          "year": 2019,
+          "set": null,
+          "question_number": "2.47",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a relational table R that is in 3NF, but not in BCNF. Which one of the following statements is TRUE?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "3NF",
+        "BCNF"
+      ],
+      "tags": [
+        "3NF",
+        "BCNF",
+        "prime attribute"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "R has a non-trivial functional dependency X→A, where X is not a superkey and A is a prime attribute.",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "R has a non-trivial functional dependency X→A, where X is not a superkey and A is not a prime attribute and X is not a proper subset of any key.",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "R has a non-trivial functional dependency X→A, where X is not a superkey and A is a non-prime attribute and X is a proper subset of some key.",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "A cell in R holds a set instead of an atomic value.",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "3NF permits a non-trivial FD X→A where X is not a superkey, as long as A is a prime attribute — this is exactly the exception that distinguishes 3NF from BCNF (which forbids it regardless of whether A is prime).",
+      "pyq_sources": [
+        {
+          "year": 2020,
+          "set": null,
+          "question_number": "2.48",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the relation R(P, Q, S, T, X, Y, Z, W) with the following functional dependencies: PQ→X; P→YX; Q→Y; Y→ZW. Consider the decomposition of the relation R into the constituent relations according to the following two decomposition schemes: D1: R = [(P,Q,S,T); (P,T,X); (Q,Y); (Y,Z,W)] and D2: R = [(P,Q,S); (T,X); (Q,Y); (Y,Z,W)]. Which one of the following options is correct?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Lossless Join",
+        "Decomposition"
+      ],
+      "tags": [
+        "lossless join",
+        "multiway join",
+        "decomposition"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "D1 is a lossy decomposition, but D2 is a lossless decomposition.",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Both D1 and D2 are lossless decompositions.",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Both D1 and D2 are lossy decompositions.",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "D1 is a lossless decomposition, but D2 is a lossy decomposition.",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "For D1, successively joining the sub-relations on their common attributes (which each form a key of one side) shows every join step is lossless, so D1 is a lossless decomposition. For D2, joining (T,X) with the other pieces shares no common attribute with them, breaking the chain and making D2 a lossy decomposition.",
+      "pyq_sources": [
+        {
+          "year": 2021,
+          "set": 1,
+          "question_number": "2.49",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following statements S1 and S2 about the relational data model: S1: A relation scheme can have at most one foreign key. S2: A foreign key in a relation scheme R cannot be used to refer to tuples of R. Which of the following is CORRECT?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Foreign Key"
+      ],
+      "tags": [
+        "foreign key",
+        "self-referential"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "Both S1 and S2 are false.",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "S1 is true and S2 is false.",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "S1 is false and S2 is true.",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Both S1 and S2 are true.",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "S1 is false, since a relation scheme can have multiple foreign keys referencing different relations. S2 is also false, since a self-referential relationship allows a foreign key in R to reference tuples of R itself.",
+      "pyq_sources": [
+        {
+          "year": 2021,
+          "set": 2,
+          "question_number": "2.50",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Suppose the following functional dependencies hold on a relation U with attributes P, Q, R, S and T: P→QR, RS→T. Which of the following functional dependencies can be inferred from the above functional dependencies?",
+      "question_type": "MSQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "FD Inference",
+        "Attribute Closure"
+      ],
+      "tags": [
+        "FD inference",
+        "attribute closure",
+        "Armstrong's axioms"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "PS→T",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "P→R",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "R→T",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "PS→Q",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "Computing (PS)+ gives {P,S,Q,R,T}, so PS→T holds and PS→Q holds. Since P→QR implies P→R directly (via decomposition), P→R also holds. But (R)+ is just {R}, so R→T does not hold.",
+      "pyq_sources": [
+        {
+          "year": 2021,
+          "set": 2,
+          "question_number": "2.51",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "In a relational data model, which one of the following statements is TRUE?",
+      "question_type": "MCQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "BCNF",
+        "2NF"
+      ],
+      "tags": [
+        "BCNF",
+        "prime attribute",
+        "two-attribute relation"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "A relation with only two attributes is always in BCNF.",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "If all attributes of a relation are prime attributes, then the relation is in BCNF.",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Every relation has at least one non-prime attribute.",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "BCNF decompositions preserve functional dependencies.",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "With only two attributes, any non-trivial FD between them must have a single attribute as a determinant, and that single attribute must then be a candidate key on its own, satisfying BCNF trivially. All other options are false in general.",
+      "pyq_sources": [
+        {
+          "year": 2022,
+          "set": null,
+          "question_number": "2.52",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a relation R(A, B, C, D, E) with the following three functional dependencies: AB→C; BC→D; C→E. The number of superkeys in the relation R is ______.",
+      "question_type": "NAT",
+      "marks": 1,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Superkey",
+        "Candidate Key"
+      ],
+      "tags": [
+        "superkey",
+        "candidate key"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 120,
+      "options": [],
+      "correct_answer_text": "8",
+      "explanation": "AB is found to be the sole candidate key. All supersets of AB (i.e., AB, ABC, ABD, ABE, ABCD, ABCE, ABDE, ABCDE) are superkeys, giving 2^3 = 8 superkeys.",
+      "pyq_sources": [
+        {
+          "year": 2022,
+          "set": null,
+          "question_number": "2.53",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Which of the following statements about a relation R in first normal form (1NF) is/are TRUE?",
+      "question_type": "MSQ",
+      "marks": 1,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "1NF"
+      ],
+      "tags": [
+        "1NF",
+        "composite attribute",
+        "candidate key"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 90,
+      "options": [
+        {
+          "label": "A",
+          "text": "R cannot have a composite attribute",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "R cannot have a foreign key",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "R can have a multi-attribute key",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "R cannot have more than one candidate key",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "1NF requires all attributes to hold atomic values, so composite (and multivalued) attributes are disallowed, making (a) true. A relation in 1NF can have a composite (multi-attribute) primary or candidate key, making (c) true. 1NF places no restriction on foreign keys or the number of candidate keys, so (b) and (d) are false.",
+      "pyq_sources": [
+        {
+          "year": 2024,
+          "set": 1,
+          "question_number": "2.54",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "The symbol → indicates functional dependency in the context of a relational database. Which of the following options is/are TRUE?",
+      "question_type": "MSQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Functional Dependency",
+        "Armstrong's Axioms"
+      ],
+      "tags": [
+        "FD rules",
+        "Armstrong's axioms",
+        "transitivity",
+        "augmentation"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "(X→Y and Y→Z) implies X→Z",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "(X, Y)→(Z, W) implies X→(Z, W)",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "((X, Y)→Z and W→Y) implies (X, W)→Z",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "(X, Y)→(Z, W) implies (X, Y)→Z",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "(a) is the transitivity axiom, which holds. (b) is false since Y is needed along with X to determine Z and W in general. (c) holds by substituting W→Y into (X,Y)→Z using pseudo-transitivity. (d) holds since (X,Y)→(Z,W) implies (X,Y)→Z by the decomposition rule.",
+      "pyq_sources": [
+        {
+          "year": 2024,
+          "set": 1,
+          "question_number": "2.55",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "A functional dependency F: X→Y is termed as a useful functional dependency if and only if it satisfies all the following three conditions: X is not the empty set; Y is not the empty set; Intersection of X and Y is the empty set. For a relation R with 4 attributes, the total number of possible useful functional dependencies is ______.",
+      "question_type": "NAT",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Functional Dependency Counting"
+      ],
+      "tags": [
+        "useful FD",
+        "combinatorics"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 180,
+      "options": [],
+      "correct_answer_text": "50",
+      "explanation": "For each non-empty proper subset X of the 4 attributes, Y must be a non-empty subset of the remaining attributes disjoint from X. Summing over all valid X (from single attributes up to 3-attribute subsets) and counting all disjoint non-empty Y for each gives a total of 50 useful functional dependencies.",
+      "pyq_sources": [
+        {
+          "year": 2024,
+          "set": 2,
+          "question_number": "2.56",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a relational schema team(name, city, owner), with functional dependencies {name→city, name→owner}. The relation team is decomposed into two relations, t1(name, city) and t2(name, owner). Which of the following statement(s) is/are TRUE?",
+      "question_type": "MSQ",
+      "marks": 2,
+      "difficulty": "medium",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Decomposition",
+        "BCNF",
+        "Lossless Join"
+      ],
+      "tags": [
+        "BCNF",
+        "lossless join",
+        "decomposition"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "The relation team is NOT in BCNF.",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "The relations t1 and t2 are in BCNF.",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "The decomposition constitutes a lossless join.",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "The relation team is NOT in 3NF.",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "The candidate key of team is name, and since name→city and name→owner both have the full key as determinant, team is already in BCNF, making (a) and (d) false. Both t1 and t2 have name as their only determinant and key, so they are in BCNF, making (b) true. The decomposition shares the common attribute name, which is a key in both sub-relations, so the join is lossless, making (c) true.",
+      "pyq_sources": [
+        {
+          "year": 2025,
+          "set": 1,
+          "question_number": "2.57",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Consider the following relational schema along with all the functional dependencies that hold on them: R1(A, B, C, D, E): {D→E, EA→B, EB→C}; R2(A, B, C, D): {A→D, A→B, C→A}. Which of the following statement(s) is/are TRUE?",
+      "question_type": "MSQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Normal Forms",
+        "3NF"
+      ],
+      "tags": [
+        "3NF",
+        "candidate key",
+        "normal form testing"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 180,
+      "options": [
+        {
+          "label": "A",
+          "text": "R1 is in 3NF",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "R2 is in 3NF",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "R1 is NOT in 3NF",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "R2 is NOT in 3NF",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "For R1, the candidate key is AD, and the FD EA→B has determinant EA which is not a superkey while B is a non-prime attribute not a proper subset of any key situation required for 3NF exception, so R1 is not in 3NF, making (c) true. For R2, the candidate key is C, and A→D, A→B have determinant A which is not a superkey, with D and B non-prime, so R2 is not in 3NF either, making (d) true.",
+      "pyq_sources": [
+        {
+          "year": 2025,
+          "set": 2,
+          "question_number": "2.58",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "Let P, Q, R and S be the attributes of a relation in a relational schema. Let X→Y indicate functional dependency in the context of a relational database, where X, Y ⊆ {P, Q, R, S}. Which of the following options is/are always TRUE?",
+      "question_type": "MSQ",
+      "marks": 1,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Functional Dependency",
+        "Armstrong's Axioms"
+      ],
+      "tags": [
+        "FD rules",
+        "Armstrong's axioms",
+        "union rule"
+      ],
+      "is_numerical": false,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "If ({P, Q}→{R} and {P}→{R}), then {Q}→{R}",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "If {P, Q}→{R}, then ({P}→{R} or {Q}→{R})",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "If ({P}→{R} and {Q}→{S}), then {P, Q}→{R, S}",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "If {P}→{R}, then {P, Q}→{R}",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "(a) and (b) are false in general, since a joint determinant does not imply either attribute alone determines the dependent attribute. (c) holds by the union/composition rule applied to two separate FDs. (d) holds by the augmentation rule, adding Q to both sides.",
+      "pyq_sources": [
+        {
+          "year": 2026,
+          "set": 1,
+          "question_number": "2.59",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "In the context of relational database normalization, which of the following statements is/are true?",
+      "question_type": "MSQ",
+      "marks": 1,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Decomposition",
+        "Dependency Preservation",
+        "2NF",
+        "3NF",
+        "BCNF"
+      ],
+      "tags": [
+        "dependency preserving decomposition",
+        "3NF",
+        "BCNF",
+        "2NF"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 120,
+      "options": [
+        {
+          "label": "A",
+          "text": "It is always possible to obtain a dependency-preserving 3NF decomposition of a relation",
+          "is_correct": true
+        },
+        {
+          "label": "B",
+          "text": "It is always possible to obtain a dependency-preserving 1NF decomposition of a relation",
+          "is_correct": true
+        },
+        {
+          "label": "C",
+          "text": "It is not always possible to obtain a dependency-preserving BCNF decomposition of a relation",
+          "is_correct": true
+        },
+        {
+          "label": "D",
+          "text": "It is not always possible to obtain a dependency-preserving 2NF decomposition of a relation",
+          "is_correct": false
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "A dependency-preserving, lossless-join decomposition into 3NF is always achievable, making (a) true. Since a relation is trivially already in 1NF, decomposition (even without splitting) trivially preserves dependencies, making (b) true. It is well known that a dependency-preserving BCNF decomposition is not always possible, making (c) true. A dependency-preserving 2NF decomposition, unlike BCNF, can always be constructed similarly to 3NF, making (d) false.",
+      "pyq_sources": [
+        {
+          "year": 2026,
+          "set": 1,
+          "question_number": "2.60",
+          "marks": 1
+        }
+      ]
+    },
+    {
+      "question_text": "Consider a relational database schema with a relation R(A, B, C, D). If {A, B} and {A, C} are the only two candidate keys of the relation R, then the number of superkeys of relation R is ______. (answer in integer)",
+      "question_type": "NAT",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Superkey",
+        "Candidate Key"
+      ],
+      "tags": [
+        "superkey",
+        "candidate key",
+        "set union"
+      ],
+      "is_numerical": true,
+      "formula_based": true,
+      "estimated_solve_time_seconds": 150,
+      "options": [],
+      "correct_answer_text": "6",
+      "explanation": "The superkeys formed from candidate key AB are AB and ABD (2 superkeys, i.e. 2^1 supersets excluding attribute C), and from AC are AC and ACD (2 superkeys). The superkey ABC (containing both keys) and ABCD account for the union, giving a total of 6 distinct superkeys using inclusion-exclusion: 2^2 + 2^2 - 2 = 6.",
+      "pyq_sources": [
+        {
+          "year": 2026,
+          "set": 1,
+          "question_number": "2.61",
+          "marks": 2
+        }
+      ]
+    },
+    {
+      "question_text": "In the context of schema normalization in relational DBMS, consider a set F of functional dependencies. The set of all functional dependencies implied by F is called the closure of F. To compute the closure of F, Armstrong's Axioms can be applied. Consider X, Y, and Z as sets of attributes over a relational schema. The three rules of Armstrong's Axioms are described as follows. Reflexivity: If Y⊆X, then X→Y. Augmentation: If X→Y, then XZ→YZ for any Z. Transitivity: If X→Y and Y→Z, then X→Z. The additional rule of Union is defined as follows. Union: If X→Y and X→Z, then X→YZ. It can be proved that the additional rule of Union is also implied by the three rules of Armstrong's Axioms. Listed below are four combinations of these three rules. Which one of these combinations is both necessary and sufficient for the proof?",
+      "question_type": "MCQ",
+      "marks": 2,
+      "difficulty": "hard",
+      "topics": [
+        "Database Design: Functional Dependencies and Normalization"
+      ],
+      "concepts": [
+        "Armstrong's Axioms",
+        "Union Rule Proof"
+      ],
+      "tags": [
+        "Armstrong's axioms",
+        "union rule",
+        "augmentation",
+        "transitivity"
+      ],
+      "is_numerical": false,
+      "formula_based": false,
+      "estimated_solve_time_seconds": 150,
+      "options": [
+        {
+          "label": "A",
+          "text": "Reflexivity, Augmentation, and Transitivity",
+          "is_correct": false
+        },
+        {
+          "label": "B",
+          "text": "Reflexivity and Augmentation",
+          "is_correct": false
+        },
+        {
+          "label": "C",
+          "text": "Transitivity",
+          "is_correct": false
+        },
+        {
+          "label": "D",
+          "text": "Augmentation and Transitivity",
+          "is_correct": true
+        }
+      ],
+      "correct_answer_text": null,
+      "explanation": "To derive the Union rule, applying Augmentation to X→Y gives X→XY, and applying Augmentation to X→Z gives XY→YZ; then applying Transitivity to X→XY and XY→YZ gives X→YZ. Only Augmentation and Transitivity are needed; Reflexivity is not required for this specific proof.",
+      "pyq_sources": [
+        {
+          "year": 2026,
+          "set": 2,
+          "question_number": "2.62",
+          "marks": 2
+        }
+      ]
+    }
+  ]
+}

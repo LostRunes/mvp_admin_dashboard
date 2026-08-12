@@ -1,0 +1,2427 @@
+{
+    "subject": {
+        "subject_name": "Operating System",
+        "subject_code": "OS"
+    },
+    "topics": [
+        {
+            "topic_name": "Process Management-I",
+            "summary": "Introduction, Process, Threads & CPU Scheduling",
+            "display_order": 1
+        },
+        {
+            "topic_name": "Process Management-II",
+            "summary": "IPC, Synchronization and Concurrency",
+            "display_order": 2
+        },
+        {
+            "topic_name": "Deadlock",
+            "summary": "Deadlock conditions, prevention, avoidance and detection",
+            "display_order": 3
+        },
+        {
+            "topic_name": "Memory Management and Virtual Memory",
+            "summary": "Paging, Segmentation, Virtual Memory, Page Replacement, TLB",
+            "display_order": 4
+        },
+        {
+            "topic_name": "File System and Device Management",
+            "summary": "File systems, disk scheduling, device management",
+            "display_order": 5
+        },
+        {
+            "topic_name": "Miscellaneous",
+            "summary": "Miscellaneous OS topics",
+            "display_order": 6
+        }
+    ],
+    "questions": [
+        {
+            "question_text": "Each process P_i, i = 1...9 is coded as follows:\nrepeat\n  P(mutex)\n  {critical section}\n  V(mutex)\nforever\nThe code for P_10 is identical except that it uses V(mutex) in place of P(mutex). What is the largest number of processes that can be inside the critical section at any moment?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Mutex semaphore",
+                "Semaphore misuse"
+            ],
+            "tags": [
+                "semaphore",
+                "mutex",
+                "critical section",
+                "process synchronization",
+                "Semaphores",
+                "Critical Section Problem"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "1",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "2",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "3",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "None of these",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Every time process P_10 enters, it performs a V (UP) operation instead of a P (down) operation, so after that one more process can enter the critical section. This phenomenon continues, allowing up to 10 processes at a time to be inside the critical section, so none of the given options (1, 2, or 3) is correct.",
+            "pyq_sources": [
+                {
+                    "year": 1997,
+                    "set": null,
+                    "question_number": "Q2.1",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "When the result of a computation depends on the speed of the processes involved, there is said to be",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Race condition"
+            ],
+            "tags": [
+                "race condition",
+                "timing dependency",
+                "definitions"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "cycle stealing",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "race condition",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "a time lock",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "a deadlock",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "By definition, a race condition occurs when the outcome of a computation depends on the relative timing/speed of the processes involved.",
+            "pyq_sources": [
+                {
+                    "year": 1998,
+                    "set": null,
+                    "question_number": "Q2.2",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "A counting semaphore was initialized to 10. Then 6 P (wait) operations and 4 V (signal) operations were completed on this semaphore. The resulting value of the semaphore is",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Counting semaphore",
+                "P and V operations"
+            ],
+            "tags": [
+                "counting semaphore",
+                "wait signal",
+                "semaphore value",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "0",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "8",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "10",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "12",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Initial value is 10. Six P (down) operations reduce it by 6 to 4, and four V (up) operations increase it by 4, giving 4 + 4 = 8.",
+            "pyq_sources": [
+                {
+                    "year": 1998,
+                    "set": null,
+                    "question_number": "Q2.3",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Let m[0]...m[4] be mutexes (binary semaphores) and P[0]...P[4] be processes. Suppose each process P[i] executes the following:\nwait(m[i]); wait(m[(i+1) mod 4]);\n............\nrelease(m[i]); release(m[(i+1) mod 4]);\nThis could cause",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Circular wait",
+                "Deadlock condition"
+            ],
+            "tags": [
+                "deadlock",
+                "mutex",
+                "circular wait",
+                "starvation",
+                "Semaphores",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Thrashing",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Deadlock",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Starvation, but not deadlock",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "None of the above",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "All processes can end up holding one mutex each and waiting for the next one held by another process, forming a circular wait so that no process can enter the critical section, i.e., a deadlock condition.",
+            "pyq_sources": [
+                {
+                    "year": 2000,
+                    "set": null,
+                    "question_number": "Q2.4",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Suppose a processor does not have any stack pointer register. Which of the following statement is true?",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Stack pointer",
+                "Subroutine calls",
+                "Interrupts"
+            ],
+            "tags": [
+                "stack pointer",
+                "subroutine call",
+                "nested calls",
+                "interrupts",
+                "Multithreading and Locks"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "It cannot have subroutine call instruction",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "It can have subroutine call instruction, but no nested subroutine calls",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Nested subroutine calls are possible, but interrupts are not",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "All sequences of subroutine calls and also interrupts are possible",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Without a stack pointer register, activation records cannot be created on a stack, so the processor cannot support subroutine call instructions at all.",
+            "pyq_sources": [
+                {
+                    "year": 2001,
+                    "set": null,
+                    "question_number": "Q2.5",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Where does the swap space reside?",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Swap space",
+                "Memory hierarchy"
+            ],
+            "tags": [
+                "swap space",
+                "disk",
+                "virtual memory",
+                "Multithreading and Locks"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 30,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "RAM",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Disk",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "ROM",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "On-chip cache",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Swap space resides on disk, where pages/processes are moved when they must be swapped out of main memory.",
+            "pyq_sources": [
+                {
+                    "year": 2001,
+                    "set": null,
+                    "question_number": "Q2.6",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider Peterson's algorithm for mutual exclusion between two concurrent processes i and j. The program executed by process i is shown below:\nrepeat\n  flag[i]=true;\n  turn=j;\n  while (P) do no-op;\n  Enter critical section, perform actions, then exit critical section\n  flag[i]=false;\n  Perform other non-critical section actions.\nuntil false;\nFor the program to guarantee mutual exclusion, the predicate P in the while loop should be",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Peterson's algorithm",
+                "flag and turn variables"
+            ],
+            "tags": [
+                "peterson's algorithm",
+                "mutual exclusion",
+                "flag",
+                "turn variable",
+                "Mutual Exclusion Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "flag[j] = true and turn = i",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "flag[j] = true and turn = j",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "flag[i] = true and turn = j",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "flag[i] = true and turn = i",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "To ensure mutual exclusion, process i must wait as long as process j has set its flag and it is j's turn, i.e., while flag[j] = true and turn = j.",
+            "pyq_sources": [
+                {
+                    "year": 2001,
+                    "set": 2,
+                    "question_number": "Q2.7",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Common Data for Q. 2.8 & 2.9: Suppose we want to synchronize two concurrent processes P and Q using binary semaphores S and T. The code for the processes P and Q is shown below:\nProcess P:\nwhile (1) {\n  W:\n  print '0';\n  print '0';\n  X:\n}\nProcess Q:\nwhile (1) {\n  Y:\n  print '1';\n  print '1';\n  Z:\n}\nSynchronization statements can be inserted only at points W, X, Y and Z.\nWhich of the following will always lead to an output string with '001100110011'?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Binary semaphore synchronization",
+                "Alternation of processes"
+            ],
+            "tags": [
+                "binary semaphore",
+                "process synchronization",
+                "output sequencing",
+                "Semaphores",
+                "Mutual Exclusion Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "P(S) at W, V(S) at X, P(T) at Y, V(T) at Z, S and T initially 1",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "P(S) at W, V(T) at X, P(T) at Y, V(S) at Z, S initially 1, and T initially 0",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "P(S) at W, V(T) at X, P(T) at Y, V(T) at Z, S and T initially 1",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "P(S) at W, V(T) at X, P(T) at Y, V(T) at Z, S initially 1, and T initially 0",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "To get the expected alternating output, the sequence of processes must strictly alternate as P, Q, P, Q, P, Q and so on; this requires initializing S = 1 and T = 0 with the P/V pairing given in option (b), which forces process P to wait for process Q's signal and vice versa.",
+            "pyq_sources": [
+                {
+                    "year": 2003,
+                    "set": 2,
+                    "question_number": "Q2.8",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Common Data for Q. 2.8 & 2.9 (continued): Which of the following will ensure that the output string never contains a substring of the form 01^n0 or 10^n1 where n is odd?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Binary semaphore synchronization",
+                "Substring avoidance in scheduling"
+            ],
+            "tags": [
+                "binary semaphore",
+                "process synchronization",
+                "output pattern",
+                "Semaphores",
+                "Mutual Exclusion Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "P(S) at W, V(S) at X, P(T) at Y, V(T) at Z, S and T initially 1",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "P(S) at W, V(T) at X, P(T) at Y, V(S) at Z, S and T initially 1",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "P(S) at W, V(S) at X, P(S) at Y, V(S) at Z, S initially 1",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "V(S) at W, V(T) at X, P(S) at Y, P(T) at Z, S and T initially 1",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If the output string must never contain a substring of the form 01^n0 or 10^n1 with odd n, the procedure reduces to using a single binary semaphore S initialized to 1, with P(S) at W and Y and V(S) at X and Z, as in option (c), which forces strict alternation between the two prints of each process.",
+            "pyq_sources": [
+                {
+                    "year": 2003,
+                    "set": 2,
+                    "question_number": "Q2.9",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider two processes P1 and P2 accessing the shared variables X and Y protected by two binary semaphores S_X and S_Y respectively, both initialized to 1. P and V denote the usual semaphore operators, where P decrements the semaphore value, and V increments the semaphore value. The pseudocode of P1 and P2 is as follows:\nP1:\nwhile true do {\n  L1: ............\n  L2: ............\n  X = X + 1;\n  Y = Y - 1;\n  V(S_X);\n  V(S_Y); }\nP2:\nwhile true do {\n  L3: ............\n  L4: ............\n  Y = Y + 1;\n  X = X - 1;\n  V(S_Y);\n  V(S_X); }\nIn order to avoid deadlock, the correct operators at L1, L2, L3 and L4 are respectively",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Binary semaphore ordering",
+                "Deadlock avoidance via consistent lock ordering"
+            ],
+            "tags": [
+                "binary semaphore",
+                "deadlock avoidance",
+                "lock ordering",
+                "Semaphores",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "P(S_Y), P(S_X), P(S_X), P(S_Y)",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "P(S_X), P(S_Y), P(S_Y), P(S_X)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "P(S_X), P(S_X), P(S_Y), P(S_Y)",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "P(S_X), P(S_Y), P(S_X), P(S_Y)",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "S_X and S_Y are binary semaphores; if both processes acquire the two locks in the same relative order (alternating P(S_X) then P(S_Y) consistently, as in option (d)), there is no chance of circular wait, hence no deadlock.",
+            "pyq_sources": [
+                {
+                    "year": 2004,
+                    "set": null,
+                    "question_number": "Q2.10",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "The semaphore variables full, empty and mutex are initialized to 0, n and 1, respectively. Process P1 repeatedly adds one item at a time to a buffer of size n, and process P2 repeatedly removes one item at a time from the same buffer using the programs given below. In the programs, K, L, M and N are unspecified statements.\nP1: while (1) {\n  K;\n  P(mutex);\n  Add an item to the buffer;\n  V(mutex);\n  L;\n}\nP2: while (1) {\n  M;\n  P(mutex);\n  Remove an item from the buffer;\n  V(mutex);\n  N;\n}\nThe statements K, L, M and N are respectively",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Empty/full semaphore counting",
+                "Bounded buffer"
+            ],
+            "tags": [
+                "producer consumer",
+                "bounded buffer",
+                "empty full semaphore",
+                "Producer-Consumer Problem",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "P(full), V(empty), P(full), V(empty)",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "P(full), V(empty), P(empty), V(full)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "P(empty), V(full), P(empty), V(full)",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "P(empty), V(full), P(full), V(empty)",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Full and empty denote the number of full and empty slots respectively. Before adding an item the producer must decrement empty (K = P(empty)), and after adding it signals full (L = V(full)); before removing an item the consumer must decrement full (M = P(full)), and after removing it signals empty (N = V(empty)), matching option (d).",
+            "pyq_sources": [
+                {
+                    "year": 2004,
+                    "set": null,
+                    "question_number": "Q2.11",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Given below is a program which when executed spawns two concurrent processes:\nsemaphore X := 0;\n/* Process now forks into concurrent processes P1 & P2 */\nP1: repeat forever    P2: repeat forever\n  V(X);                 P(X);\n  Compute;              Compute;\n  P(X);                 V(X);\nConsider the following statements about processes P1 and P2:\nI. It is possible for process P1 to starve.\nII. It is possible for process P2 to starve.\nWhich of the following holds?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Semaphore starvation analysis"
+            ],
+            "tags": [
+                "semaphore",
+                "starvation",
+                "concurrent processes",
+                "Semaphores",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Both I and II are true.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "I is true but II is false.",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "II is true but I is false",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Both I and II are false.",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "P1's V(X) always succeeds, so P1 is never blocked and cannot starve. When P1 is executing its critical region, X = 1, so P2's P(X) can always succeed and enter, so P2 also cannot starve; both statements are false.",
+            "pyq_sources": [
+                {
+                    "year": 2005,
+                    "set": null,
+                    "question_number": "Q2.12",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Two concurrent processes P1 and P2 use four shared resources R1, R2, R3 and R4, as shown below:\nP1: Compute; Use R1; Use R2; Use R3; Use R4;\nP2: Compute; Use R1; Use R2; Use R3; Use R4;\nBoth processes are started at the same time, and each resource can be accessed by only one process at a time. The following scheduling constraints exist between the access of resources by the processes:\n- P2 must complete use of R1 before P1 gets access to R1.\n- P1 must complete use of R2 before P2 gets access to R2.\n- P2 must complete use of R3 before P1 gets access to R3.\n- P1 must complete use of R4 before P2 gets access to R4.\nThere are no other scheduling constraints between the processes. If only binary semaphores are used to enforce the above scheduling constraints, what is the minimum number of binary semaphores needed?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Scheduling constraint enforcement",
+                "Binary semaphore reuse"
+            ],
+            "tags": [
+                "binary semaphore",
+                "resource scheduling",
+                "concurrency constraints",
+                "Semaphores",
+                "Resource Allocation and Concurrency"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "1",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "2",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "3",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "4",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "With only one semaphore the constraints cannot all be enforced since binary semaphores allow only a single wait/signal pair; trying with two binary semaphores a and b shows all four constraints can be satisfied, so the minimum number needed is 2.",
+            "pyq_sources": [
+                {
+                    "year": 2005,
+                    "set": null,
+                    "question_number": "Q2.13",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "The atomic fetch-and-set x, y instruction unconditionally sets the memory location x to 1 and fetches the old value of x in y without allowing any intervening access to the memory location x. Consider the following implementation of P and V functions on a binary semaphore S.\nvoid P(binary_semaphore *S) {\n  unsigned y;\n  unsigned *x = &(S -> value);\n  do {\n    fetch-and-set x, y;\n  } while (y);\n}\nvoid V(binary_semaphore *S) {\n  S -> value = 0;\n}\nWhich one of the following is true?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Fetch-and-set instruction",
+                "Binary semaphore implementation"
+            ],
+            "tags": [
+                "fetch and set",
+                "atomic instruction",
+                "binary semaphore implementation",
+                "Test-and-Set / Fetch-and-Add",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The implementation may not work if context switching is disabled in P",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "Instead of using fetch-and-set, a pair of normal load/store can be used",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "The implementation of V is wrong",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "The code does not implement a binary semaphore",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The binary semaphore's value only takes 0 or 1; fetch-and-set sets x to 1 and returns the old value in y. If context switching were disabled within P and more than two processes contend for the semaphore, this implementation would fail to correctly synchronize the processes.",
+            "pyq_sources": [
+                {
+                    "year": 2006,
+                    "set": null,
+                    "question_number": "Q2.14",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Common Data for Q. 2.15 & 2.16: Barrier is a synchronization construct where a set of processes synchronizes globally i.e. each process in the set arrives at the barrier and waits for all others to arrive and then all processes leave the barrier. Let the number of processes in the set be three and S be a binary semaphore with the usual P and V functions. Consider the following C implementation of a barrier with line numbers shown on the left.\nvoid barrier (void) {\n  1: P (S);\n  2: process_arrived++;\n  3: V (S);\n  4: while (process_arrived != 3);\n  5: P (S);\n  6: process_left++;\n  7: if (process_left == 3){\n  8:   process_arrived = 0;\n  9:   process_left = 0;\n  10: }\n  11: V (S);\n  12: }\nThe variables process_arrived and process_left are shared among all processes and are initialized to zero. In a concurrent program all the three processes call the barrier function when they need to synchronize globally.\nThe above implementation of barrier is incorrect. Which one of the following is true?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Barrier synchronization",
+                "Deadlock on repeated invocation"
+            ],
+            "tags": [
+                "barrier synchronization",
+                "binary semaphore",
+                "concurrent processes",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The barrier implementation is wrong due to the use of binary semaphore S",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "The barrier implementation may lead to a deadlock if two barrier invocations are used in immediate succession",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Lines 6 to 10 need not be inside a critical section",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "The barrier implementation is correct if there are only two processes instead of three",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If one process leaves the barrier and re-enters it before the others have all left, the while loop at line 4 can become true again incorrectly, so two barrier invocations used back-to-back can lead to deadlock.",
+            "pyq_sources": [
+                {
+                    "year": 2006,
+                    "set": null,
+                    "question_number": "Q2.15",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Common Data for Q. 2.15 & 2.16 (continued): Which one of the following rectifies the problem in the implementation?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Barrier synchronization fix"
+            ],
+            "tags": [
+                "barrier synchronization",
+                "binary semaphore",
+                "deadlock fix",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Lines 6 to 10 are simply replaced by process_arrived--",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "At the beginning of the barrier the first process to enter the barrier waits until process_arrived becomes zero before proceeding to execute P(S)",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Context switch is disabled at the beginning of the barrier and re-enabled at the end",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "The variable process_left is made private instead of shared",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Adding a wait for process_arrived to become zero at the start of the barrier ensures that a new invocation cannot begin until the previous barrier has been fully vacated by all processes, fixing the deadlock issue.",
+            "pyq_sources": [
+                {
+                    "year": 2006,
+                    "set": null,
+                    "question_number": "Q2.16",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Processes P1 and P2 use critical_flag in the following routine to achieve mutual exclusion. Assume that critical_flag is initialized to FALSE in the main program.\nget_exclusive_access() {\n  if (critical_flag == FALSE) {\n    critical_flag = TRUE;\n    critical_region();\n    critical_flag = FALSE;\n  }\n}\nConsider the following statements.\n(i) It is possible for both P1 and P2 to access critical_region concurrently.\n(ii) This may lead to a deadlock.\nWhich of the following holds?",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Flag-based mutual exclusion",
+                "Race condition on shared flag"
+            ],
+            "tags": [
+                "critical flag",
+                "mutual exclusion",
+                "race condition",
+                "Mutual Exclusion Algorithms",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "(i) is false and (ii) is true",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Both (i) and (ii) are false",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "(i) is true and (ii) is false",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Both (i) and (ii) are true",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Both processes can check critical_flag == FALSE before either sets it to TRUE, so both can enter critical_region concurrently, meaning mutual exclusion fails; but since mutual exclusion is not guaranteed, the standard deadlock condition (which requires mutual exclusion) cannot arise here.",
+            "pyq_sources": [
+                {
+                    "year": 2007,
+                    "set": null,
+                    "question_number": "Q2.17",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Two processes, P1 and P2, need to access a critical section of code. Consider the following synchronization construct used by the processes:\n/* P1 */\nwhile (true) {\n  wants1 = true;\n  while (wants2 == true);\n  /* Critical Section */\n  wants1 = false;\n}\n/* Remainder section */\n/* P2 */\nwhile (true) {\n  wants2 = true;\n  while (wants1 == true);\n  /* Critical Section */\n  wants2 = false;\n}\n/* Remainder section */\nHere, wants1 and wants2 are shared variables, which are initialized to false. Which one of the following statements is TRUE about the above construct?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Flag-based synchronization",
+                "Deadlock via mutual waiting"
+            ],
+            "tags": [
+                "mutual exclusion",
+                "deadlock",
+                "flag variables",
+                "Mutual Exclusion Algorithms",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "It does not ensure mutual exclusion.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "It does not ensure bounded waiting.",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "It requires that processes enter the critical section in strict alternation.",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "It does not prevent deadlocks, but ensures mutual exclusion.",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If wants1 is true, P2's while loop keeps it waiting until wants1 is false, and symmetrically for P1, so if both set their flags true at the same time before checking, both processes wait on each other forever (deadlock); however, whenever one process does enter, the other is guaranteed to be excluded, so mutual exclusion is maintained.",
+            "pyq_sources": [
+                {
+                    "year": 2007,
+                    "set": null,
+                    "question_number": "Q2.18",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Synchronization in the classical readers and writers problem can be achieved through use of semaphores. In the following incomplete code for readers-writers problem, two binary semaphores mutex and wrt are used to obtain synchronization\nwait (wrt)\nwriting is performed\nsignal (wrt)\n\nwait (mutex)\nreadcount = readcount + 1\nif readcount = 1 then S1\nS2\nreading is performed\nS3\nreadcount = readcount - 1\nif readcount = 0 then S4\nSignal (mutex)\nThe values of S1, S2, S3, S4, (in that order) are",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Readers-writers synchronization",
+                "Readcount tracking"
+            ],
+            "tags": [
+                "readers writers problem",
+                "mutex",
+                "wrt semaphore",
+                "readcount",
+                "Readers-Writers Problem",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "signal (mutex), wait (wrt), signal (wrt), wait (mutex)",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "signal (wrt), signal (mutex), wait (mutex), wait (wrt)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "wait (wrt), signal (mutex), wait (mutex), signal (wrt)",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "signal (mutex), wait (mutex), signal (mutex), wait (mutex)",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The first reader must lock out writers (S1 = wait(wrt)), then release mutex to let other readers in (S2 = signal(mutex)); before decrementing readcount at the end a reader must reacquire mutex (S3 = wait(mutex)), and the last reader leaving must release the writer lock (S4 = signal(wrt)), matching option (c).",
+            "pyq_sources": [
+                {
+                    "year": 2007,
+                    "set": null,
+                    "question_number": "Q2.19",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "The P and V operations on counting semaphores, where s is a counting semaphore, are defined as follows:\nP(s): s = s - 1; if s < 0 then wait;\nV(s): s = s + 1; if s <= 0 then wakeup a process waiting on s;\nAssume that P_b and V_b, the wait and signal operations on binary semaphores are provided. Two binary semaphores X_b and Y_b are used to implement the semaphore operations P(s) and V(s) as follows:\nP(s): P_b(X_b); s = s - 1; if (s < 0) { V_b(X_b); P_b(Y_b); } else V_b(X_b);\nV(s): P_b(X_b); s = s + 1; if (s <= 0) V_b(Y_b); V_b(X_b);\nThe initial values of X_b and Y_b are respectively",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Counting semaphore implementation using binary semaphores"
+            ],
+            "tags": [
+                "counting semaphore",
+                "binary semaphore",
+                "semaphore implementation",
+                "Semaphores",
+                "Test-and-Set / Fetch-and-Add"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "0 and 0",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "0 and 1",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "1 and 0",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "1 and 1",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "X_b protects the update of s and must start unlocked (available), while Y_b is only used to wake up a waiting process and must start locked so no process incorrectly proceeds before being signaled; hence X_b = 1 and Y_b = 0.",
+            "pyq_sources": [
+                {
+                    "year": 2008,
+                    "set": null,
+                    "question_number": "Q2.20",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "The enter_CS() and leave_CS() functions to implement critical section of a process are realized using test-and-set instruction as follows:\nvoid enter_CS(X) {\n  while (test-and-set(X));\n}\nvoid leave_CS(X) {\n  X = 0;\n}\nIn the above solution, X is a memory location associated with the CS and is initialized to 0. Now consider the following statements:\nI. The above solution to CS problem is deadlock-free.\nII. The solution is starvation free.\nIII. The processes enter CS in FIFO order.\nIV. More than one process can enter CS at the same time.\nWhich of the above statements are TRUE?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Test-and-set locking",
+                "Starvation vs deadlock freedom"
+            ],
+            "tags": [
+                "test and set",
+                "deadlock free",
+                "starvation",
+                "critical section",
+                "Test-and-Set / Fetch-and-Add",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "I only",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "I and II",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "II and III",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "IV only",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The test-and-set loop guarantees mutual exclusion so only one process can be in the CS at a time, and there is no scenario where every process is permanently blocked (deadlock-free). However, a process can be repeatedly bypassed by other processes since there is no ordering guarantee, so it is not starvation-free and does not guarantee FIFO order.",
+            "pyq_sources": [
+                {
+                    "year": 2009,
+                    "set": null,
+                    "question_number": "Q2.21",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the methods used by processes P1 and P2 for accessing their critical sections whenever needed, as given below. The initial values of shared boolean variables S1 and S2 are randomly assigned.\nMethod used by P1: while (S1==S2); Critical Section; S1=S2;\nMethod used by P2: while (S1!=S2); Critical Section; S2=not(S1);\nWhich one of the following statements describes the properties achieved?",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Shared boolean flag comparison",
+                "Progress condition analysis"
+            ],
+            "tags": [
+                "mutual exclusion",
+                "progress condition",
+                "shared boolean variables",
+                "Mutual Exclusion Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Mutual exclusion but not progress",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "Progress but not mutual exclusion",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Neither mutual exclusion nor progress",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Both mutual exclusion and progress",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Taking S1 = S2 = 1 initially, both processes' loop conditions and updates guarantee that only one process is ever inside its critical section at a time (mutual exclusion), but a process outside the critical section can prevent another process from entering even when free, so progress is not guaranteed.",
+            "pyq_sources": [
+                {
+                    "year": 2010,
+                    "set": null,
+                    "question_number": "Q2.22",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "The following program consists of 3 concurrent processes and 3 binary semaphores. The semaphores are initialized as S0 = 1, S1 = 0, S2 = 0.\nProcess P0: while (true) { wait (S0); print '0'; release (S1); release (S2); }\nProcess P1: wait (S1); release(S0);\nProcess P2: wait (S2); release(S0);\nHow many times will process P0 print '0'?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Binary semaphore trace",
+                "Repeated printing analysis"
+            ],
+            "tags": [
+                "binary semaphore",
+                "concurrent processes",
+                "semaphore trace",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "At least twice",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "Exactly twice",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Exactly thrice",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Exactly once",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Tracing through the semaphore values shows that P0 prints '0', then both S1 and S2 become available so both P1 and P2 can release S0 again, letting P0 execute and print '0' again; this shows P0 prints at least twice, though scheduling order can allow it to run additional times.",
+            "pyq_sources": [
+                {
+                    "year": 2010,
+                    "set": null,
+                    "question_number": "Q2.23",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Fetch_And_Add(X, i) is an atomic Read-Modify-Write instruction that reads the value of memory location X, increments it by the value i, and returns the old value of X, it is used in the pseudocode shown below to implement a busy-wait lock. L is unsigned integer shared variable initialized to 0. The value of 0 corresponds to lock being available, while any non-zero value corresponds to the lock being not available.\nAcquireLock(L) {\n  while (Fetch_And_Add(L, 1))\n  L = 1;\n}\nReleaseLock(L) {\n  L = 0;\n}\nThis implementation",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Fetch-and-add atomic instruction",
+                "Busy-wait lock correctness"
+            ],
+            "tags": [
+                "fetch and add",
+                "busy wait lock",
+                "atomic instruction",
+                "Test-and-Set / Fetch-and-Add"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "fails as L can overflow",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "fails as L can take on a non-zero value when the lock is actually available",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "works correctly but may starve some processes",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "works correctly without starvation",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If a process is preempted after executing the while condition but before setting L = 1, and another process runs to completion setting L back to 0, the first process resumes and blindly sets L = 1 even though the lock was actually available at that point without going through Fetch_And_Add properly, causing L to hold a non-zero value incorrectly.",
+            "pyq_sources": [
+                {
+                    "year": 2012,
+                    "set": null,
+                    "question_number": "Q2.24",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Three concurrent processes X, Y and Z execute three different code segments that access and update certain shared variables. Process X executes the P operation (i.e., wait) on semaphores a, b and c; process Y executes the P operation on semaphores b, c and d; process Z executes the P operation on semaphores c, d and a before entering the respective code segments. After completing the execution of its code segments, each process invokes the V operation (i.e., signal) on its three semaphores. All semaphores are binary semaphores initialized to one. Which one of the following represents a deadlock-free order of invoking the P operations by the processes?",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Lock ordering to avoid deadlock",
+                "Circular wait analysis"
+            ],
+            "tags": [
+                "deadlock free",
+                "semaphore ordering",
+                "circular wait",
+                "Semaphores",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "X: P(a)P(b)P(c), Y: P(b)P(c)P(d), Z: P(c)P(d)P(a)",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "X: P(b)P(a)P(c), Y: P(b)P(c)P(d), Z: P(a)P(c)P(d)",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "X: P(b)P(a)P(c), Y: P(c)P(b)P(d), Z: P(a)P(c)P(d)",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "X: P(a)P(b)P(c), Y: P(b)P(c)P(d), Z: P(c)P(d)P(a)",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Tracing each option line by line for all three processes shows that only option (b) avoids a cycle in the wait-for graph among X, Y and Z, so it is the only deadlock-free order.",
+            "pyq_sources": [
+                {
+                    "year": 2013,
+                    "set": null,
+                    "question_number": "Q2.25",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "A shared variable x, initialized to zero, is operated on by four concurrent processes W, X, Y, Z as follows. Each of the processes W and X reads x from memory, increments by one, stores it to memory, and then terminates. Each of the processes Y and Z reads x from memory, decrements by two, stores it to memory and then terminates. Each process before reading x invokes the P operation (i.e., wait) on a counting semaphore S and invokes the V operation (i.e., signal) on the semaphore S after storing x to memory. Semaphore S is initialized to two. What is the maximum possible value of x after all processes complete execution?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Read-modify-write race",
+                "Counting semaphore concurrency limit"
+            ],
+            "tags": [
+                "counting semaphore",
+                "shared variable race",
+                "max value analysis",
+                "Semaphores",
+                "Resource Allocation and Concurrency"
+            ],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "-2",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "-1",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "1",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "2",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "With S initialized to 2, two processes can read x concurrently before either stores it back. By carefully interleaving the reads and writes of W, X, Y, and Z (allowing lost updates), the maximum final value of x that can be achieved is 2.",
+            "pyq_sources": [
+                {
+                    "year": 2013,
+                    "set": null,
+                    "question_number": "Q2.26",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "A certain computation generates two arrays a and b such that a[i] = f(i) for 0 <= i <= n and b[i] = g(a[i]) for 0 <= i < n. Suppose this computation is decomposed into two concurrent processes X and Y such that X computes the array a and Y computes the array b. The processes employ two binary semaphores R and S, both initialized to zero. The array a is shared by the two processes. The structure of the processes is shown below:\nProcess X:\nprivate i;\nfor (i = 0; i < n; i++) {\n  a[i] = f(i);\n  ExitsX (R, S);\n}\nProcess Y:\nprivate i;\nfor (i = 0; i < n; i++) {\n  EntryY(R, S);\n  b[i] = g(a[i]);\n}\nWhich one of the following represents the CORRECT implementations of ExitsX and EntryY?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Producer-consumer style pipelining with binary semaphores"
+            ],
+            "tags": [
+                "binary semaphore",
+                "producer consumer",
+                "pipeline synchronization",
+                "Semaphores",
+                "Producer-Consumer Problem"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "ExitsX(R,S){ P(R); V(S); } EntryY(R,S){ P(S); V(R); }",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "ExitsX(R,S){ V(R); V(S); } EntryY(R,S){ P(R); P(S); }",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "ExitsX(R,S){ P(S); V(R); } EntryY(R,S){ V(S); P(R); }",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "ExitsX(R,S){ V(R); P(S); } EntryY(R,S){ V(S); P(R); }",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Each value inserted by process X into the array must be immediately consumed once by process Y before X can overwrite it; option (c) is the only implementation that ensures each a[i] written by X is consumed exactly once by Y without allowing X to race ahead or Y to consume a value before it is written.",
+            "pyq_sources": [
+                {
+                    "year": 2013,
+                    "set": null,
+                    "question_number": "Q2.27",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the procedure below for the Producer-Consumer problem which uses semaphores:\nsemaphore n = 0;\nsemaphore s = 1;\nvoid producer() {\n  while(true) {\n    produce();\n    semWait(s);\n    addToBuffer();\n    semSignal(s);\n    semSignal(n);\n  }\n}\nvoid consumer() {\n  while (true) {\n    semWait(s);\n    semWait(n);\n    removeFromBuffer();\n    semSignal(s);\n    consume();\n  }\n}\nWhich one of the following is TRUE?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Semaphore ordering bug in producer-consumer"
+            ],
+            "tags": [
+                "producer consumer",
+                "semaphore ordering",
+                "deadlock",
+                "Producer-Consumer Problem",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The producer will be able to add an item to the buffer, but the consumer can never consume it.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "The consumer will remove no more than one item from the buffer.",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Deadlock occurs if the consumer succeeds in acquiring semaphore s when the buffer is empty.",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "The starting value for the semaphore n must be 1 and not 0 for deadlock-free operation.",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If the consumer runs before the producer has produced anything, it successfully waits on s (making s = 0) but then blocks on the unsuccessful wait on n (which stays 0). If the producer then tries to run, it also blocks trying to wait on s, and since no process can signal either semaphore, a deadlock occurs.",
+            "pyq_sources": [
+                {
+                    "year": 2014,
+                    "set": 2,
+                    "question_number": "Q2.28",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "The following two functions P1 and P2 that share a variable B with an initial value of 2 execute concurrently.\nP1() { C = B - 1; B = 2 * C; }\nP2() { D = 2 * B; B = D - 1; }\nThe number of distinct values that B can possibly take after the execution is ____.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Interleaving of concurrent statement execution",
+                "Shared variable race analysis"
+            ],
+            "tags": [
+                "shared variable",
+                "interleaving",
+                "concurrency race",
+                "Resource Allocation and Concurrency"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "3",
+            "explanation": "Enumerating all possible interleavings of the statements of P1 and P2 that read and write B shows B can end up as 2, 3 or 4 depending on the interleaving, giving three distinct possible values.",
+            "pyq_sources": [
+                {
+                    "year": 2015,
+                    "set": 1,
+                    "question_number": "Q2.29",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Two processes X and Y need to access a critical section. Consider the following synchronization construct used by both the processes:\nProcess X\n/* other code for process X */\nwhile (true) {\n  varP = true;\n  while (varQ == true)\n  { /* Critical Section */\n    varP = false;\n  }\n}\n/* other code for process X */\nProcess Y\n/* other code for process Y */\nwhile (true) {\n  varQ = true;\n  while (varP == true)\n  { /* Critical Section */\n    varQ = false;\n  }\n}\n/* other code for process Y */\nHere, varP and varQ are shared variables and both are initialized to false. Which one of the following statements is true?",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Flag-based mutual exclusion failure analysis"
+            ],
+            "tags": [
+                "mutual exclusion",
+                "deadlock prevention",
+                "flag variables",
+                "Mutual Exclusion Algorithms",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The proposed solution prevents deadlock but fails to guarantee mutual exclusion",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "The proposed solution guarantees mutual exclusion but fails to prevent deadlock",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "The proposed solution guarantees mutual exclusion and prevents deadlock",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "The proposed solution fails to prevent deadlock and fails to guarantee mutual exclusion",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Both processes can execute their statements up to setting their own flag true before checking the other's flag, letting both enter the critical section simultaneously, so mutual exclusion fails; however, the given code structure prevents both processes from being permanently blocked, so deadlock is prevented.",
+            "pyq_sources": [
+                {
+                    "year": 2015,
+                    "set": 3,
+                    "question_number": "Q2.30",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following proposed solution for the critical section problem. There are n processes: P0 ... P(n-1). In the code, function pmax returns an integer not smaller than any of its arguments. For all i, t[i] is initialized to zero.\nCode for Pi:\ndo {\n  c[i]=1; t[i] = pmax (t[0],...,t[n-1]) +1; c[i]=0;\n  for every j != i in {0,..., n-1}\n  { while (c[j]);\n    while (t[j] != 0 && t[j] <= t[i]);\n  }\n  Critical Section; t[i] = 0;\n} while (true);\nWhich one of the following is TRUE about the above solution?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Bakery-style algorithm",
+                "Ticket numbering with pmax",
+                "Progress and bounded wait analysis"
+            ],
+            "tags": [
+                "mutual exclusion",
+                "n process algorithm",
+                "bakery algorithm",
+                "bounded wait",
+                "Mutual Exclusion Algorithms",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "At most one process can be in the critical section at any time",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "The bounded wait condition is satisfied",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "The progress condition is satisfied",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "It cannot cause a deadlock",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since pmax can return an integer not smaller than any argument, it is possible for t[j] == t[i] for i != j, causing the inner while loop's second condition to hold true forever for one of the processes, so processes may starve indefinitely, meaning progress and bounded waiting are not guaranteed. However, mutual exclusion (at most one process in CS) is still satisfied by the construct.",
+            "pyq_sources": [
+                {
+                    "year": 2016,
+                    "set": 1,
+                    "question_number": "Q2.31",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following two-process synchronization solution:\nProcess 0\nEntry: loop while (turn == 1);\n(critical section)\nExit: turn = 1;\nProcess 1\nEntry: loop while (turn == 0);\n(critical section)\nExit: turn = 0;\nThe shared variable turn is initialized to zero. Which one of the following is TRUE?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Strict alternation",
+                "Progress condition violation"
+            ],
+            "tags": [
+                "strict alternation",
+                "turn variable",
+                "progress condition",
+                "Mutual Exclusion Algorithms"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "This is a correct two-process synchronization solution",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "This solution violates mutual exclusion requirement",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "This solution violates progress requirement",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "This solution violates bounded wait requirement",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "This is a strict alternation scheme, so if a process outside the critical section is not ready to enter, the other process (even if it wants to enter repeatedly) can be blocked, violating the progress condition, since a process outside the CS should not be able to block a process that wants to enter when the CS is free. Bounded waiting is satisfied because a process is guaranteed a turn after the other has executed once.",
+            "pyq_sources": [
+                {
+                    "year": 2016,
+                    "set": 2,
+                    "question_number": "Q2.32",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider a non-negative counting semaphore S. The operation P(S) decrements S, and V(S) increments S. During an execution, 20 P(S) operations and 12 V(S) operations are issued in some order. The largest initial value of S for which at least one P(S) operation will remain blocked is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Counting semaphore arithmetic"
+            ],
+            "tags": [
+                "counting semaphore",
+                "blocking condition",
+                "semaphore arithmetic",
+                "Semaphores"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 90,
+            "options": [],
+            "correct_answer_text": "7",
+            "explanation": "With initial value S, after 20 P and 12 V operations the net change is S - 20 + 12 = S - 8; for at least one P operation to remain blocked, this final value must be negative, i.e., S - 8 < 0, giving the largest integer value S = 7.",
+            "pyq_sources": [
+                {
+                    "year": 2016,
+                    "set": 2,
+                    "question_number": "Q2.33",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "A multithreaded program P executes with x number of threads and uses y number of locks for ensuring mutual exclusion while operating on shared memory locations. All locks in the program are non-reentrant, i.e., if a thread holds a lock l, then it cannot re-acquire lock l without releasing it. If a thread is unable to acquire a lock, it blocks until the lock becomes available. The minimum value of x and the minimum value of y together for which execution of P can result in a deadlock are:",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Non-reentrant lock deadlock",
+                "Self re-acquisition deadlock"
+            ],
+            "tags": [
+                "multithreading",
+                "non-reentrant lock",
+                "deadlock condition",
+                "Multithreading and Locks",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "x = 1, y = 2",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "x = 2, y = 1",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "x = 2, y = 2",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "x = 1, y = 1",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since locks are non-reentrant, a single thread trying to re-acquire the same lock it already holds without releasing it will block itself forever, so a deadlock can occur with just one thread and one lock, i.e., x = 1, y = 1.",
+            "pyq_sources": [
+                {
+                    "year": 2017,
+                    "set": 1,
+                    "question_number": "Q2.34",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following solution to the producer-consumer synchronization problem. The shared buffer size is N. Three semaphores empty, full and mutex are defined with respective initial values of 0, N and 1. Semaphore empty denotes the number of available slots in the buffer, for the consumer to read from. Semaphore full denotes the number of available slots in the buffer, for the producer to write to. The placeholder variables, denoted by P, Q, R and S, in the code below can be assigned either empty or full. The valid semaphore operations are: wait() and signal().\nProducer:\ndo {\n  wait (P);\n  wait (mutex);\n  //Add item to buffer\n  signal (mutex);\n  signal (Q);\n} while (1);\nConsumer:\ndo {\n  wait (R);\n  wait (mutex);\n  //Consume item from buffer\n  signal (mutex);\n  signal (S);\n} while (1);\nWhich one of the following assignment to P, Q, R and S will yield the correct solution?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Empty/full semaphore assignment"
+            ],
+            "tags": [
+                "producer consumer",
+                "empty full semaphore",
+                "bounded buffer",
+                "Producer-Consumer Problem",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "P: full, Q: full, R: empty, S: empty",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "P: empty, Q: empty, R: full, S: full",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "P: empty, Q: full, R: full, S: empty",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "P: empty, Q: full, R: full, S: empty",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since the buffer starts empty, the consumer must not start first, and the correct semaphore names are those that properly signal availability of items to the other side: the producer waits on empty and signals full, while the consumer waits on full and signals empty, matching option (c).",
+            "pyq_sources": [
+                {
+                    "year": 2018,
+                    "set": null,
+                    "question_number": "Q2.35",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider three concurrent processes P1, P2 and P3 as shown below, which access a shared variable D that has been initialized to 100.\nP1: D = D + 20\nP2: D = D - 50\nP3: D = D + 10\nThe processes are executed on a uniprocessor system running a time-shared operating system. If the minimum and maximum possible values of D after the three processes have completed execution are X and Y respectively, then the value of Y - X is ____.",
+            "question_type": "NAT",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Read-modify-write race analysis",
+                "Interleaving on shared variable"
+            ],
+            "tags": [
+                "shared variable",
+                "read modify write",
+                "interleaving race",
+                "Resource Allocation and Concurrency"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "80",
+            "explanation": "The minimum value occurs when P1 and P3 read D before P2 updates it: P1 and P3 both read D = 100 and later write 110 and 120 respectively, and P2's update of 50 applies last, giving D = 100 - 50 = 50 = X. The maximum occurs when P2 and P3 read the initial value and update sequentially, then P1 reads the updated value: giving D = 110 + 20 = 130 = Y. Hence Y - X = 130 - 50 = 80.",
+            "pyq_sources": [
+                {
+                    "year": 2019,
+                    "set": null,
+                    "question_number": "Q2.36",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following snapshot of a system running n concurrent processes. Process i is holding X_i instances of a resource R, 1 <= i <= n. Assume that all instances of R are currently in use. Further, for all i, process i can place a request for at most Y_i additional instances of R while holding the X_i instances it already has. Of the n processes, there are exactly two processes p and q such that Y_p = Y_q = 0. Which one of the following conditions guarantees that no other process apart from p and q can complete execution?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Resource allocation graph reasoning",
+                "Safe sequence analysis"
+            ],
+            "tags": [
+                "resource allocation",
+                "deadlock avoidance",
+                "banker's algorithm style",
+                "Resource Allocation and Concurrency",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "X_p + X_q < Min {Y_k | 1 <= k <= n, k != p, k != q}",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "Min (X_p, X_q) >= Min {Y_k | 1 <= k <= n, k != p, k != q}",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Min (X_p, X_q) <= Max {Y_k | 1 <= k <= n, k != p, k != q}",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "X_p + X_q < Max {Y_k | 1 <= k <= n, k != p, k != q}",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since p and q request no more resources, they can complete and release their X_p and X_q instances, making X_p + X_q instances available. For no other process to be able to complete, this available amount must be less than the smallest additional request among all remaining processes, i.e., X_p + X_q < Min {Y_k | k != p, q}.",
+            "pyq_sources": [
+                {
+                    "year": 2019,
+                    "set": null,
+                    "question_number": "Q2.37",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Each of a set of n processes executes the following code using two semaphores a and b initialized to 1 and 0, respectively. Assume that count is a shared variable initialized to 0 and not used in CODE SECTION P.\nCODE SECTION P\nwait(a); count = count + 1;\nif (count == n) signal(b);\nsignal(a); wait(b); signal(b);\nCODE SECTION Q\nWhat does the code achieve?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Barrier-style synchronization using count and semaphores"
+            ],
+            "tags": [
+                "semaphore",
+                "barrier synchronization",
+                "code section ordering",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "It ensures that at most two processes are in CODE SECTION Q at any time.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "It ensures that all processes execute CODE SECTION P mutually exclusively.",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "It ensures that no process executes CODE SECTION Q before every process has finished CODE SECTION P.",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "It ensures that at most n-1 processes are in CODE SECTION P at any time.",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "All processes remain blocked on wait(b) until count reaches n, at which point b becomes 1, allowing a process into CODE SECTION Q; hence no process can enter CODE SECTION Q until all n processes have finished CODE SECTION P.",
+            "pyq_sources": [
+                {
+                    "year": 2020,
+                    "set": null,
+                    "question_number": "Q2.38",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following pseudocode, where S is a semaphore initialized to 5 in line#2 and counter is a shared variable initialized to 0 in line#1. Assume that the increment operation in line#7 is not atomic.\n1. int counter = 0;\n2. Semaphore S = init(5);\n3. void parop(void)\n4. {\n5.   wait(S);\n6.   wait(S);\n7.   counter++;\n8.   signal(S);\n9.   signal(S);\n10. }\nIf five threads execute the function parop concurrently, which of the following program behavior(s) is/are possible?",
+            "question_type": "MSQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Non-atomic increment race",
+                "Double wait on same semaphore"
+            ],
+            "tags": [
+                "semaphore",
+                "non-atomic increment",
+                "race condition",
+                "multithreading",
+                "Semaphores",
+                "Multithreading and Locks"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The value of counter is 1 after all the threads successfully complete the execution of parop.",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "The value of counter is 0 after all the threads successfully complete the execution of parop.",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "There is a deadlock involving all the threads.",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "The value of counter is 5 after all the threads successfully complete the execution of parop.",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "If threads interleave the non-atomic counter++ operation, a lost update can make the final counter value 1. If all five threads perform both wait(S) operations first (using up all 5 permits), none can proceed further, causing a deadlock. If instead the threads execute the whole function sequentially without interleaving the increment, counter correctly ends at 5. A final value of 0 is not possible given the interleavings.",
+            "pyq_sources": [
+                {
+                    "year": 2021,
+                    "set": 1,
+                    "question_number": "Q2.39",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider a computer system with multiple shared resource types, with one instance per resource type. Each instance can be owned by only one process at a time. Owning and freeing of resources are done by holding a global lock (L). The following scheme is used to own a resource instance:\nfunction OwnResource (Resource R)\n  Acquire lock L // a global lock\n  if R is available then\n    Acquire R\n    Release lock L\n  else\n    if R is owned by another process P then\n      Terminate P, after releasing all resources owned by P\n      Acquire R\n      Restart P\n      Release lock L\n    end if\n  end if\nend function\nWhich of the following choice(s) about the above scheme is/are correct?",
+            "question_type": "MSQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II",
+                "Deadlock"
+            ],
+            "concepts": [
+                "Preemptive resource allocation",
+                "Livelock and starvation via preemption"
+            ],
+            "tags": [
+                "resource allocation",
+                "deadlock prevention",
+                "livelock",
+                "starvation",
+                "Resource Allocation and Concurrency",
+                "Deadlock and Starvation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The scheme violates the mutual exclusion property.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "The scheme ensures that deadlocks will not occur.",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "The scheme may lead to live-lock.",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "The scheme may lead to starvation.",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Mutual exclusion is not violated since ownership is always exclusive. Deadlocks cannot occur because a process's resources are forcefully preempted (by terminating it) rather than being held indefinitely. However, if processes keep repeatedly preempting each other's resources, this can lead to starvation of some processes and a live-lock where processes keep restarting without making progress.",
+            "pyq_sources": [
+                {
+                    "year": 2021,
+                    "set": 2,
+                    "question_number": "Q2.40",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following multi-threaded code segment (in a mix of C and pseudo-code), invoked by two processes P1 and P2, and each of the processes spawns two threads T1 and T2:\nint x = 0; // global\nLock L1; // global\nmain() {\n  create a thread to execute foo(); // Thread T1\n  create a thread to execute foo(); // Thread T2\n  wait for the two threads to finish execution;\n  print (x);\n}\nfoo() {\n  int y = 0;\n  Acquire L1;\n  x = x + 1;\n  y = y + 1;\n  Release L1;\n  print (y);\n}\nWhich of the following statement(s) is/are correct?",
+            "question_type": "MSQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Process address space isolation",
+                "Lock-protected shared variable within a process"
+            ],
+            "tags": [
+                "multithreading",
+                "lock",
+                "process address space",
+                "shared variable",
+                "Multithreading and Locks"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "At least one of P1 and P2 will print the value of x as 4,",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Both P1 and P2 will print the value of x as 2.",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "Both T1 and T2, in both the processes, will print the value of y as 1.",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "At least one of the threads will print the value of y as 2.",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since x and L1 are global variables within each process's own address space (not shared across processes), each process's two threads increment their own copy of x from 0 to 2, so both P1 and P2 print x as 2. Since y is a local variable in foo(), each thread has its own separate copy of y, so every thread always prints y as 1, never 2.",
+            "pyq_sources": [
+                {
+                    "year": 2021,
+                    "set": 2,
+                    "question_number": "Q2.41",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following threads, T1, T2 and T3 executing on a single processor, synchronized using three binary semaphore variables, S1, S2 and S3, operated upon using standard wait() and signal(). The threads can be context switched in any order and at any time.\nT1: while (true) { wait (S3); print (\"C\"); signal (S2); }\nT2: while (true) { wait (S1); print (\"B\"); signal (S3); }\nT3: while (true) { wait (S2); print (\"A\"); signal (S1); }\nWhich initialization of the semaphores would print the sequence BCABCABCA.....?",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Semaphore-controlled ordered printing"
+            ],
+            "tags": [
+                "binary semaphore",
+                "ordered execution",
+                "thread synchronization",
+                "Semaphores"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "S1 = 1; S2 = 1; S3 = 1",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "S1 = 1; S2 = 1; S3 = 0",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "S1 = 1; S2 = 0; S3 = 0",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "S1 = 0; S2 = 1; S3 = 0",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "To get the sequence starting with B, only S1 must be initialized to 1 (allowing T2 to run first and print B), while S2 and S3 must both start at 0 so T3 and T1 remain blocked until signaled in the correct order.",
+            "pyq_sources": [
+                {
+                    "year": 2022,
+                    "set": null,
+                    "question_number": "Q2.42",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the two functions incr and decr shown below:\nincr() { wait(s); X = X + 1; signal(s); }\ndecr() { wait(s); X = X - 1; signal(s); }\nThere are 5 threads each invoking incr once, and 3 threads each invoking decr once, on the same shared variable X. The initial value of X is 10. Suppose there are two implementations of the semaphore s, as follows:\nI-1: s is a binary semaphore initialized to 1.\nI-2: s is a counting semaphore initialized to 2.\nLet V1, V2 be the values of X at the end of execution of all the threads with implementations I-1, I-2, respectively. Which one of the following choices corresponds to the minimum possible values of V1, V2, respectively?",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Binary vs counting semaphore critical section access",
+                "Lost update race analysis"
+            ],
+            "tags": [
+                "binary semaphore",
+                "counting semaphore",
+                "shared variable race",
+                "minimum value analysis",
+                "Semaphores",
+                "Multithreading and Locks"
+            ],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "15, 7",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "7, 7",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "12, 7",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "12, 8",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "With a binary semaphore (I-1), only one thread can be in the critical section at a time, so incr and decr always execute correctly one at a time; the only possible final value of X is 12, so V1's minimum is 12. With a counting semaphore of value 2 (I-2), two threads can access the critical section concurrently, allowing a maximum number of decrements' effects to be preserved and increments' effects to be lost through races, giving a minimum possible V2 of 7.",
+            "pyq_sources": [
+                {
+                    "year": 2023,
+                    "set": null,
+                    "question_number": "Q2.43",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following code snippet using the fork() and wait() system calls. Assume that the code compiles and runs correctly, and that the system calls run successfully without any errors.\nint x = 3;\nwhile (x > 0) {\n  fork();\n  printf(\"hello\");\n  wait(NULL);\n  x--;\n}\nThe total number of times the printf statement is executed is ____.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Process forking in a loop",
+                "Exponential process creation"
+            ],
+            "tags": [
+                "fork",
+                "wait system call",
+                "process creation count",
+                "Multithreading and Locks"
+            ],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "14",
+            "explanation": "Each iteration of the loop doubles the number of active processes through fork(), and each active process executes the printf statement once per iteration it participates in; summing the number of printf executions across the three iterations of the loop for the original process and all its descendants gives a total of 14.",
+            "pyq_sources": [
+                {
+                    "year": 2024,
+                    "set": 1,
+                    "question_number": "Q2.44",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider three processes P1, P2, and P3 running identical code, as shown in the pseudocode below. A and B are two binary semaphores initialized to 1 and 0, respectively. X is a shared variable initialized to 0. Each line in the pseudocode is executed atomically.\nPseudocode of P1, P2, and P3:\nWait(A);\nPrint(*);\nX = X+1;\nIf (X == 2)\n{\n  Print($);\n  Signal(B);\n}\nSignal(A);\nWait(B);\nPrint(#);\nSignal(B);\nAssume that any of the three processes can start to execute first and context switching can happen between these processes at any arbitrary time and in any arbitrary order.\nWhich of the following patterns is/are possible to be generated as an outcome of the execution of these three processes?",
+            "question_type": "MSQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "Process Management-II"
+            ],
+            "concepts": [
+                "Binary semaphore trace across three processes",
+                "Conditional signaling"
+            ],
+            "tags": [
+                "binary semaphore",
+                "three process synchronization",
+                "output pattern analysis",
+                "Semaphores",
+                "Multithreading and Locks"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "**$*###",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "**$#*##",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "**$*##*#",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "***$###",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since A is initialized to 1, only one process can be inside the section up to X = X+1 at a time, so a third '*' cannot be printed before the '$' appears (which happens exactly when the second process increments X to 2); this rules out option (d), while options (a), (b) and (c) are all achievable through valid interleavings of the three processes.",
+            "pyq_sources": [
+                {
+                    "year": 2026,
+                    "set": 2,
+                    "question_number": "Q2.45",
+                    "marks": 2
+                }
+            ]
+        }
+    ]
+}

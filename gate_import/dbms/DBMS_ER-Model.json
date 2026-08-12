@@ -1,0 +1,820 @@
+{
+    "subject": {
+        "subject_name": "Database Management Systems",
+        "subject_code": "DBMS"
+    },
+    "topics": [
+        {
+            "topic_name": "ER-Model",
+            "summary": "Covers entity-relationship diagrams, entity sets, relationships, cardinality and participation constraints, weak entities, and the mapping of ER models into relational schemas."
+        }
+    ],
+    "questions": [
+        {
+            "question_text": "It is desired to design an object-oriented employee record system for a company. Each employee has a name, unique id and salary. Employees belong to different categories and their salary is determined by their category. The functions getName, getId and computeSalary are required. Given the class hierarchy below (Employee as superclass with Manager, Engineer, Secretary as subclasses), possible locations for these functions are: (i) getId is implemented in the superclass (ii) getId is implemented in the subclass (iii) getName is an abstract function in the superclass (iv) getName is implemented in the superclass (v) getName is implemented in the subclass (vi) getSalary is an abstract function in the superclass (vii) getSalary is implemented in the superclass (viii) getSalary is implemented in the subclass. Choose the best design. (a) (i), (iv), (vi), (viii) (b) (i), (iv), (vii) (c) (i), (iii), (v), (vi), (viii) (d) (ii), (v), (viii)",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "Object-Oriented Design",
+                "Inheritance",
+                "Encapsulation"
+            ],
+            "tags": [
+                "class hierarchy",
+                "abstract function",
+                "superclass",
+                "subclass",
+                "OOP modeling"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "(i), (iv), (vi), (viii)",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "(i), (iv), (vii)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "(i), (iii), (v), (vi), (viii)",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "(ii), (v), (viii)",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The superclass hides information from the outside world, so getId should be implemented in the superclass. Name is also a core attribute of every employee, so getName should be implemented in the superclass as well. Salary varies by category, so computeSalary should be an abstract function declared in the superclass and implemented differently in each subclass.",
+            "pyq_sources": [
+                {
+                    "year": 2004,
+                    "set": null,
+                    "question_number": "1.1",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the following entity relationship diagram (ERD), where two entities E1 and E2 have a relation R of cardinality 1:m. The attributes of E1 are A11, A12 and A13 where A11 is the key attribute. The attributes of E2 are A21, A22 and A23 where A21 is the key attribute and A23 is a multi-valued attribute. Relation R does not have any attribute. A relational database containing minimum number of tables with each table satisfying the requirements of the third normal form (3NF) is designed from the above ERD. The number of tables in the database is (a) 2 (b) 3 (c) 5 (d) 4",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "ER to Relational Mapping",
+                "Normalization",
+                "3NF",
+                "Multivalued Attribute"
+            ],
+            "tags": [
+                "cardinality",
+                "multivalued attribute",
+                "key attribute",
+                "3NF",
+                "minimum tables"
+            ],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "2",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "3",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "5",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "4",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since R is a 1:m relationship with no attributes of its own, it merges into entity E2 (the 'many' side). This gives E1(A11, A12, A13) with key A11, and RE2(A21, A22, A23, A11) with key A21. Because A23 is multivalued, RE2 is not in 2NF as A21 -> A22, A11 holds partially; it must be split into RE11(A21, A23) with key A21, A23 and RE22(A21, A22, A11) with key A21. All three resulting tables are then in 3NF, giving a minimum of 3 tables.",
+            "pyq_sources": [
+                {
+                    "year": 2004,
+                    "set": null,
+                    "question_number": "1.2",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Consider the entities 'hotel room' and 'person' with a many-to-many relationship 'lodging' as shown below: Hotel Room -- Lodging -- Person. If we wish to store information about the rent payment to be made by person(s) occupying different hotel rooms, then this information should appear as an attribute of (a) Person (b) Hotel Room (c) Lodging (d) None of these",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "Many-to-Many Relationship",
+                "Relationship Attributes"
+            ],
+            "tags": [
+                "many-to-many relationship",
+                "relationship attribute",
+                "ER diagram"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Person",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Hotel Room",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Lodging",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "None of these",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The rent payment depends on the combination of a specific person and a specific hotel room, so it is a property of the relationship (Lodging) itself, since it is connected to both entities, not of either entity alone.",
+            "pyq_sources": [
+                {
+                    "year": 2005,
+                    "set": null,
+                    "question_number": "1.3",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Let E1 and E2 be two entities in an E/R diagram with simple single-valued attributes. R1 and R2 are two relationships between E1 and E2, where R1 is one-to-many and R2 is many-to-many. R1 and R2 do not have any attributes of their own. What is the minimum number of tables required to represent this situation in the relational model? (a) 2 (b) 3 (c) 4 (d) 5",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "ER to Relational Mapping",
+                "Relationship Cardinality",
+                "Table Minimization"
+            ],
+            "tags": [
+                "one-to-many",
+                "many-to-many",
+                "minimum tables",
+                "relational model"
+            ],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "2",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "3",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "4",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "5",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "R1's key is the key of E2 (the many side), and R2's key is the composite key of E1 and E2 since it is many-to-many. Since the key of R1 equals the key of E2, R1 can be merged into the table for E2. This leaves three tables: E1, the merged E2/R1 table, and R2.",
+            "pyq_sources": [
+                {
+                    "year": 2005,
+                    "set": null,
+                    "question_number": "1.4",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "The following table has two attributes A and C where A is the primary key and C is the foreign key referencing A with on-delete cascade. Table rows (A, C): (2,4), (3,4), (4,3), (5,2), (7,2), (9,5), (6,4). The set of all tuples that must be additionally deleted to preserve referential integrity when the tuple (2, 4) is deleted is: (a) (3,4) and (6,4) (b) (5,2) and (7,2) (c) (5,2), (7,2) and (9,5) (d) 1",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "Referential Integrity",
+                "On-Delete Cascade",
+                "Foreign Key"
+            ],
+            "tags": [
+                "cascade delete",
+                "referential integrity",
+                "foreign key",
+                "primary key"
+            ],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "(3,4) and (6,4)",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "(5,2) and (7,2)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "(5,2), (7,2) and (9,5)",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "1",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Deleting (2,4) removes the row where A=2. Since C is a foreign key referencing A, any row where C=2 must also cascade-delete: these are (5,2) and (7,2). Deleting those rows removes A=5 and A=7 as primary keys, which in turn cascades to any row referencing them as a foreign key: (9,5) references A=5, so it must also be deleted. No other row references A=7, so the chain stops there.",
+            "pyq_sources": [
+                {
+                    "year": 2005,
+                    "set": null,
+                    "question_number": "1.5",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Common Data for this and the next question: Consider the following ER diagram: entity M has multivalued/component attributes M1, M2, M3; entity P has attributes P1, P2; entity N has attributes N1, N2. M is connected to P via relationship R1, and P is connected to N via relationship R2 (N is a weak entity set dependent on the identifying relationship R2). The minimum number of tables needed to represent M, N, P, R1, R2 is (a) 2 (b) 3 (c) 4 (d) 5",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "ER to Relational Mapping",
+                "Relationship Sets",
+                "Weak Entity"
+            ],
+            "tags": [
+                "minimum tables",
+                "relationship set",
+                "weak entity",
+                "ER diagram"
+            ],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "2",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "3",
+                    "is_correct": true
+                },
+                {
+                    "label": "C",
+                    "text": "4",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "5",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "R1 (relating M and P) merges into the table for M, giving M_R(M1, M2, M3, P1). R2 relates P to the weak entity set N, so N's table absorbs R2 along with the partial key of P: NR2(P1, N1, N2). Combined with P(P1, P2), a total of 3 relational tables are required.",
+            "pyq_sources": [
+                {
+                    "year": 2008,
+                    "set": null,
+                    "question_number": "1.6",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Common Data (same ER diagram as the previous question): Which of the following is a correct attribute set for one of the tables for the correct answer to the previous question? (a) {M1, M2, M3, P1} (b) {M1, P1, N1, N2} (c) {M1, P1, N1} (d) {M1, P1}",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "ER to Relational Mapping",
+                "Relationship Sets",
+                "Weak Entity"
+            ],
+            "tags": [
+                "minimum tables",
+                "relationship set",
+                "weak entity",
+                "ER diagram"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "{M1, M2, M3, P1}",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "{M1, P1, N1, N2}",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "{M1, P1, N1}",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "{M1, P1}",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Following from the merge of R1 into entity M, the resulting table has the attribute set {M1, M2, M3, P1}.",
+            "pyq_sources": [
+                {
+                    "year": 2008,
+                    "set": null,
+                    "question_number": "1.7",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "Given the basic ER and relational models, which of the following is INCORRECT? (a) An attribute of an entity can have more than one value (b) An attribute of an entity can be composite (c) In a row of a relational table, an attribute can have more than one value (d) In a row of a relational table, an attribute can have exactly one value or a NULL value",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "Relational Model Constraints",
+                "Atomicity",
+                "Multivalued Attribute"
+            ],
+            "tags": [
+                "1NF",
+                "atomic values",
+                "composite attribute",
+                "relational table"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "An attribute of an entity can have more than one value",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "An attribute of an entity can be composite",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "In a row of a relational table, an attribute can have more than one value",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "In a row of a relational table, an attribute can have exactly one value or a NULL value",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In the ER model, an entity's attribute can indeed be multivalued (a) or composite (b), which is a correct statement. However, in the relational model each attribute value in a row must be atomic (single-valued or NULL), so option (c) stating an attribute can have more than one value in a row is the incorrect statement.",
+            "pyq_sources": [
+                {
+                    "year": 2012,
+                    "set": null,
+                    "question_number": "1.8",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Consider an Entity-Relationship (ER) model in which entity sets E1 and E2 are connected by an m:n relationship R12. E1 and E3 are connected by a 1:n (1 on the side of E1 and n on the side of E3) relationship R13. E1 has two single-valued attributes a11 and a12 of which a11 is the key attribute. E2 has two single-valued attributes a21 and a22 of which a21 is the key attribute. E3 has two single-valued attributes a31 and a32 of which a31 is the key attribute. The relationships do not have any attributes. What is the minimum number of tables required to represent this situation in the relational model?",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "ER to Relational Mapping",
+                "Multiple Relationships",
+                "Key Propagation"
+            ],
+            "tags": [
+                "m:n relationship",
+                "1:n relationship",
+                "minimum tables",
+                "key attribute"
+            ],
+            "is_numerical": true,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "4",
+            "explanation": "R13 is a 1:n relationship from E1 to E3, so it merges into E3's table: E3R13(a31, a32, a11) since a31 -> a32, a11. E1 needs its own table: E1(a11, a12) since a11 -> a12. R12 is many-to-many with no attributes of its own, so it needs a separate table: R12(a11, a21). E2 needs its own table: E2(a21, a22) since a21 -> a22. This gives a minimum of 4 tables in total.",
+            "pyq_sources": [
+                {
+                    "year": 2015,
+                    "set": 1,
+                    "question_number": "1.9",
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "question_text": "An ER model of a database consists of entity types A and B. These are connected by a relationship R which does not have its own attribute. Under which one of the following conditions, can the relational table for R be merged with that of A? (a) Relationship R is one-to-many and the participation of A in R is total. (b) Relationship R is one-to-many and the participation of A in R is partial. (c) Relationship R is many-to-one and the participation of A in R is total. (d) Relationship R is many-to-one and the participation of A in R is partial.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "Relationship Mapping",
+                "Total Participation",
+                "Table Merging"
+            ],
+            "tags": [
+                "many-to-one relationship",
+                "total participation",
+                "relational table merge",
+                "key propagation"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Relationship R is one-to-many and the participation of A in R is total.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Relationship R is one-to-many and the participation of A in R is partial.",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Relationship R is many-to-one and the participation of A in R is total.",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Relationship R is many-to-one and the participation of A in R is partial.",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A many-to-one relationship set can be merged into the table on the 'many' side (entity A). The participation of A in R can be total or partial for the merge to be valid, and among the given options, R being many-to-one with total participation of A is the condition that permits the merge.",
+            "pyq_sources": [
+                {
+                    "year": 2017,
+                    "set": 2,
+                    "question_number": "1.10",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "In an Entity-Relationship (ER) model, suppose R is a many-to-one relationship from entity set E1 to entity set E2. Assume that E1 and E2 participate totally in R and that the cardinality of E1 is greater than the cardinality of E2. Which one of the following is true about R? (a) Every entity in E1 is associated with exactly one entity in E2. (b) Some entity in E1 is associated with more than one entity in E2. (c) Every entity in E2 is associated with exactly one entity in E1. (d) Every entity in E2 is associated with at most one entity in E1.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "Many-to-One Relationship",
+                "Total Participation",
+                "Cardinality Ratio"
+            ],
+            "tags": [
+                "many-to-one",
+                "total participation",
+                "cardinality constraint",
+                "ER model"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Every entity in E1 is associated with exactly one entity in E2.",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "Some entity in E1 is associated with more than one entity in E2.",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Every entity in E2 is associated with exactly one entity in E1.",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Every entity in E2 is associated with at most one entity in E1.",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Since R is many-to-one from E1 to E2 with total participation of E1, every entity in E1 must be associated with exactly one entity in E2. Because E1 has greater cardinality than E2 and participation is total, multiple E1 entities can map to the same E2 entity, so entities in E2 are not necessarily associated with only one entity in E1.",
+            "pyq_sources": [
+                {
+                    "year": 2018,
+                    "set": null,
+                    "question_number": "1.11",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Which one of the following is used to represent the supporting many-to-one relationships of a weak entity set in an entity-relationship diagram? (a) Rectangles with double/bold border (b) Ovals with double/bold border (c) Ovals that contain underlined identifiers (d) Diamonds with double/bold border",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "Weak Entity Set",
+                "ER Diagram Notation"
+            ],
+            "tags": [
+                "weak entity set",
+                "identifying relationship",
+                "ER notation",
+                "double border"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Rectangles with double/bold border",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Ovals with double/bold border",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "Ovals that contain underlined identifiers",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "Diamonds with double/bold border",
+                    "is_correct": true
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The identifying relationship set connecting a weak entity set to its owner entity set is represented by a diamond shape with a double/bold border in standard ER notation.",
+            "pyq_sources": [
+                {
+                    "year": 2020,
+                    "set": null,
+                    "question_number": "1.12",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "Let S be the specification: 'Instructors teach courses. Students register for courses. Courses are allocated classrooms. Instructors guide students.' Which one of the following ER diagrams CORRECTLY represents S? Four candidate ER diagrams (i), (ii), (iii), (iv) are given, each showing different arrangements of the entities Instructor, Course, Student, Classroom and the relationships Teaches, Registration/Allocation, and Guides. (a) (iii) (b) (ii) (c) (iv) (d) (i)",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "hard",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "ER Diagram Interpretation",
+                "Relationship Identification"
+            ],
+            "tags": [
+                "ER diagram",
+                "relationship sets",
+                "teaches",
+                "registers",
+                "allocation",
+                "guides"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "(iii)",
+                    "is_correct": true
+                },
+                {
+                    "label": "B",
+                    "text": "(ii)",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "(iv)",
+                    "is_correct": false
+                },
+                {
+                    "label": "D",
+                    "text": "(i)",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Instructor, Course, Student, and Classroom are the entity sets. 'Teaches' is the relationship set between Instructor and Course. 'Register' is the relationship set between Student and Course. 'Allocation' is the relationship set between Course and Classroom. 'Guides' is the relationship set between Instructor and Student. Diagram (iii) is the one that correctly captures all four relationships as specified.",
+            "pyq_sources": [
+                {
+                    "year": 2024,
+                    "set": 1,
+                    "question_number": "1.13",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "In the context of owner and weak entity sets in the ER (Entity-Relationship) data model, which one of the following statements is TRUE? (a) The owner entity set MUST have total participation in the identifying relationship. (b) Neither weak entity set nor owner entity set MUST have total participation in the identifying relationship. (c) The weak entity set MUST have total participation in the identifying relationship. (d) Both weak and owner entity sets MUST have total participation in the identifying relationship.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "Weak Entity Set",
+                "Owner Entity Set",
+                "Total Participation",
+                "Identifying Relationship"
+            ],
+            "tags": [
+                "weak entity",
+                "owner entity",
+                "total participation",
+                "identifying relationship"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The owner entity set MUST have total participation in the identifying relationship.",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "Neither weak entity set nor owner entity set MUST have total participation in the identifying relationship.",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "The weak entity set MUST have total participation in the identifying relationship.",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "Both weak and owner entity sets MUST have total participation in the identifying relationship.",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A weak entity set has no key of its own and depends entirely on its identifying relationship with the owner entity set for existence, so it must always have total participation in that relationship. The owner entity set, on the other hand, may or may not have total participation.",
+            "pyq_sources": [
+                {
+                    "year": 2024,
+                    "set": 2,
+                    "question_number": "1.14",
+                    "marks": 1
+                }
+            ]
+        },
+        {
+            "question_text": "In the context of DBMS, consider the two sets T and S given below. T: I. Logical schema, II. Physical schema, III. External schema. S: L. Views, M. File organization and indexes, N. Relations. Which one of the following is the correct match from T to S? (a) I-L, II-M, III-N (b) I-M, II-L, III-N (c) I-N, II-M, III-L (d) I-N, II-L, III-M",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": [
+                "ER-Model"
+            ],
+            "concepts": [
+                "Database Architecture",
+                "Three-Schema Architecture"
+            ],
+            "tags": [
+                "logical schema",
+                "physical schema",
+                "external schema",
+                "three-level architecture",
+                "views"
+            ],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                {
+                    "label": "A",
+                    "text": "I-L, II-M, III-N",
+                    "is_correct": false
+                },
+                {
+                    "label": "B",
+                    "text": "I-M, II-L, III-N",
+                    "is_correct": false
+                },
+                {
+                    "label": "C",
+                    "text": "I-N, II-M, III-L",
+                    "is_correct": true
+                },
+                {
+                    "label": "D",
+                    "text": "I-N, II-L, III-M",
+                    "is_correct": false
+                }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In the three-schema architecture, the logical schema describes the overall structure as Relations, the physical schema describes File organization and indexes, and the external schema corresponds to user-level Views.",
+            "pyq_sources": [
+                {
+                    "year": 2026,
+                    "set": 2,
+                    "question_number": "1.15",
+                    "marks": 1
+                }
+            ]
+        }
+    ]
+}

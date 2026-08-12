@@ -1,0 +1,792 @@
+{
+    "subject": {
+        "subject_name": "Computer Networks",
+        "subject_code": "CN"
+    },
+    "topics": [
+        {
+            "topic_name": "LAN",
+            "summary": "This chapter covers Local Area Network concepts including CSMA/CD, Ethernet framing and encoding, medium access control protocols (ALOHA, polling, TDM, slotted access), bridges and switches, sliding window and ARQ protocols, ARP/ address resolution, error detection using CRC and Hamming distance, and propagation/transmission delay calculations."
+        }
+    ],
+    "questions": [
+        {
+            "question_text": "A 2 km long broadcast LAN has 10^7 bps bandwidth and uses CSMA/CD. The signal travels along the wire at 2 × 10^8 m/s. What is the minimum packet size that can be used on this network? (a) 50 bytes (b) 100 bytes (c) 200 bytes (d) None of these",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["CSMA/CD", "Minimum frame size", "Propagation delay"],
+            "tags": ["CSMA/CD", "minimum frame size", "propagation delay", "broadcast LAN"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "50 bytes", "is_correct": false },
+                { "label": "B", "text": "100 bytes", "is_correct": false },
+                { "label": "C", "text": "200 bytes", "is_correct": false },
+                { "label": "D", "text": "None of these", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In CSMA/CD the minimum frame size = 2 × z × data rate, where z = distance / velocity. Here z = (2×10^3 m)/(2×10^8 m/sec) = 10^-5 sec. Minimum packet size = 2 × 10^-5 × 10^7 = 200 bits = 25 bytes, which does not match options (a), (b), or (c), so the answer is (d) None of these.",
+            "pyq_sources": [
+                { "year": 2003, "set": null, "question_number": "2.1", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A host is connected to a Department network which is part of a University network. The University network, in turn, is part of the Internet. The largest network in which the Ethernet address of the host is unique is (a) the subnet to which the host belongs (b) the Department network (c) the University network (d) the Internet",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["LAN"],
+            "concepts": ["MAC address", "Ethernet addressing"],
+            "tags": ["MAC address", "ethernet address", "uniqueness", "addressing"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "the subnet to which the host belongs", "is_correct": false },
+                { "label": "B", "text": "the Department network", "is_correct": false },
+                { "label": "C", "text": "the University network", "is_correct": false },
+                { "label": "D", "text": "the Internet", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The address used in Ethernet is the MAC address. A manufacturer assigns MAC addresses such that no two systems ever share the same one, so the MAC address of a host is unique across the largest possible network, which is the Internet.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "2.2", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider a simplified time slotted MAC protocol, where each host always has data to send and transmits with probability p = 0.2 in every slot. There is no backoff and one frame can be transmitted in one slot. If more than one host transmits in the same slot, then the transmissions are unsuccessful due to collision. What is the maximum number of hosts which this protocol can support, if each host has to be provided a minimum throughput of 0.16 frames per time slot? (a) 1 (b) 2 (c) 3 (d) 4",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Slotted ALOHA", "Throughput", "Probability"],
+            "tags": ["slotted aloha", "throughput", "probability", "MAC protocol"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "1", "is_correct": false },
+                { "label": "B", "text": "2", "is_correct": true },
+                { "label": "C", "text": "3", "is_correct": false },
+                { "label": "D", "text": "4", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Consider n hosts. In slotted ALOHA, throughput of successful transmission = (1-0.2)^(n-1)(0.2). Setting this equal to 0.16: 0.16 = (1-0.2)^(n-1)(0.2), which gives (0.8)^1 = (0.8)^(n-1). Comparing powers gives n-1 = 1, so n = 2.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "2.3", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A and B are the only two stations on an Ethernet. Each has a steady queue of frames to send. Both A and B attempt to transmit a frame, collide, and A wins the first backoff race. At the end of this successful transmission by A, both A and B attempt to transmit a frame and collide. The probability that A wins the second backoff race is (a) 0.5 (b) 0.625 (c) 0.75 (d) 1.0",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Ethernet backoff", "Binary exponential backoff", "Probability"],
+            "tags": ["backoff algorithm", "ethernet", "probability", "collision"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "0.5", "is_correct": false },
+                { "label": "B", "text": "0.625", "is_correct": true },
+                { "label": "C", "text": "0.75", "is_correct": false },
+                { "label": "D", "text": "1.0", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "When A and B collide the first time, each picks from sequence numbers (0,1), giving probability of A winning the first backoff race = 1/4 = 0.25. When A and B collide again after A's successful transmission, A again picks from (0,1) but B, having collided a second time, picks from (0,1,2,3). Counting the favorable outcomes gives probability of A winning the second backoff race = 5/8 = 0.625.",
+            "pyq_sources": [
+                { "year": 2004, "set": null, "question_number": "2.4", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In a network of LANs connected by bridges, packets are sent from one LAN to another through intermediate bridges. Since more than one path may exist between two LANs, packets may have to be routed through multiple bridges. Why is the spanning tree algorithm used for bridge-routing? (a) For shortest path routing between LANs (b) For avoiding loops in the routing paths (c) For fault tolerance (d) For minimizing collisions",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["LAN"],
+            "concepts": ["Spanning tree algorithm", "Bridge routing"],
+            "tags": ["spanning tree algorithm", "bridge", "loop avoidance", "LAN interconnection"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "For shortest path routing between LANs", "is_correct": false },
+                { "label": "B", "text": "For avoiding loops in the routing paths", "is_correct": true },
+                { "label": "C", "text": "For fault tolerance", "is_correct": false },
+                { "label": "D", "text": "For minimizing collisions", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The spanning tree approach is a mechanism by which bridges automatically build a routing table and update it as the topology changes, using frame forwarding, address learning, and loop resolution, thereby avoiding loops in the routing paths.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "2.5", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Which of the following statements is TRUE about CSMA/CD (a) IEEE 802.11 wireless LAN runs CSMA/CD protocol (b) Ethernet is not based on CSMA/CD protocol (c) CSMA/CD is not suitable for a high propagation delay network like satellite network (d) There is no contention in a CSMA/CD network",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["CSMA/CD", "Wireless LAN", "Propagation delay"],
+            "tags": ["CSMA/CD", "wireless LAN", "satellite network", "propagation delay"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "IEEE 802.11 wireless LAN runs CSMA/CD protocol", "is_correct": false },
+                { "label": "B", "text": "Ethernet is not based on CSMA/CD protocol", "is_correct": false },
+                { "label": "C", "text": "CSMA/CD is not suitable for a high propagation delay network like satellite network", "is_correct": true },
+                { "label": "D", "text": "There is no contention in a CSMA/CD network", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "IEEE 802.11 wireless LANs actually run CSMA/CA rather than CSMA/CD, while Ethernet does use CSMA/CD. Contention is possible in CSMA/CD networks since more than one station can transmit data at the same time. CSMA/CD is not suitable for networks with high propagation delay because collision detection efficiency becomes very low when collisions take long to detect.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "2.6", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Which of the following statements is FALSE regarding a bridge (a) Bridge is a layer 2 device (b) Bridge reduces collision domain (c) Bridge is used to connect two or more LAN segments (d) Bridge reduces broadcast domain",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["Bridge", "Collision domain", "Broadcast domain"],
+            "tags": ["bridge", "collision domain", "broadcast domain", "layer 2 device"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "Bridge is a layer 2 device", "is_correct": false },
+                { "label": "B", "text": "Bridge reduces collision domain", "is_correct": false },
+                { "label": "C", "text": "Bridge is used to connect two or more LAN segments", "is_correct": false },
+                { "label": "D", "text": "Bridge reduces broadcast domain", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "A bridge is a layer 2 (data link and physical layer) device that can reduce the collision domain and can connect more than one LAN segment, but it cannot reduce the broadcast domain. A hub, by comparison, is neither a collision domain nor a broadcast domain separator.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "2.7", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "A network with CSMA/CD protocol in the MAC layer is running at 1 Gbps over a 1 km cable with no repeaters. The signal speed in the cable is 2 × 10^8 m/sec. The minimum frame size for this network should be (a) 10000 bits (b) 10000 bytes (c) 5000 bits (d) 5000 bytes",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["CSMA/CD", "Minimum frame size"],
+            "tags": ["CSMA/CD", "minimum frame size", "propagation delay", "transmission time"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "10000 bits", "is_correct": true },
+                { "label": "B", "text": "10000 bytes", "is_correct": false },
+                { "label": "C", "text": "5000 bits", "is_correct": false },
+                { "label": "D", "text": "5000 bytes", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In CSMA/CD, minimum frame size is calculated from transmission time ≥ 2 × propagation time: x/(1×10^9) ≥ 2 × (1×10^3)/(2×10^8), which gives x ≥ 10^4 bits = 10000 bits.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "2.8", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In a TDM medium access control bus LAN, each station is assigned one time slot per cycle for transmission. Assume that the length of each time slot is the time to transmit 100 bits plus the end-to-end propagation delay. Assume a propagation speed of 2 × 10^8 m/sec. The length of the LAN is 1 km with a bandwidth of 10 Mbps. The maximum number of stations that can be allowed in the LAN so that the throughput of each station can be 2/3 Mbps is (a) 3 (b) 5 (c) 10 (d) 20",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["TDM MAC", "Throughput", "Propagation delay"],
+            "tags": ["TDM MAC", "throughput", "propagation delay", "LAN"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "3", "is_correct": false },
+                { "label": "B", "text": "5", "is_correct": false },
+                { "label": "C", "text": "10", "is_correct": true },
+                { "label": "D", "text": "20", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Propagation delay = 1km/(2×10^8) = 5μs. Transmission time of 100 bits at 10Mbps = 10μs. For N stations, cycle length = N×(10+5) = 15N μs, and each station transmits for only 10μs per cycle, so efficiency per station = 10/(15N). Throughput of each station = (10/15N)×10Mbps, which is given as 2/3 Mbps, giving N = (10×10×3)/(15×2) = 10.",
+            "pyq_sources": [
+                { "year": 2005, "set": null, "question_number": "2.9", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A router has two full-duplex Ethernet interfaces each operating at 100 Mb/s. Ethernet frames are at least 84 bytes long (including the Preamble and the Inter-Packet-Gap). The maximum packet processing time at the router for wirespeed forwarding to be possible is (in micro-seconds) (a) 0.01 (b) 3.36 (c) 6.72 (d) 8",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["Router processing time", "Full-duplex Ethernet", "Wirespeed forwarding"],
+            "tags": ["router", "full duplex ethernet", "processing time", "wirespeed forwarding"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "0.01", "is_correct": false },
+                { "label": "B", "text": "3.36", "is_correct": true },
+                { "label": "C", "text": "6.72", "is_correct": false },
+                { "label": "D", "text": "8", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "With two full-duplex 100 Mbps interfaces, packets can arrive at a combined rate of 200 Mbps. Transmission time of an 84-byte packet on a single 100 Mbps interface = 84B/100Mbps = 6.72μs. Since packets can arrive from both interfaces, the router must be able to process a packet within half that time, i.e., 6.72/2 = 3.36μs, to avoid queue overflow.",
+            "pyq_sources": [
+                { "year": 2006, "set": null, "question_number": "2.10", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In Ethernet when Manchester encoding is used, the bit rate is (a) Half the baud rate (b) Twice the baud rate (c) Same as the baud rate (d) None of these",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "easy",
+            "topics": ["LAN"],
+            "concepts": ["Manchester encoding", "Baud rate", "Bit rate"],
+            "tags": ["manchester encoding", "baud rate", "bit rate", "ethernet encoding"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 45,
+            "options": [
+                { "label": "A", "text": "Half the baud rate", "is_correct": true },
+                { "label": "B", "text": "Twice the baud rate", "is_correct": false },
+                { "label": "C", "text": "Same as the baud rate", "is_correct": false },
+                { "label": "D", "text": "None of these", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In Manchester encoding, two signal changes are used to represent one bit, so the baud rate (number of signal changes per second) is twice the bit rate. Hence, the bit rate is half the baud rate.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "2.11", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "A broadcast channel has 10 nodes and total capacity of 10 Mbps. It uses polling for medium access. Once a node finishes transmission, there is a polling delay of 80 μs to poll the next node. Whenever a node is polled, it is allowed to transmit a maximum of 1000 bytes. The maximum throughput of the broadcast channel is (a) 1 Mbps (b) 100/11 Mbps (c) 10 Mbps (d) 100 Mbps",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Polling", "Throughput", "MAC protocol"],
+            "tags": ["polling", "throughput", "MAC protocol", "broadcast channel"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [
+                { "label": "A", "text": "1 Mbps", "is_correct": false },
+                { "label": "B", "text": "100/11 Mbps", "is_correct": true },
+                { "label": "C", "text": "10 Mbps", "is_correct": false },
+                { "label": "D", "text": "100 Mbps", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Transmission time for one 1000-byte frame at 10 Mbps = 8000 bits/(10×10^6) = 800μs. Total time per cycle including polling delay = 800 + 80 = 880μs. Throughput = (10×800μs)/880μs = 800/88 = 100/11 Mbps.",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "2.12", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "There are n stations in a slotted LAN. Each station attempts to transmit with a probability p in each time slot. What is the probability that ONLY one station transmits in a given time slot? (a) np(1-p)^(n-1) (b) (1-p)^(n-1) (c) p(1-p)^(n-1) (d) 1-(1-p)^(n-1)",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["Slotted ALOHA", "Probability", "Binomial distribution"],
+            "tags": ["slotted aloha", "probability", "binomial distribution", "throughput"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "np(1-p)^(n-1)", "is_correct": true },
+                { "label": "B", "text": "(1-p)^(n-1)", "is_correct": false },
+                { "label": "C", "text": "p(1-p)^(n-1)", "is_correct": false },
+                { "label": "D", "text": "1-(1-p)^(n-1)", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "This follows the binomial probability distribution for exactly one station out of n transmitting: P(E) = nC1 × p^1 × (1-p)^(n-1) = np(1-p)^(n-1).",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "2.13", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "The distance between two stations M and N is L kilometres. All frames are K bits long. The propagation delay per kilometre is t seconds. Let R bits/second be the channel capacity. Assuming that processing delay is negligible, the minimum number of bits for the sequence number field in a frame for maximum utilization, when the sliding window protocol is used, is: (a) ⌈log2(2LtR + 2K)/K⌉ (b) ⌈log2(2LtR/K)⌉ (c) ⌈log2((2LtR + K)/K)⌉ (d) ⌈log2((2LtR + K)/2K)⌉",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Sliding window protocol", "Sequence number bits", "Link utilization"],
+            "tags": ["sliding window protocol", "sequence number", "utilization", "propagation delay"],
+            "is_numerical": false,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "⌈log2(2LtR + 2K)/K⌉", "is_correct": false },
+                { "label": "B", "text": "⌈log2(2LtR/K)⌉", "is_correct": false },
+                { "label": "C", "text": "⌈log2((2LtR + K)/K)⌉", "is_correct": true },
+                { "label": "D", "text": "⌈log2((2LtR + K)/2K)⌉", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Utilization U = w(K/R) / (K/R + 2Lt). For 100% utilization, 1 = wK/(K + 2LtR), giving w = (K + 2LtR)/K. Since w = 2^n, n = ⌈log2((K + 2LtR)/K)⌉, matching option (c).",
+            "pyq_sources": [
+                { "year": 2007, "set": null, "question_number": "2.14", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "The minimum frame size required for a CSMA/CD based computer network running at 1 Gbps on a 200 m cable with a link speed of 2 × 10^8 m/s is (a) 125 bytes (b) 250 bytes (c) 500 bytes (d) None of these",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["CSMA/CD", "Minimum frame size"],
+            "tags": ["CSMA/CD", "minimum frame size", "propagation delay", "transmission time"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "125 bytes", "is_correct": false },
+                { "label": "B", "text": "250 bytes", "is_correct": true },
+                { "label": "C", "text": "500 bytes", "is_correct": false },
+                { "label": "D", "text": "None of these", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "In CSMA/CD, transmission time must be at least twice the propagation time to detect collisions: x/(1×10^9) ≥ 2×(200/(2×10^8)), giving x ≥ 2000 bits = 250 bytes.",
+            "pyq_sources": [
+                { "year": 2008, "set": null, "question_number": "2.15", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a source computer (S) transmitting a file of size 10^6 bits to a destination computer (D) over a network of two routers (R1 and R2) and three links (L1, L2 and L3). L1 connects S to R1; L2 connects R1 to R2; and L3 connects R2 to D. Assume each link is of length 100 km. Assume signals travel over each link at a speed of 10^8 meters per second. Assume that the link bandwidth on each link is 1 Mbps. Let the file be broken down into 1000 packets of size 1000 bits each. Find the total sum of transmission and propagation delays in transmitting the file from S to D? (a) 1005 ms (b) 1010 ms (c) 3000 ms (d) 3003 ms",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Propagation delay", "Transmission delay", "Store-and-forward", "Pipelining"],
+            "tags": ["propagation delay", "transmission delay", "packet switching", "store and forward"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "1005 ms", "is_correct": true },
+                { "label": "B", "text": "1010 ms", "is_correct": false },
+                { "label": "C", "text": "3000 ms", "is_correct": false },
+                { "label": "D", "text": "3003 ms", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "Propagation delay per link = distance/speed = 10^5/10^8 = 1 ms, so total propagation delay across 3 links = 3 ms. Transmission delay for one 1000-bit packet on a link = 1000/10^6 = 1 ms; with 3 links in series, the first packet takes 3 ms to reach D, so the first packet arrives at 6 ms total. Since the remaining 999 packets are pipelined behind it, they arrive one every 1 ms after that, adding 999 ms. Total time = 999 + 6 = 1005 ms.",
+            "pyq_sources": [
+                { "year": 2012, "set": null, "question_number": "2.16", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Determine the maximum length of the cable (in km) for transmitting data at a rate of 500 Mbps in an Ethernet LAN with frames of size 10,000 bits. Assume the signal speed in the cable to be 2,00,000 km/s. (a) 1 (b) 2 (c) 2.5 (d) 5",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["CSMA/CD", "Cable length", "Minimum frame size"],
+            "tags": ["CSMA/CD", "cable length", "propagation delay", "ethernet LAN"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "1", "is_correct": false },
+                { "label": "B", "text": "2", "is_correct": true },
+                { "label": "C", "text": "2.5", "is_correct": false },
+                { "label": "D", "text": "5", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "For CSMA/CD, transmission time = 2 × propagation time: 10000 bit/(500×10^6 bits/sec) = 2L/(2×10^5 km/sec), which gives L = 2 km.",
+            "pyq_sources": [
+                { "year": 2013, "set": null, "question_number": "2.17", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a LAN with four nodes S1, S2, S3 and S4. Time is divided into fixed-size slots, and a node can begin its transmission only at the beginning of a slot. A collision is said to have occurred if more than one node transmit in the same slot. The probabilities of generation of a frame in a time slot by S1, S2, S3 and S4 are 0.1, 0.2, 0.3 and 0.4, respectively. The probability of sending a frame in the first slot without any collision by any of these four stations is ____",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Slotted LAN", "Probability", "Collision"],
+            "tags": ["slotted LAN", "probability", "collision", "frame transmission"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 150,
+            "options": [],
+            "correct_answer_text": "0.4404",
+            "explanation": "Required probability = only one station transmits = (P1·P̄2·P̄3·P̄4) + (P̄1·P2·P̄3·P̄4) + (P̄1·P̄2·P3·P̄4) + (P̄1·P̄2·P̄3·P4) = (0.1×0.8×0.7×0.6) + (0.9×0.2×0.7×0.6) + (0.9×0.8×0.3×0.6) + (0.9×0.8×0.7×0.4) = 0.0336 + 0.0756 + 0.1296 + 0.2016 = 0.4404.",
+            "pyq_sources": [
+                { "year": 2015, "set": 1, "question_number": "2.18", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a CSMA/CD network that transmits data at a rate of 100 Mbps (10^8 bits per second) over a 1 km (kilometer) cable with no repeaters. If the minimum frame size required for this network is 1250 bytes, what is the signal speed (km/sec) in the cable? (a) 8000 (b) 10000 (c) 16000 (d) 20000",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["CSMA/CD", "Minimum frame size", "Signal speed"],
+            "tags": ["CSMA/CD", "minimum frame size", "signal speed", "propagation delay"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "8000", "is_correct": false },
+                { "label": "B", "text": "10000", "is_correct": false },
+                { "label": "C", "text": "16000", "is_correct": false },
+                { "label": "D", "text": "20000", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "For CSMA/CD: transmission time ≥ 2 × propagation delay: (1250×8)/(100×10^6) = 2×(1000/x), solving gives x = 2×10^7 m/s = 20000 km/sec.",
+            "pyq_sources": [
+                { "year": 2015, "set": 3, "question_number": "2.19", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Which of the following protocols is NOT used to resolve one form of address to another one? (a) DNS (b) ARP (c) DHCP (d) RARP",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["DNS", "ARP", "RARP", "DHCP", "Address resolution"],
+            "tags": ["DNS", "ARP", "RARP", "DHCP", "address resolution"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "DNS", "is_correct": true },
+                { "label": "B", "text": "ARP", "is_correct": false },
+                { "label": "C", "text": "DHCP", "is_correct": false },
+                { "label": "D", "text": "RARP", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "DNS maps a host name to an IP address, ARP maps an IP address to a MAC address, RARP maps a MAC address to an IP address, and DHCP is also used to associate MAC addresses with IP addresses. Since all options other than DNS map one form of address to another (IP/MAC), DNS is the odd one out, resolving names rather than addresses.",
+            "pyq_sources": [
+                { "year": 2016, "set": 1, "question_number": "2.20", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Which of the following is/are example(s) of statefull application layer protocols? (i) HTTP (ii) FTP (iii) TCP (iv) POP3 (a) (i) and (ii) only (b) (ii) and (iii) only (c) (ii) and (iv) only (d) (iv) only",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["Application layer protocols", "Stateful protocols"],
+            "tags": ["HTTP", "FTP", "POP3", "TCP", "stateful protocol", "application layer"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "(i) and (ii) only", "is_correct": false },
+                { "label": "B", "text": "(ii) and (iii) only", "is_correct": false },
+                { "label": "C", "text": "(ii) and (iv) only", "is_correct": true },
+                { "label": "D", "text": "(iv) only", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "FTP requires control and data connections and hence requires authorization, making it stateful. HTTP is a stateless protocol. TCP is not an application layer protocol, but it is itself stateful. POP3 is an application layer protocol that maintains state with the help of TCP.",
+            "pyq_sources": [
+                { "year": 2016, "set": 1, "question_number": "2.21", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A sender uses the Stop-and-Wait ARQ protocol for reliable transmission of frames. Frames are of size 1000 bytes and the transmission rate at the sender is 80 Kbps (1 Kbps = 1000 bits/second). Size of an acknowledgment is 100 bytes and the transmission rate at the receiver is 8 Kbps. The one-way propagation delay is 100 milliseconds. Assuming no frame is lost, the sender throughput is ________ bytes/second.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Stop-and-Wait ARQ", "Throughput", "Propagation delay"],
+            "tags": ["stop and wait ARQ", "throughput", "propagation delay", "transmission rate"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "2500",
+            "explanation": "Sender throughput = Data / Total time = 1000 bytes / (0.1+0.1+0.1+0.1) = 2500 bytes/sec, where each 0.1 sec segment corresponds to transmission and propagation delays of frame and acknowledgment.",
+            "pyq_sources": [
+                { "year": 2016, "set": 1, "question_number": "2.22", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "In an Ethernet local area network, which one of the following statements is TRUE? (a) A station stops to sense the channel once it starts transmitting a frame. (b) The purpose of the jamming signal is to pad the frames that are smaller than the minimum frame size. (c) A station continues to transmit the packet even after the collision is detected. (d) The exponential backoff mechanism reduces the probability of collision on retransmissions.",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["Ethernet", "Exponential backoff", "Collision"],
+            "tags": ["ethernet", "exponential backoff", "collision", "jamming signal"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 60,
+            "options": [
+                { "label": "A", "text": "A station stops to sense the channel once it starts transmitting a frame.", "is_correct": false },
+                { "label": "B", "text": "The purpose of the jamming signal is to pad the frames that are smaller than the minimum frame size.", "is_correct": false },
+                { "label": "C", "text": "A station continues to transmit the packet even after the collision is detected.", "is_correct": false },
+                { "label": "D", "text": "The exponential backoff mechanism reduces the probability of collision on retransmissions.", "is_correct": true }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The exponential backoff algorithm reduces the possibility of repeated collisions in subsequent retransmission attempts.",
+            "pyq_sources": [
+                { "year": 2016, "set": 1, "question_number": "2.23", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A network has a data transmission bandwidth of 20 × 10^6 bits per second. It uses CSMA/CD in the MAC layer. The maximum signal propagation time from one node to another node is 40 microseconds. The minimum size of a frame in the network is ______ bytes.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["CSMA/CD", "Minimum frame size", "Propagation delay"],
+            "tags": ["CSMA/CD", "minimum frame size", "propagation delay", "MAC layer"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [],
+            "correct_answer_text": "200",
+            "explanation": "For Ethernet, transmission time = 2 × propagation time. Frame size / (20×10^6 bits/sec) = 2 × 40 μsec, so frame size = 20×10^6 × 2 × 40×10^-6 = 1600 bits = 200 bytes.",
+            "pyq_sources": [
+                { "year": 2016, "set": 2, "question_number": "2.24", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a 128 × 10^3 bits/second satellite communication link with one way propagation delay of 150 milliseconds. Selective retransmission (repeat) protocol is used on this link to send data with a frame size of 1 kilobyte. Neglect the transmission time of acknowledgement. The minimum number of bits required for the sequence number field to achieve 100% utilization is ______",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Selective repeat ARQ", "Sequence number bits", "Sliding window", "Link utilization"],
+            "tags": ["selective repeat ARQ", "sequence number bits", "sliding window", "satellite link"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "4",
+            "explanation": "Transmission time = Frame size/Bandwidth = (1024×8)/(128×10^3) = 1028/16 msec = 64 msec. For 100% efficiency, window size w.s. = 1 + 2×(propagation time/transmission time) = 1 + 2×(150/64) = 1 + 2(2.34) = 5.68, rounded up to 6. In selective repeat ARQ, total window size ≥ log2(sender w.s. + receiver w.s.), and sender w.s. = receiver w.s., giving total w.s. ≥ log2(6+6) = log2(12) = 4 bits.",
+            "pyq_sources": [
+                { "year": 2016, "set": 2, "question_number": "2.25", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "For the IEEE 802.11 MAC protocol for wireless communication, which of the following statements is/are TRUE? I. At least three non-overlapping channels are available for transmission. II. The RTS-CTS mechanism is used for collision detection. III. Unicast frames are ACKed. (a) All I, II, and III (b) I and III only (c) II and III only (d) II only",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["IEEE 802.11", "RTS-CTS", "Wireless LAN"],
+            "tags": ["IEEE 802.11", "wireless LAN", "RTS-CTS", "collision avoidance", "unicast ACK"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "All I, II, and III", "is_correct": false },
+                { "label": "B", "text": "I and III only", "is_correct": true },
+                { "label": "C", "text": "II and III only", "is_correct": false },
+                { "label": "D", "text": "II only", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The RTS-CTS mechanism is used for collision avoidance, not collision detection, so statement II is false. Statements I and III about non-overlapping channels and ACKing unicast frames are true.",
+            "pyq_sources": [
+                { "year": 2016, "set": 2, "question_number": "2.26", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "The values of parameters for the Stop-and-Wait ARQ protocol are as given below: Bit rate of the transmission channel = 1 Mbps. Propagation delay from sender to receiver = 0.75 ms. Time to process a frame = 0.25 ms. Number of bytes in the information frame = 1980. Number of bytes in the acknowledge frame = 20. Number of overhead bytes in the information frame = 20. Assume that there are no transmission errors. Then, the transmission efficiency (expressed in percentage) of the Stop-and-Wait ARQ protocol for the above parameters is _______ (correct to 2 decimal places).",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Stop-and-Wait ARQ", "Transmission efficiency", "Propagation delay"],
+            "tags": ["stop and wait ARQ", "transmission efficiency", "propagation delay", "frame processing time"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "89.33",
+            "explanation": "Transmission time of data = (1980+20) bytes/(10^6 bits/sec) = 16 msec. Propagation time = 0.75 msec. Transmission time of ACK = 20×8 bits/10^6 = 0.16 msec. Transmission efficiency = 16/(0.25+16+1.5+0.16) = 16/17.91 × 100% = 89.33%, where processing time of frame and ack, and double propagation delay are accounted for in the denominator.",
+            "pyq_sources": [
+                { "year": 2017, "set": 1, "question_number": "2.27", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "A computer network uses polynomials over GF(2) for error checking with 8 bits as information bits and uses x^3 + x + 1 as the generator polynomial to generate the check bits. In this network, the message 01011011 is transmitted as (a) 01011011010 (b) 01011011011 (c) 01011011101 (d) 01011011100",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["CRC", "Error checking", "Generator polynomial"],
+            "tags": ["CRC", "generator polynomial", "GF(2)", "error detection"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [
+                { "label": "A", "text": "01011011010", "is_correct": false },
+                { "label": "B", "text": "01011011011", "is_correct": false },
+                { "label": "C", "text": "01011011101", "is_correct": true },
+                { "label": "D", "text": "01011011100", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The generator polynomial x^3+x+1 corresponds to the bit pattern 1011. Performing modulo-2 division of the data (appended with 3 zero bits) 01011011000 by 1011 gives a remainder of 101, so the transmitted message is the original data with these check bits appended: 01011011101.",
+            "pyq_sources": [
+                { "year": 2017, "set": 1, "question_number": "2.28", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a binary code that consists of only four valid codewords as given below: 00000, 01011, 10101, 11110. Let the minimum Hamming distance of the code be p and the maximum number of erroneous bits that can be corrected by the code be q. Then the values of p and q are (a) p = 3 and q = 1 (b) p = 3 and q = 2 (c) p = 4 and q = 1 (d) p = 4 and q = 2",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["Hamming distance", "Error correction", "Codewords"],
+            "tags": ["hamming distance", "error correction", "codewords", "error detection"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [
+                { "label": "A", "text": "p = 3 and q = 1", "is_correct": true },
+                { "label": "B", "text": "p = 3 and q = 2", "is_correct": false },
+                { "label": "C", "text": "p = 4 and q = 1", "is_correct": false },
+                { "label": "D", "text": "p = 4 and q = 2", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": "The minimum Hamming distance is the minimum of the pairwise Hamming distances among the codewords, which equals 3. To correct errors, the condition 2q+1 ≤ p must hold, giving q = 1.",
+            "pyq_sources": [
+                { "year": 2017, "set": 2, "question_number": "2.29", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a simple communication system where multiple nodes are connected by a shared broadcast medium (like Ethernet or wireless). The nodes in the system use the following carrier-sense based medium access protocol. A node that receives a packet to transmit will carrier-sense the medium for 5 units of time. If the node does not detect any other transmission in this duration, it starts transmitting its packet in the next time unit. If the node detects another transmission, it waits until this other transmission finishes, and then begins carrier-sense for 5 time units again. Once they start to transmit, nodes do not perform any collision detection even if a collision occurs. All transmissions last for 20 units of time. Assume that the transmission signal travels at the speed of 10 meters per unit time in the medium. Assume that the system has two nodes P and Q, located at a distance d meters from each other. P starts transmitting a packet at time t = 0 after successfully completing its carrier-sense phase. Node Q has a packet to transmit at time t = 0 and begins carrier-sense the medium. The maximum distance d (in meters, rounded to the closest integer) that allows Q to successfully avoid a collision between its proposed transmission and P's ongoing transmission is _______.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Carrier sense", "Collision avoidance", "Propagation delay"],
+            "tags": ["carrier sense multiple access", "collision avoidance", "propagation delay", "MAC protocol"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "50",
+            "explanation": "To avoid collision, Q's sensing must detect P's signal before Q's transmit decision, i.e., the sensing duration of Q (5 time units) must be at least equal to the time taken for P's signal to reach Q. This gives d = 5 time units × 10 meters/unit = 50 meters, since P's first bit must reach Q within 5 time units for Q to detect the ongoing transmission and wait.",
+            "pyq_sources": [
+                { "year": 2017, "set": 2, "question_number": "2.30", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider that 15 machines need to be connected in a LAN using 8-port Ethernet switches. Assume that these switches do not have any separate uplink ports. The minimum number of switches needed is _______.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["Ethernet switches", "LAN design", "Port count"],
+            "tags": ["ethernet switches", "LAN design", "port count", "network topology"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 90,
+            "options": [],
+            "correct_answer_text": "3",
+            "explanation": "3 switches of 8-port Ethernet switches are required to connect 15 computers, since switches must be interconnected using some of their own ports, reducing the effective number of ports available for end machines.",
+            "pyq_sources": [
+                { "year": 2019, "set": null, "question_number": "2.31", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Suppose that in an IP-over-Ethernet network, a machine X wishes to find the MAC address of another machine Y in its subnet. Which one of the following techniques can be used for this? (a) X sends an ARP request packet with broadcast IP address in its local subnet (b) X sends an ARP request packet to the local gateway's MAC address which then finds the MAC address of Y and sends to X (c) X sends an ARP request packet with broadcast MAC address in its local subnet (d) X sends an ARP request packet to the local gateway's IP address which then finds the MAC address of Y and sends to X",
+            "question_type": "MCQ",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["ARP", "MAC address resolution", "Broadcast"],
+            "tags": ["ARP", "MAC address", "broadcast", "address resolution"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "X sends an ARP request packet with broadcast IP address in its local subnet", "is_correct": false },
+                { "label": "B", "text": "X sends an ARP request packet to the local gateway's MAC address which then finds the MAC address of Y and sends to X", "is_correct": false },
+                { "label": "C", "text": "X sends an ARP request packet with broadcast MAC address in its local subnet", "is_correct": true },
+                { "label": "D", "text": "X sends an ARP request packet to the local gateway's IP address which then finds the MAC address of Y and sends to X", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": null,
+            "pyq_sources": [
+                { "year": 2019, "set": null, "question_number": "2.32", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Consider a network using the pure ALOHA medium access control protocol, where each frame is of length 1,000 bits. The channel transmission rate is 1 Mbps (= 10^6 bits per second). The aggregate number of transmissions across all the nodes (including new frame transmissions and retransmitted frames due to collisions) is modelled as a Poisson process with a rate of 1,000 frames per second. Throughput is defined as the average number of frames successfully transmitted per second. The throughput of the network (rounded to the nearest integer) is _______.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Pure ALOHA", "Throughput", "Poisson process"],
+            "tags": ["pure aloha", "throughput", "poisson process", "efficiency"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "135",
+            "explanation": "1 frame takes Tt = L/Bandwidth = 1000/10^6 = 1 millisecond. Aggregate rate G = 1000 frames/sec × 1ms per frame = 1. Efficiency of pure ALOHA η = G × e^(-2G) = 1 × e^(-2) = 0.1353. In 1 second, throughput = 0.1353 × 1000 = 135.3, rounded to 135.",
+            "pyq_sources": [
+                { "year": 2021, "set": 2, "question_number": "2.33", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "Node X has a TCP connection open to node Y. The packets from X to Y go through an intermediate IP router R. Ethernet switch S is the first switch on the network path between X and R. Consider a packet sent from X to Y over this connection. Which of the following statements is/are TRUE about the destination IP and MAC addresses on this packet at the time it leaves X? (a) The destination IP address is the IP address of Y. (b) The destination MAC address is the MAC address of Y. (c) The destination MAC address is the MAC address of S. (d) The destination IP address is the IP address of R.",
+            "question_type": "MCQ",
+            "marks": 1,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["IP addressing", "MAC addressing", "Routing", "TCP connection"],
+            "tags": ["IP address", "MAC address", "routing", "ethernet switch", "TCP/IP"],
+            "is_numerical": false,
+            "formula_based": false,
+            "estimated_solve_time_seconds": 90,
+            "options": [
+                { "label": "A", "text": "The destination IP address is the IP address of Y.", "is_correct": true },
+                { "label": "B", "text": "The destination MAC address is the MAC address of Y.", "is_correct": false },
+                { "label": "C", "text": "The destination MAC address is the MAC address of S.", "is_correct": false },
+                { "label": "D", "text": "The destination IP address is the IP address of R.", "is_correct": false }
+            ],
+            "correct_answer_text": null,
+            "explanation": null,
+            "pyq_sources": [
+                { "year": 2024, "set": 2, "question_number": "2.34", "marks": 1 }
+            ]
+        },
+        {
+            "question_text": "Consider an Ethernet segment with a transmission speed of 10^8 bits/sec and a maximum segment length of 500 meters. If the speed of propagation of the signal in the medium is 2 × 10^8 meters/sec, then the minimum frame size (in bits) required for collision detection is _______.",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "medium",
+            "topics": ["LAN"],
+            "concepts": ["CSMA/CD", "Minimum frame size", "Collision detection"],
+            "tags": ["CSMA/CD", "minimum frame size", "propagation delay", "collision detection"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 120,
+            "options": [],
+            "correct_answer_text": "500",
+            "explanation": null,
+            "pyq_sources": [
+                { "year": 2024, "set": 2, "question_number": "2.35", "marks": 2 }
+            ]
+        },
+        {
+            "question_text": "It is necessary to design a link-layer protocol between two hosts that are directly connected over a lossless link of length 3000 kilometers. Assume that the link bandwidth is 10^8 bits per second and that the propagation delay in the link is 5 nanoseconds per meter. Every transmitted data byte is assigned a unique sequence number. Let N be the minimum number of bits needed for the sequence number field in the protocol header such that (i) the sequence numbers do not wrap around before 60 seconds, and (ii) the maximum utilization of the link is achieved. The value of N is _______. (answer in integer)",
+            "question_type": "NAT",
+            "marks": 2,
+            "difficulty": "hard",
+            "topics": ["LAN"],
+            "concepts": ["Sequence number bits", "Sliding window", "Propagation delay", "Link utilization"],
+            "tags": ["sequence number bits", "sliding window protocol", "propagation delay", "link utilization"],
+            "is_numerical": true,
+            "formula_based": true,
+            "estimated_solve_time_seconds": 180,
+            "options": [],
+            "correct_answer_text": "30",
+            "explanation": "Condition (i): bytes transmitted per second = 10^8/8 = 1.25×10^7 bytes/sec. Over 60 seconds, 7.5×10^8 bytes are transmitted, requiring 2^N ≥ 7.5×10^8, so N ≥ 30 (since 2^30 ≈ 1.07×10^9). Condition (ii): propagation delay Tp = 3×10^6 × 5×10^-9 = 0.015 sec, so RTT = 0.03 sec. Data transmitted during RTT = 10^8×0.03 = 3×10^6 bits = 3.75×10^5 bytes, requiring window size 2^N ≥ 3.75×10^5, so N ≥ 19. Taking the maximum of both conditions, N = max(30, 19) = 30.",
+            "pyq_sources": [
+                { "year": 2026, "set": 2, "question_number": "2.36", "marks": 2 }
+            ]
+        }
+    ]
+}
