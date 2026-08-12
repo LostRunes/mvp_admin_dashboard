@@ -3,13 +3,15 @@ import sys
 import json
 import re
 import threading
+import webbrowser
 from dotenv import load_dotenv
 
 # PySide6 components
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QFrame, QVBoxLayout, QHBoxLayout,
     QLabel, QPushButton, QLineEdit, QTextEdit, QComboBox, QFileDialog,
-    QMessageBox, QScrollArea, QGridLayout, QTabWidget, QSizePolicy
+    QMessageBox, QScrollArea, QGridLayout, QTabWidget, QSizePolicy,
+    QDialog, QTextBrowser
 )
 from PySide6.QtCore import Qt, QSize, QTimer, QThread, Signal
 from PySide6.QtGui import QPixmap, QFont, QPalette, QColor, QImage, QPainter
@@ -241,6 +243,13 @@ HELP = {
         "2. Complete: Click the checkbox button to mark a task as completed (gets strike-through styling).\n"
         "3. Delete: Click the trash icon to permanently remove the item."
     ),
+    "spotify": ("coffee.png",
+        "Focus Music Player\n\n"
+        "Integrates Spotify focus music into your coding workspace.\n\n"
+        "1. Open App: Launches the Spotify Desktop application directly to the playlist.\n"
+        "2. Open Web: Opens the playlist in your system's default web browser.\n"
+        "3. Custom Playlists: Paste your own Spotify playlist link and click 'Save'. It will sync with Firestore so it is saved to your account profile."
+    ),
 }
 
 QSS = get_qss(COLORS)  # initial stylesheet (light theme)
@@ -268,6 +277,61 @@ class _GuideWorker(QThread):
                 "schema": "Database schema offline."
             }
         self.result_ready.emit(res)
+
+class GuideDialog(QDialog):
+    def __init__(self, parent, title, text, img_name):
+        super().__init__(parent)
+        self.setWindowTitle("Help Guide")
+        self.resize(520, 420)
+        self.setMinimumSize(420, 320)
+        
+        # Design layout
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(16, 16, 16, 16)
+        lay.setSpacing(12)
+        
+        hdr_lay = QHBoxLayout()
+        hdr_lay.setSpacing(12)
+        
+        # Icon
+        p_path = img_path(img_name)
+        if os.path.exists(p_path):
+            lbl_icon = QLabel()
+            lbl_icon.setPixmap(QPixmap(p_path).scaled(60, 60, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            hdr_lay.addWidget(lbl_icon)
+            
+        lbl_t = QLabel(title)
+        lbl_t.setStyleSheet("font-size: 15px; font-weight: bold; font-family: 'Pixelify Sans';")
+        lbl_t.setWordWrap(True)
+        hdr_lay.addWidget(lbl_t, 1)
+        lay.addLayout(hdr_lay)
+        
+        # Text Browser for scrollability + clickable links
+        self.browser = QTextBrowser()
+        self.browser.setOpenExternalLinks(True)
+        self.browser.setStyleSheet("background: transparent; border: none; font-size: 12px; font-family: 'Pixelify Sans';")
+        
+        html_text = self._format_text(text)
+        self.browser.setHtml(html_text)
+        lay.addWidget(self.browser, 1)
+        
+        # Buttons
+        btn_box = QHBoxLayout()
+        btn_box.addStretch()
+        ok_btn = QPushButton("Got it!")
+        ok_btn.clicked.connect(self.accept)
+        btn_box.addWidget(ok_btn)
+        lay.addLayout(btn_box)
+
+    def _format_text(self, text):
+        # Escape HTML tags first
+        text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        # Regex to match URLs
+        url_re = re.compile(r'(https?://[^\s()<>]+)')
+        # Replace URLs with HTML links styled pink
+        text = url_re.sub(r'<a href="\1" style="color: #F3A6C3; text-decoration: underline;">\1</a>', text)
+        # Replace newlines with <br>
+        return text.replace("\n", "<br>")
 
 class GlassWindow(QFrame):
     def __init__(self, title="", icon_pix=None, parent=None):
@@ -421,6 +485,7 @@ class FocusFoxApp(QMainWindow):
             ("gate_img",    "📐", "GATE Images"),
             ("gate_db",     "📁", "GATE DB Editor"),
             ("todo",        "📝", "Developer Tasks"),
+            ("spotify",     "🎵", "Focus Music"),
         ]
 
         for key, icon, label in self._nav_data:
@@ -551,6 +616,7 @@ class FocusFoxApp(QMainWindow):
         self.pages["gate_img"]    = self._page_gate_img()
         self.pages["gate_db"]     = self._page_gate_db()
         self.pages["todo"]        = self._page_todo()
+        self.pages["spotify"]     = self._page_spotify()
 
         for k, w in self.pages.items():
             self.workspace.addWidget(w)
@@ -674,6 +740,160 @@ class FocusFoxApp(QMainWindow):
 
         self.todo_list_lay.insertWidget(self.todo_list_lay.count() - 1, row)
 
+    def _page_spotify(self):
+        p = self._page_frame("🎵  Focus Music Player", "spotify")
+        win, body = self._window("SPOTIFY_LAUNCHER.EXE", "coffee")
+        p.main_layout.addWidget(win, 1)
+
+        # Scroll area
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setStyleSheet("background: transparent; border: none;")
+        body.layout().addWidget(scroll)
+
+        sc_widget = QWidget()
+        sc_lay = QVBoxLayout(sc_widget)
+        sc_lay.setContentsMargins(10, 10, 10, 10)
+        sc_lay.setSpacing(12)
+        scroll.setWidget(sc_widget)
+
+        # Welcome text
+        intro = QLabel("🎧 Focus Sessions Spotify Player\nLaunch curated or custom focus playlists directly in your Spotify application or web browser.")
+        intro.setStyleSheet("font-family: 'Pixelify Sans'; font-size: 12px; color: #E8E2FF;")
+        intro.setWordWrap(True)
+        sc_lay.addWidget(intro)
+
+        # Custom Playlist input row
+        custom_box = QFrame()
+        custom_box.setObjectName("card")
+        cb_lay = QVBoxLayout(custom_box)
+        cb_lay.setContentsMargins(12, 12, 12, 12)
+        cb_lay.setSpacing(8)
+
+        cb_title = QLabel("🔗 Custom Spotify Playlist Link:")
+        cb_title.setStyleSheet("font-family: 'Pixelify Sans'; font-weight: bold; font-size: 12px;")
+        cb_lay.addWidget(cb_title)
+
+        in_lay = QHBoxLayout()
+        self.spotify_input = QLineEdit()
+        self.spotify_input.setPlaceholderText("Paste Spotify playlist link here (e.g., https://open.spotify.com/playlist/...)")
+        self.spotify_input.setStyleSheet("font-size: 11px;")
+        in_lay.addWidget(self.spotify_input, 1)
+
+        btn_save = QPushButton("💾 Save")
+        btn_save.setFixedWidth(70)
+        btn_save.clicked.connect(self._save_spotify_playlist)
+        in_lay.addWidget(btn_save)
+
+        btn_play_custom = QPushButton("▶️ Play Custom")
+        btn_play_custom.setFixedWidth(100)
+        btn_play_custom.setStyleSheet("background-color: #A8D99B; color: #1C1B29; font-weight: bold;")
+        btn_play_custom.clicked.connect(self._play_custom_playlist)
+        in_lay.addWidget(btn_play_custom)
+        cb_lay.addLayout(in_lay)
+        sc_lay.addWidget(custom_box)
+
+        # Grid of curated playlists
+        grid_title = QLabel("🎵 Curated Focus Playlists:")
+        grid_title.setStyleSheet("font-family: 'Pixelify Sans'; font-weight: bold; font-size: 13px; margin-top: 10px;")
+        sc_lay.addWidget(grid_title)
+
+        grid = QGridLayout()
+        grid.setSpacing(12)
+        sc_lay.addLayout(grid)
+
+        # Popular focus playlists
+        curated_playlists = [
+            ("Lofi Beats 🌸", "37i9dQZF1DWWQRwui0EXPn", "Chill beats to study or relax to."),
+            ("Deep Focus 🧠", "37i9dQZF1DXcBWIGmqZ7XF", "Keep calm and focus with ambient sounds."),
+            ("Chill Lofi Study 📚", "37i9dQZF1DX8UebhpwM67e", "Cozy lofi hip hop playlist."),
+            ("Jazz Vibes 🎷", "37i9dQZF1DX0SMZkqi27Z2", "Relaxing jazz tunes for coding sessions."),
+            ("Synthwave Chill 🌌", "37i9dQZF1DXdLTE75A7KXO", "Retro futuristic electronic background vibes."),
+            ("Peaceful Piano 🎹", "37i9dQZF1DX4sWSpwq3LiO", "Beautiful, gentle solo piano works.")
+        ]
+
+        for idx, (title, playlist_id, desc) in enumerate(curated_playlists):
+            card = QFrame()
+            card.setObjectName("card")
+            card_lay = QVBoxLayout(card)
+            card_lay.setContentsMargins(12, 12, 12, 12)
+            card_lay.setSpacing(6)
+
+            t_lbl = QLabel(title)
+            t_lbl.setStyleSheet("font-family: 'Pixelify Sans'; font-size: 13px; font-weight: bold; color: #F3A6C3;")
+            card_lay.addWidget(t_lbl)
+
+            d_lbl = QLabel(desc)
+            d_lbl.setStyleSheet("font-size: 11px; color: #8D89A5;")
+            d_lbl.setWordWrap(True)
+            card_lay.addWidget(d_lbl)
+
+            btn_lay = QHBoxLayout()
+            # Play in Spotify App (using URI scheme)
+            btn_app = QPushButton("🚀 Open App")
+            btn_app.clicked.connect(lambda checked=False, pid=playlist_id: self._play_spotify(pid, use_app=True))
+            btn_lay.addWidget(btn_app)
+
+            # Play in browser
+            btn_web = QPushButton("🌐 Open Web")
+            btn_web.clicked.connect(lambda checked=False, pid=playlist_id: self._play_spotify(pid, use_app=False))
+            btn_lay.addWidget(btn_web)
+
+            card_lay.addLayout(btn_lay)
+            grid.addWidget(card, idx // 2, idx % 2)
+
+        # Load user saved playlist URL if any
+        QTimer.singleShot(100, self._load_saved_spotify_playlist)
+        return p
+
+    def _play_spotify(self, playlist_id, use_app=True):
+        if use_app:
+            # spotify:playlist:<id>
+            uri = f"spotify:playlist:{playlist_id}"
+            webbrowser.open(uri)
+            firebase_auth.log_action("PLAY_MUSIC", content_type="spotify_app", subject=playlist_id)
+        else:
+            url = f"https://open.spotify.com/playlist/{playlist_id}"
+            webbrowser.open(url)
+            firebase_auth.log_action("PLAY_MUSIC", content_type="spotify_web", subject=playlist_id)
+
+    def _load_saved_spotify_playlist(self):
+        def _fetch():
+            if _auth_ok:
+                url = firebase_auth.get_spotify_playlist()
+                QTimer.singleShot(0, lambda: self.spotify_input.setText(url))
+        threading.Thread(target=_fetch, daemon=True).start()
+
+    def _save_spotify_playlist(self):
+        url = self.spotify_input.text().strip()
+        def _save():
+            if _auth_ok:
+                firebase_auth.save_spotify_playlist(url)
+                QTimer.singleShot(0, lambda: QMessageBox.information(self, "Saved", "Spotify playlist link saved!"))
+        threading.Thread(target=_save, daemon=True).start()
+
+    def _play_custom_playlist(self):
+        url = self.spotify_input.text().strip()
+        if not url:
+            QMessageBox.warning(self, "Warning", "Please paste a Spotify playlist link first.")
+            return
+        
+        # Try to extract playlist ID
+        playlist_id = ""
+        if "spotify:playlist:" in url:
+            playlist_id = url.split("spotify:playlist:")[-1].split("?")[0]
+        elif "open.spotify.com/playlist/" in url:
+            playlist_id = url.split("open.spotify.com/playlist/")[-1].split("?")[0]
+
+        if playlist_id:
+            # Default to opening in app first
+            webbrowser.open(f"spotify:playlist:{playlist_id}")
+            firebase_auth.log_action("PLAY_MUSIC", content_type="spotify_custom_app", subject=playlist_id)
+        else:
+            # fallback to opening the url raw
+            webbrowser.open(url)
+            firebase_auth.log_action("PLAY_MUSIC", content_type="spotify_custom_raw", subject=url)
+
     def _add_todo_clicked(self):
         text = self.todo_input.text().strip()
         if not text:
@@ -710,17 +930,12 @@ class FocusFoxApp(QMainWindow):
             finished = True
             loading.close()
             
-            pop = QMessageBox(self)
-            pop.setWindowTitle(data.get("title", "Guide"))
-            
             full_text = data.get("text", "")
             if data.get("schema"):
                 full_text += "\n\n" + "="*50 + "\n" + data.get("schema")
                 
-            pop.setText(full_text)
             img_name = data.get("image", "fox_happy.png")
-            pop.setIconPixmap(QPixmap(img_path(img_name)).scaled(60, 60, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            pop.setStandardButtons(QMessageBox.Ok)
+            pop = GuideDialog(self, data.get("title", "Guide"), full_text, img_name)
             pop.exec()
 
         # Start loading thread

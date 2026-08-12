@@ -311,6 +311,35 @@ def delete_todo(todo_id: str) -> bool:
         return False
 
 
+def get_spotify_playlist() -> str:
+    """Fetches custom Spotify playlist URL from user settings."""
+    if not _current_user or not _init_firestore():
+        return ""
+    try:
+        uid = _current_user["uid"]
+        doc = _db.collection("users").document(uid).collection("settings").document("spotify").get()
+        if doc.exists:
+            return doc.to_dict().get("playlist_url", "")
+    except Exception as e:
+        print(f"[FirebaseAuth] Fetch spotify playlist failed: {e}")
+    return ""
+
+
+def save_spotify_playlist(url: str) -> bool:
+    """Saves custom Spotify playlist URL to user settings."""
+    if not _current_user or not _init_firestore():
+        return False
+    try:
+        uid = _current_user["uid"]
+        _db.collection("users").document(uid).collection("settings").document("spotify").set({
+            "playlist_url": url
+        }, merge=True)
+        return True
+    except Exception as e:
+        print(f"[FirebaseAuth] Save spotify playlist failed: {e}")
+        return False
+
+
 def _upsert_user():
     """Create or update the users/{uid} document in Firestore."""
     if not _current_user or not _init_firestore():

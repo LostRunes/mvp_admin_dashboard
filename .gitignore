@@ -1,2 +1,17 @@
 .env
 credentials.json
+firebase_service_account.json
+.firebase_token_cache.json
+__pycache__/
+*.pyc
+*.pdf
+*.zip
+dist/
+build/
+*.spec
+*.log
+find_refs.py
+find_write_refs.py
+audit_styles.py
+fix_theme.py
+sync_guides.py
