@@ -1,5 +1,7 @@
 .env
+*.env
 credentials.json
+credentials_bckup.json
 firebase_service_account.json
 .firebase_token_cache.json
 __pycache__/

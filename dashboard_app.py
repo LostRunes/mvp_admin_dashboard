@@ -6,6 +6,13 @@ import threading
 import webbrowser
 from dotenv import load_dotenv
 
+def get_resource_path(relative_path):
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_path, relative_path)
+
 # PySide6 components
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QFrame, QVBoxLayout, QHBoxLayout,
@@ -38,7 +45,141 @@ try:
 except ImportError:
     PdfReader, PdfWriter = None, None
 
-load_dotenv()
+load_dotenv(get_resource_path(".env"))
+
+class CollegeJsonWorker(QThread):
+    sig_log = Signal(str)
+    sig_done = Signal(str)
+    sig_error = Signal(str)
+
+    def __init__(self, supabase, sid, fp):
+        super().__init__()
+        self.supabase = supabase
+        self.sid = sid
+        self.fp = fp
+
+    def run(self):
+        try:
+            with open(self.fp, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            topics = data.get("topics", [])
+            qs = data.get("questions", [])
+            self.sig_log.emit(f"Importing: {len(topics)} topics, {len(qs)} questions")
+            
+            tm = {}
+            for t in topics:
+                r = self.supabase.table("topics").insert({
+                    "subject_id": self.sid, "name": t["topic_name"], "summary": t.get("summary")
+                }).execute()
+                if r.data:
+                    tm[t["topic_name"]] = r.data[0]["id"]
+                    self.sig_log.emit(f"  Topic: {t['topic_name']}")
+                    
+            for i, q in enumerate(qs):
+                rq = self.supabase.table("questions").insert({
+                    "question_text": q["question_text"], "difficulty": q.get("difficulty", "easy")
+                }).execute()
+                if not rq.data:
+                    continue
+                qid = rq.data[0]["id"]
+                
+                for tn in q.get("topics", []):
+                    tid = tm.get(tn)
+                    if tid:
+                        self.supabase.table("question_topics").insert({"question_id": qid, "topic_id": tid}).execute()
+                        
+                for src in q.get("pyq_sources", []):
+                    ex = self.supabase.table("pyq_sources").select("id").match({**src, "subject_id": self.sid}).execute()
+                    pid = ex.data[0]["id"] if ex.data else (
+                        self.supabase.table("pyq_sources").insert({**src, "subject_id": self.sid}).execute().data or [{}]
+                    )[0].get("id")
+                    if pid:
+                        self.supabase.table("question_pyq_map").insert({"question_id": qid, "pyq_source_id": pid}).execute()
+                self.sig_log.emit(f"  Q {i+1}/{len(qs)}")
+            self.sig_log.emit("✅ Done!")
+            self.sig_done.emit("College JSON Import complete!")
+        except Exception as e:
+            self.sig_log.emit(f"ERROR: {e}")
+            self.sig_error.emit(str(e))
+
+
+class GateJsonWorker(QThread):
+    sig_log = Signal(str)
+    sig_done = Signal(str)
+    sig_error = Signal(str)
+
+    def __init__(self, supabase, fp):
+        super().__init__()
+        self.supabase = supabase
+        self.fp = fp
+
+    def run(self):
+        try:
+            with open(self.fp, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            sd = data.get("subject", {})
+            topics = data.get("topics", [])
+            qs = data.get("questions", [])
+            self.sig_log.emit(f"Subject: {sd.get('subject_name')}")
+            
+            rs = self.supabase.table("gate_subjects").select("*").eq("code", sd.get("subject_code")).execute()
+            if rs.data:
+                sid = rs.data[0]["id"]
+            else:
+                ri = self.supabase.table("gate_subjects").insert({
+                    "name": sd.get("subject_name"), "code": sd.get("subject_code"), "display_order": 0
+                }).execute()
+                sid = ri.data[0]["id"]
+                
+            tm = {}
+            for t in topics:
+                rt = self.supabase.table("gate_topics").select("id").match({"subject_id": sid, "name": t["topic_name"]}).execute()
+                if rt.data:
+                    tm[t["topic_name"]] = rt.data[0]["id"]
+                else:
+                    ri = self.supabase.table("gate_topics").insert({"subject_id": sid, "name": t["topic_name"], "summary": t.get("summary")}).execute()
+                    if ri.data:
+                        tm[t["topic_name"]] = ri.data[0]["id"]
+                        
+            for i, q in enumerate(qs):
+                rq = self.supabase.table("gate_questions").insert({
+                    "subject_id": sid, "question_text": q["question_text"],
+                    "explanation": q.get("explanation"), "question_type": q.get("question_type", "MCQ"),
+                    "marks": q.get("marks", 1), "difficulty": q.get("difficulty", "easy")
+                }).execute()
+                if not rq.data:
+                    continue
+                qid = rq.data[0]["id"]
+                for tn in q.get("topics", []):
+                    tid = tm.get(tn)
+                    if tid:
+                        self.supabase.table("gate_question_topics").insert({"question_id": qid, "topic_id": tid}).execute()
+                for opt in q.get("options", []):
+                    self.supabase.table("gate_options").insert({
+                        "question_id": qid, "option_label": opt.get("label"),
+                        "option_text": opt.get("text"), "is_correct": opt.get("is_correct", False)
+                    }).execute()
+                for src in q.get("pyq_sources", []):
+                    rp = self.supabase.table("gate_papers").select("id").match({
+                        "exam": src.get("exam", "GATE CSE"), "year": src["year"], "set_number": src.get("set")
+                    }).execute()
+                    if rp.data:
+                        pid = rp.data[0]["id"]
+                    else:
+                        ri2 = self.supabase.table("gate_papers").insert({
+                            "exam": src.get("exam", "GATE CSE"), "year": src["year"], "set_number": src.get("set")
+                        }).execute()
+                        pid = ri2.data[0]["id"] if ri2.data else None
+                    if pid:
+                        self.supabase.table("gate_question_occurrences").insert({
+                            "question_id": qid, "paper_id": pid, "question_number": src["question_number"]
+                        }).execute()
+                self.sig_log.emit(f"  Q {i+1}/{len(qs)}")
+            self.sig_log.emit("✅ Done!")
+            self.sig_done.emit("GATE import complete!")
+        except Exception as e:
+            self.sig_log.emit(f"ERROR: {e}")
+            self.sig_error.emit(str(e))
 
 # ── Theme Palettes ───────────────────────────────────────────────────────────
 THEME_PALETTES = {
@@ -151,105 +292,165 @@ def get_qss(colors):
     }}
     """
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-IMGS     = os.path.join(BASE_DIR, "images")
+IMGS     = get_resource_path("images")
 
 def img_path(n): return os.path.join(IMGS, n)
 
 HELP = {
-    "guide": ("fox_happy.png",
-        "This is your all-in-one FocusFox admin workspace.\n"
-        "Navigate using the sidebar on the left.\n\n"
-        "Every section has a  ?  button for help.\n"
-        "All data syncs to your Supabase cloud database.\n\n"
-        "Tip: Credentials load from your .env file —\n"
-        "no manual config needed!"
-    ),
-    "yt": ("lil_fox.png",
-        "College PYQ & YouTube Uploader\n\n"
-        "Tab 1 — YouTube Link Uploader\n"
-        "1. Select a subject from the dropdown.\n"
-        "2. Edit links (one URL per line).\n"
-        "3. Click Save to persist changes.\n\n"
-        "Tab 2 — Subject & Branch Manager\n"
-        "Fill Subject Name + Code (required).\n"
-        "Optionally add Drive links.\n"
-        "Create branches and year labels.\n\n"
-        "Tab 3 — JSON PYQ Importer\n"
-        "1. Select target subject.\n"
-        "2. Pick a .json file with topics & questions.\n"
-        "3. Watch the log for progress."
-    ),
-    "gate": ("owl.png",
-        "GATE Admin Portal\n\n"
-        "Tab 1 — PDF Splitter\n"
-        "1. Browse to a GATE PDF.\n"
-        "2. Enter ranges:  1-10, 11-20\n"
-        "3. Pick output folder — done!\n\n"
-        "Tab 2 — GATE JSON Importer\n"
-        "JSON schema:\n"
-        "{ subject:{}, topics:[], questions:[] }\n\n"
-        "Each question needs: question_text,\n"
-        "options[], topics[], pyq_sources[].\n"
-        "Subjects & topics are auto-created."
-    ),
-    "college_img": ("panda.png",
-        "College Image Uploader\n\n"
-        "Left: cascade dropdowns\n"
-        "Branch->Sem->Subject->Year->Exam->Season->Q\n\n"
-        "Preview shows the question text.\n\n"
-        "Right panel:\n"
-        "1. Click Choose Images.\n"
-        "2. Thumbnails appear in the grid.\n"
-        "3. Click Upload — images go to ImageKit\n"
-        "   CDN and saved to Supabase images table.\n\n"
-        "Note: Uploading REPLACES existing images."
-    ),
-    "gate_img": ("lil_fox.png",
-        "GATE Image Uploader\n\n"
-        "Left: select\n"
-        "Year -> Paper -> Subject -> Question\n\n"
-        "Target:\n"
-        "Question Text / Body\n"
-        "Option A / B / C / D\n\n"
-        "Right panel:\n"
-        "1. Choose images.\n"
-        "2. Upload — stored under gate/questions/<id>\n"
-        "   or gate/options/<id> on ImageKit.\n\n"
-        "Note: Uploading REPLACES existing images."
-    ),
-    "gate_db": ("raccoon.png",
-        "GATE DB Editor (Protected)\n\n"
-        "This section lets you view, edit,\n"
-        "and delete GATE questions directly\n"
-        "in your Supabase database.\n\n"
-        "1. Select a subject from the top bar.\n"
-        "2. Type in the search box to filter.\n"
-        "3. Click a question row to load it.\n"
-        "4. Edit fields on the right panel.\n"
-        "5. Click Save Changes to persist.\n"
-        "6. Click Delete Question to remove\n"
-        "   the question and all its options.\n\n"
-        "Options panel:\n"
-        "• Edit label / text / correct flag.\n"
-        "• Click  +  to add a new option.\n"
-        "• Click  🗑  to delete an option.\n\n"
-        "⚠  Changes are permanent."
-    ),
-    "todo": ("coffee.png",
-        "Developer Task Manager\n\n"
-        "This section keeps track of your to-do lists and syncs tasks directly to your profile in Firestore.\n\n"
-        "1. Add Task: Type in the box and press Enter or click 'Add Task'.\n"
-        "2. Complete: Click the checkbox button to mark a task as completed (gets strike-through styling).\n"
-        "3. Delete: Click the trash icon to permanently remove the item."
-    ),
-    "spotify": ("coffee.png",
-        "Focus Music Player\n\n"
-        "Integrates Spotify focus music into your coding workspace.\n\n"
-        "1. Open App: Launches the Spotify Desktop application directly to the playlist.\n"
-        "2. Open Web: Opens the playlist in your system's default web browser.\n"
-        "3. Custom Playlists: Paste your own Spotify playlist link and click 'Save'. It will sync with Firestore so it is saved to your account profile."
-    ),
+    "guide": {
+        "title": "📚 FocusFox Workspace Guide",
+        "image": "fox_happy.png",
+        "text": (
+            "✦ FocusFox Admin Workspace ✦\n"
+            "This application acts as a secure back-office dashboard for managing course catalogs, lecture playlists, solution sets, and exam question databases.\n\n"
+            "🏡 Navigation & Architecture:\n"
+            "• Sidebar Navigation: Switch tabs instantly. The interface updates colors based on theme palettes.\n"
+            "• Theme Toggle: Swap between Light/Dark mode. State defaults to Dark Mode on startup.\n"
+            "• Database Connectivity: Cloud indicators (☁ Connected / ☁ Offline) reflect Supabase direct connection status.\n"
+            "• Authentication: Powered by Google OAuth. Your developer session details are shown at the bottom of the sidebar.\n"
+            "• Audit Logging: Your login, upload, import, and editor events are logged automatically in Firestore."
+        ),
+        "schema": (
+            "Firestore Collections Schema:\n"
+            "• users: { uid (str, PK), name (str), email (str), role (str), last_login (timestamp) }\n"
+            "• activity_logs: { user_id (str), user_email (str), action (str), content_type (str), subject (str), timestamp (server_timestamp) }"
+        )
+    },
+    "yt": {
+        "title": "🎥 College PYQ & YT Link Uploader Guide",
+        "image": "lil_fox.png",
+        "text": (
+            "📺 YouTube Links Tab:\n"
+            "• Purpose: Associating video resources with courses so students can view curated playlists.\n"
+            "• Action: Select a subject. Edit the links (one full HTTP link per line). Click 'Save' to update the 'subjects' table in Supabase. You can filter subjects by whether they have video links.\n\n"
+            "📚 Subject & Branch Tab:\n"
+            "• This is to only be used if a subject does not already exist in the database and needs to be added, additionally if the corresponding branch and other meta data of the subject does not already exist, then the branch or other related data is to be added, else it is not required.\n"
+            "• Purpose: Registering new subject units and mapping them to semesters, branches, and academic years.\n"
+            "• Action: Input subject code & name, notes link, and syllabus details. Select semester (1-8), branch, and year. Click 'Create Subject' to register and map them.\n\n"
+            "📥 JSON Importer Tab:\n"
+            "• Purpose: Importing batch questions/topics list generated from PDF scrapers.\n"
+            "• Go to the following links:\n"
+            "  - https://drive.google.com/drive/folders/1Ugm0zGR4A1d-mZPjCemNmxV7IsPK7Skg?usp=drive_link\n"
+            "  - kiitkatalog.gfgkiit.in\n"
+            "  - http://10.2.0.26:4000/home (only works on kiit wifi)\n\n"
+            "• Find the related subject's pyq there, download them along with the course handout (likely available in the drive) and put them in claude.ai with the prompt specified in the Firestore guide.\n\n"
+            "• Action: Choose target subject and browse to your structured JSON and upload it. Progress is shown in the Import Log box."
+        ),
+        "schema": (
+            "Supabase DB Tables Schema (College Unit Catalog):\n"
+            "• subjects: { id (int, PK), name (text), code (text, unique), yt_links (text[]), pyq_drive_link (text), notes_drive_link (text), course_outcome_link (text) }\n"
+            "• branches: { id (int, PK), name (text, unique) }\n"
+            "• years: { id (int, PK), name (text, unique) }\n"
+            "• branch_subjects: { id (int, PK), branch_id (int, FK), subject_id (int, FK), year_id (int, FK), semester (int) }\n"
+            "• topics: { id (int, PK), subject_id (int, FK), name (text), summary (text) }\n"
+            "• questions: { id (int, PK), question_text (text), difficulty (text) }\n"
+            "• question_topics: { id (int, PK), question_id (int, FK), topic_id (int, FK) }\n"
+            "• pyq_sources: { id (int, PK), subject_id (int, FK), exam (text), year (int), season (text) }\n"
+            "• question_pyq_map: { id (int, PK), question_id (int, FK), pyq_source_id (int, FK) }"
+        )
+    },
+    "gate": {
+        "title": "🎓 GATE Admin Portal Guide",
+        "image": "owl.png",
+        "text": (
+            "🗂 PDF Splitter Tab:\n"
+            "• Purpose: Splitting large multi-chapter PDFs into specific topic modules to make them easily queryable.\n"
+            "• Action: Select a source PDF. Define ranges (e.g. 1-10, 11-20, according to chapter starting and ending point, including the chapter solution), name the files, select destination directory, and click split. It runs offline instantly.\n\n"
+            "• Put them in claude.ai with the GATE PYQ extraction assistant prompt specified in the Firestore guide.\n\n"
+            "📥 JSON Importer Tab:\n"
+            "• Purpose: Seeding core GATE question banks into Supabase tables.\n"
+            "• Action: Browse structured GATE JSON. The importer parses subjects, papers, options, and correctness tags, then syncs them."
+        ),
+        "schema": (
+            "Supabase DB Tables Schema (GATE Core):\n"
+            "• gate_subjects: { id (int, PK), name (text), code (text, unique), display_order (int) }\n"
+            "• gate_topics: { id (int, PK), subject_id (int, FK), name (text), summary (text) }\n"
+            "• gate_questions: { id (int, PK), subject_id (int, FK), question_text (text), explanation (text), question_type (text), marks (int), difficulty (text) }\n"
+            "• gate_options: { id (int, PK), question_id (int, FK), option_label (text), option_text (text), is_correct (bool) }\n"
+            "• gate_question_topics: { id (int, PK), question_id (int, FK), topic_id (int, FK) }\n"
+            "• gate_papers: { id (int, PK), exam (text), year (int), set_number (int) }\n"
+            "• gate_question_occurrences: { id (int, PK), question_id (int, FK), paper_id (int, FK), question_number (int) }"
+        )
+    },
+    "college_img": {
+        "title": "🖼️ College Solution Image Uploader Guide",
+        "image": "panda.png",
+        "text": (
+            "🎨 Interface Workflow:\n"
+            "• Left Panel: Cascade dropdowns. Filter by Branch -> Sem -> Subject -> Year -> Exam -> Season -> Question. Selecting a question shows its body text in the preview box.\n\n"
+            "⚡ Image Upload & CDN:\n"
+            "• Right Panel: Click 'Choose Images' to select multiple step-by-step solution pages. Thumbnails will appear in the grid.\n"
+            "• Upload: Clicking 'Upload' pushes files directly to ImageKit CDN and maps the CDN URLs into Supabase.\n"
+            "• Note: Solution uploads replace existing images for the selected question."
+        ),
+        "schema": (
+            "Supabase DB Tables Schema (College Image Mapping):\n"
+            "• question_images: { id (int, PK), question_id (int, FK), image_url (text), display_order (int) }"
+        )
+    },
+    "gate_img": {
+        "title": "📐 GATE Image Uploader Guide",
+        "image": "lil_fox.png",
+        "text": (
+            "🎨 Interface Workflow:\n"
+            "• Left Panel: Select Year -> Paper -> Subject -> Question.\n"
+            "• Target Selection: Decide if the image belongs to the main Question Body or specific Options (A, B, C, D).\n\n"
+            "⚡ Image Upload & CDN:\n"
+            "• Right Panel: Select images and click 'Upload'. Files are sent to ImageKit CDN (saved under 'gate/questions/<id>' or 'gate/options/<id>').\n"
+            "• Note: Solutions and option images are overwritten upon new uploads."
+        ),
+        "schema": (
+            "Supabase DB Tables Schema (GATE Image Mapping):\n"
+            "• gate_questions (question_image_url field updated)\n"
+            "• gate_options (option_image_url field updated)"
+        )
+    },
+    "gate_db": {
+        "title": "📁 GATE DB Editor Guide (Protected)",
+        "image": "raccoon.png",
+        "text": (
+            "🔒 Protection:\n"
+            "• Password prompt ensures only authorized developers modify database records.\n\n"
+            "✏️ Editor Features:\n"
+            "• Select subject and search by keywords to load question sets.\n"
+            "• Click a question row to edit Question Text, Difficulty, Marks, and Explanation on the right panel.\n"
+            "• Options Panel: Add options (+), delete options (trash), edit labels (A, B, C), edit text, and toggle correctness (True/False).\n"
+            "• Click 'Save Changes' to update Supabase, or 'Delete Question' to remove the question and all associated option records."
+        ),
+        "schema": (
+            "Supabase DB Tables Schema:\n"
+            "• CRUD operations target gate_questions and gate_options direct structures."
+        )
+    },
+    "todo": {
+        "title": "📝 Developer Tasks Guide",
+        "image": "coffee.png",
+        "text": (
+            "✦ Developer Task Manager ✦\n"
+            "Keep track of milestones, features, and fixes directly inside the workspace.\n\n"
+            "⚙️ Features:\n"
+            "• Add Task: Write tasks in the text field at the top and click 'Add Task' or press Enter.\n"
+            "• Completed State: Click the check button (⬜ -> ✔️) to mark the task completed. This applies a line-through styling.\n"
+            "• Persistent State: Completed status and deletes are automatically updated in real-time in the background.\n"
+            "• Multi-User isolation: Tasks are fetched and saved under the logged-in developer's profile."
+        ),
+        "schema": (
+            "Firestore Document Mapping:\n"
+            "• Doc: users/{uid}/todos/{todo_id}\n"
+            "• Fields: { text (str), completed (bool), created_at (timestamp) }"
+        )
+    },
+    "spotify": {
+        "title": "🎵 Focus Music Player Guide",
+        "image": "coffee.png",
+        "text": (
+            "Integrates Spotify focus music into your coding workspace.\n\n"
+            "1. Open App: Launches the Spotify Desktop application directly to the playlist.\n"
+            "2. Open Web: Opens the playlist in your system's default web browser.\n"
+            "3. Custom Playlists: Paste your own Spotify playlist link and click 'Save'. It will sync with Firestore so it is saved to your account profile."
+        ),
+        "schema": "Spotify integration settings are mapped per-user in Firestore."
+    }
 }
 
 QSS = get_qss(COLORS)  # initial stylesheet (light theme)
@@ -271,10 +472,10 @@ class _GuideWorker(QThread):
                 print(f"Error loading firestore guide: {e}")
         if not res:
             res = {
-                "title": f"Help Guide ({self.key})",
-                "text": self.fallback_data[1],
-                "image": self.fallback_data[0],
-                "schema": "Database schema offline."
+                "title": self.fallback_data.get("title", f"Help Guide ({self.key})"),
+                "text": self.fallback_data.get("text", "No guide available."),
+                "image": self.fallback_data.get("image", "fox_happy.png"),
+                "schema": self.fallback_data.get("schema", "Database schema offline.")
             }
         self.result_ready.emit(res)
 
@@ -804,11 +1005,11 @@ class FocusFoxApp(QMainWindow):
 
         # Popular focus playlists
         curated_playlists = [
-            ("Lofi Beats 🌸", "37i9dQZF1DWWQRwui0EXPn", "Chill beats to study or relax to."),
-            ("Deep Focus 🧠", "37i9dQZF1DXcBWIGmqZ7XF", "Keep calm and focus with ambient sounds."),
-            ("Chill Lofi Study 📚", "37i9dQZF1DX8UebhpwM67e", "Cozy lofi hip hop playlist."),
-            ("Jazz Vibes 🎷", "37i9dQZF1DX0SMZkqi27Z2", "Relaxing jazz tunes for coding sessions."),
-            ("Synthwave Chill 🌌", "37i9dQZF1DXdLTE75A7KXO", "Retro futuristic electronic background vibes."),
+            ("Lofi Beats 🌸", "6zCID88oNjNv9zx6puDHKj", "Chill beats to study or relax to."),
+            ("Deep Focus 🧠", "37i9dQZF1DWZeKCadgRdKQ", "Keep calm and focus with ambient sounds."),
+            ("Chill Lofi Study 📚", "37i9dQZF1DX8Uebhn9wzrS", "Cozy lofi hip hop playlist."),
+            ("Jazz Vibes 🎷", "37i9dQZF1DX0SM0LYsmbMT", "Relaxing jazz tunes for coding sessions."),
+            ("Synthwave Chill 🌌", "37i9dQZF1DX8V4BE7YIpvE", "Retro futuristic electronic background vibes."),
             ("Peaceful Piano 🎹", "37i9dQZF1DX4sWSpwq3LiO", "Beautiful, gentle solo piano works.")
         ]
 
@@ -831,11 +1032,43 @@ class FocusFoxApp(QMainWindow):
             btn_lay = QHBoxLayout()
             # Play in Spotify App (using URI scheme)
             btn_app = QPushButton("🚀 Open App")
+            btn_app.setStyleSheet(f"""
+                QPushButton {{
+                    background-color: {COLORS['purple']};
+                    color: #FFFFFF;
+                    border: 2px solid {COLORS['purple']};
+                    border-radius: 6px;
+                    font-family: 'Pixelify Sans', sans-serif;
+                    font-size: 11px;
+                    font-weight: bold;
+                    padding: 6px;
+                }}
+                QPushButton:hover {{
+                    background-color: {COLORS['pink']};
+                    border-color: {COLORS['pink']};
+                    color: #1C1B29;
+                }}
+            """)
             btn_app.clicked.connect(lambda checked=False, pid=playlist_id: self._play_spotify(pid, use_app=True))
             btn_lay.addWidget(btn_app)
 
             # Play in browser
             btn_web = QPushButton("🌐 Open Web")
+            btn_web.setStyleSheet(f"""
+                QPushButton {{
+                    background-color: transparent;
+                    color: {COLORS['text']};
+                    border: 2px solid {COLORS['purple']};
+                    border-radius: 6px;
+                    font-family: 'Pixelify Sans', sans-serif;
+                    font-size: 11px;
+                    font-weight: bold;
+                    padding: 6px;
+                }}
+                QPushButton:hover {{
+                    background-color: rgba(129, 116, 214, 0.15);
+                }}
+            """)
             btn_web.clicked.connect(lambda checked=False, pid=playlist_id: self._play_spotify(pid, use_app=False))
             btn_lay.addWidget(btn_web)
 
@@ -913,7 +1146,12 @@ class FocusFoxApp(QMainWindow):
         threading.Thread(target=_save, daemon=True).start()
 
     def _show_help(self, key):
-        fallback = HELP.get(key, ("fox_happy.png", "No guide available."))
+        fallback = HELP.get(key, {
+            "title": f"Help Guide ({key})",
+            "text": "No guide available.",
+            "image": "fox_happy.png",
+            "schema": "Database schema offline."
+        })
         
         loading = QMessageBox(self)
         loading.setWindowTitle("Loading Guide...")
@@ -950,10 +1188,10 @@ class FocusFoxApp(QMainWindow):
                 finished = True
                 loading.close()
                 display_guide({
-                    "title": f"Help Guide ({key})",
-                    "text": fallback[1],
-                    "image": fallback[0],
-                    "schema": "Database schema offline (network timeout)."
+                    "title": fallback.get("title", f"Help Guide ({key})"),
+                    "text": fallback.get("text", "No guide available."),
+                    "image": fallback.get("image", "fox_happy.png"),
+                    "schema": fallback.get("schema", "Database schema offline (network timeout).")
                 })
 
         QTimer.singleShot(2500, on_timeout)
@@ -1352,39 +1590,13 @@ class FocusFoxApp(QMainWindow):
         s = self.yt_subject_map.get(self.json_sub.currentText())
         if not s: return
         self.btn_json.setEnabled(False)
-        threading.Thread(target=self._college_json_work, args=(s["id"], fp), daemon=True).start()
-
-    def _college_json_work(self, sid, fp):
-        def log(m): self.college_log.append(m)
-        try:
-            with open(fp, "r", encoding="utf-8") as f: data = json.load(f)
-            topics = data.get("topics", []); qs = data.get("questions", [])
-            log(f"Importing: {len(topics)} topics, {len(qs)} questions")
-            tm = {}
-            for t in topics:
-                r = self.supabase.table("topics").insert({
-                    "subject_id": sid, "name": t["topic_name"], "summary": t.get("summary")
-                }).execute()
-                if r.data: tm[t["topic_name"]] = r.data[0]["id"]; log(f"  Topic: {t['topic_name']}")
-            for i, q in enumerate(qs):
-                rq = self.supabase.table("questions").insert({
-                    "question_text": q["question_text"], "difficulty": q.get("difficulty", "easy")
-                }).execute()
-                if not rq.data: continue
-                qid = rq.data[0]["id"]
-                for tn in q.get("topics", []):
-                    tid = tm.get(tn)
-                    if tid: self.supabase.table("question_topics").insert({"question_id":qid,"topic_id":tid}).execute()
-                for src in q.get("pyq_sources", []):
-                    ex = self.supabase.table("pyq_sources").select("id").match({**src,"subject_id":sid}).execute()
-                    pid = ex.data[0]["id"] if ex.data else (self.supabase.table("pyq_sources").insert({**src,"subject_id":sid}).execute().data or [{}])[0].get("id")
-                    if pid: self.supabase.table("question_pyq_map").insert({"question_id":qid,"pyq_source_id":pid}).execute()
-                log(f"  Q {i+1}/{len(qs)}")
-            log("✅ Done!")
-            QMessageBox.information(self, "Done", "Import complete!")
-        except Exception as e:
-            log(f"ERROR: {e}"); QMessageBox.critical(self, "Error", str(e))
-        finally: self.btn_json.setEnabled(True)
+        
+        worker = CollegeJsonWorker(self.supabase, s["id"], fp)
+        worker.sig_log.connect(self.college_log.append)
+        worker.sig_done.connect(lambda msg: (self.btn_json.setEnabled(True), QMessageBox.information(self, "Done", msg)))
+        worker.sig_error.connect(lambda err: (self.btn_json.setEnabled(True), QMessageBox.critical(self, "Error", f"Upload Failed: {err}")))
+        worker.start()
+        self._college_worker = worker
 
     # ══════════════════════════════════════════════════════════════════════════
     # PAGE 3 — GATE ADMIN
@@ -1563,55 +1775,12 @@ class FocusFoxApp(QMainWindow):
         fp, _ = QFileDialog.getOpenFileName(self, "Import GATE JSON", "", "JSON (*.json)")
         if not fp: return
         self.btn_gate_imp.setEnabled(False)
-        threading.Thread(target=self._gate_json_work, args=(fp,), daemon=True).start()
-
-    def _gate_json_work(self, fp):
-        def log(m): self.gate_log.append(m)
-        try:
-            with open(fp, "r", encoding="utf-8") as f: data = json.load(f)
-            sd = data.get("subject", {}); topics = data.get("topics", []); qs = data.get("questions", [])
-            log(f"Subject: {sd.get('subject_name')}")
-            rs = self.supabase.table("gate_subjects").select("*").eq("code", sd.get("subject_code")).execute()
-            if rs.data:
-                sid = rs.data[0]["id"]
-            else:
-                ri = self.supabase.table("gate_subjects").insert({
-                    "name": sd.get("subject_name"), "code": sd.get("subject_code"), "display_order": 0
-                }).execute()
-                sid = ri.data[0]["id"]
-            tm = {}
-            for t in topics:
-                rt = self.supabase.table("gate_topics").select("id").match({"subject_id":sid,"name":t["topic_name"]}).execute()
-                if rt.data: tm[t["topic_name"]] = rt.data[0]["id"]
-                else:
-                    ri = self.supabase.table("gate_topics").insert({"subject_id":sid,"name":t["topic_name"],"summary":t.get("summary")}).execute()
-                    if ri.data: tm[t["topic_name"]] = ri.data[0]["id"]
-            for i, q in enumerate(qs):
-                rq = self.supabase.table("gate_questions").insert({
-                    "subject_id":sid, "question_text":q["question_text"],
-                    "explanation":q.get("explanation"), "question_type":q.get("question_type","MCQ"),
-                    "marks":q.get("marks",1), "difficulty":q.get("difficulty","easy")
-                }).execute()
-                if not rq.data: continue
-                qid = rq.data[0]["id"]
-                for tn in q.get("topics",[]):
-                    tid = tm.get(tn)
-                    if tid: self.supabase.table("gate_question_topics").insert({"question_id":qid,"topic_id":tid}).execute()
-                for opt in q.get("options",[]):
-                    self.supabase.table("gate_options").insert({"question_id":qid,"option_label":opt.get("label"),"option_text":opt.get("text"),"is_correct":opt.get("is_correct",False)}).execute()
-                for src in q.get("pyq_sources",[]):
-                    rp = self.supabase.table("gate_papers").select("id").match({"exam":src.get("exam","GATE CSE"),"year":src["year"],"set_number":src.get("set")}).execute()
-                    if rp.data: pid = rp.data[0]["id"]
-                    else:
-                        ri2 = self.supabase.table("gate_papers").insert({"exam":src.get("exam","GATE CSE"),"year":src["year"],"set_number":src.get("set")}).execute()
-                        pid = ri2.data[0]["id"] if ri2.data else None
-                    if pid: self.supabase.table("gate_question_occurrences").insert({"question_id":qid,"paper_id":pid,"question_number":src["question_number"]}).execute()
-                log(f"  Q {i+1}/{len(qs)}")
-            log("✅ Done!")
-            QMessageBox.information(self, "Done", "GATE import complete!")
-        except Exception as e:
-            log(f"ERROR: {e}"); QMessageBox.critical(self, "Error", str(e))
-        finally: self.btn_gate_imp.setEnabled(True)
+        worker = GateJsonWorker(self.supabase, fp)
+        worker.sig_log.connect(self.gate_log.append)
+        worker.sig_done.connect(lambda msg: (self.btn_gate_imp.setEnabled(True), QMessageBox.information(self, "Done", msg)))
+        worker.sig_error.connect(lambda err: (self.btn_gate_imp.setEnabled(True), QMessageBox.critical(self, "Error", f"GATE Upload Failed: {err}")))
+        worker.start()
+        self._gate_worker = worker
 
     # ══════════════════════════════════════════════════════════════════════════
     # PAGE 4 — COLLEGE IMAGE UPLOADER

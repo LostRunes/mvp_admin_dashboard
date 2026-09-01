@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow public read access to info_guides (help docs & schemas)
+    match /info_guides/{document} {
+      allow read: if true;
+    }
+    
+    // Allow authenticated users to read/write their own user doc and todos
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      match /todos/{todoId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    // Allow authenticated users to write to activity_logs
+    match /activity_logs/{document} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if false; // only admin/service account can read/modify logs
+    }
+    
+    // Allow authenticated users to read/write spotify_settings
+    match /spotify_settings/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

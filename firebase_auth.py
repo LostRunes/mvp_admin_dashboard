@@ -7,6 +7,7 @@ Uses:
 """
 
 import os
+import sys
 import json
 import datetime
 import threading
@@ -27,11 +28,31 @@ try:
 except ImportError:
     _firebase_admin_ok = False
 
+# ── Path Resolution Helpers ───────────────────────────────────────────────────
+def get_resource_path(relative_path):
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_path, relative_path)
+
+def get_writeable_path(relative_path):
+    if getattr(sys, 'frozen', False):
+        base_path = os.path.dirname(sys.executable)
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_path, relative_path)
+
 # ── Constants ─────────────────────────────────────────────────────────────────
-BASE_DIR          = os.path.dirname(os.path.abspath(__file__))
-CREDENTIALS_PATH  = os.path.join(BASE_DIR, "credentials.json")
-SERVICE_ACCT_PATH = os.path.join(BASE_DIR, "firebase_service_account.json")
-TOKEN_CACHE_PATH  = os.path.join(BASE_DIR, ".firebase_token_cache.json")
+CREDENTIALS_PATH  = get_resource_path("credentials.json")
+SERVICE_ACCT_PATH = get_resource_path("firebase_service_account.json")
+TOKEN_CACHE_PATH  = get_writeable_path(".firebase_token_cache.json")
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv(get_resource_path(".env"))
+except ImportError:
+    pass
 
 # The Web API key from your Firebase project
 # (same one visible in the Firebase console → Project Settings → General → Web API key)
@@ -50,23 +71,8 @@ _db = None                          # Firestore client
 
 # ── Firestore init ────────────────────────────────────────────────────────────
 def _init_firestore() -> bool:
-    """Initialize firebase-admin if service account exists. Returns True on success."""
-    global _db
-    if _db is not None:
-        return True
-    if not _firebase_admin_ok:
-        return False
-    if not os.path.exists(SERVICE_ACCT_PATH):
-        return False
-    try:
-        if not firebase_admin._apps:
-            cred = fb_credentials.Certificate(SERVICE_ACCT_PATH)
-            firebase_admin.initialize_app(cred)
-        _db = firestore.client()
-        return True
-    except Exception as e:
-        print(f"[FirebaseAuth] Firestore init failed: {e}")
-        return False
+    """Initialize firebase-admin. Returns True on success."""
+    return True
 
 
 # ── Google OAuth flow ─────────────────────────────────────────────────────────
@@ -141,18 +147,21 @@ def login() -> dict | None:
         email     = firebase_info.get("email", google_info.get("email", ""))
         name      = firebase_info.get("displayName", google_info.get("name", ""))
         photo_url = firebase_info.get("photoUrl", google_info.get("picture", ""))
+        id_token  = firebase_info.get("idToken", "")
     else:
         # Fallback: use Google identity directly (still unique by Google sub)
         uid       = google_info.get("id", "google_" + google_info.get("email", "unknown"))
         email     = google_info.get("email", "")
         name      = google_info.get("name", "")
         photo_url = google_info.get("picture", "")
+        id_token  = google_info.get("id_token", "")
 
     _current_user = {
         "uid":       uid,
         "email":     email,
         "name":      name,
         "photo_url": photo_url,
+        "id_token":  id_token,
     }
 
     # Upsert user document
@@ -177,6 +186,71 @@ def logout():
     _current_user = None
 
 
+# ── REST Firestore helper functions ───────────────────────────────────────────
+import base64
+
+def get_project_id() -> str:
+    """Gets project ID dynamically from logged-in user token payload or fallback."""
+    if _current_user and _current_user.get("id_token"):
+        try:
+            parts = _current_user["id_token"].split(".")
+            if len(parts) == 3:
+                payload = parts[1]
+                payload += "=" * ((4 - len(payload) % 4) % 4)
+                data = json.loads(base64.b64decode(payload).decode("utf-8"))
+                proj = data.get("iss", "").split("/")[-1]
+                if proj:
+                    return proj
+        except Exception as e:
+            print(f"[FirebaseAuth] Parse project ID from JWT failed: {e}")
+    if os.path.exists(SERVICE_ACCT_PATH):
+        try:
+            with open(SERVICE_ACCT_PATH, "r") as f:
+                return json.load(f).get("project_id", "mvp-dashboard-c56c0")
+        except Exception:
+            pass
+    return "mvp-dashboard-c56c0"
+
+def _to_rest_value(val):
+    if isinstance(val, bool):
+        return {"booleanValue": val}
+    elif isinstance(val, (int, float)):
+        return {"doubleValue": float(val)}
+    elif isinstance(val, dict):
+        return {"mapValue": {"fields": {k: _to_rest_value(v) for k, v in val.items()}}}
+    elif isinstance(val, list):
+        return {"arrayValue": {"values": [_to_rest_value(v) for v in val]}}
+    elif val is None:
+        return {"nullValue": None}
+    else:
+        return {"stringValue": str(val)}
+
+def _from_rest_value(rest_val):
+    if not isinstance(rest_val, dict):
+        return rest_val
+    for k, v in rest_val.items():
+        if k == "stringValue":
+            return v
+        elif k == "booleanValue":
+            return bool(v)
+        elif k == "doubleValue" or k == "integerValue":
+            return float(v)
+        elif k == "mapValue":
+            return {mk: _from_rest_value(mv) for mk, mv in v.get("fields", {}).items()}
+        elif k == "arrayValue":
+            return [_from_rest_value(av) for av in v.get("values", [])]
+        elif k == "nullValue":
+            return None
+    return None
+
+def _to_rest_doc(flat_dict):
+    return {"fields": {k: _to_rest_value(v) for k, v in flat_dict.items()}}
+
+def _from_rest_doc(rest_doc):
+    fields = rest_doc.get("fields", {})
+    return {k: _from_rest_value(v) for k, v in fields.items()}
+
+
 # ── Activity logging ──────────────────────────────────────────────────────────
 def log_action(
     action: str,
@@ -188,12 +262,10 @@ def log_action(
     details: dict | None = None,
 ):
     """
-    Write an activity log record to Firestore (non-blocking, fire-and-forget).
+    Write an activity log record to Firestore using the REST API (non-blocking, fire-and-forget).
     Also always prints locally as a fallback.
-
-    Actions:  LOGIN, LOGOUT, UPLOAD, EDIT, DELETE, IMPORT, SPLIT_PDF, ...
     """
-    if not _current_user:
+    if not _current_user or not _current_user.get("id_token"):
         return
 
     record = {
@@ -213,158 +285,226 @@ def log_action(
     ts_str = record["timestamp_local"]
     print(f"[ActivityLog] {_current_user['name']} | {action} | {content_type or '-'} | {subject or '-'} @ {ts_str}")
 
-    # Write to Firestore in background thread
     def _write():
-        if not _init_firestore():
-            return
         try:
-            doc = dict(record)
-            doc["timestamp"] = firestore.SERVER_TIMESTAMP
-            _db.collection("activity_logs").add(doc)
+            pid = get_project_id()
+            url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/activity_logs"
+            headers = {
+                "Authorization": f"Bearer {_current_user['id_token']}",
+                "Content-Type": "application/json"
+            }
+            # Append special firestore timestamp
+            payload = dict(record)
+            payload["timestamp"] = datetime.datetime.utcnow().isoformat() + "Z"
+            doc_data = _to_rest_doc(payload)
+            resp = requests.post(url, json=doc_data, headers=headers, timeout=5)
+            if resp.status_code not in (200, 201):
+                print(f"[ActivityLog] REST write failed: {resp.status_code} {resp.text}")
         except Exception as e:
-            print(f"[ActivityLog] Firestore write failed: {e}")
+            print(f"[ActivityLog] REST write request failed: {e}")
 
     threading.Thread(target=_write, daemon=True).start()
 
 
 def get_guide(key: str) -> dict | None:
-    """Fetches a guide document from Firestore, or returns None."""
-    if not _init_firestore():
-        return None
+    """Fetches a guide document from Firestore via REST API, or returns None."""
     try:
-        doc = _db.collection("info_guides").document(key).get()
-        if doc.exists:
-            return doc.to_dict()
+        pid = get_project_id()
+        url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/info_guides/{key}"
+        headers = {}
+        if _current_user and _current_user.get("id_token"):
+            headers["Authorization"] = f"Bearer {_current_user['id_token']}"
+        elif FIREBASE_WEB_API_KEY:
+            url += f"?key={FIREBASE_WEB_API_KEY}"
+            
+        resp = requests.get(url, headers=headers, timeout=5)
+        if resp.status_code == 200:
+            doc = resp.json()
+            return _from_rest_doc(doc)
+        else:
+            print(f"[FirebaseAuth] Fetch guide failed for key '{key}'. Status: {resp.status_code}, Response: {resp.text}")
     except Exception as e:
         print(f"[FirebaseAuth] Fetch guide failed: {e}")
     return None
 
 
 def get_todos() -> list:
-    """Fetches the list of to-do items for the logged-in user."""
-    if not _current_user or not _init_firestore():
+    """Fetches the list of to-do items for the logged-in user via REST API (from flat root collection)."""
+    if not _current_user or not _current_user.get("id_token"):
         return []
     try:
         uid = _current_user["uid"]
-        # Use order_by with a direction to be explicit; catch index errors gracefully
-        try:
-            docs = _db.collection("users").document(uid).collection("todos") \
-                      .order_by("created_at").stream()
-            items = [{"id": d.id, **d.to_dict()} for d in docs]
-        except Exception:
-            # Fallback: no ordering (e.g. index not built yet)
-            docs = _db.collection("users").document(uid).collection("todos").stream()
-            items = [{"id": d.id, **d.to_dict()} for d in docs]
-        return items
+        pid = get_project_id()
+        url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/todos"
+        headers = {"Authorization": f"Bearer {_current_user['id_token']}"}
+        
+        resp = requests.get(url, headers=headers, timeout=5)
+        if resp.status_code == 200:
+            data = resp.json()
+            documents = data.get("documents", [])
+            items = []
+            for doc in documents:
+                name = doc.get("name", "")
+                todo_id = name.split("/")[-1]
+                todo_data = _from_rest_doc(doc)
+                if todo_data.get("user_id") == uid:
+                    todo_data["id"] = todo_id
+                    items.append(todo_data)
+            
+            # Sort locally by created_at to preserve order
+            items.sort(key=lambda x: x.get("created_at") or "")
+            return items
     except Exception as e:
         print(f"[FirebaseAuth] Fetch todos failed: {e}")
-        return []
+    return []
 
 
 def add_todo(text: str) -> dict | None:
-    """Adds a new to-do item for the logged-in user."""
-    if not _current_user or not _init_firestore() or not text.strip():
+    """Adds a new to-do item for the logged-in user via REST API (to flat root collection)."""
+    if not _current_user or not _current_user.get("id_token") or not text.strip():
         return None
     try:
         uid = _current_user["uid"]
-        ref = _db.collection("users").document(uid).collection("todos").document()
+        pid = get_project_id()
+        url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/todos"
+        headers = {
+            "Authorization": f"Bearer {_current_user['id_token']}",
+            "Content-Type": "application/json"
+        }
         data = {
+            "user_id": uid,
             "text": text,
             "completed": False,
-            "created_at": firestore.SERVER_TIMESTAMP
+            "created_at": datetime.datetime.utcnow().isoformat() + "Z"
         }
-        ref.set(data)
-        # return matching dict
-        return {"id": ref.id, "text": text, "completed": False}
+        doc_data = _to_rest_doc(data)
+        resp = requests.post(url, json=doc_data, headers=headers, timeout=5)
+        if resp.status_code in (200, 201):
+            doc = resp.json()
+            todo_id = doc.get("name", "").split("/")[-1]
+            return {"id": todo_id, "text": text, "completed": False}
     except Exception as e:
         print(f"[FirebaseAuth] Add todo failed: {e}")
-        return None
+    return None
 
 
 def update_todo_completed(todo_id: str, completed: bool) -> bool:
-    """Updates the completion status of a to-do item."""
-    if not _current_user or not _init_firestore():
+    """Updates the completion status of a to-do item via REST API (in flat root collection)."""
+    if not _current_user or not _current_user.get("id_token"):
         return False
     try:
-        uid = _current_user["uid"]
-        _db.collection("users").document(uid).collection("todos").document(todo_id).update({
-            "completed": completed
-        })
-        return True
+        pid = get_project_id()
+        url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/todos/{todo_id}?updateMask.fieldPaths=completed"
+        headers = {
+            "Authorization": f"Bearer {_current_user['id_token']}",
+            "Content-Type": "application/json"
+        }
+        doc_data = {
+            "fields": {
+                "completed": {"booleanValue": completed}
+            }
+        }
+        resp = requests.patch(url, json=doc_data, headers=headers, timeout=5)
+        return resp.status_code == 200
     except Exception as e:
         print(f"[FirebaseAuth] Update todo failed: {e}")
-        return False
+    return False
 
 
 def delete_todo(todo_id: str) -> bool:
-    """Deletes a to-do item. Skips if temp (not yet persisted)."""
-    if not _current_user or not _init_firestore():
+    """Deletes a to-do item via REST API (from flat root collection)."""
+    if not _current_user or not _current_user.get("id_token"):
         return False
     if not todo_id or todo_id == "temp":
-        return False  # optimistic-only item not yet in Firestore
+        return False
     try:
-        uid = _current_user["uid"]
-        _db.collection("users").document(uid).collection("todos").document(todo_id).delete()
-        return True
+        pid = get_project_id()
+        url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/todos/{todo_id}"
+        headers = {"Authorization": f"Bearer {_current_user['id_token']}"}
+        resp = requests.delete(url, headers=headers, timeout=5)
+        return resp.status_code == 200
     except Exception as e:
         print(f"[FirebaseAuth] Delete todo failed: {e}")
-        return False
+    return False
 
 
 def get_spotify_playlist() -> str:
-    """Fetches custom Spotify playlist URL from user settings."""
-    if not _current_user or not _init_firestore():
+    """Fetches custom Spotify playlist URL from user settings via REST API (from flat root collection)."""
+    if not _current_user or not _current_user.get("id_token"):
         return ""
     try:
         uid = _current_user["uid"]
-        doc = _db.collection("users").document(uid).collection("settings").document("spotify").get()
-        if doc.exists:
-            return doc.to_dict().get("playlist_url", "")
+        pid = get_project_id()
+        url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/spotify_settings/{uid}"
+        headers = {"Authorization": f"Bearer {_current_user['id_token']}"}
+        resp = requests.get(url, headers=headers, timeout=5)
+        if resp.status_code == 200:
+            doc = resp.json()
+            todo_data = _from_rest_doc(doc)
+            return todo_data.get("playlist_url", "")
     except Exception as e:
         print(f"[FirebaseAuth] Fetch spotify playlist failed: {e}")
     return ""
 
 
 def save_spotify_playlist(url: str) -> bool:
-    """Saves custom Spotify playlist URL to user settings."""
-    if not _current_user or not _init_firestore():
+    """Saves custom Spotify playlist URL to user settings via REST API (to flat root collection)."""
+    if not _current_user or not _current_user.get("id_token"):
         return False
     try:
         uid = _current_user["uid"]
-        _db.collection("users").document(uid).collection("settings").document("spotify").set({
+        pid = get_project_id()
+        url_api = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/spotify_settings/{uid}"
+        headers = {
+            "Authorization": f"Bearer {_current_user['id_token']}",
+            "Content-Type": "application/json"
+        }
+        data = {
+            "user_id": uid,
             "playlist_url": url
-        }, merge=True)
-        return True
+        }
+        doc_data = _to_rest_doc(data)
+        resp = requests.patch(url_api, json=doc_data, headers=headers, timeout=5)
+        return resp.status_code == 200
     except Exception as e:
         print(f"[FirebaseAuth] Save spotify playlist failed: {e}")
-        return False
+    return False
 
 
 def _upsert_user():
-    """Create or update the users/{uid} document in Firestore."""
-    if not _current_user or not _init_firestore():
+    """Create or update the users/{uid} document in Firestore via REST API."""
+    if not _current_user or not _current_user.get("id_token"):
         return
     def _write():
         try:
             uid = _current_user["uid"]
-            ref = _db.collection("users").document(uid)
-            doc = ref.get()
-            if doc.exists:
-                ref.update({
-                    "last_login": firestore.SERVER_TIMESTAMP,
+            pid = get_project_id()
+            url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/users/{uid}"
+            headers = {
+                "Authorization": f"Bearer {_current_user['id_token']}",
+                "Content-Type": "application/json"
+            }
+            resp_get = requests.get(url, headers=headers, timeout=5)
+            now_str = datetime.datetime.utcnow().isoformat() + "Z"
+            if resp_get.status_code == 200:
+                data = {
+                    "last_login": now_str,
                     "name":       _current_user.get("name"),
                     "email":      _current_user.get("email"),
-                })
+                }
+                patch_url = url + "?updateMask.fieldPaths=last_login&updateMask.fieldPaths=name&updateMask.fieldPaths=email"
+                requests.patch(patch_url, json=_to_rest_doc(data), headers=headers, timeout=5)
             else:
-                ref.set({
+                data = {
                     "uid":         uid,
                     "name":        _current_user.get("name"),
                     "email":       _current_user.get("email"),
                     "photo_url":   _current_user.get("photo_url"),
                     "role":        "developer",
-                    "first_login": firestore.SERVER_TIMESTAMP,
-                    "last_login":  firestore.SERVER_TIMESTAMP,
-                })
+                    "first_login": now_str,
+                    "last_login":  now_str,
+                }
+                requests.patch(url, json=_to_rest_doc(data), headers=headers, timeout=5)
         except Exception as e:
             print(f"[FirebaseAuth] User upsert failed: {e}")
     threading.Thread(target=_write, daemon=True).start()
@@ -383,7 +523,7 @@ if __name__ == "__main__":
         print(f"   UID: {user['uid']}")
         print("\nLogging test activity to Firestore...")
         log_action("TEST_LOGIN", details={"source": "firebase_auth.py direct test"})
-        time.sleep(2)   # give background thread time to write
+        time.sleep(2)
         print("✅ Done — check Firestore → activity_logs")
     else:
         print("❌ Login failed or was cancelled.")
