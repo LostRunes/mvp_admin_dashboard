@@ -335,13 +335,18 @@ def get_todos() -> list:
     try:
         uid = _current_user["uid"]
         pid = get_project_id()
-        url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents/todos"
+        # Query only this user's docs — firestore.rules deny listing other users' to-dos
+        url = f"https://firestore.googleapis.com/v1/projects/{pid}/databases/(default)/documents:runQuery"
         headers = {"Authorization": f"Bearer {_current_user['id_token']}"}
-        
-        resp = requests.get(url, headers=headers, timeout=5)
+        body = {"structuredQuery": {
+            "from": [{"collectionId": "todos"}],
+            "where": {"fieldFilter": {"field": {"fieldPath": "user_id"}, "op": "EQUAL",
+                                      "value": {"stringValue": uid}}},
+        }}
+
+        resp = requests.post(url, json=body, headers=headers, timeout=5)
         if resp.status_code == 200:
-            data = resp.json()
-            documents = data.get("documents", [])
+            documents = [row["document"] for row in resp.json() if row.get("document")]
             items = []
             for doc in documents:
                 name = doc.get("name", "")

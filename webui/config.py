@@ -36,12 +36,22 @@ def require_secret(name: str) -> str:
     return val
 
 
-def allowed_emails() -> set[str]:
-    """ALLOWED_EMAILS may be a TOML list or a comma-separated string."""
-    raw = get_secret("ALLOWED_EMAILS", [])
+def _email_set(name: str) -> set[str]:
+    """A TOML list or a comma-separated string of emails."""
+    raw = get_secret(name, [])
     if isinstance(raw, str):
         raw = raw.split(",")
     return {str(e).strip().lower() for e in raw if str(e).strip()}
+
+
+def admin_emails() -> set[str]:
+    """Admins can always sign in and approve access requests (must match firestore.rules)."""
+    return _email_set("ADMIN_EMAILS")
+
+
+def allowed_emails() -> set[str]:
+    """Always-allowed accounts (admins included); everyone else must request access."""
+    return _email_set("ALLOWED_EMAILS") | admin_emails()
 
 
 def img_path(name: str) -> str | None:

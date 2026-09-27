@@ -246,6 +246,49 @@ class FirebaseSession:
         if r.status_code != 200:
             raise FirebaseError(f"Could not delete task (HTTP {r.status_code})")
 
+    # ── Dashboard access requests (dashboard_access/{uid}) ───────────────────
+    # firestore.rules: a user may only CREATE their own doc with status "pending";
+    # only admins may read others, approve, reject, revoke or delete.
+    def get_access_request(self) -> dict | None:
+        r = requests.get(f"{self._base()}/dashboard_access/{self.uid}", headers=self._headers(), timeout=5)
+        if r.status_code == 200:
+            return _from_rest_doc(r.json())
+        if r.status_code == 404:
+            return None
+        raise FirebaseError(f"Could not check your access (HTTP {r.status_code})")
+
+    def create_access_request(self, note: str):
+        data = {"uid": self.uid, "email": self.email, "name": self.name,
+                "note": note[:500], "status": "pending", "requested_at": _now_iso()}
+        r = requests.post(f"{self._base()}/dashboard_access", params={"documentId": self.uid},
+                          json=_to_rest_doc(data), headers=self._headers(), timeout=5)
+        if r.status_code not in (200, 201):
+            raise FirebaseError(f"Could not send your request (HTTP {r.status_code})")
+
+    def list_access_requests(self) -> list:
+        body = {"structuredQuery": {"from": [{"collectionId": "dashboard_access"}]}}
+        r = requests.post(f"{self._base()}:runQuery", json=body, headers=self._headers(), timeout=8)
+        if r.status_code != 200:
+            raise FirebaseError(f"Could not load access requests (HTTP {r.status_code}) — "
+                                "are the latest firestore.rules deployed and your email in them?")
+        out = [_from_rest_doc(row["document"]) | {"_id": row["document"]["name"].rsplit("/", 1)[-1]}
+               for row in r.json() if row.get("document")]
+        return sorted(out, key=lambda x: x.get("requested_at") or "", reverse=True)
+
+    def set_access_status(self, uid: str, status: str):
+        data = {"status": status, "decided_by": self.email, "decided_at": _now_iso()}
+        r = requests.patch(f"{self._base()}/dashboard_access/{uid}",
+                           params=[("updateMask.fieldPaths", f) for f in data] +
+                                  [("currentDocument.exists", "true")],
+                           json=_to_rest_doc(data), headers=self._headers(), timeout=5)
+        if r.status_code != 200:
+            raise FirebaseError(f"Could not update request (HTTP {r.status_code})")
+
+    def delete_access_request(self, uid: str):
+        r = requests.delete(f"{self._base()}/dashboard_access/{uid}", headers=self._headers(), timeout=5)
+        if r.status_code != 200:
+            raise FirebaseError(f"Could not delete request (HTTP {r.status_code})")
+
     # ── Spotify settings (spotify_settings/{uid}) ────────────────────────────
     def get_spotify_playlist(self) -> str:
         r = requests.get(f"{self._base()}/spotify_settings/{self.uid}", headers=self._headers(), timeout=5)

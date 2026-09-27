@@ -8,7 +8,7 @@ import time
 
 import streamlit as st
 
-from webui.config import allowed_emails, get_secret, img_path
+from webui.config import admin_emails, allowed_emails, get_secret, img_path
 
 st.set_page_config(
     page_title="FocusFox Admin",
@@ -80,17 +80,14 @@ if not st.user.is_logged_in:
     login_screen()
     st.stop()
 
-# ── 2. Allow-list (fail closed) ───────────────────────────────────────────────
+# ── 2. Verified Google account ────────────────────────────────────────────────
 email = str(st.user.get("email") or "").strip().lower()
-allowed = allowed_emails()
-if not allowed:
-    denied_screen(email, "No developer accounts are allow-listed on this server yet "
-                         "(ALLOWED_EMAILS secret is empty), so nobody can use the dashboard.")
+if st.user.get("email_verified") not in (True, "true"):
+    denied_screen(email, "This Google account's email address isn't verified.")
     st.stop()
-if st.user.get("email_verified") not in (True, "true") or email not in allowed:
-    denied_screen(email, "This Google account is not on the FocusFox developer allow-list. "
-                         "Ask an admin to add your email.")
-    st.stop()
+admins = admin_emails()
+is_admin = email in admins
+allowed = allowed_emails()          # ALLOWED_EMAILS + ADMIN_EMAILS
 
 # ── 3. Firebase identity (same UID as the desktop app) ────────────────────────
 if "fb" not in st.session_state:
@@ -104,16 +101,80 @@ if "fb" not in st.session_state:
     try:
         if not google_token:
             raise FirebaseError("Google ID token not exposed — set expose_tokens = [\"id\"] under [auth].")
-        session = FirebaseSession(get_secret("FIREBASE_WEB_API_KEY"), google_token,
-                                  fallback_name=st.user.get("name") or "", fallback_email=email)
-        session.upsert_user()
-        session.log_action("LOGIN")
-        st.session_state.fb = session
+        st.session_state.fb = FirebaseSession(get_secret("FIREBASE_WEB_API_KEY"), google_token,
+                                              fallback_name=st.user.get("name") or "", fallback_email=email)
         st.session_state.fb_error = None
-    except (FirebaseError, Exception) as e:
+    except Exception as e:
         print(f"[FirebaseAuth] {e}")
         st.session_state.fb = None
         st.session_state.fb_error = str(e)
+
+
+# ── 4. Access: allow-listed, or an admin-approved request (fail closed) ───────
+def access_gate():
+    """Returns only when the user may use the dashboard; otherwise renders a screen and stops."""
+    if email in allowed:
+        return
+    if not admins:
+        denied_screen(email, "This Google account is not allow-listed, and no admins are configured "
+                             "to approve requests. Ask the dashboard owner for access.")
+        st.stop()
+    session = st.session_state.get("fb")
+    if not session:
+        denied_screen(email, "Your access couldn't be verified right now (cloud sync unavailable). "
+                             "Sign out and sign in again.")
+        st.stop()
+    if st.session_state.get("access_ok_until", 0) > time.time():
+        return                       # approved recently; re-checked every 5 min so revokes apply
+    try:
+        req = session.get_access_request()
+    except FirebaseError as e:
+        denied_screen(email, str(e))
+        st.stop()
+    status = (req or {}).get("status")
+    if status == "approved":
+        st.session_state.access_ok_until = time.time() + 300
+        return
+    st.session_state.pop("access_ok_until", None)
+
+    with _centered(), st.container(border=True):
+        if status == "pending":
+            st.markdown("## ⏳ Request pending")
+            st.write("Your access request has been sent. An admin needs to approve it — "
+                     "check back later.")
+            if st.button("🔄 Check again", type="primary", width="stretch"):
+                st.rerun()
+        elif status in ("rejected", "revoked"):
+            st.markdown("## 🔒 Access denied")
+            st.write("Your access request was declined." if status == "rejected" else
+                     "Your access to the dashboard has been revoked.")
+            st.caption("Contact an admin if you think this is a mistake.")
+        else:
+            st.markdown("## 🔐 Request access")
+            st.write("You're signed in, but this account doesn't have access to the FocusFox "
+                     "Admin dashboard yet. Send a request and an admin will review it.")
+            note = st.text_area("Message for the admin (optional)", max_chars=500,
+                                placeholder="Who are you / what will you work on?")
+            if st.button("📨 Request access", type="primary", width="stretch"):
+                try:
+                    session.create_access_request(note.strip())
+                except FirebaseError as e:
+                    st.error(str(e))
+                else:
+                    st.rerun()
+        st.caption(f"Signed in as {email}")
+        if st.button("Sign out", width="stretch"):
+            st.session_state.clear()
+            st.logout()
+    st.stop()
+
+
+access_gate()
+
+if not st.session_state.get("_login_logged") and st.session_state.get("fb"):
+    st.session_state.fb.upsert_user()
+    st.session_state.fb.log_action("LOGIN")
+    st.session_state._login_logged = True
 
 if "page" not in st.session_state:
     st.session_state.page = "guide"
@@ -132,6 +193,13 @@ with st.sidebar:
     for key, icon, label in NAV:
         st.button(f"{icon}  {label}", key=f"nav_{key}", on_click=go, args=(key,), width="stretch",
                   type="primary" if st.session_state.page == key else "tertiary")
+    if is_admin:
+        from webui.views.access import pending_count
+        n = pending_count() if st.session_state.get("fb") else 0
+        st.caption("ADMIN")
+        st.button(f"👥  Access Requests{f' ({n})' if n else ''}", key="nav_access", on_click=go,
+                  args=("access",), width="stretch",
+                  type="primary" if st.session_state.page == "access" else "tertiary")
     st.divider()
     st.markdown(f"<b>👤  {html.escape(str(st.user.get('name') or 'Developer'))}</b><br>"
                 f"<span class='ff-muted'>{html.escape(email)}</span>", unsafe_allow_html=True)
@@ -172,3 +240,9 @@ elif page == "todo":
 elif page == "spotify":
     from webui.views import personal
     personal.render_spotify()
+elif page == "access" and is_admin:
+    from webui.views import access
+    access.render()
+else:
+    st.session_state.page = "guide"
+    st.rerun()

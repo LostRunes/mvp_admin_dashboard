@@ -1,6 +1,32 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Dashboard admins — keep in sync with the ADMIN_EMAILS secret of the web app.
+    function isAdmin() {
+      return request.auth != null
+          && request.auth.token.email_verified == true
+          && request.auth.token.email in ['otherp1234@gmail.com'];
+    }
+
+    // Web dashboard access requests, one per Firebase user (doc id = uid).
+    // Users can only file a *pending* request for themselves; only admins decide.
+    match /dashboard_access/{userId} {
+      allow create: if request.auth != null
+                    && request.auth.uid == userId
+                    && request.resource.data.keys().hasOnly(['uid', 'email', 'name', 'note', 'status', 'requested_at'])
+                    && request.resource.data.uid == userId
+                    && request.resource.data.email == request.auth.token.email
+                    && request.resource.data.status == 'pending'
+                    && request.resource.data.note is string
+                    && request.resource.data.note.size() <= 500;
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow update: if isAdmin()
+                    && request.resource.data.status in ['approved', 'rejected', 'revoked']
+                    && request.resource.data.uid == resource.data.uid
+                    && request.resource.data.email == resource.data.email;
+      allow delete: if isAdmin();
+    }
+
     // Allow public read access to info_guides (help docs & schemas)
     match /info_guides/{document} {
       allow read: if true;
