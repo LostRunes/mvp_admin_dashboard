@@ -1,5 +1,6 @@
-streamlit>=1.30.0
-supabase>=2.0.0
-python-dotenv>=1.0.0
-imagekitio>=3.0.0
-pypdf>=3.0.0
+streamlit[auth]==1.57.0
+supabase==2.6.0
+imagekitio==5.7.0
+pypdf==6.14.2
+requests>=2.31,<3
+python-dotenv>=1.0,<2

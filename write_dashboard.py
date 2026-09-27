@@ -123,9 +123,9 @@ class CozyApp(ctk.CTk):
         self.configure(fg_color=BG)
 
         self.supabase_url      = os.getenv("SUPABASE_URL",          "https://hoihnpzdlivaoywrshmk.supabase.co")
-        self.supabase_key      = os.getenv("SUPABASE_KEY",          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvaWhucHpkbGl2YW95d3JzaG1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczMDc1MjAsImV4cCI6MjA5Mjg4MzUyMH0.0XavqpSZjXVvuVRdEvI1Iy7ZGCOxCfGBA0cROVHyvHI")
-        self.imagekit_public   = os.getenv("IMAGEKIT_PUBLIC_KEY",   "public_czXZbyoBKtF2iM2UY6bWAg9tgkI=")
-        self.imagekit_private  = os.getenv("IMAGEKIT_PRIVATE_KEY",  "private_pAlFPi/MgMKYXqpcuvuioTjBHVk=")
+        self.supabase_key      = os.getenv("SUPABASE_KEY",          "")
+        self.imagekit_public   = os.getenv("IMAGEKIT_PUBLIC_KEY",   "")
+        self.imagekit_private  = os.getenv("IMAGEKIT_PRIVATE_KEY",  "")
         self.imagekit_endpoint = os.getenv("IMAGEKIT_URL_ENDPOINT", "https://ik.imagekit.io/focusfox")
 
         self._load_mascots()

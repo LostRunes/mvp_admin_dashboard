@@ -17,3 +17,5 @@ find_write_refs.py
 audit_styles.py
 fix_theme.py
 sync_guides.py
+.streamlit/secrets.toml
+client_secret*.json
